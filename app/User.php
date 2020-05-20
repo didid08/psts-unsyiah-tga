@@ -43,4 +43,8 @@ class User extends Model
 
         return User::firstwhere($identityType, $auth['identity'][$identityType])->$column;
     }
+
+    public static function dataWithCategory($category) {
+        return User::where('category', $category)->get();
+    }
 }

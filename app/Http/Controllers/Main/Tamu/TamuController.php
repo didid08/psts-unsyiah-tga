@@ -9,7 +9,5 @@ use App\Http\Controllers\Main\MainController;
 
 class TamuController extends Controller
 {
-    public function informasiTGA() {
-    	return MainController::dashboard();
-    }
+    
 }

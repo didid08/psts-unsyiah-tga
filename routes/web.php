@@ -42,6 +42,6 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/mahasiswa/administrasi-tga', 'Main\Mahasiswa\MahasiswaController@administrasiTGA')->name('main.mahasiswa.administrasi-tga');
 
 		//Tamu
-		Route::get('/tamu/informasi-tga', 'Main\Tamu\TamuController@informasiTGA')->name('main.tamu.informasi-tga');
+		Route::get('/tamu/informasi-tga', 'Main\MainController@dashboard')->name('main.tamu.informasi-tga');
 	});
 });
