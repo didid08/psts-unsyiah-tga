@@ -11,7 +11,8 @@ use App\Setting;
 
 class LoginController extends Controller
 {
-    public function loginPage($opsi = null, Request $request) {
+    public function loginPage($opsi = null, Request $request)
+    {
     	if ($opsi == 'tamu') {
     		$request->session()->put('auth', ['category' => 'tamu', 'identity' => null]);
     		return redirect('/')->with('pesan', 'Anda login sebagai Tamu');
@@ -21,8 +22,8 @@ class LoginController extends Controller
     	]);
     }
 
-    public function loginProcess(Request $request) {
-
+    public function loginProcess(Request $request)
+    {
     	$this->validate($request, [
     		'identity' => 'required',
     		'password' => 'required'

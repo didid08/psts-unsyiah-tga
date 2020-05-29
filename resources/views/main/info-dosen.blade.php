@@ -1,16 +1,12 @@
 @extends('main.master')
 
+@section('breadcumb')
+	<li class="breadcrumb-item"><a href="/">{{ ucfirst($category) }}</a></li>
+	<li class="breadcrumb-item active">{{ $subtitle }}</li>
+@endsection
+
 @section('content')
-	<div class="dashboard-content-one">
-		<div class="breadcrumbs-area">
-	        <h3>Info Dosen</h3>
-	        <ul>
-	        	<li>
-                    <a href="/">Beranda</a>
-                </li>
-	            <li>{{ ucfirst($category) }}</li>
-	        </ul>
-	    </div>
+	<div class="container">
 	    <div class="card height-auto">
 	    	<div class="card-body" style="overflow-x: auto;">
 	    		<style>
@@ -63,12 +59,12 @@
 										-
 									@endif
 								</td>
-								<td>0</td>
-								<td>0</td>
-								<td>0</td>
-								<td>0</td>
-								<td>0</td>
-								<td>0</td>
+								<td>{{ $data['bimbingan']['total'][$dosen->nama] }}</td>
+								<td>{{ $data['bimbingan']['selesai'][$dosen->nama] }}</td>
+								<td>{{ $data['bimbingan']['total'][$dosen->nama] - $data['bimbingan']['selesai'][$dosen->nama] }}</td>
+								<td>{{ $data['co_bimbingan']['total'][$dosen->nama] }}</td>
+								<td>{{ $data['co_bimbingan']['selesai'][$dosen->nama] }}</td>
+								<td>{{ $data['co_bimbingan']['total'][$dosen->nama] - $data['co_bimbingan']['selesai'][$dosen->nama] }}</td>
 								<td>0</td>
 								<td>0</td>
 								<td>0</td>

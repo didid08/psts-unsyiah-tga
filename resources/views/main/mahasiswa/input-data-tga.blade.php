@@ -1,0 +1,217 @@
+@extends('main.master')
+
+@section('breadcumb')
+	<li class="breadcrumb-item"><a href="/">{{ ucfirst($category) }}</a></li>
+	<li class="breadcrumb-item active">{{ $subtitle }}</li>
+@endsection
+
+@section('content')
+	<div class="container">
+		<div class="card height-auto">
+			<div class="card-title text-bold pl-4 pr-4 pt-4" style="font-size: 1.2em;">
+				LEMBAR INPUT DATA USULAN SKRIPSI/TGA (TUGAS AKHIR) MAHASISWA<br>
+				PRODI S1 TEKNIK SIPIL - UNSYIAH
+			</div>
+			<div class="card-body" style="overflow-x: auto;">
+				<form action="#" method="post">
+					<div class="row form-group">
+						<div class="col-5">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr class="bg-info">
+										<th scope="col">NIM</th>
+										<th scope="col" class="align-middle">{{ $nim }}</th>
+									</tr>
+									<tr class="bg-info">
+										<th scope="col">Nama Mahasiswa</th>
+										<th scope="col" class="align-middle">{{ $nama }}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Bidang Konsentrasi</td>
+										<td>
+											<select name="bidang" class="form-control">
+												@foreach ($semua_bidang as $bidang)
+													<option>{{ $bidang->nama }}</option>
+												@endforeach
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Tempat Lahir</td>
+										<td><input type="text" name="tempat-lahir" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Tanggal Lahir</td>
+										<td><input type="date" name="tgl-lahir" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Agama</td>
+										<td>
+											<select name="agama" class="form-control">
+												<option>Islam</option>
+												<option>Kristen Protestan</option>
+												<option>Katolik</option>
+												<option>Hindu</option>
+												<option>Buddha</option>
+												<option>Kong Hu Cu</option>
+												<option>Lainnya</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Jenis Kelamin</td>
+										<td>
+											<select name="gender" class="form-control">
+												<option>Laki-laki</option>
+												<option>Perempuan</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>No HP Aktif</td>
+										<td><input type="text" name="no-hp" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Email Aktif</td>
+										<td><input type="email" name="email" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Judul TGA</td>
+										<td>
+											<textarea name="judul-tga" class="form-control"></textarea>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-7">
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<td>Tahun Ajaran</td>
+										<td colspan="3">
+											<select name="tahun-ajaran" class="form-control">
+												<option>2018/2019</option>
+												<option>2019/2020</option>
+												<option>2020/2021</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Nama Pembimbing</td>
+										<td colspan="3">
+											<select name="nama-pembimbing" class="form-control">
+												@foreach ($semua_dosen as $dosen)
+													<option>{{ $dosen->nama }}</option>
+												@endforeach
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Nama Co. Pembimbing</td>
+										<td colspan="3">
+											<select name="nama-co-pembimbing" class="form-control">
+												@foreach ($semua_dosen as $dosen)
+													<option>{{ $dosen->nama }}</option>
+												@endforeach
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Dosen Wali (PA)</td>
+										<td colspan="3">
+											<select name="dosen-wali" class="form-control">
+												@foreach ($semua_dosen as $dosen)
+													<option>{{ $dosen->nama }}</option>
+												@endforeach
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Ketua Bidang</td>
+										<td colspan="3">
+											<select name="ketua-bidang" class="form-control">
+												@foreach ($semua_dosen as $dosen)
+													@if ($dosen->bidang_id != null)
+														<option>{{ $dosen->nama }}</option>
+													@endif
+												@endforeach
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Dana Pendidikan</td>
+										<td>
+											<select name="dana-pendidikan" class="form-control" id="dana-pendidikan">
+												<option>Biaya Sendiri</option>
+												<option>Beasiswa</option>
+											</select>
+										</td>
+										<td>Nama Beasiswa</td>
+										<td><input type="text" class="form-control" id="nama-beasiswa" disabled="disabled"></td>
+									</tr>
+									<tr style="background-color: rgba(255,0,0,0.1);">
+										<td>No. Disposisi</td>
+										<td>
+											<input type="text" class="form-control" disabled>
+										</td>
+										<td>Tgl Disposisi</td>
+										<td>
+											<input type="text" class="form-control" disabled>
+										</td>
+									</tr>
+									<tr style="background-color: rgba(255,0,0,0.1);">
+										<td>No. SK Pembimbing</td>
+										<td>
+											<input type="text" class="form-control" disabled>
+										</td>
+										<td>Tgl SK Pembimbing</td>
+										<td>
+											<input type="text" class="form-control" disabled>
+										</td>
+									</tr>
+									<tr>
+										<td class="bg-info"><b>PERMINTAAN CETAK DOKUMEN</b></td>
+										<td class="bg-info">
+											<input type="checkbox" name="cetak-dokumen" value="cetak-dokumen" class="form-control">
+										</td>
+										<td class="bg-info text-center">
+											<button class="btn btn-outline-light">Minta Usul TGA</button>
+										</td>
+										<td class="text-center">
+											<button class="btn btn-danger mb-2">UPDATE DATA</button>
+											<button class="btn btn-warning">PREVIEW DATA</button>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="3">
+											Centang Kotak Ini, untuk permintaan dokumen administrasi TGA ke Prodi S1<br>
+											<small class="text-red">(Jaminan AIMA: 1 jam kerja)</small>.&nbsp;
+											<small>"Jangan Lupa UPDATE DATA ANDA....!"</small>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
+				</form>
+			</div>
+		</div>
+	</div>
+@endsection
+
+@section('custom-script')
+	<script>
+		$("#dana-pendidikan").on('change', function () {
+			if (this.value == 'Beasiswa') {
+				$("#nama-beasiswa").attr('name', 'nama-beasiswa');
+				$("#nama-beasiswa").removeAttr('disabled');
+			}else {
+				$("#nama-beasiswa").attr('disabled', 'disabled');
+				$("#nama-beasiswa").removeAttr('name');
+			}
+		});
+	</script>
+@endsection

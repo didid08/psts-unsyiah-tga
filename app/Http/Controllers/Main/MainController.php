@@ -40,7 +40,8 @@ class MainController extends Controller
 
     public function dashboard() {
     	if (session('auth')['category'] == 'admin') {
-    		return AdminController::dashboard();
+            $admin_controller = new AdminController();
+    		return $admin_controller->dashboard();
     	}else {
 
             $nav_item_active = 'dashboard';
@@ -59,16 +60,29 @@ class MainController extends Controller
     }
 
     public function infoDosen() {
+
+        $user = new User();
+
         return $this->customView('info-dosen', [
-            'nav_item_active' => 'info-dosen',
+            'nav_item_active' => 'dosen',
             'subtitle' => 'Info Dosen',
-            'semua_dosen' => User::dataWithCategory('dosen')
+            'semua_dosen' => User::dataWithCategory('dosen'),
+            'data' => [
+                'bimbingan' => [
+                    'total' => $user->calculateBimbingan('total'),
+                    'selesai' => $user->calculateBimbingan('selesai')
+                ],
+                'co_bimbingan' => [
+                    'total' => $user->calculateCoBimbingan('total'),
+                    'selesai' => $user->calculateCoBimbingan('selesai')
+                ]
+            ]
         ]);
     }
 
     public function rekapDosen() {
         return $this->customView('rekap-dosen', [
-            'nav_item_active' => 'rekap-dosen',
+            'nav_item_active' => 'dosen',
             'subtitle' => 'Rekap Dosen',
             'semua_dosen' => User::dataWithCategory('dosen')
         ]);

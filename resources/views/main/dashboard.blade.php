@@ -1,5 +1,12 @@
 @extends('main.master')
 
+@section('breadcumb')
+	<li class="breadcrumb-item"><a href="/">{{ ucfirst($category) }}</a></li>
+	<li class="breadcrumb-item active">{{ $subtitle }}</li>
+@endsection
+
 @section('content')
-	Halaman Dashboard
+	<div class="container">
+		Halaman Dashboard
+	</div>
 @endsection
