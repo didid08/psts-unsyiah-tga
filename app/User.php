@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\DataTGA;
 
 class User extends Model
 {
@@ -64,11 +65,11 @@ class User extends Model
             $bimbingan[$dosen->nama] = [];
         }
 
-        if ($this->dataTGA()->where('name', 'nama_pembimbing')->exists()) {
+        if (DataTGA::where('name', 'nama-pembimbing')->exists()) {
 
-            $x = $this->dataTGA()->where('name', 'nama_pembimbing')->get();
+            $x = DataTGA::where('name', 'nama-pembimbing')->get();
             foreach ($x as $y) {
-                array_push($bimbingan[$y->content], $y->user_id->nama);
+                array_push($bimbingan[$y->content], $y->user->nama);
             }
         }
 
@@ -122,11 +123,11 @@ class User extends Model
             $co_bimbingan[$dosen->nama] = [];
         }
 
-        if ($this->dataTGA()->where('name', 'nama_co_pembimbing')->exists()) {
+        if (DataTGA::where('name', 'nama-co-pembimbing')->exists()) {
 
-            $x = $this->dataTGA()->where('name', 'nama_co_pembimbing')->get();
+            $x = DataTGA::where('name', 'nama-co-pembimbing')->get();
             foreach ($x as $y) {
-                array_push($co_bimbingan[$y->content], $y->user_id->nama);
+                array_push($co_bimbingan[$y->content], $y->user->nama);
             }
         }
 

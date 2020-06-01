@@ -13,7 +13,10 @@
 				PRODI S1 TEKNIK SIPIL - UNSYIAH
 			</div>
 			<div class="card-body" style="overflow-x: auto;">
-				<form action="#" method="post">
+				<form action="{{ route('main.mahasiswa.input-data-tga.process') }}" method="post">
+					@method('PUT')
+					@csrf
+
 					<div class="row form-group">
 						<div class="col-5">
 							<table class="table table-bordered table-striped">
@@ -33,30 +36,30 @@
 										<td>
 											<select name="bidang" class="form-control">
 												@foreach ($semua_bidang as $bidang)
-													<option>{{ $bidang->nama }}</option>
+													<option{{ $input_value['bidang'] != null ? ($input_value['bidang'] == $bidang->nama ? ' selected' : '') : '' }}>{{ $bidang->nama }}</option>
 												@endforeach
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<td>Tempat Lahir</td>
-										<td><input type="text" name="tempat-lahir" class="form-control"></td>
+										<td><input type="text" name="tempat-lahir" class="form-control"{!! $input_value['tempat-lahir'] != null ? ' value="'.$input_value['tempat-lahir'].'"' : '' !!} placeholder="Masukkan Tempat Lahir"></td>
 									</tr>
 									<tr>
 										<td>Tanggal Lahir</td>
-										<td><input type="date" name="tgl-lahir" class="form-control"></td>
+										<td><input type="date" name="tgl-lahir" class="form-control"{!! $input_value['tgl-lahir'] != null ? ' value="'.$input_value['tgl-lahir'].'"' : '' !!} placeholder="Masukkan Tanggal Lahir"></td>
 									</tr>
 									<tr>
 										<td>Agama</td>
 										<td>
 											<select name="agama" class="form-control">
-												<option>Islam</option>
-												<option>Kristen Protestan</option>
-												<option>Katolik</option>
-												<option>Hindu</option>
-												<option>Buddha</option>
-												<option>Kong Hu Cu</option>
-												<option>Lainnya</option>
+												<option{{ $input_value['agama'] != null ? ($input_value['agama'] == 'Islam' ? ' selected' : '') : '' }}>Islam</option>
+												<option{{ $input_value['agama'] != null ? ($input_value['agama'] == 'Kristen Protestan' ? ' selected' : '') : '' }}>Kristen Protestan</option>
+												<option{{ $input_value['agama'] != null ? ($input_value['agama'] == 'Katolik' ? ' selected' : '') : '' }}>Katolik</option>
+												<option{{ $input_value['agama'] != null ? ($input_value['agama'] == 'Hindu' ? ' selected' : '') : '' }}>Hindu</option>
+												<option{{ $input_value['agama'] != null ? ($input_value['agama'] == 'Buddha' ? ' selected' : '') : '' }}>Buddha</option>
+												<option{{ $input_value['agama'] != null ? ($input_value['agama'] == 'Kong Hu Cu' ? ' selected' : '') : '' }}>Kong Hu Cu</option>
+												<option{{ $input_value['agama'] != null ? ($input_value['agama'] == 'Lainnya' ? ' selected' : '') : '' }}>Lainnya</option>
 											</select>
 										</td>
 									</tr>
@@ -64,23 +67,23 @@
 										<td>Jenis Kelamin</td>
 										<td>
 											<select name="gender" class="form-control">
-												<option>Laki-laki</option>
-												<option>Perempuan</option>
+												<option{{ $input_value['gender'] != null ? ($input_value['gender'] == 'Laki-laki' ? ' selected' : '') : '' }}>Laki-laki</option>
+												<option{{ $input_value['gender'] != null ? ($input_value['gender'] == 'Perempuan' ? ' selected' : '') : '' }}>Perempuan</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<td>No HP Aktif</td>
-										<td><input type="text" name="no-hp" class="form-control"></td>
+										<td><input type="text" name="no-hp" class="form-control"{!! $input_value['no-hp'] != null ? ' value="'.$input_value['no-hp'].'"' : '' !!} placeholder="Masukkan Nomor HP"></td>
 									</tr>
 									<tr>
 										<td>Email Aktif</td>
-										<td><input type="email" name="email" class="form-control"></td>
+										<td><input type="email" name="email" class="form-control"{!! $input_value['email'] != null ? ' value="'.$input_value['email'].'"' : '' !!} placeholder="Masukkan Email"></td>
 									</tr>
 									<tr>
 										<td>Judul TGA</td>
 										<td>
-											<textarea name="judul-tga" class="form-control"></textarea>
+											<textarea name="judul-tga" class="form-control" placeholder="Masukkan Judul TGA">{{ $input_value['judul-tga'] != null ? $input_value['judul-tga'] : '' }}</textarea>
 										</td>
 									</tr>
 								</tbody>
@@ -93,9 +96,9 @@
 										<td>Tahun Ajaran</td>
 										<td colspan="3">
 											<select name="tahun-ajaran" class="form-control">
-												<option>2018/2019</option>
-												<option>2019/2020</option>
-												<option>2020/2021</option>
+												<option{{ $input_value['tahun-ajaran'] != null ? ($input_value['tahun-ajaran'] == '2018/2019' ? ' selected' : '') : '' }}>2018/2019</option>
+												<option{{ $input_value['tahun-ajaran'] != null ? ($input_value['tahun-ajaran'] == '2019/2020' ? ' selected' : '') : '' }}>2019/2020</option>
+												<option{{ $input_value['tahun-ajaran'] != null ? ($input_value['tahun-ajaran'] == '2020/2021' ? ' selected' : '') : '' }}>2020/2021</option>
 											</select>
 										</td>
 									</tr>
@@ -104,7 +107,7 @@
 										<td colspan="3">
 											<select name="nama-pembimbing" class="form-control">
 												@foreach ($semua_dosen as $dosen)
-													<option>{{ $dosen->nama }}</option>
+													<option{{ $input_value['nama-pembimbing'] != null ? ($input_value['nama-pembimbing'] == $dosen->nama ? ' selected' : '') : '' }}>{{ $dosen->nama }}</option>
 												@endforeach
 											</select>
 										</td>
@@ -114,7 +117,7 @@
 										<td colspan="3">
 											<select name="nama-co-pembimbing" class="form-control">
 												@foreach ($semua_dosen as $dosen)
-													<option>{{ $dosen->nama }}</option>
+													<option{{ $input_value['nama-co-pembimbing'] != null ? ($input_value['nama-co-pembimbing'] == $dosen->nama ? ' selected' : '') : '' }}>{{ $dosen->nama }}</option>
 												@endforeach
 											</select>
 										</td>
@@ -124,7 +127,7 @@
 										<td colspan="3">
 											<select name="dosen-wali" class="form-control">
 												@foreach ($semua_dosen as $dosen)
-													<option>{{ $dosen->nama }}</option>
+													<option{{ $input_value['dosen-wali'] != null ? ($input_value['dosen-wali'] == $dosen->nama ? ' selected' : '') : '' }}>{{ $dosen->nama }}</option>
 												@endforeach
 											</select>
 										</td>
@@ -135,7 +138,7 @@
 											<select name="ketua-bidang" class="form-control">
 												@foreach ($semua_dosen as $dosen)
 													@if ($dosen->bidang_id != null)
-														<option>{{ $dosen->nama }}</option>
+														<option{{ $input_value['ketua-bidang'] != null ? ($input_value['ketua-bidang'] == $dosen->nama ? ' selected' : '') : '' }}>{{ $dosen->nama }}</option>
 													@endif
 												@endforeach
 											</select>
@@ -145,12 +148,12 @@
 										<td>Dana Pendidikan</td>
 										<td>
 											<select name="dana-pendidikan" class="form-control" id="dana-pendidikan">
-												<option>Biaya Sendiri</option>
-												<option>Beasiswa</option>
+												<option{{ $input_value['dana-pendidikan'] != null ? ($input_value['dana-pendidikan'] == 'Dana Sendiri' ? ' selected' : '') : '' }}>Biaya Sendiri</option>
+												<option{{ $input_value['dana-pendidikan'] != null ? ($input_value['dana-pendidikan'] == 'Beasiswa' ? ' selected' : '') : '' }}>Beasiswa</option>
 											</select>
 										</td>
 										<td>Nama Beasiswa</td>
-										<td><input type="text" class="form-control" id="nama-beasiswa" disabled="disabled"></td>
+										<td><input type="text" class="form-control" id="nama-beasiswa"{!! $input_value['nama-beasiswa'] != null ? ' value="'.$input_value['nama-beasiswa'].'" name="nama-beasiswa" placeholder="Masukkan Nama Beasiswa"' : ' disabled="disabled"' !!}></td>
 									</tr>
 									<tr style="background-color: rgba(255,0,0,0.1);">
 										<td>No. Disposisi</td>
@@ -181,8 +184,8 @@
 											<button class="btn btn-outline-light">Minta Usul TGA</button>
 										</td>
 										<td class="text-center">
-											<button class="btn btn-danger mb-2">UPDATE DATA</button>
-											<button class="btn btn-warning">PREVIEW DATA</button>
+											<button type="submit" class="btn btn-danger mb-2">UPDATE DATA</button>
+											<button type="button" class="btn btn-warning" id="preview-data">PREVIEW DATA</button>
 										</td>
 									</tr>
 									<tr>
@@ -195,7 +198,7 @@
 								</tbody>
 							</table>
 						</div>
-					</div>	
+					</div>
 				</form>
 			</div>
 		</div>
@@ -204,13 +207,26 @@
 
 @section('custom-script')
 	<script>
+		var nama_beasiswa = null
+		@if ($input_value['nama-beasiswa'] != null)
+			nama_beasiswa = {{ $input_value['nama-beasiswa'] }}
+		@endif
 		$("#dana-pendidikan").on('change', function () {
 			if (this.value == 'Beasiswa') {
 				$("#nama-beasiswa").attr('name', 'nama-beasiswa');
+
+				if (nama_beasiswa != null) {
+					$("#nama-beasiswa").attr('value', nama_beasiswa);
+				}
+
+				$("#nama-beasiswa").attr('placeholder', 'Masukkan Nama Beasiswa');				
+
 				$("#nama-beasiswa").removeAttr('disabled');
 			}else {
 				$("#nama-beasiswa").attr('disabled', 'disabled');
 				$("#nama-beasiswa").removeAttr('name');
+				$("#nama-beasiswa").removeAttr('value');
+				$("#nama-beasiswa").removeAttr('placeholder');
 			}
 		});
 	</script>

@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
 		//Mahasiswa
 		Route::get('/mahasiswa/input-data-tga', 'Main\Mahasiswa\MahasiswaController@inputDataTGA')->name('main.mahasiswa.input-data-tga');
+		Route::put('/mahasiswa/input-data-tga', 'Main\Mahasiswa\MahasiswaController@inputDataTGAProcess')->name('main.mahasiswa.input-data-tga.process');
 		Route::get('/mahasiswa/administrasi-tga', 'Main\Mahasiswa\MahasiswaController@administrasiTGA')->name('main.mahasiswa.administrasi-tga');
 
 		//Tamu

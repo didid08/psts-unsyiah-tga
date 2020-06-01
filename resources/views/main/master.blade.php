@@ -10,6 +10,8 @@
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
@@ -249,6 +251,32 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+@if ( session('error') != null | session('warning') != null | session('success') != null | $errors->any() )
+  <!-- Toastr -->
+  <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+  <script>
+    $(document).ready(function () {
+      @if (session('error'))
+        toastr.error('{{ session('error') }}')      
+      @endif
+      @if (session('warning'))
+        toastr.warning('{{ session('warning') }}')
+      @endif
+      @if (session('success'))
+        toastr.success('{{ session('success') }}')
+      @endif
+      @if ($errors->any())
+        var timeout = 0
+        @foreach ($errors->all() as $error)
+          setTimeout(function () {
+            toastr.error('{{$error}}')
+          }, timeout)
+          timeout = timeout+300
+        @endforeach
+      @endif
+    });
+  </script>
+@endif
 @yield('custom-script')
 </body>
 </html>
