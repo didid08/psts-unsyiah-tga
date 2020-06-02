@@ -15,34 +15,40 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
 
-	// Index Route
+	/* INDEX ROUTE */
 	Route::get('/', 'IndexController@main')->name('index');
 
-	//Auth Routes
+	/* AUTH ROUTES */
 	Route::get('/login/{opsi?}', 'Auth\LoginController@loginPage')->name('auth.login');
 	Route::post('/login', 'Auth\LoginController@loginProcess')->name('auth.login.process');
 	Route::get('/logout', 'Auth\AuthController@logout')->name('auth.logout');
 
-	//Main Routes
+	/* MAIN ROUTES */
 	Route::middleware(['redirect'])->group(function () {
 
-		//Semua
+		// Semua
 		Route::get('/{category}/dashboard', 'Main\MainController@dashboard')->name('main.dashboard');
 		Route::get('/{category}/info-dosen', 'Main\MainController@infoDosen')->name('main.info-dosen');
 		Route::get('/{category}/rekap-dosen', 'Main\MainController@rekapDosen')->name('main.rekap-dosen');
 
-		//Admin
+		// Semua (Kecuali Tamu)
+		Route::middleware(['prevent.guest'])->group(function () {
+
+			Route::get('/{category}/administrasi-tga/{nim?}', 'Main\MainController@administrasiTGA')->name('main.administrasi-tga');
+			
+		});
+
+		// Tamu
+		Route::get('/tamu/informasi-tga', 'Main\MainController@dashboard')->name('main.tamu.informasi-tga');
+
+		// Admin
 		
 
-		//Dosen
+		// Dosen
 		
 
-		//Mahasiswa
+		// Mahasiswa
 		Route::get('/mahasiswa/input-data-tga', 'Main\Mahasiswa\MahasiswaController@inputDataTGA')->name('main.mahasiswa.input-data-tga');
 		Route::put('/mahasiswa/input-data-tga', 'Main\Mahasiswa\MahasiswaController@inputDataTGAProcess')->name('main.mahasiswa.input-data-tga.process');
-		Route::get('/mahasiswa/administrasi-tga', 'Main\Mahasiswa\MahasiswaController@administrasiTGA')->name('main.mahasiswa.administrasi-tga');
-
-		//Tamu
-		Route::get('/tamu/informasi-tga', 'Main\MainController@dashboard')->name('main.tamu.informasi-tga');
 	});
 });

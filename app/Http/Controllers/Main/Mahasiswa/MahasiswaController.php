@@ -33,12 +33,15 @@ class MahasiswaController extends MainController
             'nama-beasiswa'      => null
         ];
 
+        $administrasi_tga = false;
+
         $data_usul_tga = User::find(User::data('id'))->dataTGA()->where('category', 'data_usul_tga');
 
         if ($data_usul_tga->exists()) {
             foreach ($data_usul_tga->get() as $data) {
                 $input_value[$data->name] = $data->content;
             }
+            $administrasi_tga = true;
         }
 
         return $this->customView('mahasiswa.input-data-tga', [
@@ -51,7 +54,9 @@ class MahasiswaController extends MainController
             'semua_dosen' => User::dataWithCategory('dosen'),
             'semua_bidang' => Bidang::get(),
 
-            'input_value' => $input_value
+            'input_value' => $input_value,
+
+            'administrasi_tga' => $administrasi_tga
         ]);
     }
 
@@ -115,7 +120,8 @@ class MahasiswaController extends MainController
                 'user_id' => User::data('id'),
                 'category' => 'data_usul_tga',
                 'type' => 'inline',
-                'name' => $index
+                'name' => $index,
+                'display_name' => ucwords(str_replace('-', ' ', $index))
             ], [
                 'content' => $value
             ]);
@@ -141,20 +147,6 @@ class MahasiswaController extends MainController
         $administrasi_tga->disposition = 1;
         $administrasi_tga->save();
 
-        return redirect(route('main.mahasiswa.administrasi-tga'))->with('success', 'Sekarang anda dapat mengajukan data Administrasi TGA');
-    }
-
-    public function administrasiTGA()
-    {
-        $administrasiTGA = User::find(User::data('id'))->administrasiTGA();
-            
-        if ($administrasiTGA->exists()) { 
-            return $this->customView('mahasiswa.administrasi-tga', [
-                'nav_item_active' => 'tga',
-                'subtitle' => 'Administrasi TGA'
-            ]);
-        }
-
-        return redirect(route('main.mahasiswa.input-data-tga'))->with('warning', 'Anda harus mengisi Data Usul TGA terlebih dahulu');
+        return redirect(route('main.administrasi-tga', ['category' => 'mahasiswa']))->with('success', 'Sekarang anda dapat mengajukan data Administrasi TGA');
     }
 }

@@ -22,7 +22,7 @@ class IndexController extends Controller
 				if ($administrasiTGA->value('selesai') == true) {
 					return redirect(route('main.dashboard', ['category' => $auth['category']]));			
 				}
-				return redirect(route('main.mahasiswa.administrasi-tga'));	
+				return redirect(route('main.administrasi-tga', ['category' => 'mahasiswa']));	
 
 			}
 			return redirect(route('main.mahasiswa.input-data-tga'));

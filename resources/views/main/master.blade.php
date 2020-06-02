@@ -45,14 +45,18 @@
               <a href="{{ route('main.dashboard', ['category' => $category]) }}" class="nav-link{{ $nav_item_active == 'dashboard' ? ' text-bold' : '' }}">Dashboard</a>
             </li>
           @endif
-          @if ($category == 'mahasiswa')
+          @if ($category != 'tamu')
             <li class="nav-item dropdown">
               <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link{{ $nav_item_active == 'tga' ? ' text-bold' : '' }} dropdown-toggle">TGA</a>
               <ul class="dropdown-menu border-0 shadow">
-                <li><a href="{{ route('main.mahasiswa.input-data-tga') }}" class="dropdown-item">Input Data TGA</a></li>
-                <li><a href="{{ route('main.mahasiswa.administrasi-tga') }}" class="dropdown-item">Administrasi TGA</a></li>
-                <li><a href="{{ route('main.mahasiswa.administrasi-tga') }}" class="dropdown-item">Input Data Seminar</a></li>
-                <li><a href="#" class="dropdown-item">Input Data Sidang</a></li>
+                @if ($category == 'mahasiswa')
+                  <li><a href="{{ route('main.mahasiswa.input-data-tga') }}" class="dropdown-item">Input Data TGA</a></li>
+                @endif
+                <li><a href="{{ route('main.administrasi-tga', ['category' => $category]) }}" class="dropdown-item">Administrasi TGA</a></li>
+                @if ($category == 'mahasiswa')
+                  <li><a href="#" class="dropdown-item">Input Data Seminar</a></li>
+                  <li><a href="#" class="dropdown-item">Input Data Sidang</a></li>
+                @endif
               </ul>
             </li>
             <li class="nav-item">

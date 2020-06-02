@@ -153,7 +153,7 @@
 											</select>
 										</td>
 										<td>Nama Beasiswa</td>
-										<td><input type="text" class="form-control" id="nama-beasiswa"{!! $input_value['nama-beasiswa'] != null ? ' value="'.$input_value['nama-beasiswa'].'" name="nama-beasiswa" placeholder="Masukkan Nama Beasiswa"' : ' disabled="disabled"' !!}></td>
+										<td><input type="text" class="form-control" id="nama-beasiswa"{!! $input_value['dana-pendidikan'] == 'Beasiswa' ? ' value="'.$input_value['nama-beasiswa'].'" name="nama-beasiswa" placeholder="Masukkan Nama Beasiswa"' : ' disabled="disabled"' !!}></td>
 									</tr>
 									<tr style="background-color: rgba(255,0,0,0.1);">
 										<td>No. Disposisi</td>
@@ -194,6 +194,11 @@
 											<small class="text-red">(Jaminan AIMA: 1 jam kerja)</small>.&nbsp;
 											<small>"Jangan Lupa UPDATE DATA ANDA....!"</small>
 										</td>
+										@if ($administrasi_tga)
+											<td>
+												<a href="{{ route('main.administrasi-tga', ['category' => 'mahasiswa']) }}" class="btn btn-secondary">Ke halaman Adminstrasi TGA</a>
+											</td>
+										@endif
 									</tr>
 								</tbody>
 							</table>
@@ -209,7 +214,7 @@
 	<script>
 		var nama_beasiswa = null
 		@if ($input_value['nama-beasiswa'] != null)
-			nama_beasiswa = {{ $input_value['nama-beasiswa'] }}
+			nama_beasiswa = '{{ $input_value['nama-beasiswa'] }}'
 		@endif
 		$("#dana-pendidikan").on('change', function () {
 			if (this.value == 'Beasiswa') {

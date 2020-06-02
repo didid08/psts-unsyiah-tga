@@ -87,4 +87,56 @@ class MainController extends Controller
             'semua_dosen' => User::dataWithCategory('dosen')
         ]);
     }
+
+    public function administrasiTGA($category, $nim = null)
+    {
+        if ($category == 'mahasiswa') {
+            if ($nim == null) {
+
+                $administrasiTGA = User::find(User::data('id'))->administrasiTGA();
+                if ($administrasiTGA->exists()) { 
+                    return $this->customView('administrasi-tga', [
+                        'nav_item_active' => 'tga',
+                        'subtitle' => 'Administrasi TGA',
+
+                        'nim' => User::data('nomor_induk')
+                    ]);
+                }
+                return redirect(route('main.mahasiswa.input-data-tga'))->with('warning', 'Anda harus mengisi Data Usul TGA terlebih dahulu');
+
+            }
+            return abort(404);
+
+        } else {
+
+            $nama_mahasiswa = null;
+
+            // Cek Mahasiswa
+            if ($nim != null) {
+
+                $mahasiswa = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
+
+                // Apakah Mahasiswa dengan NIM tsb tidak ada?
+                if (!$mahasiswa->exists()) {
+                    return abort(404);
+                }
+
+                //Jika ada, apakah mahasiswa tsb belum mengisi Data Usul TGA?
+                $administrasi_tga = User::find($mahasiswa->first()->id)->administrasiTGA();
+                if (!$administrasi_tga->exists()) {
+                    return abort(404);
+                }
+
+                $nama_mahasiswa = $mahasiswa->first()->nama;
+            }
+
+            return $this->customView('administrasi-tga', [
+                'nav_item_active' => 'tga',
+                'subtitle' => 'Administrasi TGA', 
+
+                'nim' => $nim,
+                'nama_mahasiswa' => $nama_mahasiswa
+            ]);
+        }
+    }
 }
