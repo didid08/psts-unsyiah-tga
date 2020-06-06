@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Main\Admin\AdminController;
 
 use App\User;
+use App\DataTGA;
 use App\Setting;
 
 class MainController extends Controller
@@ -93,13 +94,17 @@ class MainController extends Controller
         if ($category == 'mahasiswa') {
             if ($nim == null) {
 
+                $data_tga = new DataTGA;
+                $mahasiswa_data_tga = $data_tga->listData(User::data('id'));
+
                 $administrasiTGA = User::find(User::data('id'))->administrasiTGA();
                 if ($administrasiTGA->exists()) { 
                     return $this->customView('administrasi-tga', [
                         'nav_item_active' => 'tga',
                         'subtitle' => 'Administrasi TGA',
 
-                        'nim' => User::data('nomor_induk')
+                        'mahasiswa' => User::where('nomor_induk', User::data('nomor_induk'))->first(),
+                        'mahasiswa_data_tga' => $mahasiswa_data_tga
                     ]);
                 }
                 return redirect(route('main.mahasiswa.input-data-tga'))->with('warning', 'Anda harus mengisi Data Usul TGA terlebih dahulu');
@@ -109,7 +114,7 @@ class MainController extends Controller
 
         } else {
 
-            $nama_mahasiswa = null;
+            $extra_data = [];
 
             // Cek Mahasiswa
             if ($nim != null) {
@@ -127,16 +132,19 @@ class MainController extends Controller
                     return abort(404);
                 }
 
-                $nama_mahasiswa = $mahasiswa->first()->nama;
+                $data_tga = new DataTGA;
+                $mahasiswa_data_tga = $data_tga->listData(User::firstWhere('nomor_induk', $nim)->id);
+
+                $extra_data['mahasiswa'] = User::firstWhere('nomor_induk', $nim);
+                $extra_data['mahasiswa_data_tga'] = $mahasiswa_data_tga;
             }
 
-            return $this->customView('administrasi-tga', [
+            return $this->customView('administrasi-tga', array_merge([
                 'nav_item_active' => 'tga',
                 'subtitle' => 'Administrasi TGA', 
 
-                'nim' => $nim,
-                'nama_mahasiswa' => $nama_mahasiswa
-            ]);
+                'nim' => $nim
+            ], $extra_data));
         }
     }
 }

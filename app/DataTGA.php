@@ -12,7 +12,31 @@ class DataTGA extends Model
     	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'verified'
     ];
 
-    public function user() {
+    public function user()
+    {
     	return $this->belongsTo('App\User');
+    }
+
+    public function listData($user_id, $category = null)
+    {
+    	$final_data = [];
+
+    	if ($category == null) {
+    		$all_data = $this->where('user_id', $user_id)->get();
+    	} else {
+    		$all_data = $this->where(['user_id' => $user_id, 'category' => $category])->get();
+    	}
+
+    	foreach ($all_data as $data) {
+			$final_data[str_replace('-', '_', $data->name)] = [
+				'category' => $data->category,
+				'type' => $data->type,
+				'display_name' => $data->display_name,
+				'content' => $data->content,
+				'verified' => $data->verified
+			];
+		}
+
+    	return json_decode(json_encode($final_data));
     }
 }

@@ -128,7 +128,7 @@ class MahasiswaController extends MainController
         }
 
         if (!array_key_exists('nama-beasiswa', $input)) {
-            $nama_beasiswa = User::find(User::data('id'))->dataTGA()->firstWhere('name', 'nama-beasiswa');
+            $nama_beasiswa = User::find(User::data('id'))->dataTGA()->where('name', 'nama-beasiswa');
 
             if ($nama_beasiswa->exists()) {
                 $nama_beasiswa->delete();
