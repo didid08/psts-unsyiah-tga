@@ -81,6 +81,7 @@ class UserRolesTableSeeder extends Seeder
         	'role_id' => 8
         ]);
 
+        //Mahasiswa
         for ($i = 68; $i <= 1068; $i++) {
         	DB::table('user_roles')->insert([
         		'user_id' => $i,

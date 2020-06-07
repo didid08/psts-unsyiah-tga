@@ -13,31 +13,40 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-        	'name' => 'Administrator'
+            'name' => 'admin',
+        	'display_name' => 'Administrator'
         ]);
         DB::table('roles')->insert([
-        	'name' => 'Koordinator Prodi'
+            'name' => 'koor-prodi',
+        	'display_name' => 'Koordinator Prodi'
         ]);
         DB::table('roles')->insert([
-        	'name' => 'Ketua Kelompok Keahlian'
+            'name' => 'ketua-kel-keahlian',
+        	'display_name' => 'Ketua Kelompok Keahlian'
         ]);
         DB::table('roles')->insert([
-        	'name' => 'Pembimbing (Co)'
+            'name' => 'pembimbing-co',
+        	'display_name' => 'Pembimbing (Co)'
         ]);
         DB::table('roles')->insert([
-        	'name' => 'Koordinator TGA'
+            'name' => 'koor-tga',
+        	'display_name' => 'Koordinator TGA'
         ]);
         DB::table('roles')->insert([
-        	'name' => 'Komisi Penguji'
+            'name' => 'komisi-penguji',
+        	'display_name' => 'Komisi Penguji'
         ]);
         DB::table('roles')->insert([
-        	'name' => 'Ketua Jurusan'
+            'name' => 'ketua-jurusan',
+        	'display_name' => 'Ketua Jurusan'
         ]);
         DB::table('roles')->insert([
-        	'name' => 'Sekretaris Jurusan'
+            'name' => 'sek-jurusan',
+        	'display_name' => 'Sekretaris Jurusan'
         ]);
         DB::table('roles')->insert([
-        	'name' => 'Mahasiswa'
+            'name' => 'mhs',
+        	'display_name' => 'Mahasiswa'
         ]);
     }
 }

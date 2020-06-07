@@ -119,7 +119,9 @@ class UsersTableSeeder extends Seeder
 				default: //do nothing
 			}
 
-			DB::table('users')->insert(array_merge(['category' => 'dosen', 'password' => Hash::make('test')], $data_dosen));
+			$data_dosen['password'] = Hash::make($data_dosen['nomor_induk']);
+
+			DB::table('users')->insert(array_merge(['category' => 'dosen'], $data_dosen));
 		}
 
 		$semua_mahasiswa = [
@@ -1205,7 +1207,9 @@ class UsersTableSeeder extends Seeder
 				}
 			}
 
-			DB::table('users')->insert(array_merge(['category' => 'mahasiswa', 'password' => Hash::make('test')], $data_mahasiswa));
+			$data_mahasiswa['password'] = Hash::make($data_mahasiswa['nomor_induk']);
+
+			DB::table('users')->insert(array_merge(['category' => 'mahasiswa'], $data_mahasiswa));
 			//array_push($x, array_merge(['category' => 'mahasiswa', 'password' => Hash::make('test')], $data_mahasiswa));
 		}
 

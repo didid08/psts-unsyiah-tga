@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Main\Admin\AdminController;
 
 use App\User;
+use App\UserRole;
 use App\DataTGA;
 use App\Setting;
 
 class MainController extends Controller
 {
-    public function customView($viewName, $data = []) {
+    public function customView($viewName, $data = [])
+    {
 
         $nama = 'Tamu';
         if (session('auth')['category'] != 'tamu') {
@@ -39,7 +41,8 @@ class MainController extends Controller
 
     }
 
-    public function dashboard() {
+    public function dashboard()
+    {
     	if (session('auth')['category'] == 'admin') {
             $admin_controller = new AdminController();
     		return $admin_controller->dashboard();
@@ -60,8 +63,8 @@ class MainController extends Controller
     	}
     }
 
-    public function infoDosen() {
-
+    public function infoDosen()
+    {
         $user = new User();
 
         return $this->customView('info-dosen', [
@@ -81,7 +84,8 @@ class MainController extends Controller
         ]);
     }
 
-    public function rekapDosen() {
+    public function rekapDosen()
+    {
         return $this->customView('rekap-dosen', [
             'nav_item_active' => 'dosen',
             'subtitle' => 'Rekap Dosen',
@@ -94,21 +98,28 @@ class MainController extends Controller
         if ($category == 'mahasiswa') {
             if ($nim == null) {
 
-                $data_tga = new DataTGA;
+                $data_tga = new DataTGA();
                 $mahasiswa_data_tga = $data_tga->listData(User::data('id'));
+                $administrasi_tga = User::find(User::data('id'))->administrasiTGA();
 
-                $administrasiTGA = User::find(User::data('id'))->administrasiTGA();
-                if ($administrasiTGA->exists()) { 
-                    return $this->customView('administrasi-tga', [
+                $user_roles = new UserRole();
+                $my_roles = $user_roles->myRoles();
+
+                if ($administrasi_tga->exists()) { 
+                    return $this->customView('administrasi-tga.main', [
                         'nav_item_active' => 'tga',
                         'subtitle' => 'Administrasi TGA',
+
+                        'roles' => $my_roles,
+
+                        'administrasi_tga' => $administrasi_tga,
 
                         'mahasiswa' => User::where('nomor_induk', User::data('nomor_induk'))->first(),
                         'mahasiswa_data_tga' => $mahasiswa_data_tga
                     ]);
                 }
-                return redirect(route('main.mahasiswa.input-data-tga'))->with('warning', 'Anda harus mengisi Data Usul TGA terlebih dahulu');
 
+                return redirect(route('main.mahasiswa.input-data-tga'))->with('warning', 'Anda harus mengisi Data Usul TGA terlebih dahulu');
             }
             return abort(404);
 
@@ -132,14 +143,22 @@ class MainController extends Controller
                     return abort(404);
                 }
 
-                $data_tga = new DataTGA;
+                $data_tga = new DataTGA();
                 $mahasiswa_data_tga = $data_tga->listData(User::firstWhere('nomor_induk', $nim)->id);
 
                 $extra_data['mahasiswa'] = User::firstWhere('nomor_induk', $nim);
                 $extra_data['mahasiswa_data_tga'] = $mahasiswa_data_tga;
+
+                $user_roles = new UserRole();
+                $my_roles = $user_roles->myRoles();
+                $extra_data['roles'] = $my_roles;
+
+                $extra_data['administrasi_tga'] = $administrasi_tga;
             }
 
-            return $this->customView('administrasi-tga', array_merge([
+
+
+            return $this->customView('administrasi-tga.main', array_merge([
                 'nav_item_active' => 'tga',
                 'subtitle' => 'Administrasi TGA', 
 
