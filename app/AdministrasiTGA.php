@@ -9,7 +9,7 @@ class AdministrasiTGA extends Model
     protected $table = 'administrasi_tga';
 
     protected $fillable = [
-    	'tahap', 'disposition', 'repeat', 'disposition_optional', 'repeat_optional'
+    	'progress', 'repeat', 'progress_optional', 'repeat_optional'
     ];
 
     public function user() {

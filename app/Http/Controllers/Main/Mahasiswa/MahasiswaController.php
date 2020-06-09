@@ -143,9 +143,8 @@ class MahasiswaController extends MainController
 
         $administrasi_tga = new AdministrasiTGA;
         $administrasi_tga->user_id = User::data('id');
-        $administrasi_tga->tahap = 1;
-        $administrasi_tga->disposition = 1;
-        $administrasi_tga->disposition_optional = 0;
+        $administrasi_tga->progress = 1;
+        $administrasi_tga->progress_optional = 0;
         $administrasi_tga->save();
 
         return redirect(route('main.administrasi-tga', ['category' => 'mahasiswa']))->with('success', 'Sekarang anda dapat mengajukan data Administrasi TGA');

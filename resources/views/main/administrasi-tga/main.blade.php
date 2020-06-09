@@ -8,6 +8,14 @@
 		.icon-size {
 			font-size: 1.8em;
 		}
+
+		.bg-alert-danger-1 {
+			background-color: #c0392b;
+		}
+
+		.bg-alert-danger-2 {
+			background-color: #e74c3c;
+		}
 	</style>
 @endsection
 
@@ -28,34 +36,10 @@
 				</div>
 			</div>
 		@else
-			@php
-				function namaFile ($tahap, $role) {
-					$path = 'main.administrasi-tga.';
-					return $path.$role.'.'.$tahap;
-				}
-
-				function progressIndicator ($tahap, $disposition, $administrasi_tga) {
-					if ($administrasi_tga->value('tahap') > $tahap) {
-						return '<i class="fa fa-check-circle text-green icon-size"></i>';
-					} elseif ($administrasi_tga->value('tahap') == $tahap && $administrasi_tga->value('disposition') > $disposition) {
-						return '<i class="fa fa-check-circle text-green icon-size"></i>';
-					} elseif ($administrasi_tga->value('tahap') == $tahap && $administrasi_tga->value('disposition') == $disposition && $administrasi_tga->value('repeat')) {
-						return '<i class="fa fa-times-circle text-red icon-size"></i>';
-					} else {
-						return '<i class="fa fa-circle nonactive icon-size"></i>';
-					}
-				}
-
-				function progressIndicatorOpsional ($disposition, $administrasi_tga) {
-					if ($administrasi_tga->value('disposition_optional') > $disposition) {
-						return '<i class="fa fa-check-circle text-green icon-size"></i>';
-					} elseif ($administrasi_tga->value('disposition_optional') == $disposition && $administrasi_tga->value('repeat_optional')) {
-						return '<i class="fa fa-times-circle text-red icon-size"></i>';
-					} else {
-						return '<i class="fa fa-circle nonactive icon-size"></i>';
-					}
-				}
-			@endphp
+			@include('main.administrasi-tga.function')
+			@if (isset($roles->mhs))
+				@include('main.administrasi-tga.mhs.function')
+			@endif
 			<div class="card">
 				<div class="card-body" style="overflow-x: auto;">
 					<table class="table table-bordered table-striped table-secondary table-responsive">
@@ -82,33 +66,33 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="{{ $administrasi_tga->value('tahap') > 1 ? 'table-success' : ($administrasi_tga->value('repeat') ? 'table-danger' : 'table-info') }}">
+							<tr class="{{ background(1, 3, $administrasi_tga) }}">
 								<td><b>1</b></td>
 								<td colspan="4">
 									@if (isset($roles->mhs))
 										@include(namaFile('tahap-1', 'mhs'))
 									@elseif (isset($roles->admin))
 										@include(namaFile('tahap-1', 'admin'))
-									@elseif ($roles->koor-prodi != null)
+									@elseif ($roles->koor_prodi != null)
 										@include(namaFile('tahap-1', 'koor-prodi'))
 									@else
 										@include(namaFile('tahap-1', 'read-only'))
 									@endif
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicator(1, 1, $administrasi_tga) !!}
+									{!! progress(1, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicator(1, 2, $administrasi_tga) !!}
+									{!! progress(2, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicator(1, 3, $administrasi_tga) !!}
+									{!! progress(3, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 							</tr>
-							<tr class="{{ $administrasi_tga->value('tahap') > 2 ? 'table-success' : ($administrasi_tga->value('tahap') < 2 ? '' : ($administrasi_tga->value('repeat') ? 'table-danger' : 'table-info')) }}">
+							<tr class="{{ background(4, 4, $administrasi_tga) }}">
 								<td><b>2</b></td>
 								<td colspan="4">
 									@if (isset($roles->mhs))
@@ -123,12 +107,12 @@
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle">
-									{!! progressIndicator(2, 1, $administrasi_tga) !!}
+									{!! progress(4, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 							</tr>
-							<tr class="{{ $administrasi_tga->value('tahap') > 3 ? 'table-success' : ($administrasi_tga->value('tahap') < 3 ? '' : ($administrasi_tga->value('repeat') ? 'table-danger' : 'table-info')) }}">
+							<tr class="{{ background(5, 6, $administrasi_tga) }}">
 								<td><b>3</b></td>
 								<td colspan="4">
 									@if (isset($roles->mhs))
@@ -144,16 +128,16 @@
 								<td class="text-center align-middle">
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicator(3, 1, $administrasi_tga) !!}
+									{!! progress(5, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicator(3, 2, $administrasi_tga) !!}
+									{!! progress(6, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 							</tr>
-							<tr class="{{ $administrasi_tga->value('disposition_optional') > 3 ? 'table-success' : ($administrasi_tga->value('disposition_optional') < 1 ? '' : ($administrasi_tga->value('repeat_optional') ? 'table-danger' : 'table-warning')) }}">
+							<tr class="{{ backgroundOptional(1, 3, $administrasi_tga) }}">
 								<td></td>
 								<td colspan="4">
 									@if (isset($roles->mhs))
@@ -167,19 +151,19 @@
 									@endif
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicatorOpsional(1, $administrasi_tga) !!}
+									{!! progressOptional(1, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicatorOpsional(2, $administrasi_tga) !!}
+									{!! progressOptional(2, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicatorOpsional(3, $administrasi_tga) !!}
+									{!! progressOptional(3, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 							</tr>
-							<tr class="{{ $administrasi_tga->value('disposition_optional') > 5 ? 'table-success' : ($administrasi_tga->value('disposition_optional') < 4 ? '' : ($administrasi_tga->value('repeat_optional') ? 'table-danger' : 'table-warning')) }}">
+							<tr class="{{ backgroundOptional(4, 5, $administrasi_tga) }}">
 								<td></td>
 								<td colspan="4">
 									@if (isset($roles->mhs))
@@ -195,13 +179,34 @@
 								<td class="text-center align-middle">
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicatorOpsional(4, $administrasi_tga) !!}
+									{!! progressOptional(4, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle">
-									{!! progressIndicatorOpsional(5, $administrasi_tga) !!}
+									{!! progressOptional(5, $administrasi_tga) !!}
 								</td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+							</tr>
+
+							<tr class="{{ background(7, 7, $administrasi_tga) }}">
+								<td><b>4</b></td>
+								<td colspan="4">
+									@if (isset($roles->mhs))
+										@include(namaFile('tahap-4', 'mhs'))
+									@elseif (isset($roles->pembimbing_co))
+										@include(namaFile('tahap-4', 'pembimbing-co'))
+									@else
+										@include(namaFile('tahap-4', 'read-only'))
+									@endif
+								</td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle">
+									{!! progress(7, $administrasi_tga) !!}
+								</td>
 								<td class="text-center align-middle"></td>
 							</tr>
 						</tbody>

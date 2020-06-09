@@ -1,4 +1,4 @@
-<table width="100%" class="table table-bordered{{ $administrasi_tga->value('tahap') == 3 ? ' table-light' : '' }}">
+<table width="100%" class="table table-bordered{{ formBackground(5, 6, $administrasi_tga) }}">
 	<tbody>
 		<tr>
 			<td class="align-middle">1.</td>
@@ -9,9 +9,9 @@
 			<td class="align-middle"></td>
 			<td class="align-middle font-italic">No <span style="float: right;">:</span></td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('tahap') == 3)
+				@if (in_array($administrasi_tga->value('progress'), range(5,6)) && $administrasi_tga->value('repeat') == false)
 					<span class="text-warning">sedang diproses</span>
-				@elseif ($administrasi_tga->value('tahap') > 3)
+				@elseif ($administrasi_tga->value('progress') > 6)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
 				@else
 					--
@@ -22,23 +22,21 @@
 			<td class="align-middle"></td>
 			<td class="align-middle font-italic">Tgl <span style="float: right;">:</span></td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('tahap') == 3)
+				@if (in_array($administrasi_tga->value('progress'), range(5,6)) && $administrasi_tga->value('repeat') == false)
 					<span class="text-warning">sedang diproses</span>
-				@elseif ($administrasi_tga->value('tahap') > 3)
+				@elseif ($administrasi_tga->value('progress') > 6)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
 				@else
 					--
 				@endif
 			</td>
 		</tr>
-		@if ($administrasi_tga->value('tahap') >= 3)
+		@if ($administrasi_tga->value('progress') >= 6)
 			<tr>
+				<td></td>
 				<td></td>
 				<td class="align-middle text-center">
 					<a href="#" class="btn btn-sm btn-success">Unduh SK</a>
-				</td>
-				<td class="align-middle text-center">
-					<a href="#" class="btn btn-sm btn-light">Unduh Disposisi</a>
 				</td>
 			</tr>
 		@endif

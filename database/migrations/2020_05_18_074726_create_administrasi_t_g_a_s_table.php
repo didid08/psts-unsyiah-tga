@@ -19,11 +19,10 @@ class CreateAdministrasiTGASTable extends Migration
             $table->bigInteger('user_id')->nullable()->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->integer('tahap')->nullable();
-            $table->integer('disposition')->nullable();
+            $table->integer('progress')->nullable();
             $table->boolean('repeat')->default(false);
 
-            $table->integer('disposition_optional')->nullable();
+            $table->integer('progress_optional')->nullable();
             $table->boolean('repeat_optional')->default(false);
 
             $table->boolean('selesai')->default(false);

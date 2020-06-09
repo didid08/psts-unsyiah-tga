@@ -1,12 +1,12 @@
-<table width="100%" class="table table-bordered{{ $administrasi_tga->value('tahap') == 2 ? ' table-light' : '' }}">
+<table width="100%" class="table table-bordered{{ formBackground(4, 4, $administrasi_tga) }}">
 	<tbody>
 		<tr>
 			<td class="align-middle">1.</td>
 			<td class="align-middle font-italic">Nama Pembimbing <span style="float: right;">:</span></td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('tahap') == 2)
+				@if (in_array($administrasi_tga->value('progress'), range(4,4)) && $administrasi_tga->value('repeat') == false)
 					<span class="text-warning">sedang diproses</span>
-				@elseif ($administrasi_tga->value('tahap') > 2)
+				@elseif ($administrasi_tga->value('progress') > 4)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
 				@else
 					--
@@ -17,9 +17,9 @@
 			<td class="align-middle">2.</td>
 			<td class="align-middle font-italic">Nama Co Pembimbing <span style="float: right;">:</span></td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('tahap') == 2)
+				@if (in_array($administrasi_tga->value('progress'), range(4,4)) && $administrasi_tga->value('repeat') == false)
 					<span class="text-warning">sedang diproses</span>
-				@elseif ($administrasi_tga->value('tahap') > 2)
+				@elseif ($administrasi_tga->value('progress') > 4)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
 				@else
 					--
@@ -30,20 +30,12 @@
 			<td class="align-middle">3.</td>
 			<td class="align-middle font-italic">Rencana Judul TGA <span style="float: right;">:</span></td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('tahap') >= 2)
+				@if ($administrasi_tga->value('progress') >= 4)
 					<textarea class="form-control bg-light" readonly="readonly">{{ $mahasiswa_data_tga->judul_tga->content }}</textarea>
 				@else
 					--
 				@endif
 			</td>
 		</tr>
-		@if ($administrasi_tga->value('tahap') >= 2)
-			<tr>
-				<td colspan="2"></td>
-				<td class="text-center align-middle">
-					<a href="#" class="btn btn-sm btn-light">Unduh Disposisi</a>
-				</td>
-			</tr>
-		@endif
 	</tbody>
 </table>
