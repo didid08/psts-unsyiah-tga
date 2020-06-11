@@ -16,6 +16,9 @@
 		.bg-alert-danger-2 {
 			background-color: #e74c3c;
 		}
+		label {
+			text-overflow: ellipsis!important;
+		}
 	</style>
 @endsection
 
@@ -188,7 +191,8 @@
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>
 							</tr>
-
+							
+							{{-- Tahap 4 --}}
 							<tr class="{{ background(7, 7, $administrasi_tga) }}">
 								<td><b>4</b></td>
 								<td colspan="4">
@@ -209,10 +213,131 @@
 								</td>
 								<td class="text-center align-middle"></td>
 							</tr>
+
+							{{-- Tahap 5 --}}
+							<tr class="{{ background(8, 10, $administrasi_tga) }}">
+								<td><b>5</b></td>
+								<td colspan="4">
+									@if (isset($roles->mhs))
+										@include(namaFile('tahap-5', 'mhs'))
+									@elseif (isset($roles->admin))
+										@include(namaFile('tahap-5', 'admin'))
+									@elseif (isset($roles->koor_tga))
+										@include(namaFile('tahap-5', 'koor-tga'))
+									@else
+										@include(namaFile('tahap-5', 'read-only'))
+									@endif
+								</td>
+								<td class="text-center align-middle">
+									{!! progress(8, $administrasi_tga) !!}
+								</td>
+								<td class="text-center align-middle">
+									{!! progress(9, $administrasi_tga) !!}
+								</td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle">
+									{!! progress(10, $administrasi_tga) !!}
+								</td>
+							</tr>			
+
+							{{-- Tahap 6 --}}
+							<tr class="{{ background(11, 12, $administrasi_tga) }}">
+								<td><b>6</b></td>
+								<td colspan="4">
+									@if (isset($roles->mhs))
+										@include(namaFile('tahap-6', 'mhs'))
+									@elseif (isset($roles->admin))
+										@include(namaFile('tahap-6', 'admin'))
+									@elseif (isset($roles->koor_prodi))
+										@include(namaFile('tahap-6', 'koor-prodi'))
+									@else
+										@include(namaFile('tahap-6', 'read-only'))
+									@endif
+								</td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle">
+									{!! progress(11, $administrasi_tga) !!}
+								</td>
+								<td class="text-center align-middle">
+									{!! progress(12, $administrasi_tga) !!}
+								</td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+							</tr>
+
+							{{-- Tahap 7 --}}
+							<tr class="{{ background(13, 13, $administrasi_tga) }}">
+								<td><b>7</b></td>
+								<td colspan="4">
+									@if (isset($roles->mhs))
+										@include(namaFile('tahap-7', 'mhs'))
+									@elseif (isset($roles->komisi_penguji))
+										@include(namaFile('tahap-7', 'komisi_penguji'))
+									@else
+										@include(namaFile('tahap-7', 'read-only'))
+									@endif
+								</td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+							</tr>
+
+							{{-- Tahap 8 --}}
+							<tr class="{{ background(15, 17, $administrasi_tga) }}">
+								<td><b>8</b></td>
+								<td colspan="4">
+									@if (isset($roles->mhs))
+										@include(namaFile('tahap-8', 'mhs'))
+									@elseif (isset($roles->admin))
+										@include(namaFile('tahap-8', 'admin'))
+									@elseif (isset($roles->koor_prodi))
+										@include(namaFile('tahap-8', 'koor-prodi'))
+									@else
+										@include(namaFile('tahap-8', 'read-only'))
+									@endif
+								</td>
+								<td class="text-center align-middle">
+									{!! progress(15, $administrasi_tga) !!}
+								</td>
+								<td class="text-center align-middle">
+									{!! progress(16, $administrasi_tga) !!}
+								</td>
+								<td class="text-center align-middle">
+									{!! progress(17, $administrasi_tga) !!}
+								</td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+								<td class="text-center align-middle"></td>
+							</tr>				
 						</tbody>
 					</table>
 				</div>
 			</div>
 		@endif
 	</div>
+@endsection
+
+@section('custom-script')
+	<script>
+		$('input[type=file]').each(function (index, data) {
+			$(this).val('');
+		});
+		function showSelectedFile(label, e) {
+			var fileName = e.target.files[0].name;
+
+			var html;
+			if (fileName.length <= 10) {
+				html = fileName;
+			} else {
+				html = fileName.substring(0,10)+'...';
+			}
+			$(label).html(html);
+		}
+	</script>
 @endsection

@@ -3,7 +3,11 @@
 		<tr>
 			<td class="align-middle">1.</td>
 			<td class="align-middle font-weight-bold">SK Penunjukan Pembimbing</td>
-			<td class="align-middle"></td>
+			<td class="align-middle text-center">
+				@if ($administrasi_tga->value('progress') > 6)
+					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+				@endif
+			</td>
 		</tr>
 		<tr>
 			<td class="align-middle"></td>
@@ -31,14 +35,5 @@
 				@endif
 			</td>
 		</tr>
-		@if ($administrasi_tga->value('progress') >= 6)
-			<tr>
-				<td></td>
-				<td></td>
-				<td class="align-middle text-center">
-					<a href="#" class="btn btn-sm btn-success">Unduh SK</a>
-				</td>
-			</tr>
-		@endif
 	</tbody>
 </table>

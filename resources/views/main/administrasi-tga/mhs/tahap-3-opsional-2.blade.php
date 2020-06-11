@@ -3,7 +3,11 @@
 		<tr>
 			<td class="align-middle">2.</td>
 			<td class="align-middle">Surat Tugas Pengambilan Data Lab/Lapangan</td>
-			<td class="align-middle"></td>
+			<td class="align-middle text-center">
+			@if ($administrasi_tga->value('progress_optional') > 5)
+				<a href="#" class="btn btn-sm btn-success">Unduh</a>
+			@endif
+			</td>
 		</tr>
 		<tr>
 			<td class="align-middle"></td>
@@ -31,13 +35,5 @@
 				@endif
 			</td>
 		</tr>
-		@if ($administrasi_tga->value('progress_optional') > 5)
-			<tr>
-				<td></td>
-				<td class="align-middle text-center">
-					<a href="#" class="btn btn-sm btn-success">Unduh Surat Tugas Pengambilan Data</a>
-				</td>
-			</tr>
-		@endif
 	</tbody>
 </table>

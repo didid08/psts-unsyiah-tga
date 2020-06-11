@@ -27,7 +27,10 @@
 					@if (in_array($administrasi_tga->value('progress'), range(2,3)) && $administrasi_tga->value('repeat') == false)
 						<span class="text-warning">sedang diperiksa</span>
 					@else
-						<input type="file">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" name="spp" id="spp" onchange="showSelectedFile('#spp-label', event)" accept="application/pdf">
+							<label class="custom-file-label text-left" for="spp" id="spp-label">Pilih File</label>
+						</div>
 					@endif
 				@endif
 			</td>
@@ -42,7 +45,10 @@
 					@if (in_array($administrasi_tga->value('progress'), range(2,3)) && $administrasi_tga->value('repeat') == false)
 						<span class="text-warning">sedang diperiksa</span>
 					@else
-						<input type="file">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" name="krs" id="krs" onchange="showSelectedFile('#krs-label', event)" accept="application/pdf">
+							<label class="custom-file-label text-left" for="krs" id="krs-label">Pilih File</label>
+						</div>
 					@endif
 				@endif
 			</td>
@@ -57,7 +63,10 @@
 					@if (in_array($administrasi_tga->value('progress'), range(2,3)) && $administrasi_tga->value('repeat') == false)
 						<span class="text-warning">sedang diperiksa</span>
 					@else
-						<input type="file">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" name="transkrip-sementara" id="transkrip-sementara" onchange="showSelectedFile('#transkrip-sementara-label', event)" accept="application/pdf">
+							<label class="custom-file-label text-left" for="transkrip-sementara" id="transkrip-sementara-label">Pilih File</label>
+						</div>
 					@endif
 				@endif
 			</td>
@@ -72,7 +81,10 @@
 					@if (in_array($administrasi_tga->value('progress'), range(2,3)) && $administrasi_tga->value('repeat') == false)
 						<span class="text-warning">sedang diperiksa</span>
 					@else
-						<input type="file">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" name="khs" id="khs" onchange="showSelectedFile('#khs-label', event)" accept="application/pdf">
+							<label class="custom-file-label text-left" for="khs" id="khs-label">Pilih File</label>
+						</div>
 					@endif
 				@endif
 			</td>
@@ -84,11 +96,19 @@
 					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
 				</td>
 			</tr>
-		@elseif (in_array($administrasi_tga->value('progress'), range(1, 3)) && $administrasi_tga->value('repeat'))
+		@elseif (in_array($administrasi_tga->value('progress'), range(2, 3)) && $administrasi_tga->value('repeat'))
 			<tr>
 				<td colspan="2"></td>
 				<td class="text-center align-middle">
 					<button type="submit" class="btn btn-sm btn-warning">Perbaiki</button>
+				</td>
+			</tr>
+		@endif
+
+		@if ($administrasi_tga->value('progress') > 3)
+			<tr>
+				<td colspan="3" class="align-middle text-center">
+					<a href="#" class="btn btn-block btn-success">Unduh Semua</a>
 				</td>
 			</tr>
 		@endif

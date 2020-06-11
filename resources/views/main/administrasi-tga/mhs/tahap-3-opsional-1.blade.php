@@ -24,9 +24,15 @@
 			<td class="align-middle">Surat Permohonan Tugas Pengambilan Data</td>
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress_optional') == 0)
-					<input type="file" disabled="disabled">
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" name="sptpd" id="sptpd" onchange="showSelectedFile('#sptpd-label', event)" accept="application/pdf" disabled="disabled">
+						<label class="custom-file-label text-left" for="sptpd" id="sptpd-label">Pilih File</label>
+					</div>
 				@elseif ($administrasi_tga->value('progress_optional') == 1)
-					<input type="file">
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" name="sptpd" id="sptpd" onchange="showSelectedFile('#sptpd-label', event)" accept="application/pdf">
+						<label class="custom-file-label text-left" for="sptpd" id="sptpd-label">Pilih File</label>
+					</div>
 				@elseif (in_array($administrasi_tga->value('progress_optional'), range(2,3)))
 					@if ($administrasi_tga->value('repeat_optional'))
 						<input type="file">
@@ -39,7 +45,7 @@
 			</td>
 			@if ($administrasi_tga->value('progress_optional') == 0)
 				<td class="text-center align-middle">
-					<button class="btn btn-sm btn-success" disabled="disabled">Kirim</button>
+					<button class="btn btn-sm btn-secondary" disabled="disabled">Kirim</button>
 				</td>
 			@elseif ($administrasi_tga->value('progress_optional') == 1)
 				<td class="text-center align-middle">

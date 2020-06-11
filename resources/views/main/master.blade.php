@@ -55,7 +55,7 @@
                 @endif
                 <li><a href="{{ route('main.administrasi-tga', ['category' => $category]) }}" class="dropdown-item">Administrasi TGA</a></li>
                 @if ($category == 'mahasiswa')
-                  <li><a href="#" class="dropdown-item">Input Data Seminar</a></li>
+                  <li><a href="#" class="dropdown-item">Input Data Proposal</a></li>
                   <li><a href="#" class="dropdown-item">Input Data Sidang</a></li>
                 @endif
               </ul>
