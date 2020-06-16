@@ -158,6 +158,24 @@ class MainController extends Controller
                 $extra_data['roles'] = $my_roles;
                 $extra_data['administrasi_tga'] = $administrasi_tga;
 
+                $user = new User;
+                $daftar_bimbingan = $user->calculateBimbingan('total');
+                $daftar_co_bimbingan = $user->calculateCoBimbingan('total');
+                $semua_dosen_bimbingan = [];
+                $semua_dosen_co_bimbingan = [];
+                foreach (User::dataWithCategory('dosen') as $x) {
+                    if ($daftar_bimbingan[$x->nama] < 10) {
+                        array_push($semua_dosen_bimbingan, $x);
+                    }
+                }
+                foreach (User::dataWithCategory('dosen') as $x) {
+                    if ($daftar_co_bimbingan[$x->nama] < 10) {
+                        array_push($semua_dosen_co_bimbingan, $x);
+                    }
+                }
+                $extra_data['semua_dosen_bimbingan'] = json_decode(json_encode($semua_dosen_bimbingan));
+                $extra_data['semua_dosen_co_bimbingan'] = json_decode(json_encode($semua_dosen_co_bimbingan));
+
             } else {
                 $adm = new AdministrasiTGA;
                 $list = $adm->list();

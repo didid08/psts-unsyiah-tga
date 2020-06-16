@@ -113,6 +113,8 @@
 										@include(namaFile('tahap-1', 'mhs'))
 									@elseif (isset($roles->admin))
 										@include(namaFile('tahap-1', 'admin'))
+									@elseif (isset($roles->koor_prodi))
+										@include(namaFile('tahap-1', 'koor-prodi'))
 									@else
 										@include(namaFile('tahap-1', 'read-only'))
 									@endif

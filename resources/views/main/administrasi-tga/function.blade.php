@@ -37,8 +37,10 @@
 			return '<i class="fa fa-check-circle text-green icon-size"></i>';
 		} elseif ($administrasi_tga->value('progress') == $progress && $administrasi_tga->value('repeat')) {
 			return '<i class="fa fa-times-circle text-red icon-size"></i>';
+		} elseif ($administrasi_tga->value('progress') == $progress) {
+			return '<i class="fa fa-sync-alt text-info icon-size"></i>';
 		} else {
-			return '<i class="fa fa-circle nonactive icon-size"></i>';
+			return '<i class="far fa-circle nonactive icon-size"></i>';
 		}
 	}
 
@@ -47,28 +49,25 @@
 			return '<i class="fa fa-check-circle text-green icon-size"></i>';
 		} elseif ($administrasi_tga->value('progress_optional') == $progress_optional && $administrasi_tga->value('repeat_optional')) {
 			return '<i class="fa fa-times-circle text-red icon-size"></i>';
+		} elseif ($administrasi_tga->value('progress_optional') == $progress_optional) {
+			return '<i class="fa fa-sync-alt text-info icon-size"></i>';
 		} else {
-			return '<i class="fa fa-circle nonactive icon-size"></i>';
+			return '<i class="far fa-circle nonactive icon-size"></i>';
 		}
 	}
 
-	function alert($type, $text, $colspan) {
-		if ($type == 'danger') {
-
-			$icon = 'fa-exclamation-triangle';
-
-			$bg1 = 'bg-alert-danger-1';
-			$bg2 = 'bg-alert-danger-2';
+	/* Fungsi untuk manajemen form input */
+	function formBackground ($min_progress, $max_progress, $administrasi_tga) {
+		if (in_array($administrasi_tga->value('progress'), range($min_progress, $max_progress))) {
+			return ' table-light';
 		}
-		return '<tr>
-					<td colspan="'.$colspan.'" class="text-center align-middle">
-						<table width="100%" class="table-borderless">
-							<tr>
-								<td class="text-center align-middle p-4 '.$bg1.'"><i class="fa '.$icon.' text-white"></i></td>
-								<td class="text-left align-middle '.$bg2.'">'.$text.'</td>
-							</tr>
-						</table>
-					</td>
-				</tr>';
+		return false;
+	}
+
+	function formBackgroundOptional ($min_progress, $max_progress, $administrasi_tga) {
+		if (in_array($administrasi_tga->value('progress_optional'), range($min_progress, $max_progress))) {
+			return ' table-light';
+		}
+		return false;
 	}
 @endphp
