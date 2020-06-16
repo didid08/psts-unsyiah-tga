@@ -72,8 +72,6 @@ class MahasiswaController extends MainController
             'email'              => 'required|email',
             'judul-tga'          => 'required',
             'tahun-ajaran'       => 'required',
-            'nama-pembimbing'    => 'required',
-            'nama-co-pembimbing' => 'required',
             'dosen-wali'         => 'required',
             'ketua-bidang'       => 'required',
             'dana-pendidikan'    => 'required'
@@ -91,8 +89,6 @@ class MahasiswaController extends MainController
             'email.email'                 => 'Format Email salah',
             'judul-tga.required'          => 'Judul TGA tidak boleh kosong',
             'tahun-ajaran.required'       => 'Tahun Ajaran tidak boleh kosong',
-            'nama-pembimbing.required'    => 'Nama Pembimbing tidak boleh kosong',
-            'nama-co-pembimbing.required' => 'Nama Co Pembimbing tidak boleh kosong',
             'dosen-wali.required'         => 'Dosen Wali tidak boleh kosong',
             'ketua-bidang.required'       => 'Ketua Bidang tidak boleh kosong',
             'dana-pendidikan.required'    => 'Dana Pendidikan tidak boleh kosong'

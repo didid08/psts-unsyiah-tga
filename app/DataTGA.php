@@ -39,4 +39,15 @@ class DataTGA extends Model
 
     	return json_decode(json_encode($final_data));
     }
+
+    public function getSingleData($mhs_id, $name) {
+        return $this->firstWhere(['user_id' => $mhs_id, 'name' => $name]);
+    }
+
+    public function checkSingleData($mhs_id, $name) {
+        if ($this->where(['user_id' => $mhs_id, 'name' => $name])->exists()) {
+            return true;
+        }
+        return false;
+    }
 }

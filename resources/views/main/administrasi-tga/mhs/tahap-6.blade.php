@@ -11,7 +11,7 @@
 		</tr>
 		<tr>
 			<td class="align-middle"></td>
-			<td class="align-middle font-italic">No <span style="float: right;">:</span></td>
+			<td class="align-middle font-italic">No</td>
 			<td class="text-center align-middle">
 				@if (in_array($administrasi_tga->value('progress'), range(11,12)) && $administrasi_tga->value('repeat') == false)
 					<span class="text-warning">sedang diproses</span>
@@ -24,7 +24,7 @@
 		</tr>
 		<tr>
 			<td class="align-middle"></td>
-			<td class="align-middle font-italic">Tgl <span style="float: right;">:</span></td>
+			<td class="align-middle font-italic">Tgl</td>
 			<td class="text-center align-middle">
 				@if (in_array($administrasi_tga->value('progress'), range(11,12)) && $administrasi_tga->value('repeat') == false)
 					<span class="text-warning">sedang diproses</span>

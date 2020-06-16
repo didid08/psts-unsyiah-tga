@@ -34,12 +34,12 @@ Route::middleware(['auth'])->group(function () {
 		// Semua (Kecuali Tamu)
 		Route::middleware(['prevent.guest'])->group(function () {
 
-			Route::get('/{category}/administrasi-tga/{nim?}', 'Main\MainController@administrasiTGA')->name('main.administrasi-tga');
+			Route::get('/{category}/tga/administrasi/{nim?}', 'Main\MainController@administrasiTGA')->name('main.administrasi-tga');
 			
 		});
 
 		// Tamu
-		Route::get('/tamu/informasi-tga', 'Main\MainController@dashboard')->name('main.tamu.informasi-tga');
+		Route::get('/tamu/tga/informasi', 'Main\MainController@dashboard')->name('main.tamu.informasi-tga');
 
 		// Admin
 		
@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
 		
 
 		// Mahasiswa
-		Route::get('/mahasiswa/input-data-tga', 'Main\Mahasiswa\MahasiswaController@inputDataTGA')->name('main.mahasiswa.input-data-tga');
-		Route::put('/mahasiswa/input-data-tga', 'Main\Mahasiswa\MahasiswaController@inputDataTGAProcess')->name('main.mahasiswa.input-data-tga.process');
+		Route::get('/mahasiswa/tga/input-data', 'Main\Mahasiswa\MahasiswaController@inputDataTGA')->name('main.mahasiswa.input-data-tga');
+		Route::put('/mahasiswa/tga/input-data', 'Main\Mahasiswa\MahasiswaController@inputDataTGAProcess')->name('main.mahasiswa.input-data-tga.process');
 	});
 });

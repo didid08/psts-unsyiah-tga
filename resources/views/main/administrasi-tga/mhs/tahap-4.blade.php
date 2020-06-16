@@ -6,11 +6,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="align-middle font-italic">Jumlah Asistensi (min. 8 kali) <span style="float: right;">:</span></td>
+			<td class="align-middle font-italic">Jumlah Asistensi (min. 8 kali)</td>
 			<td class="text-center align-middle">
 				@if (in_array($administrasi_tga->value('progress'), range(7,7)) && $administrasi_tga->value('repeat') == false)
 					<span class="text-warning">sedang diproses</span>
-				@elseif ($administrasi_tga->value('progress') > 4)
+				@elseif ($administrasi_tga->value('progress') > 7)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
 				@else
 					--
@@ -18,11 +18,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="align-middle font-italic">Masa Pembimbingan Proposal <span style="float: right;">:</span></td>
+			<td class="align-middle font-italic">Masa Pembimbingan Proposal</td>
 			<td class="text-center align-middle">
 				@if (in_array($administrasi_tga->value('progress'), range(7,7)) && $administrasi_tga->value('repeat') == false)
 					<span class="text-warning">sedang diproses</span>
-				@elseif ($administrasi_tga->value('progress') > 4)
+				@elseif ($administrasi_tga->value('progress') > 7)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
 				@else
 					--

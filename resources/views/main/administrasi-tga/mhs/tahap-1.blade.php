@@ -18,7 +18,7 @@
 			</tr>
 		@endif
 		<tr>
-			<td class="align-middle">1.</td>
+			<td class="align-middle text-center">1.</td>
 			<td class="align-middle">SPP</td>
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') > 3)
@@ -36,7 +36,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="align-middle">2.</td>
+			<td class="align-middle text-center">2.</td>
 			<td class="align-middle">KRS</td>
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') > 3)
@@ -54,7 +54,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="align-middle">3.</td>
+			<td class="align-middle text-center">3.</td>
 			<td class="align-middle">Transkrip Sementara</td>
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') > 3)
@@ -72,7 +72,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="align-middle">4.</td>
+			<td class="align-middle text-center">4.</td>
 			<td class="align-middle">KHS</td>
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') > 3)

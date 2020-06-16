@@ -102,7 +102,7 @@
 											</select>
 										</td>
 									</tr>
-									<tr>
+									<!--<tr>
 										<td>Nama Pembimbing</td>
 										<td colspan="3">
 											<select name="nama-pembimbing" class="form-control">
@@ -121,7 +121,21 @@
 												@endforeach
 											</select>
 										</td>
+									</tr>-->
+
+									<tr>
+										<td>Nama Pembimbing</td>
+										<td colspan="3">
+											<input type="text" class="form-control" value="{{ $input_value['nama-pembimbing'] }}" placeholder="Diisi oleh admin" readonly="readonly">
+										</td>
 									</tr>
+									<tr>
+										<td>Nama Co. Pembimbing</td>
+										<td colspan="3">
+											<input type="text" class="form-control" value="{{ $input_value['nama-co-pembimbing'] }}" placeholder="Diisi oleh admin" readonly="readonly">
+										</td>
+									</tr>
+
 									<tr>
 										<td>Dosen Wali (PA)</td>
 										<td colspan="3">
@@ -158,21 +172,21 @@
 									<tr style="background-color: rgba(255,0,0,0.1);">
 										<td>No. Disposisi</td>
 										<td>
-											<input type="text" class="form-control" disabled>
+											<input type="text" class="form-control" placeholder="Diisi oleh admin" readonly="readonly">
 										</td>
 										<td>Tgl Disposisi</td>
 										<td>
-											<input type="text" class="form-control" disabled>
+											<input type="text" class="form-control" placeholder="Diisi oleh admin" readonly="readonly">
 										</td>
 									</tr>
 									<tr style="background-color: rgba(255,0,0,0.1);">
 										<td>No. SK Pembimbing</td>
 										<td>
-											<input type="text" class="form-control" disabled>
+											<input type="text" class="form-control" placeholder="Diisi oleh admin" readonly="readonly">
 										</td>
 										<td>Tgl SK Pembimbing</td>
 										<td>
-											<input type="text" class="form-control" disabled>
+											<input type="text" class="form-control" placeholder="Diisi oleh admin" readonly="readonly">
 										</td>
 									</tr>
 									<tr>

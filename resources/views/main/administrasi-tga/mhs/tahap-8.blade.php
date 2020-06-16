@@ -11,8 +11,8 @@
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" name="berita-acara-seminar-proposal" id="berita-acara-seminar-proposal" onchange="showSelectedFile('#berita-acara-seminar-proposal-label', event)" accept="application/pdf">
-							<label class="custom-file-label text-left" for="spp" id="berita-acara-seminar-proposal-label">Pilih File</label>
+							<input type="file" class="custom-file-input" name="berita-acara-seminar-proposal" id="berita-acara-seminar-proposal" onchange="showSelectedFile('#berita-acara-seminar-proposal-label', event)" accept="application/pdf" {!! in_array($administrasi_tga->value('progress'), range(15,17)) ? '' : 'disabled="disabled"' !!}>
+							<label class="custom-file-label text-left" for="berita-acara-seminar-proposal" id="berita-acara-seminar-proposal-label">Pilih File</label>
 						</div>
 					@endif
 				@endif
@@ -29,8 +29,8 @@
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" name="buku-proposal" id="buku-proposal" onchange="showSelectedFile('#buku-proposal-label', event)" accept="application/pdf">
-							<label class="custom-file-label text-left" for="krs" id="buku-proposal-label">Pilih File</label>
+							<input type="file" class="custom-file-input" name="buku-proposal" id="buku-proposal" onchange="showSelectedFile('#buku-proposal-label', event)" accept="application/pdf" {!! in_array($administrasi_tga->value('progress'), range(15,17)) ? '' : 'disabled="disabled"' !!}>
+							<label class="custom-file-label text-left" for="buku-proposal" id="buku-proposal-label">Pilih File</label>
 						</div>
 					@endif
 				@endif

@@ -9,6 +9,7 @@ use App\Http\Controllers\Main\Admin\AdminController;
 
 use App\User;
 use App\UserRole;
+use App\AdministrasiTGA;
 use App\DataTGA;
 use App\Setting;
 
@@ -143,25 +144,30 @@ class MainController extends Controller
                     return abort(404);
                 }
 
-                $data_tga = new DataTGA();
-                $mahasiswa_data_tga = $data_tga->listData(User::firstWhere('nomor_induk', $nim)->id);
+                $user_role = new UserRole ();
+                $my_roles = $user_role->myRoles();
 
+                $adm = new AdministrasiTGA ();
+                if (!$adm->isEligibleToView($nim, User::data('nama'))) {
+                    return response('Anda tidak mempunyai perizinan untuk melihat progress mahasiswa yang anda pilih.');   
+                }
+
+                $data_tga = new DataTGA ();
                 $extra_data['mahasiswa'] = User::firstWhere('nomor_induk', $nim);
-                $extra_data['mahasiswa_data_tga'] = $mahasiswa_data_tga;
-
-                $user_roles = new UserRole();
-                $my_roles = $user_roles->myRoles();
+                $extra_data['mahasiswa_data_tga'] = $data_tga->listData(User::firstWhere('nomor_induk', $nim)->id);
                 $extra_data['roles'] = $my_roles;
-
                 $extra_data['administrasi_tga'] = $administrasi_tga;
+
+            } else {
+                $adm = new AdministrasiTGA;
+                $list = $adm->list();
+
+                $extra_data['administrasi_tga'] = $list;
             }
-
-
 
             return $this->customView('administrasi-tga.main', array_merge([
                 'nav_item_active' => 'tga',
-                'subtitle' => 'Administrasi TGA', 
-
+                'subtitle' => 'Administrasi TGA',
                 'nim' => $nim
             ], $extra_data));
         }

@@ -13,7 +13,7 @@
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" name="lembar-asistensi" id="lembar-asistensi" onchange="showSelectedFile('#lembar-asistensi-label', event)" accept="application/pdf" {!! $administrasi_tga->value('progress') == 8 ? '' : 'disabled="disabled"' !!}>
+							<input type="file" class="custom-file-input" name="lembar-asistensi" id="lembar-asistensi" onchange="showSelectedFile('#lembar-asistensi-label', event)" accept="application/pdf" {!! in_array($administrasi_tga->value('progress'), range(8,10)) ? '' : 'disabled="disabled"' !!}>
 							<label class="custom-file-label text-left" for="lembar-asistensi" id="lembar-asistensi-label">Pilih File</label>
 						</div>
 					@endif
@@ -34,7 +34,7 @@
 					@else
 						<form class="">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="draft-buku-proposal" id="draft-buku-proposal" onchange="showSelectedFile('#draft-buku-proposal-label', event)" accept="application/pdf" {!! $administrasi_tga->value('progress') == 8 ? '' : 'disabled="disabled"' !!}>
+								<input type="file" class="custom-file-input" name="draft-buku-proposal" id="draft-buku-proposal" onchange="showSelectedFile('#draft-buku-proposal-label', event)" accept="application/pdf" {!! in_array($administrasi_tga->value('progress'), range(8,10)) ? '' : 'disabled="disabled"' !!}>
 								<label class="custom-file-label text-left" for="draft-buku-proposal" id="draft-buku-proposal-label">Pilih File</label>
 							</div>
 						</form>
@@ -68,14 +68,14 @@
 			<tr class="bg-warning">
 				<td>3.</td>
 				<td colspan="2" class="align-middle">
-					Koordinator TGA mengusulkan Komisi Penguji dan Jadwal Seminar
+					Koordinator TGA sedang mengusulkan Komisi Penguji dan Jadwal Seminar
 				</td>
 			</tr>
 		@elseif ($administrasi_tga->value('progress') > 10)
 			<tr>
 				<td>3.</td>
 				<td colspan="2" class="align-middle">
-					Koordinator TGA mengusulkan Komisi Penguji dan Jadwal Seminar
+					Koordinator TGA telah mengusulkan Komisi Penguji dan Jadwal Seminar
 				</td>
 			</tr>
 		@else
