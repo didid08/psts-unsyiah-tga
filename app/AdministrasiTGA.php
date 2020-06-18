@@ -59,6 +59,28 @@ class AdministrasiTGA extends Model
     	}
     }
 
+    public function isPembimbing($nim, $myname)
+    {
+        $mhs_id = User::firstWhere('nomor_induk', $nim)->id;
+        $data_tga = new DataTGA ();
+
+        $mhs_pembimbing = null;
+        $mhs_co_pembimbing = null;
+
+        if ($data_tga->checkSingleData($mhs_id, 'nama-pembimbing')) {
+            $mhs_pembimbing = $data_tga->getSingleData($mhs_id, 'nama-pembimbing')->content;
+        }
+
+        if ($data_tga->checkSingleData($mhs_id, 'nama-co-pembimbing')) {
+            $mhs_co_pembimbing = $data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->content;
+        }
+
+        if ($myname == $mhs_pembimbing | $myname == $mhs_co_pembimbing) {
+            return true;
+        }
+        return false;
+    }
+
     public function list() {
     	$result = [];
     	foreach ($this->get() as $mhs) {

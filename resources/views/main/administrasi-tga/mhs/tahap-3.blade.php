@@ -13,7 +13,7 @@
 			<td class="align-middle"></td>
 			<td class="align-middle font-italic">No</td>
 			<td class="text-center align-middle">
-				@if (in_array($administrasi_tga->value('progress'), range(5,6)) && $administrasi_tga->value('repeat') == false)
+				@if (in_array($administrasi_tga->value('progress'), range(5,6)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($administrasi_tga->value('progress') > 6)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
@@ -26,7 +26,7 @@
 			<td class="align-middle"></td>
 			<td class="align-middle font-italic">Tgl</td>
 			<td class="text-center align-middle">
-				@if (in_array($administrasi_tga->value('progress'), range(5,6)) && $administrasi_tga->value('repeat') == false)
+				@if (in_array($administrasi_tga->value('progress'), range(5,6)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($administrasi_tga->value('progress') > 6)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">

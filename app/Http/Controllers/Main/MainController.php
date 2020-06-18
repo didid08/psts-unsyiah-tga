@@ -153,10 +153,6 @@ class MainController extends Controller
                 }
 
                 $data_tga = new DataTGA ();
-                $extra_data['mahasiswa'] = User::firstWhere('nomor_induk', $nim);
-                $extra_data['mahasiswa_data_tga'] = $data_tga->listData(User::firstWhere('nomor_induk', $nim)->id);
-                $extra_data['roles'] = $my_roles;
-                $extra_data['administrasi_tga'] = $administrasi_tga;
 
                 $user = new User;
                 $daftar_bimbingan = $user->calculateBimbingan('total');
@@ -173,8 +169,16 @@ class MainController extends Controller
                         array_push($semua_dosen_co_bimbingan, $x);
                     }
                 }
-                $extra_data['semua_dosen_bimbingan'] = json_decode(json_encode($semua_dosen_bimbingan));
-                $extra_data['semua_dosen_co_bimbingan'] = json_decode(json_encode($semua_dosen_co_bimbingan));
+
+                $extra_data = [
+                    'mahasiswa' => User::firstWhere('nomor_induk', $nim),
+                    'mahasiswa_data_tga' => $data_tga->listData(User::firstWhere('nomor_induk', $nim)->id),
+                    'roles' => $my_roles,
+                    'administrasi_tga' => $administrasi_tga,
+                    'semua_dosen_bimbingan' => json_decode(json_encode($semua_dosen_bimbingan)),
+                    'semua_dosen_co_bimbingan' => json_decode(json_encode($semua_dosen_co_bimbingan)),
+                    'isPembimbing' => $adm->isPembimbing($nim, User::data('nama'))
+                ];
 
             } else {
                 $adm = new AdministrasiTGA;

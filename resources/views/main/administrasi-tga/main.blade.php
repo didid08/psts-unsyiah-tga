@@ -78,9 +78,17 @@
 			@endif
 			<div class="card">
 				<div class="card-body" style="overflow-x: auto;">
-
-					<a href="#" class="btn btn-outline-secondary font-weight-bold mb-4"><i class="fa fa-download"></i>&nbsp;&nbsp;Unduh Disposisi</a>
-					
+					<div class="container text-center">
+						<h5>LEMBAR DISPOSISI TUGAS AKHIR - JURUSAN TEKNIK SIPIL</h5>
+						<h5>FAKULTAS TEKNIK UNIVERSITAS SYIAH KUALA</h5>
+						@if (isset($roles->admin))
+							<span class="mr-2">No: </span><input type="text" name="no-disposisi" class="form-control mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline-block; height: 2.2em;">
+							<button class="btn btn-sm btn-secondary">Update</button><br>
+						@else
+							<span>No: --</span><br>
+						@endif
+						<a href="#" class="btn btn-sm btn-outline-secondary font-weight-bold m-3"><i class="fa fa-download"></i>&nbsp;&nbsp;Unduh Disposisi</a>
+					</div>			
 					<table class="table table-bordered table-striped table-secondary table-responsive">
 						<thead>
 							<tr class="bg-info">
@@ -300,7 +308,7 @@
 								<td colspan="4">
 									@if (isset($roles->mhs))
 										@include(namaFile('tahap-4', 'mhs'))
-									@elseif (isset($roles->pembimbing_co))
+									@elseif (isset($roles->pembimbing_co) && $isPembimbing)
 										@include(namaFile('tahap-4', 'pembimbing-co'))
 									@else
 										@include(namaFile('tahap-4', 'read-only'))

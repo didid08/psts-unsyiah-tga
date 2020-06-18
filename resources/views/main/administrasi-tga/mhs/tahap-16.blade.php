@@ -7,7 +7,7 @@
 				@if ($administrasi_tga->value('progress') > 36)
 					<a href="#" class="btn btn-sm btn-success">Unduh</a>
 				@else
-					@if (in_array($administrasi_tga->value('progress'), range(35,36)) && $administrasi_tga->value('repeat') == false)
+					@if (in_array($administrasi_tga->value('progress'), range(35,36)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
@@ -26,7 +26,7 @@
 				@if ($administrasi_tga->value('progress') > 36)
 					<a href="#" class="btn btn-sm btn-success">Unduh</a>
 				@else
-					@if (in_array($administrasi_tga->value('progress'), range(35,36)) && $administrasi_tga->value('repeat') == false)
+					@if (in_array($administrasi_tga->value('progress'), range(35,36)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
@@ -52,14 +52,6 @@
 				<td></td>
 				<td class="text-right align-middle">
 					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
-				</td>
-			</tr>
-		@elseif (in_array($administrasi_tga->value('progress'), range(35,36)) && $administrasi_tga->value('repeat'))
-			<tr>
-				<td></td>
-				<td></td>
-				<td class="text-right align-middle">
-					<button type="submit" class="btn btn-sm btn-warning">Perbaiki</button>
 				</td>
 			</tr>
 		@endif

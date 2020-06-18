@@ -2,7 +2,7 @@
 	<tbody>
 		<tr>
 			<td class="align-middle">2.</td>
-			<td class="align-middle">Surat Tugas Pengambilan Data Lab/Lapangan</td>
+			<td class="align-middle"><b>Surat Tugas Pengambilan Data Lab/Lapangan</b></td>
 			<td class="align-middle text-center">
 			@if ($administrasi_tga->value('progress_optional') > 5)
 				<a href="#" class="btn btn-sm btn-success">Unduh</a>

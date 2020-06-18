@@ -35,8 +35,6 @@
 	function progress ($progress, $administrasi_tga) {
 		if ($administrasi_tga->value('progress') > $progress) {
 			return '<i class="fa fa-check-circle text-green icon-size"></i>';
-		} elseif ($administrasi_tga->value('progress') == $progress && $administrasi_tga->value('repeat')) {
-			return '<i class="fa fa-times-circle text-red icon-size"></i>';
 		} elseif ($administrasi_tga->value('progress') == $progress) {
 			return '<i class="fa fa-sync-alt text-info icon-size"></i>';
 		} else {
@@ -47,8 +45,6 @@
 	function progressOptional ($progress_optional, $administrasi_tga) {
 		if ($administrasi_tga->value('progress_optional') > $progress_optional) {
 			return '<i class="fa fa-check-circle text-green icon-size"></i>';
-		} elseif ($administrasi_tga->value('progress_optional') == $progress_optional && $administrasi_tga->value('repeat_optional')) {
-			return '<i class="fa fa-times-circle text-red icon-size"></i>';
 		} elseif ($administrasi_tga->value('progress_optional') == $progress_optional) {
 			return '<i class="fa fa-sync-alt text-info icon-size"></i>';
 		} else {

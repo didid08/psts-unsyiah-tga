@@ -6,12 +6,10 @@
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') == 1)
 					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($administrasi_tga->value('progress') == 2 && $administrasi_tga->value('repeat') == false)
+				@elseif ($administrasi_tga->value('progress') == 2)
 					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh Admin</span>
-				@elseif ($administrasi_tga->value('progress') == 3 && $administrasi_tga->value('repeat') == false)
+				@elseif ($administrasi_tga->value('progress') == 3)
 					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh koor prodi</span>
-				@elseif ($administrasi_tga->value('repeat') == true)
-					<span><i class="fa fa-times-circle text-danger"></i>&nbsp;&nbsp;Belum diperbaiki</span>
 				@else
 					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
 				@endif
@@ -23,12 +21,10 @@
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') == 1)
 					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($administrasi_tga->value('progress') == 2 && $administrasi_tga->value('repeat') == false)
+				@elseif ($administrasi_tga->value('progress') == 2)
 					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh Admin</span>
-				@elseif ($administrasi_tga->value('progress') == 3 && $administrasi_tga->value('repeat') == false)
+				@elseif ($administrasi_tga->value('progress') == 3)
 					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh koor prodi</span>
-				@elseif ($administrasi_tga->value('repeat') == true)
-					<span><i class="fa fa-times-circle text-danger"></i>&nbsp;&nbsp;Belum diperbaiki</span>
 				@else
 					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
 				@endif
@@ -40,12 +36,10 @@
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') == 1)
 					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($administrasi_tga->value('progress') == 2 && $administrasi_tga->value('repeat') == false)
+				@elseif ($administrasi_tga->value('progress') == 2)
 					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh Admin</span>
-				@elseif ($administrasi_tga->value('progress') == 3 && $administrasi_tga->value('repeat') == false)
+				@elseif ($administrasi_tga->value('progress') == 3)
 					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh koor prodi</span>
-				@elseif ($administrasi_tga->value('repeat') == true)
-					<span><i class="fa fa-times-circle text-danger"></i>&nbsp;&nbsp;Belum diperbaiki</span>
 				@else
 					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
 				@endif
@@ -57,12 +51,10 @@
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') == 1)
 					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($administrasi_tga->value('progress') == 2 && $administrasi_tga->value('repeat') == false)
+				@elseif ($administrasi_tga->value('progress') == 2)
 					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh Admin</span>
-				@elseif ($administrasi_tga->value('progress') == 3 && $administrasi_tga->value('repeat') == false)
+				@elseif ($administrasi_tga->value('progress') == 3)
 					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh koor prodi</span>
-				@elseif ($administrasi_tga->value('repeat') == true)
-					<span><i class="fa fa-times-circle text-danger"></i>&nbsp;&nbsp;Belum diperbaiki</span>
 				@else
 					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
 				@endif

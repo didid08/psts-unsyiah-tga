@@ -4,7 +4,7 @@
 			<td class="align-middle text-center">1.</td>
 			<td class="align-middle">Nama Pembimbing</td>
 			<td class="text-center align-middle">
-				@if (in_array($administrasi_tga->value('progress'), range(4,4)) && $administrasi_tga->value('repeat') == false)
+				@if (in_array($administrasi_tga->value('progress'), range(4,4)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($administrasi_tga->value('progress') > 4)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
@@ -17,7 +17,7 @@
 			<td class="align-middle text-center">2.</td>
 			<td class="align-middle">Nama Co Pembimbing</td>
 			<td class="text-center align-middle">
-				@if (in_array($administrasi_tga->value('progress'), range(4,4)) && $administrasi_tga->value('repeat') == false)
+				@if (in_array($administrasi_tga->value('progress'), range(4,4)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($administrasi_tga->value('progress') > 4)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">

@@ -1,22 +1,5 @@
 <table width="100%" class="table table-bordered{{ formBackground(1, 3, $administrasi_tga) }}">
 	<tbody>
-		@if (in_array($administrasi_tga->value('progress'), range(2, 3)) && $administrasi_tga->value('repeat'))
-			@php
-				$penolak;
-				if ($administrasi_tga->value('progress') == 2) {
-					$penolak = 'Admin';
-				} elseif ($administrasi_tga->value('progress') == 3) {
-					$penolak = 'Koordinator Prodi';
-				}
-			@endphp
-			<tr>
-				<td colspan="3" class="text-center align-middle">
-					<div class="alert alert-danger text-left font-italic" role="alert">
-					  <b>Kesalahan!</b> Pengajuan anda ditolak oleh "{{ $penolak }}"
-					</div>
-				</td>
-			</tr>
-		@endif
 		<tr>
 			<td class="align-middle text-center">1.</td>
 			<td class="align-middle">SPP</td>
@@ -24,7 +7,7 @@
 				@if ($administrasi_tga->value('progress') > 3)
 					<a href="#" class="btn btn-sm btn-success">Unduh</a>
 				@else
-					@if (in_array($administrasi_tga->value('progress'), range(2,3)) && $administrasi_tga->value('repeat') == false)
+					@if (in_array($administrasi_tga->value('progress'), range(2,3)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
@@ -42,7 +25,7 @@
 				@if ($administrasi_tga->value('progress') > 3)
 					<a href="#" class="btn btn-sm btn-success">Unduh</a>
 				@else
-					@if (in_array($administrasi_tga->value('progress'), range(2,3)) && $administrasi_tga->value('repeat') == false)
+					@if (in_array($administrasi_tga->value('progress'), range(2,3)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
@@ -60,7 +43,7 @@
 				@if ($administrasi_tga->value('progress') > 3)
 					<a href="#" class="btn btn-sm btn-success">Unduh</a>
 				@else
-					@if (in_array($administrasi_tga->value('progress'), range(2,3)) && $administrasi_tga->value('repeat') == false)
+					@if (in_array($administrasi_tga->value('progress'), range(2,3)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
@@ -78,7 +61,7 @@
 				@if ($administrasi_tga->value('progress') > 3)
 					<a href="#" class="btn btn-sm btn-success">Unduh</a>
 				@else
-					@if (in_array($administrasi_tga->value('progress'), range(2,3)) && $administrasi_tga->value('repeat') == false)
+					@if (in_array($administrasi_tga->value('progress'), range(2,3)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
@@ -94,13 +77,6 @@
 				<td colspan="2"></td>
 				<td class="text-center align-middle">
 					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
-				</td>
-			</tr>
-		@elseif (in_array($administrasi_tga->value('progress'), range(2, 3)) && $administrasi_tga->value('repeat'))
-			<tr>
-				<td colspan="2"></td>
-				<td class="text-center align-middle">
-					<button type="submit" class="btn btn-sm btn-warning">Perbaiki</button>
 				</td>
 			</tr>
 		@endif

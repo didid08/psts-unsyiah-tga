@@ -9,7 +9,7 @@
 				@elseif ($administrasi_tga->value('progress') > 23)
 					<a href="#" class="btn btn-sm btn-success">Unduh</a>
 				@else
-					@if (in_array($administrasi_tga->value('progress'), range(22,23)) && $administrasi_tga->value('repeat') == false)
+					@if (in_array($administrasi_tga->value('progress'), range(22,22)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
@@ -29,7 +29,7 @@
 				@elseif ($administrasi_tga->value('progress') > 23)
 					<a href="#" class="btn btn-sm btn-success">Unduh</a>
 				@else
-					@if (in_array($administrasi_tga->value('progress'), range(22,23)) && $administrasi_tga->value('repeat') == false)
+					@if (in_array($administrasi_tga->value('progress'), range(22,22)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<form class="">
@@ -47,13 +47,6 @@
 				<td colspan="2"></td>
 				<td class="text-center align-middle">
 					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
-				</td>
-			</tr>
-		@elseif (in_array($administrasi_tga->value('progress'), range(22, 23)) && $administrasi_tga->value('repeat'))
-			<tr>
-				<td colspan="2"></td>
-				<td class="text-center align-middle">
-					<button type="submit" class="btn btn-sm btn-warning">Perbaiki</button>
 				</td>
 			</tr>
 		@endif
