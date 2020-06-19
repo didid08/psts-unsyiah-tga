@@ -76,7 +76,7 @@
 			<tr>
 				<td colspan="2"></td>
 				<td class="text-center align-middle">
-					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
+					<button type="submit" class="btn btn-block btn-success">Kirim</button>
 				</td>
 			</tr>
 		@endif

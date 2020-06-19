@@ -13,7 +13,7 @@
 			if ($administrasi_tga->value('repeat')) {
 				return 'table-danger';
 			} else {
-				return 'table-primary';
+				return 'table-warning';
 			}
 		}
 	}
@@ -36,7 +36,7 @@
 		if ($administrasi_tga->value('progress') > $progress) {
 			return '<i class="fa fa-check-circle text-green icon-size"></i>';
 		} elseif ($administrasi_tga->value('progress') == $progress) {
-			return '<i class="fa fa-sync-alt text-info icon-size"></i>';
+			return '<i class="fa fa-sync-alt text-warning icon-size"></i>';
 		} else {
 			return '<i class="far fa-circle nonactive icon-size"></i>';
 		}
@@ -46,7 +46,7 @@
 		if ($administrasi_tga->value('progress_optional') > $progress_optional) {
 			return '<i class="fa fa-check-circle text-green icon-size"></i>';
 		} elseif ($administrasi_tga->value('progress_optional') == $progress_optional) {
-			return '<i class="fa fa-sync-alt text-info icon-size"></i>';
+			return '<i class="fa fa-sync-alt text-warning icon-size"></i>';
 		} else {
 			return '<i class="far fa-circle nonactive icon-size"></i>';
 		}

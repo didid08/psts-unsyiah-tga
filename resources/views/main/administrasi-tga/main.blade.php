@@ -8,17 +8,6 @@
 		.icon-size {
 			font-size: 1.8em;
 		}
-
-		.bg-alert-danger-1 {
-			background-color: #c0392b;
-		}
-
-		.bg-alert-danger-2 {
-			background-color: #e74c3c;
-		}
-		label {
-			text-overflow: ellipsis!important;
-		}
 	</style>
 @endsection
 
@@ -82,7 +71,7 @@
 						<h5>LEMBAR DISPOSISI TUGAS AKHIR - JURUSAN TEKNIK SIPIL</h5>
 						<h5>FAKULTAS TEKNIK UNIVERSITAS SYIAH KUALA</h5>
 						@if (isset($roles->admin))
-							<span class="mr-2">No: </span><input type="text" name="no-disposisi" class="form-control mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline-block; height: 2.2em;">
+							<span class="mr-2">No: </span><input type="text" name="no-disposisi" class="form-control mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;">
 							<button class="btn btn-sm btn-secondary">Update</button><br>
 						@else
 							<span>No: --</span><br>
@@ -379,7 +368,7 @@
 							</tr>
 
 							{{-- Tahap 7 --}}
-							<tr class="{{ background(13, 13, $administrasi_tga) }}">
+							<tr class="{{ background(13, 14, $administrasi_tga) }}">
 								<td><b>7</b></td>
 								<td colspan="4">
 									@if (isset($roles->mhs))
@@ -456,7 +445,7 @@
 								<td colspan="4">
 									@if (isset($roles->mhs))
 										@include(namaFile('tahap-10', 'mhs'))
-									@elseif (isset($roles->pembimbing_co))
+									@elseif (isset($roles->pembimbing_co) && $isPembimbing)
 										@include(namaFile('tahap-10', 'pembimbing-co'))
 									@else
 										@include(namaFile('tahap-10', 'read-only'))
@@ -527,7 +516,7 @@
 							</tr>
 
 							{{-- Tahap 13 --}}
-							<tr class="{{ background(26, 26, $administrasi_tga) }}">
+							<tr class="{{ background(26, 27, $administrasi_tga) }}">
 								<td><b>13</b></td>
 								<td colspan="4">
 									@if (isset($roles->mhs))
@@ -638,6 +627,7 @@
 		$('input[type=file]').each(function (index, data) {
 			$(this).val('');
 		});
+
 		function showSelectedFile(label, e) {
 			var fileName = e.target.files[0].name;
 
@@ -649,5 +639,40 @@
 			}
 			$(label).html(html);
 		}
+
+		@php
+			$tahap = [
+				[1,2,3], //Tahap 1
+				[4], //Tahap 2
+				[5,6], //Tahap 3
+				[7], //Tahap 4
+				[8,9,10], //Tahap 5
+				[11,12], //Tahap 6
+				[13,14], //Tahap 7
+				[15,16,17], //Tahap 8
+				[18,19], //Tahap 9
+				[20], //Tahap 10
+				[21,22,23], //Tahap 11
+				[24,25], //Tahap 12
+				[26,27], //Tahap 13
+				[28,29,30], //Tahap 14
+				[31,32,33], //Tahap 15
+				[34,35,36] //Tahap 16
+			];
+
+			$tahap_opsional = [
+				[1,2,3],
+				[4,5]
+			];
+		@endphp
+
+		@if (isset($roles->mhs))
+			@if ($administrasi_tga->value('repeat'))
+				toastr.error('Pengajuan anda sebelumnya ditolak, harap ajukan kembali')
+			@endif
+			@if ($administrasi_tga->value('repeat_optional'))
+				toastr.error('Pengajuan opsional anda sebelumnya ditolak, harap ajukan kembali')
+			@endif
+		@endif
 	</script>
 @endsection

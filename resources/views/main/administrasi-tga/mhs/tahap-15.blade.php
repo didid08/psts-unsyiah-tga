@@ -51,5 +51,15 @@
 				<a href="https://unsyiah.ac.id/faculty-and-staff" target="_blank">https://unsyiah.ac.id/faculty-and-staff</a>
 			</td>
 		</tr>
+
+		@if ($administrasi_tga->value('progress') == 33)
+			<tr>
+				<td colspan="3">
+					<div class="alert alert-success text-left" role="alert" style="margin: 0;">
+						Silahkan unggah <b>Data Yudisium</b> terlebih dahulu melalui link berikut: <a href="#">Unggah Data Yudisium</a> untuk lanjut ke tahap selanjutnya
+					</div>
+				</td>
+			</tr>
+		@endif
 	</tbody>
 </table>

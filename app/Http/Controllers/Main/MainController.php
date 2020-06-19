@@ -175,9 +175,16 @@ class MainController extends Controller
                     'mahasiswa_data_tga' => $data_tga->listData(User::firstWhere('nomor_induk', $nim)->id),
                     'roles' => $my_roles,
                     'administrasi_tga' => $administrasi_tga,
+                    'semua_dosen' => User::dataWithCategory('dosen'),
                     'semua_dosen_bimbingan' => json_decode(json_encode($semua_dosen_bimbingan)),
                     'semua_dosen_co_bimbingan' => json_decode(json_encode($semua_dosen_co_bimbingan)),
-                    'isPembimbing' => $adm->isPembimbing($nim, User::data('nama'))
+                    'isPembimbing' => $adm->isPembimbing($nim, User::data('nama')),
+
+                    'ketua_penguji_accepted' => $adm->isAccepted($nim, 'ketua-penguji'),
+                    'penguji_1_accepted' => $adm->isAccepted($nim, 'penguji-1'),
+                    'penguji_2_accepted' => $adm->isAccepted($nim, 'penguji-2'),
+                    'penguji_3_accepted' => $adm->isAccepted($nim, 'penguji-3'),
+                    'is_ketua_penguji' => $adm->isKetuaPenguji($nim, User::data('nama'))
                 ];
 
             } else {

@@ -1,4 +1,4 @@
-<table width="100%" class="table table-bordered{{ formBackground(13, 13, $administrasi_tga) }}">
+<table width="100%" class="table table-bordered{{ formBackground(13, 14, $administrasi_tga) }}">
 	<tbody>
 		<tr>
 			@if ($administrasi_tga->value('progress') < 13)
@@ -7,7 +7,7 @@
 				</td>
 			@elseif ($administrasi_tga->value('progress') == 13)
 				<td class="align-middle">
-					<div class="alert alert-info text-left" role="alert">
+					<div class="alert alert-info text-left" role="alert" style="margin: 0;">
 						<u><b>Pelaksanaan Seminar Proposal.</b></u>
 						<ul>
 							<li>Seminar proposal dilaksanakan secara langsung maupun secara online.</li>
@@ -18,14 +18,14 @@
 				</td>
 			@elseif ($administrasi_tga->value('progress') == 14)
 				<td class="align-middle">
-					<div class="alert alert-success text-left" role="alert">
+					<div class="alert alert-success text-left" role="alert" style="margin: 0;">
 						<b>Pelaksanaan Seminar Proposal sudah selesai.</b> <br>
 						Silahkan mengunggah <b>Data Proposal</b> melalui link berikut: <a href="#">Unggah Data Proposal</a> untuk membuka tahap selanjutnya
 					</div>
 				</td>
 			@elseif ($administrasi_tga->value('progress') > 14)
 				<td class="align-middle">
-					<div class="alert alert-success text-left" role="alert">
+					<div class="alert alert-success text-left" role="alert" style="margin: 0;">
 						<b>Pelaksanaan Seminar Proposal sudah selesai.</b>
 					</div>
 				</td>

@@ -9,7 +9,7 @@
 			<td class="align-middle font-italic">Jumlah Asistensi (min. 8 kali)</td>
 			<td class="text-center align-middle">
 				@if (in_array($administrasi_tga->value('progress'), range(7,7)))
-					<span class="text-warning">sedang diproses</span>
+					<span class="text-warning">Sedang diproses</span>
 				@elseif ($administrasi_tga->value('progress') > 7)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
 				@else
@@ -21,7 +21,7 @@
 			<td class="align-middle font-italic">Masa Pembimbingan Proposal</td>
 			<td class="text-center align-middle">
 				@if (in_array($administrasi_tga->value('progress'), range(7,7)))
-					<span class="text-warning">sedang diproses</span>
+					<span class="text-warning">Sedang diproses</span>
 				@elseif ($administrasi_tga->value('progress') > 7)
 					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
 				@else

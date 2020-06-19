@@ -256,13 +256,13 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 @if ( session('error') != null | session('warning') != null | session('success') != null | $errors->any() )
-  <!-- Toastr -->
-  <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
   <script>
     $(document).ready(function () {
       @if (session('error'))
-        toastr.error('{{ session('error') }}')      
+        toastr.error('{{ session('error') }}')
       @endif
       @if (session('warning'))
         toastr.warning('{{ session('warning') }}')
