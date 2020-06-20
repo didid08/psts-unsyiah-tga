@@ -60,9 +60,9 @@
                 @endif
               </ul>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a href="#" class="nav-link{{ $nav_item_active == 'biodata' ? ' text-bold' : '' }}">Biodata</a>
-            </li>
+            </li>-->
           @endif
           <li class="nav-item dropdown">
             <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link{{ $nav_item_active == 'dosen' ? ' text-bold' : '' }} dropdown-toggle">Dosen</a>
@@ -73,7 +73,7 @@
           </li>
         </ul>
 
-        <!-- SEARCH FORM -->
+        {{-- <!-- SEARCH FORM -->
         <form class="form-inline ml-0 ml-md-3">
           <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -83,13 +83,13 @@
               </button>
             </div>
           </div>
-        </form>
+        </form> --}}
       </div>
 
       <!-- Right navbar links -->
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
         <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-comments"></i>
             <span class="badge badge-danger navbar-badge">3</span>
@@ -145,7 +145,7 @@
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
           </div>
-        </li>
+        </li> --}}
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">

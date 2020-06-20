@@ -21,14 +21,13 @@ class AdministrasiTGA extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function isEligibleToView($nim, $myname)
+    public function isEligibleToView($mhs_id, $myname)
     {
     	$user_role = new UserRole();
     	$my_roles = $user_role->myRoles();
     	if (isset($my_roles->admin) | isset($my_roles->koor_prodi) | isset($my_roles->koor_tga) | isset($my_roles->ketua_jurusan) | isset($my_roles->sek_jurusan)) {
     		return true;
     	} else {
-    		$mhs_id = User::firstWhere('nomor_induk', $nim)->id;
     		$data_tga = new DataTGA ();
 
     		$mhs_ketua_bidang = null;
@@ -40,41 +39,43 @@ class AdministrasiTGA extends Model
             $mhs_penguji_3 = null;
 
     		if ($data_tga->checkSingleData($mhs_id, 'ketua-bidang')) {
-				$mhs_ketua_bidang = $data_tga->getSingleData($mhs_id, 'ketua-bidang')->content;
+                if ($data_tga->getSingleData($mhs_id, 'ketua-bidang')->temporary == false && $data_tga->getSingleData($mhs_id, 'ketua-bidang')->verified == true) {
+				    $mhs_ketua_bidang = $data_tga->getSingleData($mhs_id, 'ketua-bidang')->content;
+                }
     		}
 
     		if ($data_tga->checkSingleData($mhs_id, 'nama-pembimbing')) {
-                if ($data_tga->getSingleData($mhs_id, 'nama-pembimbing')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'nama-pembimbing')->temporary == false && $data_tga->getSingleData($mhs_id, 'nama-pembimbing')->verified == true) {
 				    $mhs_pembimbing = $data_tga->getSingleData($mhs_id, 'nama-pembimbing')->content;
                 }
     		}
 
     		if ($data_tga->checkSingleData($mhs_id, 'nama-co-pembimbing')) {
-				if ($data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->verified == true) {
+				if ($data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->temporary == false && $data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->verified == true) {
                     $mhs_pembimbing = $data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->content;
                 }
     		}
 
     		if ($data_tga->checkSingleData($mhs_id, 'ketua-penguji')) {
-                if ($data_tga->getSingleData($mhs_id, 'ketua-penguji')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'ketua-penguji')->temporary == false && $data_tga->getSingleData($mhs_id, 'ketua-penguji')->verified == true) {
                     $mhs_ketua_penguji = $data_tga->getSingleData($mhs_id, 'ketua-penguji')->content;
                 }
     		}
 
             if ($data_tga->checkSingleData($mhs_id, 'penguji-1')) {
-                if ($data_tga->getSingleData($mhs_id, 'penguji-1')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'penguji-1')->temporary == false && $data_tga->getSingleData($mhs_id, 'penguji-1')->verified == true) {
                     $mhs_ketua_penguji = $data_tga->getSingleData($mhs_id, 'penguji-1')->content;
                 }
             }
 
             if ($data_tga->checkSingleData($mhs_id, 'penguji-2')) {
-                if ($data_tga->getSingleData($mhs_id, 'penguji-2')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'penguji-2')->temporary == false && $data_tga->getSingleData($mhs_id, 'penguji-2')->verified == true) {
                     $mhs_ketua_penguji = $data_tga->getSingleData($mhs_id, 'penguji-2')->content;
                 }
             }
 
             if ($data_tga->checkSingleData($mhs_id, 'penguji-3')) {
-                if ($data_tga->getSingleData($mhs_id, 'penguji-3')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'penguji-3')->temporary == false && $data_tga->getSingleData($mhs_id, 'penguji-3')->verified == true) {
                     $mhs_ketua_penguji = $data_tga->getSingleData($mhs_id, 'penguji-3')->content;
                 }
             }
@@ -86,9 +87,8 @@ class AdministrasiTGA extends Model
     	}
     }
 
-    public function isPembimbing($nim, $myname)
+    public function isPembimbing($mhs_id, $myname)
     {
-        $mhs_id = User::firstWhere('nomor_induk', $nim)->id;
         $data_tga = new DataTGA ();
 
         $mhs_pembimbing = null;
@@ -112,9 +112,8 @@ class AdministrasiTGA extends Model
         return false;
     }
 
-    public function isKetuaPenguji($nim, $myname)
+    public function isKetuaPenguji($mhs_id, $myname)
     {
-        $mhs_id = User::firstWhere('nomor_induk', $nim)->id;
         $data_tga = new DataTGA ();
 
         $ketua_penguji = null;
@@ -134,16 +133,15 @@ class AdministrasiTGA extends Model
     public function list() {
     	$result = [];
     	foreach ($this->get() as $mhs) {
-    		if ($this->isEligibleToView($mhs->user->nomor_induk, User::data('nama'))) {
+    		if ($this->isEligibleToView($mhs->user->id, User::data('nama'))) {
     			array_push($result, ['nama' => $mhs->user->nama, 'nim' => $mhs->user->nomor_induk]);
     		}
     	}
     	return json_decode(json_encode($result));
     }
 
-    public function isAllKomisiPengujiAccepted ($nim)
+    public function isAllKomisiPengujiAccepted ($mhs_id)
     {
-        $mhs_id = User::firstWhere('nomor_induk', $nim)->id;
         $data_tga = new DataTGA ();
 
         $ketua_penguji = false;
@@ -164,9 +162,26 @@ class AdministrasiTGA extends Model
         return false;
     }
 
-    public function isAccepted ($nim, $role) //pembimbing dann komisi penguji
+    public function isAllPembimbingAccepted ($mhs_id)
     {
-        $mhs_id = User::firstWhere('nomor_induk', $nim)->id;
+        $data_tga = new DataTGA ();
+
+        $pembimbing = false;
+        $co_pembimbing = false;
+
+        if ($data_tga->checkSingleData($mhs_id, 'nama-pembimbing') && $data_tga->checkSingleData($mhs_id, 'nama-co-pembimbing')) {
+            $pembimbing = $data_tga->getSingleData($mhs_id, 'nama-pembimbing')->verified;
+            $co_pembimbing = $data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->verified;
+        }
+
+        if ($pembimbing == true && $co_pembimbing == true) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAccepted ($mhs_id, $role) //pembimbing dann komisi penguji
+    {
         $data_tga = new DataTGA ();
 
         $result = false;
@@ -175,9 +190,18 @@ class AdministrasiTGA extends Model
             $result = $data_tga->getSingleData($mhs_id, $role)->verified;
         }
 
-        if ($result == true) {
-            return true;
+        return $result;
+    }
+
+    public function isTemporary($mhs_id, $data) {
+        $data_tga = new DataTGA ();
+
+        $result = false;
+
+        if ($data_tga->checkSingleData($mhs_id, $data)) {
+            $result = $data_tga->getSingleData($mhs_id, $data)->temporary;
         }
-        return false;
+
+        return $result;
     }
 }

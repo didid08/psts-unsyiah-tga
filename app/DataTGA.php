@@ -9,7 +9,7 @@ class DataTGA extends Model
     protected $table = 'data_tga';
 
     protected $fillable = [
-    	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'verified'
+    	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'temporary', 'verified'
     ];
 
     public function user()
@@ -33,6 +33,7 @@ class DataTGA extends Model
 				'type' => $data->type,
 				'display_name' => $data->display_name,
 				'content' => $data->content,
+                'temporary' => $data->temporary,
 				'verified' => $data->verified
 			];
 		}

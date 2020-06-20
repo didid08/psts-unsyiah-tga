@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         	UsersTableSeeder::class,
         	RolesTableSeeder::class,
         	UserRolesTableSeeder::class,
-        	SettingsTableSeeder::class
+        	SettingsTableSeeder::class,
+            DataTGATableSeeder::class,
+            TaskTableSeeder::class
         ]);
     }
 }

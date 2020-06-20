@@ -9,7 +9,11 @@
 				@elseif ($administrasi_tga->value('progress') == 19)
 					<span class="text-yellow">Sedang diperiksa oleh Admin</span>
 				@elseif ($administrasi_tga->value('progress') > 19)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					@if (isset($roles->koor_prodi))
+						<a href="#" class="btn btn-sm btn-outline-success">Lihat</a>
+					@else
+						<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					@endif
 				@else
 					--
 				@endif

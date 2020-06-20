@@ -24,6 +24,7 @@ class CreateDataTGASTable extends Migration
             $table->string('name')->unique();
             $table->string('display_name')->nullable();
             $table->string('content');
+            $table->boolean('temporary')->default(false);
             $table->boolean('verified')->default(false);
 
             $table->timestamps();

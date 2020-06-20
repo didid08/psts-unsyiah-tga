@@ -12,7 +12,11 @@
 			<td class="align-middle">Lembar Pengesahan dan Buku Laporan KP (jika diperlukan)</td>
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') > 32)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					@if (isset($roles->koor_prodi))
+						<a href="#" class="btn btn-sm btn-outline-success">Lihat</a>
+					@else
+						<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					@endif
 				@elseif (in_array($administrasi_tga->value('progress'), range(32,32)))
 					<span class="text-warning">Sedang diproses</span>
 				@elseif ($administrasi_tga->value('progress') == 31)

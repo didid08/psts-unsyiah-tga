@@ -110,9 +110,10 @@
 						</tbody>
 					</table>
 					<button class="btn btn-block btn-success font-weight-bold">Tetapkan komisi penguji dan jadwal seminar</button>
+					<small>Catatan: <i>Pastikan dosen yang anda pilih telah <b>setuju</b> dijadikan bagian dari komisi penguji</i></small>
 				</td>
 			</tr>
-		@elseif ($administrasi_tga->value('progress') > 10)
+		@elseif ($administrasi_tga->value('progress') > 10 && $administrasi_tga->value('progress') < 13)
 			<tr>
 				<td>3.</td>
 				<td colspan="2" class="align-middle">
@@ -192,6 +193,14 @@
 					</table>
 					<button class="btn btn-block btn-outline-success font-weight-bold">Ubah komisi penguji dan jadwal seminar</button>
 				</td>
+				</td>
+			</tr>
+		@elseif ($administrasi_tga->value('progress') >= 13)
+			<tr>
+				<td>3.</td>
+				<td colspan="2" class="align-middle">
+					Koordinator TGA mengusulkan Komisi Penguji dan Jadwal Seminar<br>
+					--
 				</td>
 			</tr>
 		@else
@@ -278,3 +287,15 @@
 		@endif
 	</tbody>
 </table>
+@if ($administrasi_tga->value('progress') >= 10 && $administrasi_tga->value('progress') < 13)
+	<table class="table table-borderless{{ $administrasi_tga->value('progress') > 10 ? '' : ' table-light' }} mt-3">
+		<tr>
+			<td class="text-right align-middle">
+				<i class="fa fa-question-circle text-info"></i>&nbsp;&nbsp;Bantuan :
+			</td>
+			<td class="text-right align-middle">
+				<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#usulkan-komisi-penguji">Usulkan Komisi Penguji dan Jadwal Seminar</button>
+			</td>
+		</tr>
+	</table>
+@endif

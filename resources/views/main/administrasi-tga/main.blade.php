@@ -20,8 +20,8 @@
 @endsection
 
 @section('content')
-	<div class="container">
-		@if ($category != 'mahasiswa' && $nim == null)
+	@if ($category != 'mahasiswa' && $nim == null)
+		<div class="container">
 			<div class="card">
 				<div class="card-body">
 					<table class="table table-bordered table-striped">
@@ -60,7 +60,10 @@
 					</table>
 				</div>
 			</div>
-		@else
+		</div>
+	@else
+		@include('main.administrasi-tga.modals')
+		<div class="container">
 			@include('main.administrasi-tga.function')
 			@if (isset($roles->mhs))
 				@include('main.administrasi-tga.mhs.function')
@@ -297,7 +300,7 @@
 								<td colspan="4">
 									@if (isset($roles->mhs))
 										@include(namaFile('tahap-4', 'mhs'))
-									@elseif (isset($roles->pembimbing_co) && $isPembimbing)
+									@elseif (isset($roles->pembimbing_co) && $is_pembimbing)
 										@include(namaFile('tahap-4', 'pembimbing-co'))
 									@else
 										@include(namaFile('tahap-4', 'read-only'))
@@ -445,7 +448,7 @@
 								<td colspan="4">
 									@if (isset($roles->mhs))
 										@include(namaFile('tahap-10', 'mhs'))
-									@elseif (isset($roles->pembimbing_co) && $isPembimbing)
+									@elseif (isset($roles->pembimbing_co) && $is_pembimbing)
 										@include(namaFile('tahap-10', 'pembimbing-co'))
 									@else
 										@include(namaFile('tahap-10', 'read-only'))
@@ -618,8 +621,8 @@
 					</table>
 				</div>
 			</div>
-		@endif
-	</div>
+		</div>
+	@endif
 @endsection
 
 @section('custom-script')

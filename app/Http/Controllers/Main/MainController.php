@@ -12,6 +12,7 @@ use App\UserRole;
 use App\AdministrasiTGA;
 use App\DataTGA;
 use App\Setting;
+use App\Task;
 
 class MainController extends Controller
 {
@@ -144,11 +145,13 @@ class MainController extends Controller
                     return abort(404);
                 }
 
+                $mhs_id = User::firstWhere('nomor_induk', $nim)->id;
+
                 $user_role = new UserRole ();
                 $my_roles = $user_role->myRoles();
 
                 $adm = new AdministrasiTGA ();
-                if (!$adm->isEligibleToView($nim, User::data('nama'))) {
+                if (!$adm->isEligibleToView($mhs_id, User::data('nama'))) {
                     return response('Anda tidak mempunyai perizinan untuk melihat progress mahasiswa yang anda pilih.');   
                 }
 
@@ -172,19 +175,31 @@ class MainController extends Controller
 
                 $extra_data = [
                     'mahasiswa' => User::firstWhere('nomor_induk', $nim),
-                    'mahasiswa_data_tga' => $data_tga->listData(User::firstWhere('nomor_induk', $nim)->id),
+                    'mahasiswa_data_tga' => $data_tga->listData($mhs_id),
                     'roles' => $my_roles,
                     'administrasi_tga' => $administrasi_tga,
+
+
                     'semua_dosen' => User::dataWithCategory('dosen'),
                     'semua_dosen_bimbingan' => json_decode(json_encode($semua_dosen_bimbingan)),
                     'semua_dosen_co_bimbingan' => json_decode(json_encode($semua_dosen_co_bimbingan)),
-                    'isPembimbing' => $adm->isPembimbing($nim, User::data('nama')),
 
-                    'ketua_penguji_accepted' => $adm->isAccepted($nim, 'ketua-penguji'),
-                    'penguji_1_accepted' => $adm->isAccepted($nim, 'penguji-1'),
-                    'penguji_2_accepted' => $adm->isAccepted($nim, 'penguji-2'),
-                    'penguji_3_accepted' => $adm->isAccepted($nim, 'penguji-3'),
-                    'is_ketua_penguji' => $adm->isKetuaPenguji($nim, User::data('nama'))
+                    'is_pembimbing' => $adm->isPembimbing($mhs_id, User::data('nama')),
+
+                    'pembimbing_isset' => $data_tga->checkSingleData($mhs_id, 'nama-pembimbing'),
+                    'co_pembimbing_isset' => $data_tga->checkSingleData($mhs_id, 'nama-co-pembimbing'),
+
+                    'pembimbing_accepted' => $adm->isAccepted($mhs_id, 'nama-pembimbing'),
+                    'co_pembimbing_accepted' => $adm->isAccepted($mhs_id, 'nama-co-pembimbing'),
+
+                    /*'ketua_penguji_accepted' => $adm->isAccepted($mhs_id, 'ketua-penguji'),
+                    'penguji_1_accepted' => $adm->isAccepted($mhs_id, 'penguji-1'),
+                    'penguji_2_accepted' => $adm->isAccepted($mhs_id, 'penguji-2'),
+                    'penguji_3_accepted' => $adm->isAccepted($mhs_id, 'penguji-3'),*/
+                    'is_ketua_penguji' => $adm->isKetuaPenguji($mhs_id, User::data('nama')),
+
+                    'task_set_pembimbing' => Task::where(['user_id' => $mhs_id, 'task_name' => 'set.pembimbing']),
+                    'task_set_co_pembimbing' => Task::where(['user_id' => $mhs_id, 'task_name' => 'set.co_pembimbing'])
                 ];
 
             } else {

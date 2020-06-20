@@ -31,6 +31,10 @@ class User extends Model
         return $this->hasMany('App\DataTGA');
     }
 
+    public function task() {
+        return $this->hasMany('App\Task');
+    }
+
     public static function data($column) {
         $auth = session('auth');
 
