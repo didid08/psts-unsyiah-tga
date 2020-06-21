@@ -18,7 +18,7 @@
 					@csrf
 
 					<div class="row form-group">
-						<div class="col-5">
+						<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
 							<table class="table table-bordered table-striped">
 								<thead>
 									<tr class="bg-info">
@@ -89,7 +89,7 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="col-7">
+						<div class="co-xl-7 col-lg-7 col-md-7 col-sm-12">
 							<table class="table table-bordered table-striped">
 								<tbody>
 									<tr>
