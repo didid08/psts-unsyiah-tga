@@ -12,7 +12,7 @@ class DataTGATableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('data_tga')->insert([
+        /*DB::table('data_tga')->insert([
         	'user_id' => 867,
         	'category' => 'data_administrasi_tga',
         	'type' => 'inline',
@@ -40,6 +40,6 @@ class DataTGATableSeeder extends Seeder
         	'display_name' => 'Ketua Penguji Seminar Proposal',
         	'content' => 'Dr. Ir. Abdullah, M.Sc.',
             'verified' => true
-        ]);
+        ]);*/
     }
 }

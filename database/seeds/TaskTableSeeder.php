@@ -12,7 +12,7 @@ class TaskTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tasks')->insert([
+        /*DB::table('tasks')->insert([
         	'user_id' => 867,
         	'task_name' => 'set.pembimbing',
         	'task_value' => 'Ir. Buraida, M.M.',
@@ -31,6 +31,6 @@ class TaskTableSeeder extends Seeder
             'task_name' => 'set.ketua_penguji',
             'task_value' => 'Dr. Ir. Abdullah, M.Sc.',
             'status' => 'processing'
-        ]);
+        ]);*/
     }
 }
