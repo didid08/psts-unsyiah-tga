@@ -5,6 +5,12 @@
 	<li class="breadcrumb-item active">{{ $subtitle }}</li>
 @endsection
 
+@section('custom-script')
+	<script>
+		$("#rekap-dosen").dataTable()
+	</script>
+@endsection
+
 @section('content')
 	<div class="container">
 	    <div class="card height-auto">

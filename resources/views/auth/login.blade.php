@@ -91,7 +91,13 @@
         toastr.warning('{{ session('warning') }}')
       @endif
       @if ($errors->any())
-        toastr.error('Masukkan NIP/NIM/Username beserta Password')      
+        var timeout = 0
+        @foreach ($errors->all() as $error)
+          setTimeout(function () {
+            toastr.error('{{$error}}')
+          }, timeout)
+          timeout = timeout+300
+        @endforeach
       @endif
     });
   </script>

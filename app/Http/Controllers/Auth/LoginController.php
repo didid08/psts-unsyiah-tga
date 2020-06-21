@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-
 use App\User;
 use App\Setting;
 
@@ -24,15 +24,22 @@ class LoginController extends Controller
 
     public function loginProcess(Request $request)
     {
-    	$this->validate($request, [
-    		'identity' => 'required',
-    		'password' => 'required'
-    	]);
+        $validator = Validator::make($request->all(), [
+            'identity' => 'required',
+            'password' => 'required'
+        ], [
+            'identity.required' => 'Harap masukkan NIP/NIM/Username',
+            'password.required' => 'Harap masukkan password'
+        ]);
 
-    	$auth = [
-    		'identity' => $request->input('identity'),
-    		'password' => $request->input('password')
-    	];
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $auth = [
+            'identity' => $request->input('identity'),
+            'password' => $request->input('password')
+        ];
 
     	$identityType = 'nomor_induk';
 
@@ -54,7 +61,7 @@ class LoginController extends Controller
     			return redirect('/')->with('pesan', 'Anda telah login');
 
     		}
-    		return redirect()->back()->with('error', 'Akun tidak ditemukan');
+    		return redirect()->back()->with('error', 'Anda salah memasukkan password');
     	}
     	return redirect()->back()->with('error', 'Akun tidak ditemukan');
     }

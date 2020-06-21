@@ -22,19 +22,20 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/login/{opsi?}', 'Auth\LoginController@loginPage')->name('auth.login');
 	Route::post('/login', 'Auth\LoginController@loginProcess')->name('auth.login.process');
 	Route::get('/logout', 'Auth\AuthController@logout')->name('auth.logout');
+	Route::put('/auth/password/change/{for?}', 'Auth\PasswordController@changePassword')->middleware('prevent.guest')->name('auth.password.change');
 
 	/* MAIN ROUTES */
 	Route::middleware(['redirect'])->group(function () {
 
 		// Semua
-		Route::get('/{category}/dashboard/{nim?}', 'Main\MainController@dashboard')->name('main.dashboard');
 		Route::get('/{category}/info-dosen', 'Main\MainController@infoDosen')->name('main.info-dosen');
 		Route::get('/{category}/rekap-dosen', 'Main\MainController@rekapDosen')->name('main.rekap-dosen');
 
 		// Semua (Kecuali Tamu)
 		Route::middleware(['prevent.guest'])->group(function () {
-
-			Route::get('/{category}/tga/administrasi/{nim?}', 'Main\MainController@administrasiTGA')->name('main.administrasi-tga');
+			Route::get('/{category}/dashboard', 'Main\MainController@dashboard')->name('main.dashboard');
+			Route::get('/admin/dashboard/data', 'Main\Admin\AdminController@dashboardWithData')->name('main.dashboard.admin.with-data');
+			Route::get('/{category}/tga/administrasi/{nim?}', 'Main\AdministrasiTGA\ViewController')->name('main.administrasi-tga');
 			
 		});
 

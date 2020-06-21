@@ -3,18 +3,66 @@
 @section('custom-script')
 	<script>
 		$("#select-nim").select2();
-		$("tbody").addClass('text-muted');
-		$("input[type=checkbox]").attr('disabled', 'disabled');
-		$(".cetak-btn").attr('disabled', 'disabled');
+
+		@if (!isset($mhs))
+			$("tbody").addClass('text-muted');
+			$("input[type=checkbox]").attr('disabled', 'disabled');
+			$(".cetak-btn").attr('disabled', 'disabled');
+		@else
+			$("#refresh-btn").click(function () {
+				location.reload(false);
+			});
+		@endif
 	</script>
 @endsection
 
 @section('breadcumb')
-	<li class="breadcrumb-item"><a href="/">{{ ucfirst($category) }}</a></li>
-	<li class="breadcrumb-item active">{{ $subtitle }}</li>
+	@if (isset($mhs))
+		<li class="breadcrumb-item"><a href="/">{{ ucfirst($category) }}</a></li>
+		<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+		<li class="breadcrumb-item active">Data {{ $mhs->nama }}</li>
+	@else
+		<li class="breadcrumb-item"><a href="/">{{ ucfirst($category) }}</a></li>
+		<li class="breadcrumb-item active">{{ $subtitle }}</li>
+	@endif
 @endsection
 
 @section('content')
+	@if (isset($mhs))
+		<div class="modal fade" id="rubah-password" aria-modal="true">
+			<div class="modal-dialog modal-lg">
+		  		<div class="modal-content">
+		    		<div class="modal-header">
+		      			<h4 class="modal-title">Rubah Password {{ $mhs->nama }} ({{ $mhs->nomor_induk }})</h4>
+		      			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		        			<span aria-hidden="true">×</span>
+		      			</button>
+		    		</div>
+		    		<form action="{{ route('auth.password.change', ['for' => $mhs->nomor_induk]) }}" method="post">
+			    		<div class="modal-body">
+			    			@method('put')
+		    				@csrf
+		    				<table class="table table-light">
+			    				<tr>
+			    					<td class="align-middle text-center">
+			    						<input type="password" class="form-control" name="password" placeholder="Masukkan password baru">
+			    					</td>
+			    					<td class="align-middle text-center">
+			    						<input type="password" class="form-control" name="password-repeat" placeholder="Ulangi password baru">
+			    					</td>
+			    				</tr>
+			    			</table>
+			    		</div>
+			    		<div class="modal-footer justify-content-between">
+			      			<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+			      			<button type="submit" class="btn btn-success">Kirim</button>
+				        </div>
+			        </form>
+		    	</div>
+			</div>
+		</div>
+	@endif
+
 	<div class="container">
 	    <div class="card height-auto">
 	    	<div class="card-body" style="overflow-x: auto;">
@@ -32,31 +80,38 @@
 										FAKULTAS TEKNIK - UNIVERSITAS SYIAH KUALA
 									</th>
 								</tr>
-								<tr class="bg-light">
-									<th class="align-middle text-left">
-										NIM Mahasiswa
-									</th>
-									<th class="align-middle text-left">
-										<select name="nim-mahasiswa" id="select-nim" style="width: 100%;">
-											<option value="empty">Pilih NIM</option>
-											@foreach ($semua_mahasiswa as $mahasiswa)
-												<option>{{ $mahasiswa->nomor_induk }}</option>
-											@endforeach
-										</select>
-									</th>
-									<th colspan="2" class="align-middle text-center">
-										<button class="btn btn-info text-bold">Panggil Data</button>
-									</th>
-								</tr>
+								<form action="{{ route('main.dashboard.admin.with-data') }}" method="get" class="form-control">
+									<tr class="bg-light">
+										<th class="align-middle text-left">
+											NIM Mahasiswa
+										</th>
+										<th colspan="2" class="align-middle text-left">
+											@csrf
+											<select name="nim" id="select-nim" style="width: 100%;">
+												<option value="empty">Pilih NIM</option>
+												@foreach ($semua_mahasiswa as $mahasiswa)
+													<option{!! isset($mhs->nomor_induk) ? ($mahasiswa->nomor_induk == $mhs->nomor_induk ? ' selected="selected"' : '') : '' !!}>{{ $mahasiswa->nomor_induk }}</option>
+												@endforeach
+											</select>
+										</th>
+										<th colspan="2" class="align-middle text-center">
+											<button type="submit" class="btn btn-info text-bold" id="panggil-data">Panggil Data</button>
+										</th>
+									</tr>
+								</form>
 								<tr class="bg-light">
 									<th class="align-middle text-left">
 										Nama Mahasiswa
 									</th>
-									<th class="align-middle text-left text-bold">
-										<span id="nama-mahasiswa">--</span>
+									<th colspan="2" class="align-middle text-left text-bold">
+										<span id="nama-mahasiswa">{{ $mhs->nama ?? '--' }}</span>
 									</th>
-									<th colspan="2" class="align-middle text-center">
-										<button class="btn btn-info text-bold" disabled="disabled">Rubah Password</button>
+									<th class="align-middle text-center">
+										@if (isset($mhs))
+											<button type="button" class="btn btn-info text-bold" data-toggle="modal" data-target="#rubah-password">Rubah Password</button>
+										@else
+											<button class="btn btn-info text-bold" disabled="disabled">Rubah Password</button>
+										@endif
 									</th>
 								</tr>
 							</thead>
@@ -70,7 +125,12 @@
 									<td colspan="3" class="align-middle text-left bg-white">Mengisi Data Rencana TGA</td>
 								</tr>--}}
 								<tr>
-									<td colspan="4"></td>
+									<td colspan="{{ isset($mhs) ? '3' : '4' }}"></td>
+									@if (isset($mhs))
+										<td class="align-middle text-center">
+											<button type="button" class="btn btn-sm btn-outline-info" id="refresh-btn"><i class="fa fa-sync"></i>&nbsp;&nbsp;Refresh</button>
+										</td>
+									@endif
 								</tr>
 								<tr>
 									<td colspan="4" class="align-middle text-center text-bold bg-primary">

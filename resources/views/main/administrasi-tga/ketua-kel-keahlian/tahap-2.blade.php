@@ -86,7 +86,6 @@
 			</td>
 			<td class="text-right align-middle">
 				<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#usulkan-pembimbing-co">Usulkan Pembimbing dan Co</button>
-				
 			</td>
 		</tr>
 	</table>

@@ -70,7 +70,7 @@
 			@endif
 			<div class="card">
 				<div class="card-body" style="overflow-x: auto;">
-					<div class="container text-center">
+					{{--<div class="container text-center">
 						<h5>LEMBAR DISPOSISI TUGAS AKHIR - JURUSAN TEKNIK SIPIL</h5>
 						<h5>FAKULTAS TEKNIK UNIVERSITAS SYIAH KUALA</h5>
 						@if (isset($roles->admin))
@@ -80,10 +80,31 @@
 							<span>No: --</span><br>
 						@endif
 						<a href="#" class="btn btn-sm btn-outline-secondary font-weight-bold m-3"><i class="fa fa-download"></i>&nbsp;&nbsp;Unduh Disposisi</a>
-					</div>			
+					</div>--}}
 					<table class="table table-bordered table-striped table-secondary table-responsive">
 						<thead>
-							<tr class="bg-info">
+							<tr class="bg-light">
+								<th colspan="11" class="align-middle" style="background-color: #f1f2f6;">
+									<table class="table-borderless">
+										<tr class="" style="background-color: #f1f2f6;">
+											<td class="align-middle text-center">
+												<img src="{{ asset('dist/img/logo-unsyiah.png') }}" alt="Universitas Syiah Kuala" width="110em">	
+											</td>
+											<td class="align-middle text-left">
+												LEMBAR DISPOSISI TUGAS AKHIR - JURUSAN TEKNIK SIPIL<br>
+												FAKULTAS TEKNIK UNIVERSITAS SYIAH KUALA<br>
+												@if (isset($roles->admin))
+													<span class="mr-2">No: </span><input type="text" name="no-disposisi" class="form-control mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;">
+													<button class="btn btn-sm btn-secondary">Update</button><br>
+												@else
+													<span class="mr-2">No: </span><input type="text" class="form-control bg-light mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;" readonly="repeat_optional">
+												@endif
+											</td>
+										</tr>
+									</table>
+								</th>
+							</tr>
+							<tr class="" style="background-color: #f5f6fa">
 								<th rowspan="2" class="text-center align-middle">#</th>
 								<th class="text-center align-middle">Nama</th>
 								<th class="align-middle font-weight-normal">{{ $mahasiswa->nama }}</th>
@@ -91,7 +112,7 @@
 								<th class="align-middle font-weight-normal">{{ $mahasiswa_data_tga->bidang->content }}</th>
 								<th colspan="6" class="text-center align-middle">Progress</th>
 							</tr>
-							<tr class="bg-info">
+							<tr class="" style="background-color: #f5f6fa">
 								<th class="text-center align-middle">NIM</th>
 								<th class="align-middle font-weight-normal">{{ $mahasiswa->nomor_induk }}</th>
 								<th class="text-center align-middle">Nomor HP</th>
