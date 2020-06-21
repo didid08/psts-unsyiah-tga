@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::middleware(['redirect'])->group(function () {
 
 		// Semua
-		Route::get('/{category}/dashboard', 'Main\MainController@dashboard')->name('main.dashboard');
+		Route::get('/{category}/dashboard/{nim?}', 'Main\MainController@dashboard')->name('main.dashboard');
 		Route::get('/{category}/info-dosen', 'Main\MainController@infoDosen')->name('main.info-dosen');
 		Route::get('/{category}/rekap-dosen', 'Main\MainController@rekapDosen')->name('main.rekap-dosen');
 

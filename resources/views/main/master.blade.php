@@ -10,6 +10,9 @@
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  {{--<link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">--}}
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
   <!-- Theme style -->
@@ -25,9 +28,9 @@
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white p-3">
     <div class="container">
       <a href="/" class="navbar-brand">
-        <img src="{{ asset('dist/img/logopsts.png') }}" alt="{{ $title }} Logo" class="brand-image"
-             style="opacity: .8">
-        <!--<span class="brand-text font-weight-light">{{ $title }}</span>-->
+        <img src="{{ asset('dist/img/logo-unsyiah-2.png') }}" alt="{{ $title }} Logo" class="brand-image"
+             style="opacity: .8" width="40em">
+        <span class="brand-text font-weight-bold text-muted ml-2">{{ $title }}</span>
       </a>
       
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -256,6 +259,8 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <!-- Toastr -->
 <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 @if ( session('error') != null | session('warning') != null | session('success') != null | $errors->any() )
