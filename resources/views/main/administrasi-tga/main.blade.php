@@ -74,7 +74,8 @@
 						<thead>
 							<tr class="bg-light">
 								<th colspan="11" class="align-middle" style="background-color: #f1f2f6;">
-									<table class="table-borderless">
+
+									<table class="table-borderless" width="100%">
 										<tr class="" style="background-color: #f1f2f6;">
 											<td class="align-middle text-center">
 												<img src="{{ asset('dist/img/logo-unsyiah.png') }}" alt="Universitas Syiah Kuala" width="110em">	
@@ -89,15 +90,17 @@
 													<span class="mr-2">No: </span><input type="text" class="form-control bg-light mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;" readonly="repeat_optional">
 												@endif
 											</td>
+											<td></td><td></td>
+											<td class="align-middle text-center">
+												<button class="btn btn-sm btn-outline-secondary text-bold"><i class="fa fa-download"></i>&nbsp;&nbsp;Unduh Disposisi</button>												
+											</td>
 										</tr>
 									</table>
+
 								</th>
-								{{--<th colspan="10" class="align-top text-center" style="background-color: #f1f2f6;">
-									
-								</th>--}}
 							</tr>
 							<tr class="" style="background-color: #f5f6fa">
-								<th rowspan="2" class="text-center align-middle">#</th>
+								<th rowspan="2" class="text-center align-middle">No</th>
 								<th class="text-center align-middle">Nama</th>
 								<th class="align-middle font-weight-normal">{{ $mahasiswa->nama }}</th>
 								<th class="text-center align-middle">Bidang</th>

@@ -1,5 +1,8 @@
 <table width="100%" class="table table-bordered{{ formBackground(1, 3, $administrasi_tga) }}">
 	<tbody>
+		@if ($administrasi_tga->value('progress') == 1)
+			<form action="{{ route('main.administrasi-tga.unggah', ['category' => $category, 'nim' => $mahasiswa->nomor_induk, 'progress' => '1']) }}" method="post" enctype="multipart/form-data">
+		@endif
 		<tr>
 			<td class="align-middle text-center">1.</td>
 			<td class="align-middle">SPP</td>
@@ -11,6 +14,7 @@
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
+							@csrf
 							<input type="file" class="custom-file-input" name="spp" id="spp" onchange="showSelectedFile('#spp-label', event)" accept="application/pdf">
 							<label class="custom-file-label text-left" for="spp" id="spp-label">Pilih File</label>
 						</div>
@@ -87,6 +91,10 @@
 					<a href="#" class="btn btn-block btn-success">Unduh Semua</a>
 				</td>
 			</tr>
+		@endif
+
+		@if ($administrasi_tga->value('progress') == 1)
+			</form>
 		@endif
 	</tbody>
 </table>

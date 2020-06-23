@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\User;
 
-class AdminController extends MainController
+class DashboardController extends MainController
 {
     public function dashboard()
     {

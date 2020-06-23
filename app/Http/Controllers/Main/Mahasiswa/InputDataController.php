@@ -11,7 +11,7 @@ use App\Bidang;
 use App\AdministrasiTGA;
 use App\DataTGA;
 
-class MahasiswaController extends MainController
+class InputDataController extends MainController
 {
     public function inputDataTGA()
     {

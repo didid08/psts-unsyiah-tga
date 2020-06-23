@@ -2,7 +2,7 @@
 	<tbody>
 		<tr>
 			<td class="align-middle">1.</td>
-			<td class="align-middle">Lembar Asistensi (Setuju Diseminarkan)</td>
+			<td class="align-middle">Lembar Asistensi (Setuju Disidangkan)</td>
 			<td class="text-center align-middle">
 				@if ($administrasi_tga->value('progress') == 23)
 					<span class="text-success">Telah disetujui</span>

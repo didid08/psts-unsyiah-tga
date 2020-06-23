@@ -86,7 +86,6 @@
 											NIM Mahasiswa
 										</th>
 										<th colspan="2" class="align-middle text-left">
-											@csrf
 											<select name="nim" id="select-nim" style="width: 100%;">
 												<option value="empty">Pilih NIM</option>
 												@foreach ($semua_mahasiswa as $mahasiswa)

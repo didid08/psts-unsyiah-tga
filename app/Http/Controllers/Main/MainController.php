@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Main\Admin\AdminController;
+use App\Http\Controllers\Main\Admin\DashboardController;
 use App\User;
 use App\Setting;
 
@@ -40,8 +40,8 @@ class MainController extends Controller
     public function dashboard()
     {
     	if (session('auth')['category'] == 'admin') {
-            $admin_controller = new AdminController();
-    		return $admin_controller->dashboard();
+            $admin_dashboard_controller = new DashboardController();
+    		return $admin_dashboard_controller->dashboard();
     	}else {
 
             $nav_item_active = 'dashboard';
