@@ -10,11 +10,7 @@
 		if ($administrasi_tga->value('progress') > $max_progress) {
 			return 'table-success';
 		} elseif (in_array($administrasi_tga->value('progress'), range($min_progress, $max_progress))) {
-			if ($administrasi_tga->value('repeat')) {
-				return 'table-danger';
-			} else {
-				return 'table-info';
-			}
+			return 'table-info';
 		}
 	}
 
@@ -22,11 +18,7 @@
 		if ($administrasi_tga->value('progress_optional') > $max_progress) {
 			return 'table-success';
 		} elseif (in_array($administrasi_tga->value('progress_optional'), range($min_progress, $max_progress))) {
-			if ($administrasi_tga->value('repeat_optional')) {
-				return 'table-danger';
-			} else {
-				return 'table-warning';
-			}
+			return 'table-warning';
 		}
 	}
 

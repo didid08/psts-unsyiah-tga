@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Main\Mahasiswa;
+namespace App\Http\Controllers\Main\TGA\Mahasiswa;
 
 use App\Http\Controllers\Main\MainController;
 use Illuminate\Http\Request;
@@ -11,9 +11,9 @@ use App\Bidang;
 use App\AdministrasiTGA;
 use App\DataTGA;
 
-class InputDataController extends MainController
+class InputUsulController extends MainController
 {
-    public function inputDataTGA()
+    public function view()
     {
         $input_value = [
             'bidang'             => null,
@@ -60,7 +60,7 @@ class InputDataController extends MainController
         ]);
     }
 
-    public function inputDataTGAProcess(Request $request)
+    public function process(Request $request)
     {
         $validator_rules = [
             'bidang'             => 'required',

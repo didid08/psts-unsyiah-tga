@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DataTGA extends Model
+class Data extends Model
 {
-    protected $table = 'data_tga';
+    protected $table = 'data';
 
     protected $fillable = [
-    	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'temporary', 'verified'
+    	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'verified'
     ];
 
     public function user()
@@ -33,7 +33,6 @@ class DataTGA extends Model
 				'type' => $data->type,
 				'display_name' => $data->display_name,
 				'content' => $data->content,
-                'temporary' => $data->temporary,
 				'verified' => $data->verified
 			];
 		}

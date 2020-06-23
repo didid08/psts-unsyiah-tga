@@ -13,7 +13,7 @@
                 @if ($category == 'tamu')
                 	<h6>Informasi yang berkaitan dengan dosen dapat dilihat di menu <i>Dosen</i></h6>
                 @else
-                	<h6>Informasi Administrasi TGA dapat dilihat menu <i>TGA > Administrasi TGA</i></h6>
+                	<h6>Informasi yang berkaitan dengan TGA dapat dilihat menu <i>TGA</i></h6>
                 @endif
             </div>
         </div>

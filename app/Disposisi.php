@@ -8,12 +8,12 @@ use App\User;
 use App\UserRole;
 use App\DataTGA;
 
-class AdministrasiTGA extends Model
+class Disposisi extends Model
 {
-    protected $table = 'administrasi_tga';
+    protected $table = 'disposisi';
 
     protected $fillable = [
-    	'progress', 'repeat', 'progress_optional', 'repeat_optional'
+    	'progress', 'progress_optional'
     ];
 
     public function user()

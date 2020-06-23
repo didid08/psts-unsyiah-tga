@@ -16,43 +16,25 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
 
 	/* INDEX ROUTE */
-	Route::get('/', 'IndexController@main')->name('index');
+	Route::get('/', 'IndexController')->name('index');
 
 	/* AUTH ROUTES */
-	Route::get('/login/{opsi?}', 'Auth\LoginController@loginPage')->name('auth.login');
-	Route::post('/login', 'Auth\LoginController@loginProcess')->name('auth.login.process');
-	Route::get('/logout', 'Auth\AuthController@logout')->name('auth.logout');
+	Route::get('/auth/login/{opsi?}', 'Auth\LoginController@loginPage')->name('auth.login');
+	Route::post('/auth/login', 'Auth\LoginController@loginProcess')->name('auth.login.process');
+	Route::get('/auth/logout', 'Auth\AuthController@logout')->name('auth.logout');
 	Route::put('/auth/password/change/{for?}', 'Auth\PasswordController@changePassword')->middleware('prevent.guest')->name('auth.password.change');
 
 	/* MAIN ROUTES */
-	Route::middleware(['redirect'])->group(function () {
+	Route::get('/main/dashboard', 'Main\MainController@dashboard')->name('main.dashboard');
+	Route::get('/main/dashboard/data', 'Main\Admin\DashboardController@dashboardWithData')->middleware('only.admin')->name('main.dashboard.admin.with-data');
+	Route::get('/main/dosen/info', 'Main\MainController@infoDosen')->name('main.dosen.info');
+	Route::get('/main/dosen/rekap', 'Main\MainController@rekapDosen')->name('main.dosen.rekap');
 
-		// Semua
-		Route::get('/{category}/info-dosen', 'Main\MainController@infoDosen')->name('main.info-dosen');
-		Route::get('/{category}/rekap-dosen', 'Main\MainController@rekapDosen')->name('main.rekap-dosen');
-
-		// Semua (Kecuali Tamu)
-		Route::middleware(['prevent.guest'])->group(function () {
-			Route::get('/{category}/dashboard', 'Main\MainController@dashboard')->name('main.dashboard');
-			Route::get('/{category}/tga/administrasi/{nim?}', 'Main\AdministrasiTGA\ViewController')->name('main.administrasi-tga');
-
-			Route::middleware('administrasi-tga')->group(function () {
-				Route::post('/{category}/tga/administrasi/{nim}/{progress}/unggah', 'Main\AdministrasiTGA\UploadController')->name('main.administrasi-tga.unggah');
-				//Route::post('/{category}/tga/administrasi/{nim}/{progress}/verifikasi', 'Main\AdministrasiTGA\VerificationController')->name('main.administrasi-tga.verifikasi');
-			});
+		//TGA
+		Route::get('/main/tga/disposisi/{nim?}', 'Main\TGA\DisposisiController@view')->middleware('prevent.guest')->name('main.tga.disposisi');
+		Route::middleware('only.mahasiswa')->group(function () {
+			//Route::post('/main/tga/disposisi/{nim}/{progress}/unggah', 'Main\TGA\DisposisiController@upload')->name('main.tga.disposisi.unggah');
+			Route::get('/main/tga/input-usul', 'Main\TGA\Mahasiswa\InputUsulController@view')->name('main.tga.mahasiswa.input-usul');
+			Route::put('/main/tga/input-usul', 'Main\TGA\Mahasiswa\InputUsulController@process')->name('main.tga.mahasiswa.input-usul.process');
 		});
-
-		// Tamu
-		Route::get('/tamu/tga/informasi', 'Main\MainController@dashboard')->name('main.tamu.informasi-tga');
-
-		// Admin
-		Route::get('/admin/dashboard/data', 'Main\Admin\DashboardController@dashboardWithData')->name('main.dashboard.admin.with-data');
-
-		// Dosen
-		
-
-		// Mahasiswa
-		Route::get('/mahasiswa/tga/input-data', 'Main\Mahasiswa\InputDataController@inputDataTGA')->name('main.mahasiswa.input-data-tga');
-		Route::put('/mahasiswa/tga/input-data', 'Main\Mahasiswa\InputDataController@inputDataTGAProcess')->name('main.mahasiswa.input-data-tga.process');
-	});
 });

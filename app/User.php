@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\DataTGA;
+use App\Data;
 
 class User extends Model
 {
@@ -23,19 +23,15 @@ class User extends Model
     	return $this->hasMany('App\UserRole');
     }
 
-    public function administrasiTGA() {
-        return $this->hasOne('App\AdministrasiTGA');
+    public function disposisi() {
+        return $this->hasOne('App\Disposisi');
     }
 
-    public function dataTGA() {
-        return $this->hasMany('App\DataTGA');
+    public function data() {
+        return $this->hasMany('App\Data');
     }
 
-    public function task() {
-        return $this->hasMany('App\Task');
-    }
-
-    public static function data($column) {
+    public static function myData($column) {
         $auth = session('auth');
 
         $identityType;
@@ -69,9 +65,9 @@ class User extends Model
             $bimbingan[$dosen->nama] = [];
         }
 
-        if (DataTGA::where('name', 'nama-pembimbing')->exists()) {
+        if (Data::where('name', 'nama-pembimbing')->exists()) {
 
-            $x = DataTGA::where('name', 'nama-pembimbing')->get();
+            $x = Data::where('name', 'nama-pembimbing')->get();
             foreach ($x as $y) {
                 array_push($bimbingan[$y->content], $y->user->nama);
             }
@@ -127,9 +123,9 @@ class User extends Model
             $co_bimbingan[$dosen->nama] = [];
         }
 
-        if (DataTGA::where('name', 'nama-co-pembimbing')->exists()) {
+        if (Data::where('name', 'nama-co-pembimbing')->exists()) {
 
-            $x = DataTGA::where('name', 'nama-co-pembimbing')->get();
+            $x = Data::where('name', 'nama-co-pembimbing')->get();
             foreach ($x as $y) {
                 array_push($co_bimbingan[$y->content], $y->user->nama);
             }

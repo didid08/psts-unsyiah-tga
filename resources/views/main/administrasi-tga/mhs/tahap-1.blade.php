@@ -1,7 +1,7 @@
 <table width="100%" class="table table-bordered{{ formBackground(1, 3, $administrasi_tga) }}">
 	<tbody>
 		@if ($administrasi_tga->value('progress') == 1)
-			<form action="{{ route('main.administrasi-tga.unggah', ['category' => $category, 'nim' => $mahasiswa->nomor_induk, 'progress' => '1']) }}" method="post" enctype="multipart/form-data">
+			<form action="#" method="post" enctype="multipart/form-data">
 		@endif
 		<tr>
 			<td class="align-middle text-center">1.</td>

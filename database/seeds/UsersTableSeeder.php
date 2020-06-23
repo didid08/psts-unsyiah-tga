@@ -1195,8 +1195,6 @@ class UsersTableSeeder extends Seeder
 		  ["180410101 0043","Imam Muzhaffar"]
 		];
 
-		//$x = [];
-
 		foreach ($semua_mahasiswa as $mahasiswa) {
 			$data_mahasiswa = [];
 			foreach ($mahasiswa as $index => $data) {
@@ -1210,17 +1208,7 @@ class UsersTableSeeder extends Seeder
 			$data_mahasiswa['password'] = Hash::make($data_mahasiswa['nomor_induk']);
 
 			DB::table('users')->insert(array_merge(['category' => 'mahasiswa'], $data_mahasiswa));
-			//array_push($x, array_merge(['category' => 'mahasiswa', 'password' => Hash::make('test')], $data_mahasiswa));
 		}
-
-		/*$x = collect($x);
-
-		$chunks = $x->chunk(250);
-
-		foreach ($chunks as $chunk)
-		{
-		   DB::table('users')->insert($chunk->toArray());
-		}*/
 
     }
 }

@@ -20,7 +20,7 @@ class UserRole extends Model
     }
 
     public function myRoles() {
-    	$get_roles = $this->where('user_id', User::data('id'))->get();
+    	$get_roles = $this->where('user_id', User::myData('id'))->get();
         $roles = [];
 
         foreach ($get_roles as $role) {

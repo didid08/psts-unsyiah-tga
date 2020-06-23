@@ -56,8 +56,14 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Auth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+
+        'only.admin' => \App\Http\Middleware\OnlyAdmin::class,
+        'only.ketua-kel-keahlian' => \App\Http\Middleware\OnlyKetuaKelKeahlian::class,
+        'only.koor-prodi' => \App\Http\Middleware\OnlyKoorProdi::class,
+        'only.koor-tga' => \App\Http\Middleware\OnlyKoorTGA::class,
+        'only.pembimbing-co' => \App\Http\Middleware\OnlyPembimbingCo::class,
+        'only.mahasiswa' => \App\Http\Middleware\OnlyMahasiswa::class,
+
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'prevent.guest' => \App\Http\Middleware\PreventGuest::class,
         'redirect' => \App\Http\Middleware\Redirect::class,

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Main\Admin\DashboardController;
 use App\User;
+use App\UserRole;
 use App\Setting;
 
 class MainController extends Controller
@@ -15,13 +16,13 @@ class MainController extends Controller
 
         $nama = 'Tamu';
         if (session('auth')['category'] != 'tamu') {
-            $nama = User::data('nama');
+            $nama = User::myData('nama');
         }
 
         $identity;
 
         if (in_array(session('auth')['category'], array('dosen', 'mahasiswa'))) {
-            $identity = User::data('nomor_induk');
+            $identity = User::myData('nomor_induk');
         }else if (session('auth')['category'] == 'admin') {
             $identity = "Admin";
         }else {
@@ -39,18 +40,15 @@ class MainController extends Controller
 
     public function dashboard()
     {
-    	if (session('auth')['category'] == 'admin') {
-            $admin_dashboard_controller = new DashboardController();
+        $userRole = new UserRole();
+        $role = $userRole->myRoles();
+    	if (isset($role->admin)) {
+            $admin_dashboard_controller = new DashboardController;
     		return $admin_dashboard_controller->dashboard();
     	}else {
 
             $nav_item_active = 'dashboard';
             $subtitle = 'Dashboard';
-
-            if (session('auth')['category'] == 'tamu') {
-                $nav_item_active = 'informasi-tga';
-                $subtitle = 'Informasi TGA';
-            }
 
     		return $this->customView('dashboard', [
                 'nav_item_active' => $nav_item_active,

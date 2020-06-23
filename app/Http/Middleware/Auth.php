@@ -15,7 +15,7 @@ class Auth
      */
     public function handle($request, Closure $next)
     {
-        if ($request->is('login') | $request->is('login/*')) {
+        if ($request->is('auth/login') | $request->is('auth/login/*')) {
             if (session('auth')) {
                 return redirect('/');
             }
@@ -24,7 +24,7 @@ class Auth
             if (session('auth')) {
                 return $next($request);
             }
-            return redirect('/login');
+            return redirect('auth/login');
         }
     }
 }

@@ -40,40 +40,39 @@
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
-          @if ($category == 'tamu')
-            <li class="nav-item">
-              <a href="{{ route('main.tamu.informasi-tga') }}" class="nav-link{{ $nav_item_active == 'informasi-tga' ? ' text-bold' : '' }}">Informasi TGA</a>
-            </li>
-          @else
-            <li class="nav-item">
-              <a href="{{ route('main.dashboard', ['category' => $category]) }}" class="nav-link{{ $nav_item_active == 'dashboard' ? ' text-bold' : '' }}">Dashboard</a>
-            </li>
-          @endif
+          <li class="nav-item">
+            <a href="{{ route('main.dashboard') }}" class="nav-link{{ $nav_item_active == 'dashboard' ? ' text-bold' : '' }}">Dashboard</a>
+          </li>
           @if ($category != 'tamu')
             <li class="nav-item dropdown">
               <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link{{ $nav_item_active == 'tga' ? ' text-bold' : '' }} dropdown-toggle">TGA</a>
               <ul class="dropdown-menu border-0 shadow">
+                <li><a href="{{ route('main.tga.disposisi', ['category' => $category]) }}" class="dropdown-item">Disposisi</a></li>
                 @if ($category == 'mahasiswa')
-                  <li><a href="{{ route('main.mahasiswa.input-data-tga') }}" class="dropdown-item">Input Data TGA</a></li>
-                @endif
-                <li><a href="{{ route('main.administrasi-tga', ['category' => $category]) }}" class="dropdown-item">Administrasi TGA</a></li>
-                @if ($category == 'mahasiswa')
-                  <li><a href="#" class="dropdown-item">Input Data Proposal</a></li>
-                  <li><a href="#" class="dropdown-item">Input Data Sidang</a></li>
+                  <li><a href="{{ route('main.tga.mahasiswa.input-usul') }}" class="dropdown-item">Input Usul TGA</a></li>
+                  <li><a href="#" class="dropdown-item">Input Usul Seminar Proposal</a></li>
+                  <li><a href="#" class="dropdown-item">Input Usul Sidang</a></li>
+                  <li><a href="#" class="dropdown-item">Input Usul Yudisium</a></li>
                 @endif
               </ul>
             </li>
-            <!--<li class="nav-item">
+            <li class="nav-item">
               <a href="#" class="nav-link{{ $nav_item_active == 'biodata' ? ' text-bold' : '' }}">Biodata</a>
-            </li>-->
+            </li>
           @endif
           <li class="nav-item dropdown">
             <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link{{ $nav_item_active == 'dosen' ? ' text-bold' : '' }} dropdown-toggle">Dosen</a>
             <ul class="dropdown-menu border-0 shadow">
-              <li><a href="{{ route('main.info-dosen', ['category' => $category]) }}" class="dropdown-item">Info Dosen</a></li>
-              <li><a href="{{ route('main.rekap-dosen', ['category' => $category]) }}" class="dropdown-item">Rekap Dosen</a></li>
+              <li><a href="{{ route('main.dosen.info') }}" class="dropdown-item">Info Dosen</a></li>
+              <li><a href="{{ route('main.dosen.rekap') }}" class="dropdown-item">Rekap Dosen</a></li>
             </ul>
           </li>
+
+          @if (in_array($category, ['admin', 'mahasiswa']))
+            <li class="nav-item">
+              <a href="#" class="nav-link{{ $nav_item_active == 'nilai-mahasiswa' ? ' text-bold' : '' }}">Nilai Mahasiswa</a>
+            </li>
+          @endif
         </ul>
 
         {{-- <!-- SEARCH FORM -->
