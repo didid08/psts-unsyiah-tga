@@ -11,20 +11,12 @@
 	</style>
 @endsection
 
-@section('breadcumb')
-	<li class="breadcrumb-item"><a href="/">{{ ucfirst($category) }}</a></li>
-	@if ($category != 'mahasiswa' && $nim != null)
-		<li class="breadcrumb-item"><a href="{{ route('main.tga.disposisi') }}">{{ $subtitle }}</a></li>
-	@endif
-	<li class="breadcrumb-item active">{{ $category != 'mahasiswa' ? ($nim != null ? $mahasiswa->nama : $subtitle) : $subtitle }}</li>
-@endsection
-
 @section('content')
 	@if ($category != 'mahasiswa' && $nim == null)
 		<div class="container">
 			<div class="card">
 				<div class="card-body">
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-striped" id="daftar-mahasiswa">
 						<thead>
 							<tr class="bg-info">
 								<th class="align-middle text-center">No.</th>
@@ -43,9 +35,9 @@
 								@endphp
 								<tr>
 									<td class="align-middle text-center">{{ $index+1 }}</td>
-									<td class="align-middle">{{ $value->nama }}</td>
-									<td class="align-middle text-center">{{ $value->nim }}</td>
-									<td class="align-middle text-center"><a href="{{ route('main.administrasi-tga', ['category' => $category, 'nim' => $value->nim ]) }}" class="btn btn-info">Pilih</a></td>
+									<td class="align-middle">{{ $value->user->nama }}</td>
+									<td class="align-middle text-center">{{ $value->user->nomor_induk }}</td>
+									<td class="align-middle text-center"><a href="{{ route('main.tga.disposisi', ['nim' => $value->user->nomor_induk ]) }}" class="btn btn-info">Pilih</a></td>
 								</tr>
 							@endforeach
 							@if ($empty)
@@ -84,8 +76,10 @@
 													<span class="mr-2">No: </span><input type="text" name="no-disposisi" class="form-control mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;">
 													<button class="btn btn-sm btn-secondary">Update</button><br>
 												@else
-													<span class="mr-2">No: </span><input type="text" class="form-control bg-light mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;" readonly="repeat_optional">
+													<span class="mr-2">No: </span><input type="text" class="form-control bg-light mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;" readonly="readonly">
 												@endif
+												<br>
+												<span class="mr-2">Tgl: </span><input type="text" class="form-control bg-light mt-2" placeholder="Belum ada tanggal" style="width: 18em; display: inline; height: 2.2em;" readonly="readonly">
 											</td>
 											<td></td><td></td>
 											<td class="align-middle text-center">
@@ -542,5 +536,7 @@
 				[4,5]
 			];
 		@endphp
+
+		$("#daftar-mahasiswa").dataTable();
 	</script>
 @endsection

@@ -52,13 +52,7 @@ class DisposisiController extends MainController
                 $user_role = new UserRole ();
                 $my_roles = $user_role->myRoles();
 
-                $dis = new Disposisi ();
-                if (!$dis->isEligibleToView($mhs_id, User::myData('nama'))) {
-                    return response('Anda tidak mempunyai perizinan untuk melihat progress mahasiswa yang anda pilih.');
-                }
-
                 $data = new Data ();
-
                 $user = new User;
                 $daftar_bimbingan = $user->calculateBimbingan('total');
                 $daftar_co_bimbingan = $user->calculateCoBimbingan('total');
@@ -79,30 +73,14 @@ class DisposisiController extends MainController
                     'mahasiswa' => User::firstWhere('nomor_induk', $nim),
                     'mahasiswa_data_tga' => $data->listData($mhs_id),
                     'roles' => $my_roles,
-                    'administrasi_tga' => $disposisi,
+                    'disposisi' => Disposisi::where('user_id', $mhs_id)->first(),
                     'semua_dosen' => User::dataWithCategory('dosen'),
                     'semua_dosen_bimbingan' => json_decode(json_encode($semua_dosen_bimbingan)),
-                    'semua_dosen_co_bimbingan' => json_decode(json_encode($semua_dosen_co_bimbingan)),
-                    'is_pembimbing' => $dis->isPembimbing($mhs_id, User::myData('nama')),
-                    'pembimbing_isset' => $data->checkSingleData($mhs_id, 'nama-pembimbing'),
-                    'co_pembimbing_isset' => $data->checkSingleData($mhs_id, 'nama-co-pembimbing'),
-                    'pembimbing_accepted' => $dis->isAccepted($mhs_id, 'nama-pembimbing'),
-                    'co_pembimbing_accepted' => $dis->isAccepted($mhs_id, 'nama-co-pembimbing'),
-
-                    /*'ketua_penguji_accepted' => $dis->isAccepted($mhs_id, 'ketua-penguji'),
-                    'penguji_1_accepted' => $dis->isAccepted($mhs_id, 'penguji-1'),
-                    'penguji_2_accepted' => $dis->isAccepted($mhs_id, 'penguji-2'),
-                    'penguji_3_accepted' => $dis->isAccepted($mhs_id, 'penguji-3'),*/
-                    'is_ketua_penguji' => $dis->isKetuaPenguji($mhs_id, User::myData('nama')),
-                    'task_set_pembimbing' => Task::where(['user_id' => $mhs_id, 'task_name' => 'set.pembimbing']),
-                    'task_set_co_pembimbing' => Task::where(['user_id' => $mhs_id, 'task_name' => 'set.co_pembimbing'])
+                    'semua_dosen_co_bimbingan' => json_decode(json_encode($semua_dosen_co_bimbingan))
                 ];
 
             } else {
-                $dis = new Disposisi;
-                $list = $dis->list();
-
-                $extra_data['administrasi_tga'] = $list;
+                $extra_data['disposisi'] = Disposisi::get();
             }
 
             return $this->customView('tga.disposisi.main', array_merge([

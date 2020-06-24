@@ -1,4 +1,4 @@
-<table width="100%" class="table table-bordered{{ formBackground(31, 32, $administrasi_tga) }}">
+<table width="100%" class="table table-bordered{{ formBackground(31, 32, $disposisi) }}">
 	<tbody>
 		<tr>
 			<td class="align-middle">1.</td>
@@ -11,15 +11,15 @@
 			<td class="align-middle">2.</td>
 			<td class="align-middle">Lembar Pengesahan dan Buku Laporan KP (jika diperlukan)</td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('progress') > 32)
+				@if ($disposisi->progress > 32)
 					@if (isset($roles->koor_prodi))
 						<a href="#" class="btn btn-sm btn-outline-success">Lihat</a>
 					@else
 						<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
 					@endif
-				@elseif (in_array($administrasi_tga->value('progress'), range(32,32)))
+				@elseif (in_array($disposisi->progress, range(32,32)))
 					<span class="text-warning">Sedang diproses</span>
-				@elseif ($administrasi_tga->value('progress') == 31)
+				@elseif ($disposisi->progress == 31)
 					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
 				@else
 					--
@@ -35,7 +35,7 @@
 			</td>
 		</tr>
 
-		@if ($administrasi_tga->value('progress') == 33)
+		@if ($disposisi->progress == 33)
 			<tr>
 				<td colspan="3">
 					<div class="alert alert-success text-left" role="alert" style="margin: 0;">

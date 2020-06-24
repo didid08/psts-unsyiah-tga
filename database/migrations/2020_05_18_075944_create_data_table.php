@@ -24,6 +24,8 @@ class CreateDataTable extends Migration
             $table->string('name')->unique();
             $table->string('display_name')->nullable();
             $table->string('content');
+            $table->string('no')->nullable();
+            $table->string('tgl')->nullable();
             $table->boolean('verified')->default(false);
 
             $table->timestamps();

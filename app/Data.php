@@ -9,12 +9,32 @@ class Data extends Model
     protected $table = 'data';
 
     protected $fillable = [
-    	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'verified'
+    	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'no', 'tgl', 'verified'
     ];
 
     public function user()
     {
     	return $this->belongsTo('App\User');
+    }
+
+    public function getDataMultiple($name) // Mengambil data yang sama secara multiple
+    {
+        $final_data = [];
+        $all_data = $this->where('name', $name)->get();
+
+        foreach ($all_data as $data) {
+            $final_data[$data->user_id] = [
+                'user_id' => $data->user_id,
+                'category' => $data->category,
+                'type' => $data->type,
+                'display_name' => $data->display_name,
+                'content' => $data->content,
+                'no' => $data->no,
+                'tgl' => $data->tgl,
+                'verified' => $data->verified
+            ];
+        }
+        return json_decode(json_encode($final_data));   
     }
 
     public function listData($user_id)
@@ -28,6 +48,8 @@ class Data extends Model
 				'type' => $data->type,
 				'display_name' => $data->display_name,
 				'content' => $data->content,
+                'no' => $data->no,
+                'tgl' => $data->tgl,
 				'verified' => $data->verified
 			];
 		}

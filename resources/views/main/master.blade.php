@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
   {{--<link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">--}}
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
@@ -44,18 +45,47 @@
             <a href="{{ route('main.dashboard') }}" class="nav-link{{ $nav_item_active == 'dashboard' ? ' text-bold' : '' }}">Dashboard</a>
           </li>
           @if ($category != 'tamu')
-            <li class="nav-item dropdown">
-              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link{{ $nav_item_active == 'tga' ? ' text-bold' : '' }} dropdown-toggle">TGA</a>
-              <ul class="dropdown-menu border-0 shadow">
-                <li><a href="{{ route('main.tga.disposisi') }}" class="dropdown-item">Disposisi</a></li>
-                @if ($category == 'mahasiswa')
-                  <li><a href="{{ route('main.tga.mahasiswa.input-usul') }}" class="dropdown-item">Input Usul TGA</a></li>
-                  <li><a href="#" class="dropdown-item">Input Usul Seminar Proposal</a></li>
-                  <li><a href="#" class="dropdown-item">Input Usul Sidang</a></li>
-                  <li><a href="#" class="dropdown-item">Input Usul Yudisium</a></li>
-                @endif
-              </ul>
-            </li>
+            @if (isset($role->admin) | isset($role->koor_prodi) | isset($role->koor_tga) | isset($role->mhs))
+              <li class="nav-item dropdown">
+                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link{{ $nav_item_active == 'tga' ? ' text-bold' : '' }} dropdown-toggle">TGA</a>
+                <ul class="dropdown-menu border-0 shadow">
+                  <li><a href="{{ route('main.tga.disposisi') }}" class="dropdown-item">Disposisi</a></li>
+                  @if (isset($role->mhs))
+                    <li><a href="{{ route('main.tga.mahasiswa.input-usul') }}" class="dropdown-item">Input Usul TGA</a></li>
+                    <li><a href="#" class="dropdown-item">Input Usul Seminar Proposal</a></li>
+                    <li><a href="#" class="dropdown-item">Input Usul Sidang</a></li>
+                    <li><a href="#" class="dropdown-item">Input Usul Yudisium</a></li>
+                  @elseif (isset($role->admin))
+                    <li><a href="{{ route('main.tga.admin.usulan-tga') }}" class="dropdown-item">Usulan TGA</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan SK Pembimbing</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan Surat Tugas Pengambilan Data</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan Seminar Proposal</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan Pengesahan Seminar Proposal</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan Sidang</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan SK Penguji Sidang</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan Pengesahan Sidang</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan Yudisium</a></li>
+                  @elseif (isset($role->koor_prodi))
+                    <li><a href="#" class="dropdown-item">Persetujuan Usulan TGA</a></li>
+                    <li><a href="#" class="dropdown-item">Penetapan SK Pembimbing</a></li>
+                    <li><a href="#" class="dropdown-item">Persetujuan Surat Tugas Pengambilan Data</a></li>
+                    <li><a href="#" class="dropdown-item">Penetapan SK Penguji Seminar Proposal</a></li>
+                    <li><a href="#" class="dropdown-item">Pengesahan Seminar Proposal</a></li>
+                    <li><a href="#" class="dropdown-item">Penetapan SK Penguji Sidang</a></li>
+                    <li><a href="#" class="dropdown-item">Pengesahan Sidang</a></li>
+                    <li><a href="#" class="dropdown-item">Pengesahan Usulan Yudisium</a></li>
+                  @elseif (isset($role->koor_tga))
+                    <li><a href="#" class="dropdown-item">Usulan Seminar Proposal</a></li>
+                    <li><a href="#" class="dropdown-item">Usulan Sidang</a></li>
+                  @endif
+                </ul>
+              </li>
+            @else
+              <li class="nav-item">
+                <a href="#" class="nav-link{{ $nav_item_active == 'tga' ? ' text-bold' : '' }}">TGA</a>
+              </li>
+            @endif
             <li class="nav-item">
               <a href="#" class="nav-link{{ $nav_item_active == 'biodata' ? ' text-bold' : '' }}">Biodata</a>
             </li>
@@ -259,7 +289,7 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- DataTables -->
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <!-- Select2 -->
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <!-- Toastr -->

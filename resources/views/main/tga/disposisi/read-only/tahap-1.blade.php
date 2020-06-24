@@ -1,17 +1,15 @@
-<table width="100%" class="table table-bordered{{ formBackground(1, 3, $administrasi_tga) }}">
+<table width="100%" class="table table-bordered{{ formBackground(1, 3, $disposisi) }}">
 	<tbody>
 		<tr>
 			<td class="align-middle text-center">1.</td>
 			<td class="align-middle">SPP</td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('progress') == 1)
-					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($administrasi_tga->value('progress') == 2)
-					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh Admin</span>
-				@elseif ($administrasi_tga->value('progress') == 3)
-					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh koor prodi</span>
+				@if ($disposisi->progress > 1)
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 1)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
@@ -19,44 +17,38 @@
 			<td class="align-middle text-center">2.</td>
 			<td class="align-middle">KRS</td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('progress') == 1)
-					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($administrasi_tga->value('progress') == 2)
-					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh Admin</span>
-				@elseif ($administrasi_tga->value('progress') == 3)
-					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh koor prodi</span>
+				@if ($disposisi->progress > 1)
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 1)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
 		<tr>
 			<td class="align-middle text-center">3.</td>
-			<td class="align-middle">Transkrip Sementara</td>
+			<td class="align-middle">KHS</td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('progress') == 1)
-					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($administrasi_tga->value('progress') == 2)
-					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh Admin</span>
-				@elseif ($administrasi_tga->value('progress') == 3)
-					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh koor prodi</span>
+				@if ($disposisi->progress > 1)
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 1)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
 		<tr>
 			<td class="align-middle text-center">4.</td>
-			<td class="align-middle">KHS</td>
+			<td class="align-middle">Transkrip Sementara</td>
 			<td class="text-center align-middle">
-				@if ($administrasi_tga->value('progress') == 1)
-					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($administrasi_tga->value('progress') == 2)
-					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh Admin</span>
-				@elseif ($administrasi_tga->value('progress') == 3)
-					<span><i class="fa fa-sync-alt text-yellow"></i>&nbsp;&nbsp;Sedang diperiksa oleh koor prodi</span>
+				@if ($disposisi->progress > 1)
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 1)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>

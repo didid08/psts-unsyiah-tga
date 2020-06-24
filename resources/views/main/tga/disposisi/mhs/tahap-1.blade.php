@@ -13,9 +13,11 @@
 			<td class="align-middle">SPP</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress > 1)
-					<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 1)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					<i class="fa fa-exclamation-triangle text-yellow"></i>&nbsp;&nbsp;&nbsp;&nbsp;Belum ada
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
@@ -24,9 +26,11 @@
 			<td class="align-middle">KRS</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress > 1)
-					<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 1)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					<i class="fa fa-exclamation-triangle text-yellow"></i>&nbsp;&nbsp;&nbsp;&nbsp;Belum ada
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
@@ -35,9 +39,11 @@
 			<td class="align-middle">KHS</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress > 1)
-					<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 1)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					<i class="fa fa-exclamation-triangle text-yellow"></i>&nbsp;&nbsp;&nbsp;&nbsp;Belum ada
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
@@ -46,9 +52,11 @@
 			<td class="align-middle">Transkrip Sementara</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress > 1)
-					<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 1)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					<i class="fa fa-exclamation-triangle text-yellow"></i>&nbsp;&nbsp;&nbsp;&nbsp;Belum ada
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>

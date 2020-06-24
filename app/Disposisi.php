@@ -39,43 +39,43 @@ class Disposisi extends Model
             $mhs_penguji_3 = null;
 
     		if ($data_tga->checkSingleData($mhs_id, 'ketua-bidang')) {
-                if ($data_tga->getSingleData($mhs_id, 'ketua-bidang')->temporary == false && $data_tga->getSingleData($mhs_id, 'ketua-bidang')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'ketua-bidang')->verified == true) {
 				    $mhs_ketua_bidang = $data_tga->getSingleData($mhs_id, 'ketua-bidang')->content;
                 }
     		}
 
     		if ($data_tga->checkSingleData($mhs_id, 'nama-pembimbing')) {
-                if ($data_tga->getSingleData($mhs_id, 'nama-pembimbing')->temporary == false && $data_tga->getSingleData($mhs_id, 'nama-pembimbing')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'nama-pembimbing')->verified == true) {
 				    $mhs_pembimbing = $data_tga->getSingleData($mhs_id, 'nama-pembimbing')->content;
                 }
     		}
 
     		if ($data_tga->checkSingleData($mhs_id, 'nama-co-pembimbing')) {
-				if ($data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->temporary == false && $data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->verified == true) {
+				if ($data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->verified == true) {
                     $mhs_pembimbing = $data_tga->getSingleData($mhs_id, 'nama-co-pembimbing')->content;
                 }
     		}
 
     		if ($data_tga->checkSingleData($mhs_id, 'ketua-penguji')) {
-                if ($data_tga->getSingleData($mhs_id, 'ketua-penguji')->temporary == false && $data_tga->getSingleData($mhs_id, 'ketua-penguji')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'ketua-penguji')->verified == true) {
                     $mhs_ketua_penguji = $data_tga->getSingleData($mhs_id, 'ketua-penguji')->content;
                 }
     		}
 
             if ($data_tga->checkSingleData($mhs_id, 'penguji-1')) {
-                if ($data_tga->getSingleData($mhs_id, 'penguji-1')->temporary == false && $data_tga->getSingleData($mhs_id, 'penguji-1')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'penguji-1')->verified == true) {
                     $mhs_ketua_penguji = $data_tga->getSingleData($mhs_id, 'penguji-1')->content;
                 }
             }
 
             if ($data_tga->checkSingleData($mhs_id, 'penguji-2')) {
-                if ($data_tga->getSingleData($mhs_id, 'penguji-2')->temporary == false && $data_tga->getSingleData($mhs_id, 'penguji-2')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'penguji-2')->verified == true) {
                     $mhs_ketua_penguji = $data_tga->getSingleData($mhs_id, 'penguji-2')->content;
                 }
             }
 
             if ($data_tga->checkSingleData($mhs_id, 'penguji-3')) {
-                if ($data_tga->getSingleData($mhs_id, 'penguji-3')->temporary == false && $data_tga->getSingleData($mhs_id, 'penguji-3')->verified == true) {
+                if ($data_tga->getSingleData($mhs_id, 'penguji-3')->verified == true) {
                     $mhs_ketua_penguji = $data_tga->getSingleData($mhs_id, 'penguji-3')->content;
                 }
             }
@@ -133,9 +133,7 @@ class Disposisi extends Model
     public function list() {
     	$result = [];
     	foreach ($this->get() as $mhs) {
-    		if ($this->isEligibleToView($mhs->user->id, User::myData('nama'))) {
-    			array_push($result, ['nama' => $mhs->user->nama, 'nim' => $mhs->user->nomor_induk]);
-    		}
+    		array_push($result, ['nama' => $mhs->user->nama, 'nim' => $mhs->user->nomor_induk]);
     	}
     	return json_decode(json_encode($result));
     }

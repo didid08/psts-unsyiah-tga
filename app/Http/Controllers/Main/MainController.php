@@ -29,11 +29,14 @@ class MainController extends Controller
             $identity = '--';
         }
 
+        $userRole = new UserRole();
+
     	return view('main.'.$viewName, array_merge([
     		'title' => Setting::get('site_title'),
             'category' => session('auth')['category'],
             'nama' => $nama,
-            'identity' => $identity
+            'identity' => $identity,
+            'role' => $userRole->myRoles()
     	], $data));
 
     }
