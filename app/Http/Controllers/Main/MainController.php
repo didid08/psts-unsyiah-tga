@@ -61,7 +61,7 @@ class MainController extends Controller
     {
         $user = new User();
 
-        return $this->customView('info-dosen', [
+        return $this->customView('dosen.info', [
             'nav_item_active' => 'dosen',
             'subtitle' => 'Info Dosen',
             'semua_dosen' => User::dataWithCategory('dosen'),
@@ -80,7 +80,7 @@ class MainController extends Controller
 
     public function rekapDosen()
     {
-        return $this->customView('rekap-dosen', [
+        return $this->customView('dosen.rekap', [
             'nav_item_active' => 'dosen',
             'subtitle' => 'Rekap Dosen',
             'semua_dosen' => User::dataWithCategory('dosen')

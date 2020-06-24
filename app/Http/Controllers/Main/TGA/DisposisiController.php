@@ -13,36 +13,27 @@ use App\Setting;
 
 class DisposisiController extends MainController
 {
-    public function view($category, $nim = null)
+    public function view($nim = null)
     {
-        if ($category == 'mahasiswa') {
+        $userRole = new UserRole();
+        $role = $userRole->myRoles();
+
+        if (isset($role->mhs)) {
             if ($nim == null) {
 
+                $id = User::myData('id');
                 $data = new Data();
-                $mahasiswa_data_tga = $data->listData(User::myData('id'));
-                $disposisi = User::find(User::myData('id'))->disposisi();
-
-                $user_roles = new UserRole();
-                $my_roles = $user_roles->myRoles();
-
-                if ($disposisi->exists()) { 
-                    return $this->customView('administrasi-tga.main', [
-                        'nav_item_active' => 'tga',
-                        'subtitle' => 'Administrasi TGA',
-
-                        'roles' => $my_roles,
-
-                        'administrasi_tga' => $disposisi,
-
-                        'mahasiswa' => User::where('nomor_induk', User::myData('nomor_induk'))->first(),
-                        'mahasiswa_data_tga' => $mahasiswa_data_tga
-                    ]);
-                }
-
-                return redirect(route('main.mahasiswa.input-data-tga'))->with('warning', 'Anda harus mengisi Data Usul TGA terlebih dahulu');
+                
+                return $this->customView('tga.disposisi.main', [
+                    'nav_item_active' => 'tga',
+                    'subtitle' => 'Disposisi',
+                    'role' => $role,
+                    'mahasiswa' => User::where('id', $id)->first(),
+                    'disposisi' => Disposisi::where('user_id', $id)->first(),
+                    'data' => $data->listData($id)
+                ]);
             }
             return abort(404);
-
         } else {
 
             $extra_data = [];
@@ -57,20 +48,13 @@ class DisposisiController extends MainController
                     return abort(404);
                 }
 
-                //Jika ada, apakah mahasiswa tsb belum mengisi Data Usul TGA?
-                $disposisi = User::find($mahasiswa->first()->id)->disposisi();
-                if (!$disposisi->exists()) {
-                    return abort(404);
-                }
-
                 $mhs_id = User::firstWhere('nomor_induk', $nim)->id;
-
                 $user_role = new UserRole ();
                 $my_roles = $user_role->myRoles();
 
                 $dis = new Disposisi ();
                 if (!$dis->isEligibleToView($mhs_id, User::myData('nama'))) {
-                    return response('Anda tidak mempunyai perizinan untuk melihat progress mahasiswa yang anda pilih.');   
+                    return response('Anda tidak mempunyai perizinan untuk melihat progress mahasiswa yang anda pilih.');
                 }
 
                 $data = new Data ();
@@ -96,17 +80,12 @@ class DisposisiController extends MainController
                     'mahasiswa_data_tga' => $data->listData($mhs_id),
                     'roles' => $my_roles,
                     'administrasi_tga' => $disposisi,
-
-
                     'semua_dosen' => User::dataWithCategory('dosen'),
                     'semua_dosen_bimbingan' => json_decode(json_encode($semua_dosen_bimbingan)),
                     'semua_dosen_co_bimbingan' => json_decode(json_encode($semua_dosen_co_bimbingan)),
-
                     'is_pembimbing' => $dis->isPembimbing($mhs_id, User::myData('nama')),
-
                     'pembimbing_isset' => $data->checkSingleData($mhs_id, 'nama-pembimbing'),
                     'co_pembimbing_isset' => $data->checkSingleData($mhs_id, 'nama-co-pembimbing'),
-
                     'pembimbing_accepted' => $dis->isAccepted($mhs_id, 'nama-pembimbing'),
                     'co_pembimbing_accepted' => $dis->isAccepted($mhs_id, 'nama-co-pembimbing'),
 
@@ -115,7 +94,6 @@ class DisposisiController extends MainController
                     'penguji_2_accepted' => $dis->isAccepted($mhs_id, 'penguji-2'),
                     'penguji_3_accepted' => $dis->isAccepted($mhs_id, 'penguji-3'),*/
                     'is_ketua_penguji' => $dis->isKetuaPenguji($mhs_id, User::myData('nama')),
-
                     'task_set_pembimbing' => Task::where(['user_id' => $mhs_id, 'task_name' => 'set.pembimbing']),
                     'task_set_co_pembimbing' => Task::where(['user_id' => $mhs_id, 'task_name' => 'set.co_pembimbing'])
                 ];
@@ -127,9 +105,9 @@ class DisposisiController extends MainController
                 $extra_data['administrasi_tga'] = $list;
             }
 
-            return $this->customView('administrasi-tga.main', array_merge([
+            return $this->customView('tga.disposisi.main', array_merge([
                 'nav_item_active' => 'tga',
-                'subtitle' => 'Administrasi TGA',
+                'subtitle' => 'Disposisi',
                 'nim' => $nim
             ], $extra_data));
         }

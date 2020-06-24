@@ -47,7 +47,7 @@
             <li class="nav-item dropdown">
               <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link{{ $nav_item_active == 'tga' ? ' text-bold' : '' }} dropdown-toggle">TGA</a>
               <ul class="dropdown-menu border-0 shadow">
-                <li><a href="{{ route('main.tga.disposisi', ['category' => $category]) }}" class="dropdown-item">Disposisi</a></li>
+                <li><a href="{{ route('main.tga.disposisi') }}" class="dropdown-item">Disposisi</a></li>
                 @if ($category == 'mahasiswa')
                   <li><a href="{{ route('main.tga.mahasiswa.input-usul') }}" class="dropdown-item">Input Usul TGA</a></li>
                   <li><a href="#" class="dropdown-item">Input Usul Seminar Proposal</a></li>
@@ -221,9 +221,9 @@
             <h1 class="m-0 text-dark"> {{ $subtitle }}</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            {{--<ol class="breadcrumb float-sm-right">
               @yield('breadcumb')
-            </ol>
+            </ol>--}}
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->

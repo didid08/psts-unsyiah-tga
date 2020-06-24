@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware\TGA;
+namespace App\Http\Middleware;
 
 use Closure;
 use App\UserRole;
@@ -16,8 +16,10 @@ class OnlyMahasiswa
      */
     public function handle($request, Closure $next)
     {   
-        $role = new UserRole->myRoles();
-        if (isset($role->mhs))
+        $userRole = new UserRole();
+        $role = $userRole->myRoles();
+
+        if (isset($role->mhs)) {
             return $next($request);
         }
         return abort(404);

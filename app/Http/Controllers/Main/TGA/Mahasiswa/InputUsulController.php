@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Validator;
 
 use App\User;
 use App\Bidang;
-use App\AdministrasiTGA;
-use App\DataTGA;
+use App\Disposisi;
+use App\Data;
 
 class InputUsulController extends MainController
 {
@@ -33,30 +33,23 @@ class InputUsulController extends MainController
             'nama-beasiswa'      => null
         ];
 
-        $administrasi_tga = false;
+        $data_usul = User::find(User::myData('id'))->data()->where('category', 'data_usul');
 
-        $data_usul_tga = User::find(User::data('id'))->dataTGA()->where('category', 'data_usul_tga');
-
-        if ($data_usul_tga->exists()) {
-            foreach ($data_usul_tga->get() as $data) {
+        if ($data_usul->exists()) {
+            foreach ($data_usul->get() as $data) {
                 $input_value[$data->name] = $data->content;
             }
-            $administrasi_tga = true;
         }
 
-        return $this->customView('mahasiswa.input-data-tga', [
+        return $this->customView('tga.mahasiswa.input-usul', [
             'nav_item_active' => 'tga',
-            'subtitle' => 'Input Data TGA',
-
-            'nama' => User::data('nama'),
-            'nim' => User::data('nomor_induk'),
-
+            'subtitle' => 'Input Usul TGA',
+            'nama' => User::myData('nama'),
+            'nim' => User::myData('nomor_induk'),
             'semua_dosen' => User::dataWithCategory('dosen'),
             'semua_bidang' => Bidang::get(),
-
             'input_value' => $input_value,
-
-            'administrasi_tga' => $administrasi_tga
+            'progress' => Disposisi::firstWhere('user_id', User::myData('id'))->progress
         ]);
     }
 
@@ -99,6 +92,32 @@ class InputUsulController extends MainController
             $validator_errors = array_merge($validator_errors, ['nama-beasiswa.required' => 'Dana Pendidikan yang dipilih adalah Beasiswa tetapi Nama Beasiswa tidak terisi']);
         }
 
+        $data = new Data;
+        $id = User::myData('id');
+
+        if (Disposisi::firstWhere('user_id', $id)->progress == 1) {
+            $validator_rules = array_merge($validator_rules, [
+                'spp'                 => 'required|file|mimes:pdf|max:5120',
+                'krs'                 => 'required|file|mimes:pdf|max:5120',
+                'transkrip-sementara' => 'required|file|mimes:pdf|max:5120',
+                'khs'                 => 'required|file|mimes:pdf|max:5120'
+            ]);
+            $validator_errors = array_merge($validator_errors, [
+                'spp.required' => 'SPP tidak ditemukan',
+                'krs.required' => 'KRS tidak ditemukan',
+                'transkrip-sementara.required' => 'Transkrip Sementara tidak ditemukan',
+                'khs.required' => 'KHS tidak ditemukan',
+                'spp.mimes' => 'SPP yang anda unggah tidak berbentuk pdf',
+                'krs.mimes' => 'KRS yang anda unggah tidak berbentuk pdf',
+                'transkrip-sementara.mimes' => 'Transkrip Sementara yang anda unggah tidak berbentuk pdf',
+                'khs.mimes' => 'KHS yang anda unggah tidak berbentuk pdf',
+                'spp.max' => 'Ukuran SPP melebihi 5 MB',
+                'krs.max' => 'Ukuran KRS melebihi 5 MB',
+                'transkrip-sementara.max' => 'Ukuran Transkrip Sementara melebihi 5 MB',
+                'khs.max' => 'Ukuran KHS melebihi 5 MB'
+            ]);
+        }
+
         $validator = Validator::make($request->all(), $validator_rules, $validator_errors);
 
         if ($validator->fails()) {
@@ -112,37 +131,49 @@ class InputUsulController extends MainController
         }
 
         foreach ($input as $index => $value) {
-            DataTGA::updateOrCreate([
-                'user_id' => User::data('id'),
-                'category' => 'data_usul_tga',
-                'type' => 'inline',
-                'name' => $index,
-                'display_name' => ucwords(str_replace('-', ' ', $index))
-            ], [
-                'content' => $value
-            ]);
+            if (in_array($index, ['spp', 'krs', 'khs', 'transkrip-sementara']))
+            {
+                $filename = uniqid(rand());
+                $request->file($index)->storeAs(
+                    'data', $filename
+                );
+                Data::updateOrCreate([
+                    'user_id' => User::myData('id'),
+                    'category' => 'data_usul',
+                    'type' => 'file',
+                    'name' => $index,
+                    'display_name' => ucwords(str_replace('-', ' ', $index))
+                ], [
+                    'content' => $filename
+                ]);
+            } else {
+                Data::updateOrCreate([
+                    'user_id' => User::myData('id'),
+                    'category' => 'data_usul',
+                    'type' => 'text',
+                    'name' => $index,
+                    'display_name' => ucwords(str_replace('-', ' ', $index))
+                ], [
+                    'content' => $value
+                ]);
+            }
         }
 
         if (!array_key_exists('nama-beasiswa', $input)) {
-            $nama_beasiswa = User::find(User::data('id'))->dataTGA()->where('name', 'nama-beasiswa');
+            $nama_beasiswa = User::find(User::myData('id'))->data()->where('name', 'nama-beasiswa');
 
             if ($nama_beasiswa->exists()) {
                 $nama_beasiswa->delete();
             }
         }
 
-        $administrasiTGA = User::find(User::data('id'))->administrasiTGA();
-            
-        if ($administrasiTGA->exists()) { 
-            return redirect()->back()->with('success', 'Data anda berhasil diupdate');
+        if (array_key_exists('spp', $input) && array_key_exists('krs', $input) && array_key_exists('khs', $input) && array_key_exists('transkrip-sementara', $input)) {
+            Disposisi::where('user_id', User::myData('id'))->update([
+                'progress' => 2
+            ]);
+            return redirect(route('main.tga.disposisi'))->with('success', 'Data anda berhasil disimpan');            
         }
 
-        $administrasi_tga = new AdministrasiTGA;
-        $administrasi_tga->user_id = User::data('id');
-        $administrasi_tga->progress = 1;
-        $administrasi_tga->progress_optional = 0;
-        $administrasi_tga->save();
-
-        return redirect(route('main.administrasi-tga', ['category' => 'mahasiswa']))->with('success', 'Sekarang anda dapat mengajukan data Administrasi TGA');
+        return redirect()->back()->with('success', 'Data anda berhasil disimpan');
     }
 }

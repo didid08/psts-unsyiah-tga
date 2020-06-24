@@ -17,15 +17,10 @@ class Data extends Model
     	return $this->belongsTo('App\User');
     }
 
-    public function listData($user_id, $category = null)
+    public function listData($user_id)
     {
     	$final_data = [];
-
-    	if ($category == null) {
-    		$all_data = $this->where('user_id', $user_id)->get();
-    	} else {
-    		$all_data = $this->where(['user_id' => $user_id, 'category' => $category])->get();
-    	}
+    	$all_data = $this->where('user_id', $user_id)->get();
 
     	foreach ($all_data as $data) {
 			$final_data[str_replace('-', '_', $data->name)] = [
@@ -36,7 +31,6 @@ class Data extends Model
 				'verified' => $data->verified
 			];
 		}
-
     	return json_decode(json_encode($final_data));
     }
 

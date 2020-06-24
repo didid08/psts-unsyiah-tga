@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 use App\UserRole;
-use App\DataTGA;
+use App\Data;
 
 class Disposisi extends Model
 {
@@ -28,7 +28,7 @@ class Disposisi extends Model
     	if (isset($my_roles->admin) | isset($my_roles->koor_prodi) | isset($my_roles->koor_tga) | isset($my_roles->ketua_jurusan) | isset($my_roles->sek_jurusan)) {
     		return true;
     	} else {
-    		$data_tga = new DataTGA ();
+    		$data_tga = new Data ();
 
     		$mhs_ketua_bidang = null;
     		$mhs_pembimbing = null;
@@ -89,7 +89,7 @@ class Disposisi extends Model
 
     public function isPembimbing($mhs_id, $myname)
     {
-        $data_tga = new DataTGA ();
+        $data_tga = new Data ();
 
         $mhs_pembimbing = null;
         $mhs_co_pembimbing = null;
@@ -114,7 +114,7 @@ class Disposisi extends Model
 
     public function isKetuaPenguji($mhs_id, $myname)
     {
-        $data_tga = new DataTGA ();
+        $data_tga = new Data ();
 
         $ketua_penguji = null;
 
@@ -133,7 +133,7 @@ class Disposisi extends Model
     public function list() {
     	$result = [];
     	foreach ($this->get() as $mhs) {
-    		if ($this->isEligibleToView($mhs->user->id, User::data('nama'))) {
+    		if ($this->isEligibleToView($mhs->user->id, User::myData('nama'))) {
     			array_push($result, ['nama' => $mhs->user->nama, 'nim' => $mhs->user->nomor_induk]);
     		}
     	}
@@ -142,7 +142,7 @@ class Disposisi extends Model
 
     public function isAllKomisiPengujiAccepted ($mhs_id)
     {
-        $data_tga = new DataTGA ();
+        $data_tga = new Data ();
 
         $ketua_penguji = false;
         $penguji_1 = false;
@@ -164,7 +164,7 @@ class Disposisi extends Model
 
     public function isAllPembimbingAccepted ($mhs_id)
     {
-        $data_tga = new DataTGA ();
+        $data_tga = new Data ();
 
         $pembimbing = false;
         $co_pembimbing = false;
@@ -182,7 +182,7 @@ class Disposisi extends Model
 
     public function isAccepted ($mhs_id, $role) //pembimbing dann komisi penguji
     {
-        $data_tga = new DataTGA ();
+        $data_tga = new Data ();
 
         $result = false;
 
@@ -194,7 +194,7 @@ class Disposisi extends Model
     }
 
     public function isTemporary($mhs_id, $data) {
-        $data_tga = new DataTGA ();
+        $data_tga = new Data ();
 
         $result = false;
 
