@@ -9,9 +9,7 @@
 			</div>
 			<div class="card-body" style="overflow-x: auto;">
 				<form action="{{ route('main.tga.mahasiswa.input-usul.process') }}" method="post" enctype="multipart/form-data">
-					@method('PUT')
 					@csrf
-
 					<div class="row form-group">
 						<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
 							<table class="table table-bordered table-striped">
@@ -235,11 +233,24 @@
 														@endif
 													</td>
 												</tr>
+												<tr>
+													<td class="align-middle text-center">
+														Foto
+													</td>
+													<td class="align-middle text-center">
+														@if ($progress == 1)
+															<input type="file" name="foto" id="foto" accept="image/*">
+														@else
+															<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada
+														@endif
+													</td>
+												</tr>
 											</table>	
 										</td>
 										<td class="align-top text-center">
 											<button type="submit" class="btn btn-block btn-success text-bold">Simpan</button>
 											<a href="{{ route('main.tga.disposisi') }}" class="btn btn-block btn-secondary">Kembali ke disposisi</a>
+											
 										</td>
 									</tr>
 								</tbody>

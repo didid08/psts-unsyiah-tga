@@ -17,11 +17,12 @@ class UsulanTGAController extends MainController
             'nav_item_active' => 'tga',
             'subtitle' => 'Usulan TGA',
 
-            'semua_mahasiswa' => Disposisi::where('progress', 2)->get(),
+            'semua_mahasiswa' => Disposisi::where('progress', 2)->orderBy('updated_at')->get(),
             'spp' => $data->getDataMultiple('spp'),
             'krs' => $data->getDataMultiple('krs'),
             'khs' => $data->getDataMultiple('khs'),
-            'transkrip_sementara' => $data->getDataMultiple('transkrip-sementara')
+            'transkrip_sementara' => $data->getDataMultiple('transkrip-sementara'),
+            'foto' => $data->getDataMultiple('foto')
         ]);
     }
 }

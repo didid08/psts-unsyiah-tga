@@ -72,14 +72,9 @@
 											<td class="align-middle text-left">
 												LEMBAR DISPOSISI TUGAS AKHIR - JURUSAN TEKNIK SIPIL<br>
 												FAKULTAS TEKNIK UNIVERSITAS SYIAH KUALA<br>
-												@if (isset($roles->admin))
-													<span class="mr-2">No: </span><input type="text" name="no-disposisi" class="form-control mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;">
-													<button class="btn btn-sm btn-secondary">Update</button><br>
-												@else
-													<span class="mr-2">No: </span><input type="text" class="form-control bg-light mt-2" placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;" readonly="readonly">
-												@endif
+												<span class="mr-2">No: </span><input type="text" class="form-control bg-light mt-2"{!! $disposisi->no_disposisi != null ? ' value="'.$disposisi->no_disposisi.'"' : '' !!} placeholder="Belum ada nomor" style="width: 18em; display: inline; height: 2.2em;" readonly="readonly">
 												<br>
-												<span class="mr-2">Tgl: </span><input type="text" class="form-control bg-light mt-2" placeholder="Belum ada tanggal" style="width: 18em; display: inline; height: 2.2em;" readonly="readonly">
+												<span class="mr-2">Tgl: </span><input type="text" class="form-control bg-light mt-2"{!! $disposisi->tgl_disposisi != null ? ' value="'.date('d-m-Y', strtotime($disposisi->tgl_disposisi)).'"' : '' !!} placeholder="Belum ada tanggal" style="width: 18em; display: inline; height: 2.2em;" readonly="readonly">
 											</td>
 											<td></td><td></td>
 											<td class="align-middle text-center">

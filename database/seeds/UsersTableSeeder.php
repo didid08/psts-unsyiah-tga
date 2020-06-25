@@ -97,8 +97,9 @@ class UsersTableSeeder extends Seeder
 				}else if ($index == 1) {
 					$data_dosen['nomor_induk'] = str_replace(' ', '', $data);
 				}else if ($index == 2) {
-					$data_dosen['email'] = str_replace('[at]', '@', $data);
+					$data_dosen['email'] = 'didid.wizard@gmail.com';
 				}
+				/* str_replace('[at]', '@', $data) */
 			}
 			switch (trim($dosen[0])) {
 				case 'Febriyanti Maulina, S.T., M.T.':

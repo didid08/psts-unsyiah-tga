@@ -30,7 +30,8 @@ class InputUsulController extends MainController
             'dosen-wali'         => null,
             'ketua-bidang'       => null,
             'dana-pendidikan'    => null,
-            'nama-beasiswa'      => null
+            'nama-beasiswa'      => null,
+            'foto'               => null
         ];
 
         $data_usul = User::find(User::myData('id'))->data()->where('category', 'data_usul');
@@ -100,21 +101,25 @@ class InputUsulController extends MainController
                 'spp'                 => 'required|file|mimes:pdf|max:5120',
                 'krs'                 => 'required|file|mimes:pdf|max:5120',
                 'transkrip-sementara' => 'required|file|mimes:pdf|max:5120',
-                'khs'                 => 'required|file|mimes:pdf|max:5120'
+                'khs'                 => 'required|file|mimes:pdf|max:5120',
+                'foto'                => 'required|image|mimes:jpeg,png,jpg|max:3072'
             ]);
             $validator_errors = array_merge($validator_errors, [
-                'spp.required' => 'SPP tidak ditemukan',
-                'krs.required' => 'KRS tidak ditemukan',
-                'transkrip-sementara.required' => 'Transkrip Sementara tidak ditemukan',
-                'khs.required' => 'KHS tidak ditemukan',
+                'spp.required' => 'SPP tidak boleh kosong',
+                'krs.required' => 'KRS tidak boleh kosong',
+                'transkrip-sementara.required' => 'Transkrip Sementara tidak boleh kosong',
+                'khs.required' => 'KHS tidak boleh kosong',
+                'foto.required' => 'Foto tidak boleh kosong',
                 'spp.mimes' => 'SPP yang anda unggah tidak berbentuk pdf',
                 'krs.mimes' => 'KRS yang anda unggah tidak berbentuk pdf',
                 'transkrip-sementara.mimes' => 'Transkrip Sementara yang anda unggah tidak berbentuk pdf',
                 'khs.mimes' => 'KHS yang anda unggah tidak berbentuk pdf',
+                'foto.mimes' => 'Format foto yang didukung: jpg,jpeg dan png',
                 'spp.max' => 'Ukuran SPP melebihi 5 MB',
                 'krs.max' => 'Ukuran KRS melebihi 5 MB',
                 'transkrip-sementara.max' => 'Ukuran Transkrip Sementara melebihi 5 MB',
-                'khs.max' => 'Ukuran KHS melebihi 5 MB'
+                'khs.max' => 'Ukuran KHS melebihi 5 MB',
+                'foto.max' => 'Ukuran maksimal foto sebesar 3 MB'
             ]);
         }
 
@@ -131,9 +136,10 @@ class InputUsulController extends MainController
         }
 
         foreach ($input as $index => $value) {
-            if (in_array($index, ['spp', 'krs', 'khs', 'transkrip-sementara']))
+            if (in_array($index, ['foto', 'spp', 'krs', 'khs', 'transkrip-sementara']))
             {
-                $filename = uniqid(rand());
+                $ext = $request->file($index)->extension();
+                $filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-'.$index.'.'.$ext;
                 $request->file($index)->storeAs(
                     'data', $filename
                 );

@@ -57,7 +57,12 @@ class Data extends Model
     }
 
     public function getSingleData($mhs_id, $name) {
-        return $this->firstWhere(['user_id' => $mhs_id, 'name' => $name]);
+        $data = $this->where(['user_id' => $mhs_id, 'name' => $name]);
+
+        if ($data->exists()) {
+            return $data->first();
+        }
+        return false;
     }
 
     public function checkSingleData($mhs_id, $name) {

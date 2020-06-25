@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Main\TGA;
 use App\Http\Controllers\Main\MainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 use App\User;
 use App\UserRole;
 use App\Disposisi;
@@ -74,13 +75,14 @@ class DisposisiController extends MainController
                     'mahasiswa_data_tga' => $data->listData($mhs_id),
                     'roles' => $my_roles,
                     'disposisi' => Disposisi::where('user_id', $mhs_id)->first(),
+                    'data' => $data->listData($mhs_id),
                     'semua_dosen' => User::dataWithCategory('dosen'),
                     'semua_dosen_bimbingan' => json_decode(json_encode($semua_dosen_bimbingan)),
                     'semua_dosen_co_bimbingan' => json_decode(json_encode($semua_dosen_co_bimbingan))
                 ];
 
             } else {
-                $extra_data['disposisi'] = Disposisi::get();
+                $extra_data['disposisi'] = Disposisi::orderBy('user_id')->get();
             }
 
             return $this->customView('tga.disposisi.main', array_merge([
@@ -262,5 +264,55 @@ class DisposisiController extends MainController
         }
 
         return ['rules' => $validate_rules, 'errors' => $validate_errors];
+    }
+
+    public function changeProgress($nim, $progress, $opsi = null)
+    {
+        $user = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
+        if ($user->exists()) {
+            $mhsId = $user->first()->id;
+
+            Disposisi::where('user_id', $mhsId)->update([
+                'progress' => $progress
+            ]);
+
+            if ($opsi == 'verified')
+            {
+                Data::where('user_id', $mhsId)->update([
+                    'verified' => true
+                ]);
+
+                if (Disposisi::firstWhere('user_id', $mhsId)->no_disposisi == null
+                    && Disposisi::firstWhere('user_id', $mhsId)->tgl_disposisi == null)
+                {
+                    $jumlahYgAdaNomor = Disposisi::whereNotNull('no_disposisi')->get()->count();
+                    $no = $jumlahYgAdaNomor+1;
+
+                    Disposisi::where('user_id', $mhsId)->update([
+                        'no_disposisi' => $no.'/TA/II/'.date('Y'),
+                        'tgl_disposisi' => date('Y m d')
+                    ]);                
+                }
+            }
+
+            return redirect()->back()->with('success', 'Success');
+        }
+        return abort(404);
+    }
+
+    public function terimaUsul($name, $nim)
+    {   
+        $mhs = User::where('nomor_induk', $nim)->first();
+        $data = Data::where(['user_id' => $mhs->id, 'name' => $name]);
+
+        if ($data->first()->verified == true) {
+            return abort(404);
+        }
+        
+        $data->update([
+            'verified' => true
+        ]);
+
+        return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name)).' untuk mahasiswa bernama '.$mhs->nama.' ('.$mhs->nomor_induk.')');
     }
 }

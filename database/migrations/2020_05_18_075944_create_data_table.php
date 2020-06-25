@@ -21,7 +21,7 @@ class CreateDataTable extends Migration
 
             $table->string('category');
             $table->enum('type', ['text', 'file']);
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('display_name')->nullable();
             $table->string('content');
             $table->string('no')->nullable();

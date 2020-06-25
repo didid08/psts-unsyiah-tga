@@ -168,4 +168,21 @@ class User extends Model
         }
         return false;
     }
+
+    public function listMahasiswaWith($with)
+    {
+        if ($with == 'ketua-bidang') {
+            $mahasiswa = [];
+            $data = new Data();
+
+            foreach(User::where('category', 'mahasiswa')->get() as $mhs) {
+                $ketuaBidang = $data->getSingleData($mhs->id, 'ketua-bidang');
+                if ($ketuaBidang != false) {
+                    $mahasiswa[$mhs->nama] = $ketuaBidang->content;
+                }
+            }
+
+            return $mahasiswa;
+        }
+    }
 }

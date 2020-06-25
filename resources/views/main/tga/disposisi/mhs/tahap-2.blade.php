@@ -31,7 +31,7 @@
 			<td class="align-middle">Rencana Judul TGA</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress >= 4)
-					<textarea class="form-control bg-light" readonly="readonly">{{ $mahasiswa_data_tga->judul_tga->content }}</textarea>
+					<textarea class="form-control bg-light" readonly="readonly">{{ $data->judul_tga->content }}</textarea>
 				@else
 					--
 				@endif
