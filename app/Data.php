@@ -9,7 +9,7 @@ class Data extends Model
     protected $table = 'data';
 
     protected $fillable = [
-    	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'no', 'tgl', 'verified'
+    	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'no', 'tgl', 'verified', 'verification_key'
     ];
 
     public function user()

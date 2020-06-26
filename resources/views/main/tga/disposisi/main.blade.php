@@ -54,7 +54,6 @@
 			</div>
 		</div>
 	@else
-		@include('main.tga.disposisi.modals')
 		<div class="container">
 			@include('main.tga.disposisi.function')
 			<div class="card">

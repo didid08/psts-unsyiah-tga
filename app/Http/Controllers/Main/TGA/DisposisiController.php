@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Main\TGA;
 use App\Http\Controllers\Main\MainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\User;
 use App\UserRole;
@@ -300,19 +301,44 @@ class DisposisiController extends MainController
         return abort(404);
     }
 
-    public function terimaUsul($name, $nim)
+    public function terimaUsul($name, $nim, Request $request)
     {   
-        $mhs = User::where('nomor_induk', $nim)->first();
-        $data = Data::where(['user_id' => $mhs->id, 'name' => $name]);
-
-        if ($data->first()->verified == true) {
-            return abort(404);
-        }
-        
-        $data->update([
-            'verified' => true
+        $validator = Validator::make($request->all(), [
+            'key' => 'required'
         ]);
 
-        return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name)).' untuk mahasiswa bernama '.$mhs->nama.' ('.$mhs->nomor_induk.')');
+        if ($validator->fails()) {
+            return abort(404);
+        }
+
+        $mhs = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
+        if ($mhs->exists()) {
+
+            $data = Data::where(['user_id' => $mhs->first()->id, 'name' => $name]);
+            if ($data->exists()) {
+
+                if ($data->first()->verified == true) {
+                    return abort(404);
+                }
+
+                $diff = time() - strtotime($data->first()->updated_at);
+                $hariLewat = floor($diff / (60 * 60 * 24));
+                if ($hariLewat >= 2) {
+                    return abort(404);
+                }
+
+                if (Hash::check($request->input('key'), $data->first()->verification_key))
+                {
+                    $data->update([
+                        'verified' => true,
+                        'verification_key' => null
+                    ]);
+                    return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name)).' untuk mahasiswa bernama '.$mhs->first()->nama.' ('.$mhs->first()->nomor_induk.')');
+                }
+                return abort(404);
+            }
+            return abort(404);
+        }
+        return abort(404);
     }
 }

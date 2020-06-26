@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Main\TGA\KetuaKelKeahlian;
 
 use App\Http\Controllers\Main\MainController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use App\Data;
 use App\Disposisi;
 use App\User;
@@ -32,9 +34,11 @@ class PengusulanPembimbingController extends MainController
     		}
     	}
 
-    	return $this->customView('tga.ketua-kel-keahlian.tga', [
+    	$mhsYgSudahAdaPembimbingCo = [];
+
+    	return $this->customView('tga.ketua-kel-keahlian.pengusulan-pembimbing', [
             'nav_item_active' => 'tga',
-            'subtitle' => 'TGA',
+            'subtitle' => 'Pengusulan Pembimbing dan Co',
 
             'semua_mahasiswa' => Data::where(['name' => 'ketua-bidang', 'content' => User::myData('nama')])
             						->join('disposisi', 'data.user_id', '=', 'disposisi.user_id')
@@ -42,6 +46,8 @@ class PengusulanPembimbingController extends MainController
             						->where('progress', 4)
             						->orderBy('updated_at')
             						->get(),
+            'daftar_pembimbing' => $data->getDataMultiple('pembimbing'),
+            'daftar_co_pembimbing' => $data->getDataMultiple('co-pembimbing'),
             'judul_tga' => $data->getDataMultiple('judul-tga'),
             'dosen_pembimbing' => $dosen_pembimbing,
             'dosen_co_pembimbing' => $dosen_co_pembimbing
@@ -50,21 +56,39 @@ class PengusulanPembimbingController extends MainController
 
     public function usul($nim, Request $request)
     {
-    	$this->validate($request, [
+    	$validator = Validator::make($request->all(), [
     		'pembimbing' => 'required',
     		'co-pembimbing' => 'required'
+    	], [
+    		'pembimbing.required' => 'Harap pilih nama pembimbing',
+    		'co-pembimbing.required' => 'Harap pilih nama co pembimbing'
     	]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
 
     	$nomorIndukPembimbing = $request->input('pembimbing');
     	$nomorIndukCoPembimbing = $request->input('co-pembimbing');
 
     	if ($nomorIndukPembimbing == 'empty' | $nomorIndukCoPembimbing == 'empty') {
-    		return redirect()->back()->with('error', 'Harap masukkan nama pembimbing beserta co pembimbing');
+    		return redirect()->back()->with('error', 'Harap pilih nama pembimbing beserta co pembimbing');
     	}
 
     	$mahasiswa = User::where('nomor_induk', $nim)->first();
     	$pembimbing = User::where('nomor_induk', $nomorIndukPembimbing)->first();
     	$coPembimbing = User::where('nomor_induk', $nomorIndukCoPembimbing)->first();
+
+    	if ($pembimbing->email == null) {
+    		return redirect()->back()->with('error', 'Pembimbing tidak memiliki email yang dapat dikirim');
+    	}
+
+    	if ($coPembimbing->email == null) {
+    		return redirect()->back()->with('error', 'Co Pembimbing tidak memiliki email yang dapat dikirim');
+    	}
+
+    	$key1 = uniqid(rand());
+    	$key2 = uniqid(rand());
 
     	Data::updateOrCreate([
     		'user_id' => $mahasiswa->id,
@@ -73,7 +97,9 @@ class PengusulanPembimbingController extends MainController
     		'name' => 'pembimbing',
     		'display_name' => 'Nama Pembimbing'
     	], [
-    		'content' => $pembimbing->nama
+    		'content' => $pembimbing->nama,
+    		'verified' => false,
+    		'verification_key' => Hash::make($key1)
     	]);
 
     	Data::updateOrCreate([
@@ -83,11 +109,13 @@ class PengusulanPembimbingController extends MainController
     		'name' => 'co-pembimbing',
     		'display_name' => 'Nama Co Pembimbing'
     	], [
-    		'content' => $coPembimbing->nama
+    		'content' => $coPembimbing->nama,
+    		'verified' => false,
+    		'verification_key' => Hash::make($key2)
     	]);
 
-    	Mail::to($pembimbing->email)->send(new UsulPembimbing($mahasiswa->nama, $mahasiswa->nomor_induk));
-    	Mail::to($coPembimbing->email)->send(new UsulCoPembimbing($mahasiswa->nama, $mahasiswa->nomor_induk));
+    	Mail::to($pembimbing->email)->send(new UsulPembimbing($mahasiswa->nama, $mahasiswa->nomor_induk, $key1));
+    	Mail::to($coPembimbing->email)->send(new UsulCoPembimbing($mahasiswa->nama, $mahasiswa->nomor_induk, $key2));
 
     	return redirect()->back()->with('success', 'Berhasil mengusulkan Pembimbing dan Co Pembimbing untuk '.$mahasiswa->nama.' ('.$nim.')');
     }

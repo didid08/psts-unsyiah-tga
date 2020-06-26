@@ -27,6 +27,7 @@ class CreateDataTable extends Migration
             $table->string('no')->nullable();
             $table->string('tgl')->nullable();
             $table->boolean('verified')->default(false);
+            $table->string('verification_key')->nullable();
 
             $table->timestamps();
         });

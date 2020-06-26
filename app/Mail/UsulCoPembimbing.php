@@ -13,16 +13,18 @@ class UsulCoPembimbing extends Mailable
 
     public $nama;
     public $nim;
+    public $key;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($nama, $nim)
+    public function __construct($nama, $nim, $key)
     {
         $this->nama = $nama;
         $this->nim = $nim;
+        $this->key = $key;
     }
 
     /**
@@ -38,6 +40,7 @@ class UsulCoPembimbing extends Mailable
                     [
                         'nama' => $this->nama,
                         'nim' => $this->nim,
+                        'key' => $this->key
                     ]);
     }
 }

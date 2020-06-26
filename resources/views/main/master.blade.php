@@ -83,7 +83,7 @@
                     <li><a href="#" class="dropdown-item">Usulan Sidang</a></li>
                   @endif
                   @if (isset($role->ketua_kel_keahlian))
-                    <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengusulan-pembimbing') }}" class="dropdown-item">Pengusulan Pembimbing</a></li>
+                    <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengusulan-pembimbing') }}" class="dropdown-item">Pengusulan Pembimbing dan Co</a></li>
                   @endif
                 </ul>
               </li>
