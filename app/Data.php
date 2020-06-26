@@ -32,7 +32,9 @@ class Data extends Model
                 'no' => $data->no,
                 'tgl' => $data->tgl,
                 'verified' => $data->verified,
-                'updated_at' => $data->updated_at
+                'updated_at' => $data->updated_at,
+                'no' => $data->no,
+                'tgl' => $data->tgl
             ];
         }
         return json_decode(json_encode($final_data));   
@@ -51,7 +53,10 @@ class Data extends Model
 				'content' => $data->content,
                 'no' => $data->no,
                 'tgl' => $data->tgl,
-				'verified' => $data->verified
+				'verified' => $data->verified,
+                'updated_at' => $data->updated_at,
+                'no' => $data->no,
+                'tgl' => $data->tgl
 			];
 		}
     	return json_decode(json_encode($final_data));

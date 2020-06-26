@@ -173,9 +173,10 @@ class InputUsulController extends MainController
             }
         }
 
-        if (array_key_exists('spp', $input) && array_key_exists('krs', $input) && array_key_exists('khs', $input) && array_key_exists('transkrip-sementara', $input)) {
+        if (array_key_exists('spp', $input) && array_key_exists('krs', $input) && array_key_exists('khs', $input) && array_key_exists('transkrip-sementara', $input) && array_key_exists('foto', $input)) {
             Disposisi::where('user_id', User::myData('id'))->update([
-                'progress' => 2
+                'progress' => 2,
+                'bypass_key' => uniqid(rand()).uniqid(rand()).uniqid(rand())
             ]);
             return redirect(route('main.tga.disposisi'))->with('success', 'Data anda berhasil disimpan');            
         }

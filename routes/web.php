@@ -41,12 +41,14 @@ Route::middleware(['auth'])->group(function () {
 			Route::post('/main/tga/input-usul', 'Main\TGA\Mahasiswa\InputUsulController@process')->name('main.tga.mahasiswa.input-usul.process');
 		});
 
-		Route::get('/main/tga/ubah-progress/{nim}/{progress}/{opsi?}', 'Main\TGA\DisposisiController@changeProgress')->name('main.tga.ubah-progress');
+		Route::put('/main/tga/disposisi/{nim}/update-progress', 'Main\TGA\DisposisiController@updateProgress')->name('main.tga.update-progress');
 		
 		//Admin
 		Route::get('/main/tga/usulan-tga', 'Main\TGA\Admin\UsulanTGAController@view')->name('main.tga.admin.usulan-tga');
+		Route::get('/main/tga/usulan-sk-pembimbing', 'Main\TGA\Admin\UsulanSKPembimbingController@view')->name('main.tga.admin.usulan-sk-pembimbing');
 		//Koor Prodi
 		Route::get('/main/tga/persetujuan-usulan-tga', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@view')->name('main.tga.koor-prodi.persetujuan-usulan-tga');
+		Route::get('/main/tga/penetapan-sk-pembimbing', 'Main\TGA\KoorProdi\PenetapanSKPembimbingController@view')->name('main.tga.koor-prodi.penetapan-sk-pembimbing');
 		//Ketua Kel Keahlian
 		Route::get('/main/tga/pengusulan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');
 		Route::post('/usul/pembimbing-co/{nim}', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@usul')->name('usul.pembimbing-co');

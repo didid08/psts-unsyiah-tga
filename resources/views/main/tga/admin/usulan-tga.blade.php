@@ -59,10 +59,22 @@
 									<a target="_blank" href="{{ route('main.file', ['filename' => $transkrip_sementara->$mhsId->content]) }}" class="text-green">Periksa</a>
 								</td>
 								<td class="align-middle text-center">
-									<a href="{{ route('main.tga.ubah-progress', ['nim' => $mahasiswa->user->nomor_induk, 'progress' => 3]) }}" class="btn btn-sm btn-success">Kirim ke Koor Prodi</a>
+									<form action="{{ route('main.tga.update-progress', ['nim' => $mahasiswa->user->nomor_induk]) }}" method="post" style="display: inline;">
+										@method('PUT')
+										@csrf
+										<input type="hidden" name="progress" value="3">
+										<input type="hidden" name="bypass-key" value="{{ $mahasiswa->bypass_key }}">
+										<button type="submit" class="btn btn-sm btn-success">Kirim ke Koor Prodi</button>
+									</form>
 								</td>
 								<td class="align-middle text-center">
-									<a href="{{ route('main.tga.ubah-progress', ['nim' => $mahasiswa->user->nomor_induk, 'progress' => 1]) }}" class="btn btn-sm btn-danger">Tolak</a>
+									<form action="{{ route('main.tga.update-progress', ['nim' => $mahasiswa->user->nomor_induk]) }}" method="post" style="display: inline;">
+										@method('PUT')
+										@csrf
+										<input type="hidden" name="progress" value="1">
+										<input type="hidden" name="bypass-key" value="{{ $mahasiswa->bypass_key }}">
+										<button type="submit" class="btn btn-sm btn-danger">Tolak</button>
+									</form>
 								</td>
 							</tr>
 							@endforeach

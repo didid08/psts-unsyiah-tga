@@ -123,7 +123,13 @@
 											<textarea class="form-control bg-light" readonly="readonly">{{ $judul_tga->$mhsId2->content }}</textarea>
 										</td>
 										<td class="align-middle text-center">
-											<a href="{{ route('main.tga.ubah-progress', ['nim' => $mahasiswa->user->nomor_induk, 'progress' => 5]) }}" class="btn btn-sm btn-success text-bold">Kirim ke admin</a>
+											<form action="{{ route('main.tga.update-progress', ['nim' => $mahasiswa->user->nomor_induk]) }}" method="post" style="display: inline;">
+												@method('PUT')
+												@csrf
+												<input type="hidden" name="progress" value="5">
+												<input type="hidden" name="bypass-key" value="{{ $mahasiswa->bypass_key }}">
+												<button type="submit" class="btn btn-sm btn-success">Kirim ke admin</button>
+											</form>
 										</td>
 									</tr>
 								@endif

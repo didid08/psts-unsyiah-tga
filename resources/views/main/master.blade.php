@@ -58,7 +58,7 @@
                   @endif
                   @if (isset($role->admin))
                     <li><a href="{{ route('main.tga.admin.usulan-tga') }}" class="dropdown-item">Usulan TGA</a></li>
-                    <li><a href="#" class="dropdown-item">Usulan SK Pembimbing</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sk-pembimbing') }}" class="dropdown-item">Usulan SK Pembimbing</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Surat Tugas Pengambilan Data</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
@@ -70,7 +70,7 @@
                   @endif
                   @if (isset($role->koor_prodi))
                     <li><a href="{{ route('main.tga.koor-prodi.persetujuan-usulan-tga') }}" class="dropdown-item">Persetujuan Usulan TGA</a></li>
-                    <li><a href="#" class="dropdown-item">Penetapan SK Pembimbing</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-pembimbing') }}" class="dropdown-item">Penetapan SK Pembimbing</a></li>
                     <li><a href="#" class="dropdown-item">Persetujuan Surat Tugas Pengambilan Data</a></li>
                     <li><a href="#" class="dropdown-item">Penetapan SK Penguji Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Pengesahan Seminar Proposal</a></li>

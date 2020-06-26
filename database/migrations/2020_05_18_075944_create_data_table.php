@@ -25,7 +25,7 @@ class CreateDataTable extends Migration
             $table->string('display_name')->nullable();
             $table->string('content');
             $table->string('no')->nullable();
-            $table->string('tgl')->nullable();
+            $table->date('tgl')->nullable();
             $table->boolean('verified')->default(false);
             $table->string('verification_key')->nullable();
 

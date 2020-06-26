@@ -267,38 +267,122 @@ class DisposisiController extends MainController
         return ['rules' => $validate_rules, 'errors' => $validate_errors];
     }
 
-    public function changeProgress($nim, $progress, $opsi = null)
+    public function updateProgress($nim, Request $request)
     {
         $user = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
-        if ($user->exists()) {
+
+        if ($user->exists())
+        {
             $mhsId = $user->first()->id;
+            $disposisi = Disposisi::where(['user_id' => $mhsId]);
 
-            Disposisi::where('user_id', $mhsId)->update([
-                'progress' => $progress
-            ]);
+            $validate_rules = [
+                'progress' => 'required|numeric',
+                'bypass-key' => 'required'
+            ];
 
-            if ($opsi == 'verified')
-            {
-                Data::where('user_id', $mhsId)->update([
-                    'verified' => true
-                ]);
+            $validate_errors = [
+                'progress.required' => 'Harap masukkan progress',
+                'progress.numeric' => 'Progress hanya berbentuk angka',
+                'bypass-key.required' => 'Kesalahan dalam mengupdate progress'
+            ];
 
-                if (Disposisi::firstWhere('user_id', $mhsId)->no_disposisi == null
-                    && Disposisi::firstWhere('user_id', $mhsId)->tgl_disposisi == null)
-                {
-                    $jumlahYgAdaNomor = Disposisi::whereNotNull('no_disposisi')->get()->count();
-                    $no = $jumlahYgAdaNomor+1;
-
-                    Disposisi::where('user_id', $mhsId)->update([
-                        'no_disposisi' => $no.'/TA/II/'.date('Y'),
-                        'tgl_disposisi' => date('Y m d')
-                    ]);                
+            /* Extra Validation Process */
+                if ($disposisi->first()->progress == 5) {
+                    $validate_rules = array_merge($validate_rules, [
+                        'sk-pembimbing' => 'required|file|mimes:pdf|max:5120'
+                    ]);
+                    $validate_errors = array_merge($validate_errors, [
+                        'sk-pembimbing.required' => 'Harap unggah SK Penunjukan Pembimbing',
+                        'sk-pembimbing.mimes' => 'Harap unggah dalam format pdf',
+                        'sk-pembimbing.max' => 'Ukuran SK Penunjukan Pembimbing melebihi 5 MB'
+                    ]);
                 }
+            /* End of Extra Validation Process */
+
+            $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
             }
 
-            return redirect()->back()->with('success', 'Success');
+            if ($request->input('bypass-key') == $disposisi->first()->bypass_key)
+            {
+                /* Upload File */
+                    if ($disposisi->first()->progress == 5) {
+                        $ext = $request->file('sk-pembimbing')->extension();
+                        $filename = $nim.'-sk-pembimbing.'.$ext;
+                        $request->file('sk-pembimbing')->storeAs(
+                            'data', $filename
+                        );
+                        Data::updateOrCreate([
+                            'user_id' => $user->first()->id,
+                            'category' => 'data_usul',
+                            'type' => 'file',
+                            'name' => 'sk-pembimbing',
+                            'display_name' => 'SK Penunjukan Pembimbing'
+                        ], [
+                            'content' => $filename
+                        ]);
+                    }
+                    if ($disposisi->first()->progress == 6 && $request->input('progress') == 7) {
+                        $jumlahYgAdaNomorSK = Data::where('name', 'sk-pembimbing')->whereNotNull('no')->whereNotNull('tgl')->get()->count();
+                        $noSK = $jumlahYgAdaNomorSK+1;
+
+                        Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->update([
+                            'no' => $noSK.'/TA/II/'.date('Y'),
+                            'tgl' => date('Y m d')
+                        ]);
+                        $disposisi->update([
+                            'progress_optional' => 1
+                        ]);
+                    }
+                /* End Upload File */
+
+                // Ubah Progress
+                $disposisi->update([
+                    'progress' => $request->input('progress'),
+                    'bypass_key' => uniqid(rand()).uniqid(rand()).uniqid(rand())
+                ]);
+
+                // Verifikasi data
+                if ($request->has('verify-data'))
+                {
+                    if ($request->input('verify-data') == 'all') {
+                        Data::where(['user_id' => $mhsId])->update([
+                            'verified' => true
+                        ]);
+                    } else {
+                        $verifyData = explode('|', $request->input('verify-data'));
+                        foreach ($verifyData as $value) {
+                            $x = Data::where(['user_id' => $mhsId, 'name' => $value]);
+                            if ($x->exists()) {
+                                $x->update([
+                                    'verified' => true
+                                ]);
+                            }
+                        }
+                    }
+                }
+
+                // Menambahkan Nomor Disposisi
+                if ($disposisi->first()->progress == 3) {
+                    if ($disposisi->first()->no_disposisi == null
+                        && $disposisi->first()->tgl_disposisi == null)
+                    {
+                        $jumlahYgAdaNomor = Disposisi::whereNotNull('no_disposisi')->get()->count();
+                        $no = $jumlahYgAdaNomor+1;
+
+                        Disposisi::where('user_id', $mhsId)->update([
+                            'no_disposisi' => $no.'/TA/II/'.date('Y'),
+                            'tgl_disposisi' => date('Y m d')
+                        ]);
+                    }
+                }
+                return redirect()->back()->with('success', 'Success');
+            }
+            return redirect()->back()->with('error', 'Anda tidak memiliki perizinan untuk melakukan aksi ini');
         }
-        return abort(404);
+        return redirect()->back()->with('error', 'Mahasiswa tidak ditemukan');
     }
 
     public function terimaUsul($name, $nim, Request $request)
