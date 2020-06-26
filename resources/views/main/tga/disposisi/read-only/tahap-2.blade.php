@@ -7,7 +7,15 @@
 				@if (in_array($disposisi->progress, range(4,4)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 4)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
+					@if (isset($mahasiswa_data_tga->pembimbing))
+						@if ($mahasiswa_data_tga->pembimbing->verified == true)
+							<input type="text" class="form-control bg-light" readonly="readonly" value="{{ $mahasiswa_data_tga->pembimbing->content }}">
+						@else
+							<span class="text-warning">sedang diubah</span>
+						@endif
+					@else
+						<span class="text-warning">sedang diubah</span>
+					@endif
 				@else
 					--
 				@endif
@@ -20,7 +28,15 @@
 				@if (in_array($disposisi->progress, range(4,4)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 4)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
+					@if (isset($mahasiswa_data_tga->co_pembimbing))
+						@if ($mahasiswa_data_tga->co_pembimbing->verified == true)
+							<input type="text" class="form-control bg-light" readonly="readonly" value="{{ $mahasiswa_data_tga->co_pembimbing->content }}">
+						@else
+							<span class="text-warning">sedang diubah</span>
+						@endif
+					@else
+						<span class="text-warning">sedang diubah</span>
+					@endif
 				@else
 					--
 				@endif

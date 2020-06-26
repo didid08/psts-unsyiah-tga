@@ -34,7 +34,24 @@ class PengusulanPembimbingController extends MainController
     		}
     	}
 
-    	$mhsYgSudahAdaPembimbingCo = [];
+    	$pembimbing_array = json_decode(json_encode($data->getDataMultiple('pembimbing')), true);
+    	foreach($pembimbing_array as $index => $value) {
+    		$diff = time() - strtotime($value['updated_at']);
+	        $hariLewat = floor($diff / (60 * 60 * 24));
+	        if ($hariLewat >= 2) {
+	            Data::where(['user_id' => $value['user_id'], 'name' => 'pembimbing'])->delete();
+	            Data::where(['user_id' => $value['user_id'], 'name' => 'co-pembimbing'])->delete();
+	        }
+    	}
+    	$co_pembimbing_array = json_decode(json_encode($data->getDataMultiple('co-pembimbing')), true);
+    	foreach($co_pembimbing_array as $index => $value) {
+    		$diff2 = time() - strtotime($value['updated_at']);
+	        $hariLewat2 = floor($diff2 / (60 * 60 * 24));
+	        if ($hariLewat2 >= 2) {
+	            Data::where(['user_id' => $value['user_id'], 'name' => 'pembimbing'])->delete();
+	            Data::where(['user_id' => $value['user_id'], 'name' => 'co-pembimbing'])->delete();
+	        }
+    	}
 
     	return $this->customView('tga.ketua-kel-keahlian.pengusulan-pembimbing', [
             'nav_item_active' => 'tga',

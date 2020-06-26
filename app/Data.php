@@ -31,7 +31,8 @@ class Data extends Model
                 'content' => $data->content,
                 'no' => $data->no,
                 'tgl' => $data->tgl,
-                'verified' => $data->verified
+                'verified' => $data->verified,
+                'updated_at' => $data->updated_at
             ];
         }
         return json_decode(json_encode($final_data));   
