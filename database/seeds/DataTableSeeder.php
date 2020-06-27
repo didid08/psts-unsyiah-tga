@@ -12,7 +12,7 @@ class DataTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = array (
+        /*$data = array (
 		  0 => 
 		  array (
 		    'id' => 1,
@@ -337,7 +337,6 @@ class DataTableSeeder extends Seeder
 
 		foreach ($data as $index => $value) {
 			DB::table('data')->insert([
-				'id' => $value['id'],
 				'user_id' => $value['user_id'],
 				'category' => $value['category'],
 				'type' => $value['type'],
@@ -351,6 +350,6 @@ class DataTableSeeder extends Seeder
 				'created_at' => $value['created_at'],
 				'updated_at' => $value['updated_at']
 			]);
-		}
+		}*/
     }
 };

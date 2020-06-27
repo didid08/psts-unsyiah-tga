@@ -94,7 +94,7 @@ class DisposisiController extends MainController
         }
     }
 
-    public function upload($category, $nim, $progress, Request $request)
+    /*public function upload($category, $nim, $progress, Request $request)
     {
         $validator = Validator::make($request->all(), $this->uploadValidation($progress)['rules'], $this->uploadValidation($progress)['errors']);
 
@@ -114,9 +114,9 @@ class DisposisiController extends MainController
         }
 
         dd($file);
-    }
+    }*/
 
-    public function uploadValidation($progress)
+    /*public function uploadValidation($progress)
     {
         $validate_rules = [];
         $validate_errors = [];
@@ -265,7 +265,7 @@ class DisposisiController extends MainController
         }
 
         return ['rules' => $validate_rules, 'errors' => $validate_errors];
-    }
+    }*/
 
     public function updateProgress($nim, Request $request)
     {
@@ -284,31 +284,38 @@ class DisposisiController extends MainController
             $validate_errors = [
                 'progress.required' => 'Harap masukkan progress',
                 'progress.numeric' => 'Progress hanya berbentuk angka',
-                'bypass-key.required' => 'Kesalahan dalam mengupdate progress'
+                'bypass-key.required' => 'Kesalahan'
             ];
-
-            /* Extra Validation Process */
-                if ($disposisi->first()->progress == 5) {
-                    $validate_rules = array_merge($validate_rules, [
-                        'sk-pembimbing' => 'required|file|mimes:pdf|max:5120'
-                    ]);
-                    $validate_errors = array_merge($validate_errors, [
-                        'sk-pembimbing.required' => 'Harap unggah SK Penunjukan Pembimbing',
-                        'sk-pembimbing.mimes' => 'Harap unggah dalam format pdf',
-                        'sk-pembimbing.max' => 'Ukuran SK Penunjukan Pembimbing melebihi 5 MB'
-                    ]);
-                }
-            /* End of Extra Validation Process */
 
             $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator);
             }
 
+
+
             if ($request->input('bypass-key') == $disposisi->first()->bypass_key)
             {
-                /* Upload File */
-                    if ($disposisi->first()->progress == 5) {
+                /* ===========
+                   Insert Data
+                   =========== */
+
+                    if ($request->input('progress') == 6)
+                    {
+                        $validate_rules = [
+                            'sk-pembimbing' => 'required|file|mimes:pdf|max:5120'
+                        ];
+                        $validate_errors = [
+                            'sk-pembimbing.required' => 'Harap unggah SK Penunjukan Pembimbing',
+                            'sk-pembimbing.mimes' => 'Harap unggah dalam format pdf',
+                            'sk-pembimbing.max' => 'Ukuran SK Penunjukan Pembimbing melebihi 5 MB'
+                        ];
+
+                        $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+                        if ($validator->fails()) {
+                            return redirect()->back()->withErrors($validator);
+                        }
+
                         $ext = $request->file('sk-pembimbing')->extension();
                         $filename = $nim.'-sk-pembimbing.'.$ext;
                         $request->file('sk-pembimbing')->storeAs(
@@ -324,25 +331,78 @@ class DisposisiController extends MainController
                             'content' => $filename
                         ]);
                     }
-                    if ($disposisi->first()->progress == 6 && $request->input('progress') == 7) {
+                    
+                    if ($request->input('progress') == 7) {
                         $jumlahYgAdaNomorSK = Data::where('name', 'sk-pembimbing')->whereNotNull('no')->whereNotNull('tgl')->get()->count();
                         $noSK = $jumlahYgAdaNomorSK+1;
 
-                        Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->update([
-                            'no' => $noSK.'/TA/II/'.date('Y'),
-                            'tgl' => date('Y m d')
-                        ]);
+                        if (Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->first()->no == null) {
+                            Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->update([
+                                'no' => $noSK.'/TA/II/'.date('Y'),
+                                'tgl' => date('Y m d')
+                            ]);
+                        }
                         $disposisi->update([
                             'progress_optional' => 1
                         ]);
                     }
-                /* End Upload File */
+
+                    if ($request->input('progress') == 2 && $request->has('optional'))
+                    {
+                        $validate_rules = [
+                            'sptpd' => 'required|file|mimes:pdf|max:5120'
+                        ];
+                        $validate_errors = [
+                            'sptpd.required' => 'Harap unggah Surat Permohonan Tugas Pengambilan Data',
+                            'sptpd.mimes' => 'Harap unggah dalam format pdf',
+                            'sptpd.max' => 'Ukuran Surat Permohonan Tugas Pengambilan Data melebihi 5 MB'
+                        ];
+
+                        $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+                        if ($validator->fails()) {
+                            return redirect()->back()->withErrors($validator);
+                        }
+
+                        $ext = $request->file('sptpd')->extension();
+                        $filename = $nim.'-sptpd.'.$ext;
+                        $request->file('sptpd')->storeAs(
+                            'data', $filename
+                        );
+                        Data::updateOrCreate([
+                            'user_id' => $user->first()->id,
+                            'category' => 'data_usul',
+                            'type' => 'file',
+                            'name' => 'sptpd',
+                            'display_name' => 'Surat Permohonan Tugas Pengambilan Data'
+                        ], [
+                            'content' => $filename
+                        ]);
+                    }
+
+                    if ($request->input('progress') == 3 && $request->has('optional'))
+                    {
+                        
+                    }
+
+                /* ===============
+                   End Insert Data
+                   =============== */
+
+
+
 
                 // Ubah Progress
-                $disposisi->update([
-                    'progress' => $request->input('progress'),
-                    'bypass_key' => uniqid(rand()).uniqid(rand()).uniqid(rand())
-                ]);
+                if ($request->has('optional')) {
+                    $disposisi->update([
+                        'progress_optional' => $request->input('progress'),
+                        'bypass_key' => uniqid(rand()).uniqid(rand()).uniqid(rand())
+                    ]);
+                } else {
+                    $disposisi->update([
+                        'progress' => $request->input('progress'),
+                        'bypass_key' => uniqid(rand()).uniqid(rand()).uniqid(rand())
+                    ]);
+                }
 
                 // Verifikasi data
                 if ($request->has('verify-data'))

@@ -2,7 +2,7 @@
 
 @section('custom-script')
 	<script>
-		$("#usulan-sk-pembimbing").dataTable();
+		$("#persetujuan-surat-tugas-pengambilan-data").dataTable();
 	</script>
 @endsection
 
@@ -10,16 +10,15 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-body" style="overflow-x: auto;">
-				<table class="table table-bordered table-striped" id="usulan-sk-pembimbing">
+				<table class="table table-bordered table-striped" id="persetujuan-surat-tugas-pengambilan-data">
 					<thead>
 						<tr class="bg-green">
 							<th scope="col" class="align-middle text-center">No</th>
 							<th scope="col" class="align-middle text-left">Nama</th>
 							<th scope="col" class="align-middle text-center">NIM</th>
-							<th scope="col" class="align-middle text-center">Pembimbing</th>
-							<th scope="col" class="align-middle text-center">Co Pembimbing</th>
-							<th scope="col" class="align-middle text-center">SK Penunjukan Pembimbing</th>
-							<th scope="col" class="align-middle text-center">Opsi</th>
+							<th scope="col" class="align-middle text-center">Surat Permohonan Tugas Pengambilan Data</th>
+							<th scope="col" class="align-middle text-center">Opsi 1</th>
+							<th scope="col" class="align-middle text-center">Opsi 2</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -33,24 +32,25 @@
 								$mhsId = $mahasiswa->user_id;
 							@endphp
 							<tr>
-								<form action="{{ route('main.tga.admin.usulan-sk-pembimbing.process', ['nim' => $mahasiswa->user->nomor_induk]) }}" method="post" style="display: inline;" enctype="multipart/form-data">
+								<form action="{{ route('main.tga.koor-prodi.persetujuan-sptpd.process', ['nim' => $mahasiswa->user->nomor_induk, 'opsi' => 'accept']) }}" method="post" style="display: inline;">
 									<td class="align-middle text-center">{{ $index+1 }}</td>
 									<td class="align-middle text-left">{{ $mahasiswa->user->nama }}</td>
 									<td class="align-middle text-center">{{ $mahasiswa->user->nomor_induk }}</td>
 									<td class="align-middle text-center">
-										<input type="text" class="form-control bg-light" value="{{ $co_pembimbing->$mhsId->content }}" readonly="readonly">
-									</td>
-									<td class="align-middle text-center">
-										<input type="text" class="form-control bg-light" value="{{ $pembimbing->$mhsId->content }}" readonly="readonly">
-									</td>
-									<td class="align-middle text-center">
-										<input type="file" name="sk-pembimbing" accept="application/pdf">
+										<i class="fa fa-check-circle text-green mr-2"></i>
+										<a target="_blank" href="{{ route('main.file', ['filename' => $sptpd->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
 										@csrf
-										<button type="submit" class="btn btn-sm btn-success">Kirim ke Koor Prodi</button>
+										<button type="submit" class="btn btn-sm btn-success">Terima</button>
 									</td>
 								</form>
+								<td class="align-middle text-center">
+									<form action="{{ route('main.tga.koor-prodi.persetujuan-sptpd.process', ['nim' => $mahasiswa->user->nomor_induk, 'opsi' => 'decline']) }}" method="post" style="display: inline;">
+										@csrf
+										<button type="submit" class="btn btn-sm btn-danger">Tolak</button>
+									</form>
+								</td>
 							</tr>
 							@endforeach
 
@@ -58,7 +58,6 @@
 								<tr>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-left">--</td>
-									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>

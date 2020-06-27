@@ -33,7 +33,7 @@
 								$mhsId = $mahasiswa->user_id;
 							@endphp
 							<tr>
-								<form action="{{ route('main.tga.update-progress', ['nim' => $mahasiswa->user->nomor_induk]) }}" method="post" style="display: inline;">
+								<form action="{{ route('main.tga.koor-prodi.penetapan-sk-pembimbing.process', ['nim' => $mahasiswa->user->nomor_induk, 'opsi' => 'accept']) }}" method="post" style="display: inline;">
 									<td class="align-middle text-center">{{ $index+1 }}</td>
 									<td class="align-middle text-left">{{ $mahasiswa->user->nama }}</td>
 									<td class="align-middle text-center">{{ $mahasiswa->user->nomor_induk }}</td>
@@ -48,20 +48,13 @@
 										<a target="_blank" href="{{ route('main.file', ['filename' => $sk_pembimbing->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
-										@method('PUT')
 										@csrf
-										<input type="hidden" name="progress" value="7">
-										<input type="hidden" name="bypass-key" value="{{ $mahasiswa->bypass_key }}">
-										<input type="hidden" name="verify-data" value="sk-pembimbing">
 										<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
 									</td>
 								</form>
-								<form action="{{ route('main.tga.update-progress', ['nim' => $mahasiswa->user->nomor_induk]) }}" method="post" style="display: inline;">
+								<form action="{{ route('main.tga.koor-prodi.penetapan-sk-pembimbing.process', ['nim' => $mahasiswa->user->nomor_induk, 'opsi' => 'decline']) }}" method="post" style="display: inline;">
 									<td class="align-middle text-center">
-										@method('PUT')
 										@csrf
-										<input type="hidden" name="progress" value="5">
-										<input type="hidden" name="bypass-key" value="{{ $mahasiswa->bypass_key }}">
 										<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
 									</td>
 								</form>

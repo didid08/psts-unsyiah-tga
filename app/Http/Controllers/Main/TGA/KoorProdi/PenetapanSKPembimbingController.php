@@ -24,4 +24,50 @@ class PenetapanSKPembimbingController extends MainController
             'sk_pembimbing' => $data->getDataMultiple('sk-pembimbing')
         ]);
     }
+
+    public function process($nim, $opsi, Request $request)
+    {
+        $user = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
+        if (!$user->exists()) {
+            return abort(404);
+        }
+
+        $disposisi = Disposisi::where(['user_id' => $user->first()->id]);
+
+        switch ($opsi)
+        {
+            case 'decline':
+                $disposisi->update([
+                    'progress' => 5
+                ]);
+                return redirect()->back()->with('error', 'Usulan telah ditolak');
+            break;
+
+            case 'accept':
+
+                $jumlahYgAdaNomorSK = Data::where('name', 'sk-pembimbing')->whereNotNull('no')->whereNotNull('tgl')->get()->count();
+                $noSK = $jumlahYgAdaNomorSK+1;
+
+                if (Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->first()->no == null) {
+                    Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->update([
+                        'no' => $noSK.'/TA/II/'.date('Y'),
+                        'tgl' => date('Y m d')
+                    ]);
+                }
+
+                Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->update([
+                    'verified' => true
+                ]);
+
+                $disposisi->update([
+                    'progress' => 7,
+                    'progress_optional' => 1
+                ]);
+
+                return redirect()->back()->with('success', 'SK Pembimbing telah ditetapkan');
+            break;
+            default:
+                return abort(404);
+        }
+    }
 }

@@ -4,6 +4,9 @@
 			<td colspan="3" class="align-middle">Pengajuan Surat Tugas Pengambilan Data Lab/Lapangan (<span class="text-red">opsional</span>)</td>
 		</tr>
 		<tr>
+			@if ($disposisi->progress_optional == 1)
+				<form action="{{ route('main.tga.mahasiswa.upload-disposisi', ['progress' => 1, 'optional' => 'optional']) }}" method="post" style="display: inline;" enctype="multipart/form-data">
+			@endif
 			<td class="align-middle">Surat Permohonan Tugas Pengambilan Data</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress_optional == 0 || ($disposisi->progress_optional < 6 && $disposisi->progress >= 26))
@@ -19,7 +22,7 @@
 				@elseif (in_array($disposisi->progress_optional, range(2,3)))
 					<span class="text-yellow">sedang diperiksa</span>
 				@else
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
 				@endif
 			</td>
 			@if ($disposisi->progress_optional == 0 || ($disposisi->progress_optional < 6 && $disposisi->progress >= 26))
@@ -28,8 +31,10 @@
 				</td>
 			@elseif ($disposisi->progress_optional == 1)
 				<td class="text-center align-middle">
-					<button class="btn btn-sm btn-success">Kirim</button>
+					@csrf
+					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
 				</td>
+				</form>
 			@endif
 		</tr>
 	</tbody>

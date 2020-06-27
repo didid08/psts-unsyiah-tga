@@ -23,7 +23,6 @@ class CreateDisposisiTable extends Migration
             $table->integer('progress_optional')->default(0);
             $table->string('no_disposisi')->nullable();
             $table->date('tgl_disposisi')->nullable();
-            $table->string('bypass_key')->nullable();
 
             $table->timestamps();
         });

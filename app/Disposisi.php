@@ -13,7 +13,7 @@ class Disposisi extends Model
     protected $table = 'disposisi';
 
     protected $fillable = [
-    	'progress', 'progress_optional'
+    	'progress', 'progress_optional', 'no_disposisi', 'tgl_disposisi'
     ];
 
     public function user()

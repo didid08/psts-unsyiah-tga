@@ -136,4 +136,20 @@ class PengusulanPembimbingController extends MainController
 
     	return redirect()->back()->with('success', 'Berhasil mengusulkan Pembimbing dan Co Pembimbing untuk '.$mahasiswa->nama.' ('.$nim.')');
     }
+
+    public function process($nim, Request $request)
+    {
+        $user = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
+        if (!$user->exists()) {
+            return abort(404);
+        }
+
+        $disposisi = Disposisi::where(['user_id' => $user->first()->id]);
+
+        $disposisi->update([
+            'progress' => 5
+        ]);
+
+        return redirect()->back()->with('success', 'Pembimbing telah ditetapkan');
+    }
 }

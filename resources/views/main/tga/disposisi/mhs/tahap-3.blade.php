@@ -5,7 +5,7 @@
 			<td class="align-middle font-weight-bold">SK Penunjukan Pembimbing</td>
 			<td class="align-middle text-center">
 				@if ($disposisi->progress > 6)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<a href="{{ route('main.file', ['filename' => $data->sk_pembimbing->content]) }}" class="btn btn-sm btn-success">Unduh</a>
 				@endif
 			</td>
 		</tr>
@@ -16,7 +16,7 @@
 				@if (in_array($disposisi->progress, range(5,6)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 6)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
+					<input type="text" class="form-control bg-light" readonly="readonly" value="{{ $data->sk_pembimbing->no }}">
 				@else
 					--
 				@endif
@@ -29,7 +29,7 @@
 				@if (in_array($disposisi->progress, range(5,6)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 6)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
+					<input type="text" class="form-control bg-light" readonly="readonly" value="{{ date('d-m-Y', strtotime($data->sk_pembimbing->tgl)) }}">
 				@else
 					--
 				@endif

@@ -25,21 +25,36 @@ class InputUsulController extends MainController
             'email'              => null,
             'judul-tga'          => null,
             'tahun-ajaran'       => null,
-            'nama-pembimbing'    => null,
-            'nama-co-pembimbing' => null,
+            'pembimbing'         => null,
+            'co-pembimbing'      => null,
             'dosen-wali'         => null,
             'ketua-bidang'       => null,
             'dana-pendidikan'    => null,
             'nama-beasiswa'      => null,
-            'foto'               => null
+            'foto'               => null,
+            'no-disposisi'       => Disposisi::where('user_id', User::myData('id'))->first()->no_disposisi,
+            'tgl-disposisi'      => null,
+            'no-sk-pembimbing'   => null,
+            'tgl-sk-pembimbing'  => null,
         ];
 
         $data_usul = User::find(User::myData('id'))->data()->where('category', 'data_usul');
 
         if ($data_usul->exists()) {
             foreach ($data_usul->get() as $data) {
-                $input_value[$data->name] = $data->content;
+                if ($data->verified == true) {
+                    if ($data->name == 'sk-pembimbing') {
+                        $input_value['no-sk-pembimbing'] = $data->no;
+                        $input_value['tgl-sk-pembimbing'] = date('d-m-Y', strtotime($data->tgl));
+                    } else {
+                        $input_value[$data->name] = $data->content;
+                    }
+                }
             }
+        }
+
+        if (Disposisi::where('user_id', User::myData('id'))->first()->tgl_disposisi != null) {
+            $input_value['tgl-disposisi'] = date('d-m-Y', strtotime(Disposisi::where('user_id', User::myData('id'))->first()->tgl_disposisi));
         }
 
         return $this->customView('tga.mahasiswa.input-usul', [
@@ -160,7 +175,8 @@ class InputUsulController extends MainController
                     'name' => $index,
                     'display_name' => ucwords(str_replace('-', ' ', $index))
                 ], [
-                    'content' => $value
+                    'content' => $value,
+                    'verified' => true
                 ]);
             }
         }
@@ -175,8 +191,7 @@ class InputUsulController extends MainController
 
         if (array_key_exists('spp', $input) && array_key_exists('krs', $input) && array_key_exists('khs', $input) && array_key_exists('transkrip-sementara', $input) && array_key_exists('foto', $input)) {
             Disposisi::where('user_id', User::myData('id'))->update([
-                'progress' => 2,
-                'bypass_key' => uniqid(rand()).uniqid(rand()).uniqid(rand())
+                'progress' => 2
             ]);
             return redirect(route('main.tga.disposisi'))->with('success', 'Data anda berhasil disimpan');            
         }

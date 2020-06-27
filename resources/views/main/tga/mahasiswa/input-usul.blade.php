@@ -95,37 +95,17 @@
 											</select>
 										</td>
 									</tr>
-									<!--<tr>
-										<td>Nama Pembimbing</td>
-										<td colspan="3">
-											<select name="nama-pembimbing" class="form-control">
-												@foreach ($semua_dosen as $dosen)
-													<option{{ $input_value['nama-pembimbing'] != null ? ($input_value['nama-pembimbing'] == $dosen->nama ? ' selected' : '') : '' }}>{{ $dosen->nama }}</option>
-												@endforeach
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<td>Nama Co. Pembimbing</td>
-										<td colspan="3">
-											<select name="nama-co-pembimbing" class="form-control">
-												@foreach ($semua_dosen as $dosen)
-													<option{{ $input_value['nama-co-pembimbing'] != null ? ($input_value['nama-co-pembimbing'] == $dosen->nama ? ' selected' : '') : '' }}>{{ $dosen->nama }}</option>
-												@endforeach
-											</select>
-										</td>
-									</tr>-->
 
 									<tr>
 										<td>Nama Pembimbing</td>
 										<td colspan="3">
-											<input type="text" class="form-control" value="{{ $input_value['nama-pembimbing'] }}" placeholder="Diisi oleh admin" readonly="readonly">
+											<input type="text" class="form-control bg-light" value="{{ $input_value['pembimbing'] }}" placeholder="Diisi oleh sistem" readonly="readonly">
 										</td>
 									</tr>
 									<tr>
 										<td>Nama Co. Pembimbing</td>
 										<td colspan="3">
-											<input type="text" class="form-control" value="{{ $input_value['nama-co-pembimbing'] }}" placeholder="Diisi oleh admin" readonly="readonly">
+											<input type="text" class="form-control bg-light" value="{{ $input_value['co-pembimbing'] }}" placeholder="Diisi oleh sistem" readonly="readonly">
 										</td>
 									</tr>
 
@@ -162,24 +142,24 @@
 										<td>Nama Beasiswa</td>
 										<td><input type="text" class="form-control" id="nama-beasiswa"{!! $input_value['dana-pendidikan'] == 'Beasiswa' ? ' value="'.$input_value['nama-beasiswa'].'" name="nama-beasiswa" placeholder="Masukkan Nama Beasiswa"' : ' disabled="disabled"' !!}></td>
 									</tr>
-									<tr style="background-color: rgba(255,0,0,0.1);">
+									<tr>
 										<td>No. Disposisi</td>
 										<td>
-											<input type="text" class="form-control" placeholder="Diisi oleh admin" readonly="readonly">
+											<input type="text" class="form-control bg-light" value="{{ $input_value['no-disposisi'] }}" placeholder="Diisi oleh sistem" readonly="readonly">
 										</td>
 										<td>Tgl Disposisi</td>
 										<td>
-											<input type="text" class="form-control" placeholder="Diisi oleh admin" readonly="readonly">
+											<input type="text" class="form-control bg-light" value="{{ $input_value['tgl-disposisi'] }}" placeholder="Diisi oleh sistem" readonly="readonly">
 										</td>
 									</tr>
-									<tr style="background-color: rgba(255,0,0,0.1);">
+									<tr>
 										<td>No. SK Pembimbing</td>
 										<td>
-											<input type="text" class="form-control" placeholder="Diisi oleh admin" readonly="readonly">
+											<input type="text" class="form-control bg-light" value="{{ $input_value['no-sk-pembimbing'] }}" placeholder="Diisi oleh sistem" readonly="readonly">
 										</td>
 										<td>Tgl SK Pembimbing</td>
 										<td>
-											<input type="text" class="form-control" placeholder="Diisi oleh admin" readonly="readonly">
+											<input type="text" class="form-control bg-light" value="{{ $input_value['tgl-sk-pembimbing'] }}" placeholder="Diisi oleh sistem" readonly="readonly">
 										</td>
 									</tr>
 									<tr>
