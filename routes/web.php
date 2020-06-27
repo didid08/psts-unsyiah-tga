@@ -35,12 +35,15 @@ Route::middleware(['auth'])->group(function () {
 
 		//TGA
 		Route::get('/main/tga/disposisi/{nim?}', 'Main\TGA\DisposisiController@view')->middleware('prevent.guest')->name('main.tga.disposisi');
-		Route::post('/main/tga/disposisi/upload/{progress}/{optional?}', 'Main\TGA\Mahasiswa\UploadDisposisiController')->middleware('prevent.guest')->name('main.tga.mahasiswa.upload-disposisi');
 
 		Route::middleware('only.mahasiswa')->group(function () {
-			//Route::post('/main/tga/disposisi/{nim}/{progress}/unggah', 'Main\TGA\DisposisiController@upload')->name('main.tga.disposisi.unggah');
+			Route::post('/main/tga/disposisi/upload/{progress}/{optional?}', 'Main\TGA\Mahasiswa\UploadDisposisiController')->middleware('prevent.guest')->name('main.tga.mahasiswa.upload-disposisi');
+
 			Route::get('/main/tga/input-usul', 'Main\TGA\Mahasiswa\InputUsulController@view')->name('main.tga.mahasiswa.input-usul');
 			Route::post('/main/tga/input-usul', 'Main\TGA\Mahasiswa\InputUsulController@process')->name('main.tga.mahasiswa.input-usul.process');
+
+			Route::get('/main/tga/input-usul-sempro', 'Main\TGA\Mahasiswa\InputUsulSemproController@view')->name('main.tga.mahasiswa.input-usul-sempro');
+			Route::post('/main/tga/input-usul-sempro', 'Main\TGA\Mahasiswa\InputUsulSemproController@process')->name('main.tga.mahasiswa.input-usul-sempro.process');
 		});
 		
 		//Admin
@@ -53,6 +56,9 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/main/tga/usulan-surat-permohonan-tugas-pengambilan-data', 'Main\TGA\Admin\UsulanSuratPermohonanTugasPengambilanDataController@view')->name('main.tga.admin.usulan-sptpd');
 		Route::post('/main/tga/usulan-surat-permohonan-tugas-pengambilan-data/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanSuratPermohonanTugasPengambilanDataController@process')->name('main.tga.admin.usulan-sptpd.process');
 
+		Route::get('/main/tga/usulan-surat-tugas-pengambilan-data', 'Main\TGA\Admin\UsulanSuratTugasPengambilanDataController@view')->name('main.tga.admin.usulan-stpd');
+		Route::post('/main/tga/usulan-surat-tugas-pengambilan-data/process/{nim}', 'Main\TGA\Admin\UsulanSuratTugasPengambilanDataController@process')->name('main.tga.admin.usulan-stpd.process');
+
 		//Koor Prodi
 		Route::get('/main/tga/persetujuan-usulan-tga', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@view')->name('main.tga.koor-prodi.persetujuan-usulan-tga');
 		Route::post('/main/tga/persetujuan-usulan-tga/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@process')->name('main.tga.koor-prodi.persetujuan-usulan-tga.process');
@@ -63,8 +69,15 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/main/tga/persetujuan-surat-permohonan-tugas-pengambilan-data', 'Main\TGA\KoorProdi\PersetujuanSuratPermohonanTugasPengambilanDataController@view')->name('main.tga.koor-prodi.persetujuan-sptpd');
 		Route::post('/main/tga/persetujuan-surat-permohonan-tugas-pengambilan-data/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PersetujuanSuratPermohonanTugasPengambilanDataController@process')->name('main.tga.koor-prodi.persetujuan-sptpd.process');
 
+		Route::get('/main/tga/persetujuan-surat-tugas-pengambilan-data', 'Main\TGA\KoorProdi\PersetujuanSuratTugasPengambilanDataController@view')->name('main.tga.koor-prodi.persetujuan-stpd');
+		Route::post('/main/tga/persetujuan-surat-tugas-pengambilan-data/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PersetujuanSuratTugasPengambilanDataController@process')->name('main.tga.koor-prodi.persetujuan-stpd.process');
+
 		//Ketua Kel Keahlian
 		Route::get('/main/tga/pengusulan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');
 		Route::post('/main/tga/pengusulan-pembimbing-co/process/{nim}', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@process')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing.process');
 		Route::post('/usul/pembimbing-co/{nim}', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@usul')->name('usul.pembimbing-co');
+
+		//Pembimbing Co
+		Route::get('/main/tga/persetujuan-seminar-dan-sidang', 'Main\TGA\PembimbingCo\PersetujuanSeminarDanSidangController@view')->name('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang');
+		Route::post('/main/tga/persetujuan-seminar-dan-sidang/process/{nim}/{type}', 'Main\TGA\PembimbingCo\PersetujuanSeminarDanSidangController@process')->name('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang.process');		
 });

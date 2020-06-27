@@ -52,7 +52,7 @@
                   <li><a href="{{ route('main.tga.disposisi') }}" class="dropdown-item">Disposisi</a></li>
                   @if (isset($role->mhs))
                     <li><a href="{{ route('main.tga.mahasiswa.input-usul') }}" class="dropdown-item">Input Usul TGA</a></li>
-                    <li><a href="#" class="dropdown-item">Input Usul Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.mahasiswa.input-usul-sempro') }}" class="dropdown-item">Input Usul Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Input Usul Sidang</a></li>
                     <li><a href="#" class="dropdown-item">Input Usul Yudisium</a></li>
                   @endif
@@ -60,6 +60,7 @@
                     <li><a href="{{ route('main.tga.admin.usulan-tga') }}" class="dropdown-item">Usulan TGA</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-sk-pembimbing') }}" class="dropdown-item">Usulan SK Pembimbing</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-sptpd') }}" class="dropdown-item">Usulan Surat Permohonan Tugas Pengambilan Data</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-stpd') }}" class="dropdown-item">Usulan Surat Tugas Pengambilan Data</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Pengesahan Seminar Proposal</a></li>
@@ -72,7 +73,7 @@
                     <li><a href="{{ route('main.tga.koor-prodi.persetujuan-usulan-tga') }}" class="dropdown-item">Persetujuan Usulan TGA</a></li>
                     <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-pembimbing') }}" class="dropdown-item">Penetapan SK Pembimbing</a></li>
                     <li><a href="{{ route('main.tga.koor-prodi.persetujuan-sptpd') }}" class="dropdown-item">Persetujuan Surat Permohonan Tugas Pengambilan Data</a></li>
-                    <li><a href="#" class="dropdown-item">Persetujuan Surat Tugas Pengambilan Data</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.persetujuan-stpd') }}" class="dropdown-item">Persetujuan Surat Tugas Pengambilan Data</a></li>
                     <li><a href="#" class="dropdown-item">Penetapan SK Penguji Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Pengesahan Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Penetapan SK Penguji Sidang</a></li>
@@ -85,6 +86,9 @@
                   @endif
                   @if (isset($role->ketua_kel_keahlian))
                     <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengusulan-pembimbing') }}" class="dropdown-item">Pengusulan Pembimbing dan Co</a></li>
+                  @endif
+                  @if (isset($role->pembimbing_co))
+                    <li><a href="{{ route('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang') }}" class="dropdown-item">Persetujuan Seminar dan Sidang</a></li>
                   @endif
                 </ul>
               </li>

@@ -13,7 +13,7 @@
 				@if ($disposisi->progress_optional < 4)
 					<span class="text-muted">--</span>
 				@elseif ($disposisi->progress_optional > 5)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">	
+					<input type="text" class="form-control bg-light" readonly="readonly" value="{{ $mahasiswa_data_tga->stpd->no }}">	
 				@elseif ($disposisi->progress_optional < 6 && $disposisi->progress >= 26)
 					<span class="text-muted">--</span>
 				@else
@@ -28,7 +28,7 @@
 				@if ($disposisi->progress_optional < 4)
 					<span class="text-muted">--</span>
 				@elseif ($disposisi->progress_optional > 5)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">	
+					<input type="text" class="form-control bg-light" readonly="readonly" value="{{ date('d-m-Y', strtotime($mahasiswa_data_tga->stpd->tgl)) }}">	
 				@elseif ($disposisi->progress_optional < 6 && $disposisi->progress >= 26)
 					<span class="text-muted">--</span>
 				@else

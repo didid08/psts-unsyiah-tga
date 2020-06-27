@@ -2,7 +2,7 @@
 
 @section('custom-script')
 	<script>
-		$("#usulan-surat-permohonan-tugas-pengambilan-data").dataTable();
+		$("#persetujuan-seminar-dan-sidang").dataTable();
 	</script>
 @endsection
 
@@ -10,15 +10,16 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-body" style="overflow-x: auto;">
-				<table class="table table-bordered table-striped" id="usulan-surat-permohonan-tugas-pengambilan-data">
+				<h5 class="mb-4">Persetujuan Diseminarkan</h5>
+				<table class="table table-bordered table-striped" id="persetujuan-seminar-dan-sidang">
 					<thead>
 						<tr class="bg-green">
 							<th scope="col" class="align-middle text-center">No</th>
 							<th scope="col" class="align-middle text-left">Nama</th>
 							<th scope="col" class="align-middle text-center">NIM</th>
-							<th scope="col" class="align-middle text-center">Surat Permohonan Tugas Pengambilan Data</th>
-							<th scope="col" class="align-middle text-center">Opsi 1</th>
-							<th scope="col" class="align-middle text-center">Opsi 2</th>
+							<th scope="col" class="align-middle text-center">Jumlah Asistensi</th>
+							<th scope="col" class="align-middle text-center">Masa Pembimbingan Proposal</th>
+							<th scope="col" class="align-middle text-center">Opsi</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -32,25 +33,21 @@
 								$mhsId = $mahasiswa->user_id;
 							@endphp
 							<tr>
-								<form action="{{ route('main.tga.admin.usulan-sptpd.process', ['nim' => $mahasiswa->user->nomor_induk, 'opsi' => 'accept']) }}" method="post" style="display: inline;" enctype="multipart/form-data">
+								<form action="{{ route('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang.process', ['nim' => $mahasiswa->user->nomor_induk, 'type' => 'proposal']) }}" method="post" style="display: inline;">
 									<td class="align-middle text-center">{{ $index+1 }}</td>
 									<td class="align-middle text-left">{{ $mahasiswa->user->nama }}</td>
 									<td class="align-middle text-center">{{ $mahasiswa->user->nomor_induk }}</td>
 									<td class="align-middle text-center">
-										<i class="fa fa-check-circle text-green mr-2"></i>
-										<a target="_blank" href="{{ route('main.file', ['filename' => $sptpd->$mhsId->content]) }}" class="text-green">Periksa</a>
+										<input type="number" name="jumlah-asistensi" class="form-control" min="8" style="display: inline-block; width: 5em;"><span class="ml-2">kali</span>
+									</td>
+									<td class="align-middle text-center">
+										<input type="number" name="masa-pembimbingan-proposal" class="form-control" style="display: inline-block; width: 5em;"><span class="ml-2">bulan</span>
 									</td>
 									<td class="align-middle text-center">
 										@csrf
-										<button type="submit" class="btn btn-sm btn-success">Kirim ke Koor Prodi</button>
+										<button type="submit" class="btn btn-sm btn-success">Simpan</button>
 									</td>
 								</form>
-								<td class="align-middle text-center">
-									<form action="{{ route('main.tga.admin.usulan-sptpd.process', ['nim' => $mahasiswa->user->nomor_induk, 'opsi' => 'decline']) }}" method="post" style="display: inline;" enctype="multipart/form-data">
-										@csrf
-										<button type="submit" class="btn btn-sm btn-danger">Tolak</button>
-									</form>
-								</td>
 							</tr>
 							@endforeach
 

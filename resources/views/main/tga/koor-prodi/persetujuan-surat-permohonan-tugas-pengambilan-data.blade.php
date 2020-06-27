@@ -2,7 +2,7 @@
 
 @section('custom-script')
 	<script>
-		$("#persetujuan-surat-tugas-pengambilan-data").dataTable();
+		$("#persetujuan-surat-permohonan-tugas-pengambilan-data").dataTable();
 	</script>
 @endsection
 
@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-body" style="overflow-x: auto;">
-				<table class="table table-bordered table-striped" id="persetujuan-surat-tugas-pengambilan-data">
+				<table class="table table-bordered table-striped" id="persetujuan-surat-permohonan-tugas-pengambilan-data">
 					<thead>
 						<tr class="bg-green">
 							<th scope="col" class="align-middle text-center">No</th>

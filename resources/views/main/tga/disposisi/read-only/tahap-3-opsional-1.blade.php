@@ -13,7 +13,7 @@
 				@elseif (in_array($disposisi->progress_optional, [2,3]))
 					<span class="text-yellow">sedang diproses</span>
 				@else
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Ada</span>
 				@endif
 			</td>
 		</tr>
