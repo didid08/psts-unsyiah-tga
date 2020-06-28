@@ -34,77 +34,84 @@
 				</td>
 			</tr>
 		@elseif ($disposisi->progress > 10)
-			<tr>
+			@if (isset($roles->admin) | isset($roles->koor_prodi))
+				<tr>
+					<td>3.</td>
+					<td colspan="2" class="align-middle">
+						<table class="table table-bordered table-striped table-light">
+							<thead>
+								<tr>
+									<th colspan="2" class="align-middle text-center">Komisi Penguji</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="align-middle text-left text-bold">Ketua Penguji</td>
+									<td class="align-middle text-left">
+										{{ $mahasiswa_data_tga->ketua_penguji->content }}
+									</td>
+								</tr>
+								<tr>
+									<td class="align-middle text-left text-bold">Penguji 1</td>
+									<td class="align-middle text-left">
+										{{ $mahasiswa_data_tga->penguji_1->content }}
+									</td>
+								</tr>
+								<tr>
+									<td class="align-middle text-left text-bold">Penguji 2</td>
+									<td class="align-middle text-left">
+										{{ $mahasiswa_data_tga->penguji_2->content }}
+									</td>
+								</tr>
+								<tr>
+									<td class="align-middle text-left text-bold">Penguji 3</td>
+									<td class="align-middle text-left">
+										{{ $mahasiswa_data_tga->penguji_3->content }}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-bordered table-striped table-light mt-4">
+							<thead>
+								<tr>
+									<th colspan="2" class="align-middle text-center">Jadwal Seminar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="align-middle text-center text-bold">Hari</td>
+									<td class="align-middle text-center">
+										{{ \Carbon\Carbon::parse($mahasiswa_data_tga->tgl_seminar->content)->translatedFormat('l') }}
+									</td>
+								</tr>
+								<tr>
+									<td class="align-middle text-center text-bold">Tanggal</td>
+									<td class="align-middle text-center">
+										{{ \Carbon\Carbon::parse($mahasiswa_data_tga->tgl_seminar->content)->translatedFormat('d F Y') }}
+									</td>
+								</tr>
+								<tr>
+									<td class="align-middle text-center text-bold">Jam</td>
+									<td class="align-middle text-center">
+										{{ \Carbon\Carbon::parse($mahasiswa_data_tga->jam_seminar->content)->translatedFormat('H:i') }} WIB
+									</td>
+								</tr>
+								<tr>
+									<td class="align-middle text-center text-bold">Tempat</td>
+									<td class="align-middle text-center">
+										{{ $mahasiswa_data_tga->tempat_seminar->content }}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			@else
 				<td>3.</td>
 				<td colspan="2" class="align-middle">
-					<table class="table table-bordered table-striped table-light">
-						<thead>
-							<tr>
-								<th colspan="2" class="align-middle text-center">Komisi Penguji</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="align-middle text-left text-bold">Ketua Penguji</td>
-								<td class="align-middle text-left">
-									{{ $mahasiswa_data_tga->ketua_penguji->content }}
-								</td>
-							</tr>
-							<tr>
-								<td class="align-middle text-left text-bold">Penguji 1</td>
-								<td class="align-middle text-left">
-									{{ $mahasiswa_data_tga->penguji_1->content }}
-								</td>
-							</tr>
-							<tr>
-								<td class="align-middle text-left text-bold">Penguji 2</td>
-								<td class="align-middle text-left">
-									{{ $mahasiswa_data_tga->penguji_2->content }}
-								</td>
-							</tr>
-							<tr>
-								<td class="align-middle text-left text-bold">Penguji 3</td>
-								<td class="align-middle text-left">
-									{{ $mahasiswa_data_tga->penguji_3->content }}
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="table table-bordered table-striped table-light mt-4">
-						<thead>
-							<tr>
-								<th colspan="2" class="align-middle text-center">Jadwal Seminar</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="align-middle text-center text-bold">Hari</td>
-								<td class="align-middle text-center">
-									{{ \Carbon\Carbon::parse($mahasiswa_data_tga->tgl_seminar->content)->translatedFormat('l') }}
-								</td>
-							</tr>
-							<tr>
-								<td class="align-middle text-center text-bold">Tanggal</td>
-								<td class="align-middle text-center">
-									{{ \Carbon\Carbon::parse($mahasiswa_data_tga->tgl_seminar->content)->translatedFormat('d F Y') }}
-								</td>
-							</tr>
-							<tr>
-								<td class="align-middle text-center text-bold">Jam</td>
-								<td class="align-middle text-center">
-									{{ \Carbon\Carbon::parse($mahasiswa_data_tga->jam_seminar->content)->translatedFormat('H:i') }} WIB
-								</td>
-							</tr>
-							<tr>
-								<td class="align-middle text-center text-bold">Tempat</td>
-								<td class="align-middle text-center">
-									{{ $mahasiswa_data_tga->tempat_seminar->content }}
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					Koordinator TGA telah menetapkan Komisi Penguji dan Jadwal Seminar
 				</td>
-			</tr>
+			@endif
 		@else
 			<tr class="text-muted">
 				<td>3.</td>

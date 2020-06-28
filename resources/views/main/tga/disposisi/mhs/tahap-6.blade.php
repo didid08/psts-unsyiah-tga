@@ -5,7 +5,7 @@
 			<td class="align-middle font-weight-bold">SK Komisi Penguji Seminar Proposal</td>
 			<td class="align-middle text-center">
 				@if ($disposisi->progress > 12)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<a href="{{ route('main.file', ['filename' => $data->sk_penguji_sempro->content]) }}" class="btn btn-sm btn-success">Unduh</a>
 				@endif
 			</td>
 		</tr>
@@ -16,7 +16,7 @@
 				@if (in_array($disposisi->progress, range(11,12)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 12)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
+					<input type="text" class="form-control bg-light" readonly="readonly" value="{{ $data->sk_penguji_sempro->no }}">
 				@else
 					--
 				@endif
@@ -29,7 +29,7 @@
 				@if (in_array($disposisi->progress, range(11,12)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 12)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
+					<input type="text" class="form-control bg-light" readonly="readonly" value="{{ date('d-m-Y', strtotime($data->sk_penguji_sempro->tgl)) }}">
 				@else
 					--
 				@endif
@@ -42,7 +42,7 @@
 				@if (in_array($disposisi->progress, range(11,12)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 12)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<a href="{{ route('main.file', ['filename' => $data->undangan_sempro->content]) }}" class="btn btn-sm btn-success">Unduh</a>
 				@else
 					--
 				@endif
@@ -55,18 +55,11 @@
 				@if (in_array($disposisi->progress, range(11,12)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 12)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<a href="{{ route('main.file', ['filename' => $data->berkas_seminar_lainnya->content]) }}" class="btn btn-sm btn-success">Unduh</a>
 				@else
 					--
 				@endif
 			</td>
 		</tr>
-		@if ($disposisi->progress > 12)
-			<tr>
-				<td colspan="3" class="align-middle text-center">
-					<a href="#" class="btn btn-block btn-success">Unduh Semua</a>
-				</td>
-			</tr>
-		@endif
 	</tbody>
 </table>

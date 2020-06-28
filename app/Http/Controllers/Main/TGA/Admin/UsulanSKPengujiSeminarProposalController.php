@@ -36,6 +36,72 @@ class UsulanSKPengujiSeminarProposalController extends MainController
     		return abort(404);
     	}
 
+    	$validate_rules = [
+            'sk-penguji-sempro' => 'required|file|mimes:pdf|max:5120',
+            'undangan-sempro' => 'required|file|mimes:pdf|max:5120',
+            'berkas-seminar-lainnya' => 'required|file|mimes:pdf|max:5120'
+        ];
+        $validate_errors = [
+            'sk-penguji-sempro.required' => 'Harap unggah SK Penguji Sempro',
+            'sk-penguji-sempro.mimes' => 'Harap unggah dalam format pdf',
+            'sk-penguji-sempro.max' => 'Ukuran SK Penguji Sempro melebihi 5 MB',
+
+            'undangan-sempro.required' => 'Harap unggah Undangan Sempro',
+            'undangan-sempro.mimes' => 'Harap unggah dalam format pdf',
+            'undangan-sempro.max' => 'Ukuran Undangan Sempro melebihi 5 MB',
+
+            'berkas-seminar-lainnya.required' => 'Harap unggah Berkas Seminar Lainnya',
+            'berkas-seminar-lainnya.mimes' => 'Harap unggah dalam format pdf',
+            'berkas-seminar-lainnya.max' => 'Ukuran Berkas Seminar Lainnya melebihi 5 MB'
+        ];
+
+        $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $filename1 = $nim.'-sk-penguji-sempro.'.$request->file('sk-penguji-sempro')->extension();
+        $filename2 = $nim.'-undangan-sempro.'.$request->file('undangan-sempro')->extension();
+        $filename3 = $nim.'-berkas-seminar-lainnya.'.$request->file('berkas-seminar-lainnya')->extension();
+        
+        $request->file('sk-penguji-sempro')->storeAs(
+            'data', $filename1
+        );
+        $request->file('undangan-sempro')->storeAs(
+            'data', $filename2
+        );
+        $request->file('berkas-seminar-lainnya')->storeAs(
+            'data', $filename3
+        );
+
+        Data::updateOrCreate([
+            'user_id' => $user->first()->id,
+            'category' => 'data_usul_sempro',
+            'type' => 'file',
+            'name' => 'sk-penguji-sempro',
+            'display_name' => 'SK Penguji Sempro'
+        ], [
+            'content' => $filename1
+        ]);
+        Data::updateOrCreate([
+            'user_id' => $user->first()->id,
+            'category' => 'data_usul_sempro',
+            'type' => 'file',
+            'name' => 'undangan-sempro',
+            'display_name' => 'Undangan Seminar Proposal'
+        ], [
+            'content' => $filename2
+        ]);
+        Data::updateOrCreate([
+            'user_id' => $user->first()->id,
+            'category' => 'data_usul_sempro',
+            'type' => 'file',
+            'name' => 'berkas-seminar-lainnya',
+            'display_name' => 'Berkas Seminar Lainnya'
+        ], [
+            'content' => $filename3
+        ]);
+
     	$disposisi = Disposisi::where(['user_id' => $user->first()->id]);
 	
         $disposisi->update([

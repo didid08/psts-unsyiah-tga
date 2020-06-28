@@ -20,9 +20,10 @@
 							<th scope="col" class="align-middle text-center">Masa Pembimbingan Proposal</th>
 							<th scope="col" class="align-middle text-center">Lembar Asistensi</th>
 							<th scope="col" class="align-middle text-center">Draft Buku Proposal</th>
-							<th scope="col" class="align-middle text-center">SK Komisi Penguji Sempro</th>
-							<th scope="col" class="align-middle text-center">Opsi 1</th>
-							<th scope="col" class="align-middle text-center">Opsi 2</th>
+							<th scope="col" class="align-middle text-center">SK Penguji Sempro</th>
+							<th scope="col" class="align-middle text-center">Undangan Sempro</th>
+							<th scope="col" class="align-middle text-center">Berkas Seminar Lainnya</th>
+							<th scope="col" class="align-middle text-center">Opsi</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -55,10 +56,13 @@
 										<a target="_blank" href="{{ route('main.file', ['filename' => $draft_buku_proposal->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
-										<input type="file" name="sk-komisi-penguji-sempro" accept="application/pdf">
+										<input type="file" name="sk-penguji-sempro" accept="application/pdf">
 									</td>
 									<td class="align-middle text-center">
 										<input type="file" name="undangan-sempro" accept="application/pdf">
+									</td>
+									<td class="align-middle text-center">
+										<input type="file" name="berkas-seminar-lainnya" accept="application/pdf">
 									</td>
 									<td class="align-middle text-center">
 										@csrf
@@ -72,6 +76,8 @@
 								<tr>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-left">--</td>
+									<td class="align-middle text-center">--</td>
+									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>

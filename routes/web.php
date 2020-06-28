@@ -78,6 +78,9 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/main/tga/koor-prodi/persetujuan-surat-tugas-pengambilan-data', 'Main\TGA\KoorProdi\PersetujuanSuratTugasPengambilanDataController@view')->name('main.tga.koor-prodi.persetujuan-stpd');
 		Route::post('/main/tga/koor-prodi/persetujuan-surat-tugas-pengambilan-data/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PersetujuanSuratTugasPengambilanDataController@process')->name('main.tga.koor-prodi.persetujuan-stpd.process');
 
+		Route::get('/main/tga/koor-prodi/penetapan-sk-penguji-sempro', 'Main\TGA\KoorProdi\PenetapanSKPengujiSeminarProposalController@view')->name('main.tga.koor-prodi.penetapan-sk-penguji-sempro');
+		Route::post('/main/tga/koor-prodi/penetapan-sk-penguji-sempro/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PenetapanSKPengujiSeminarProposalController@process')->name('main.tga.koor-prodi.penetapan-sk-penguji-sempro.process');
+
 		//Ketua Kel Keahlian
 		Route::get('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');
 		Route::post('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co/process/{nim}', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@process')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing.process');
@@ -90,4 +93,8 @@ Route::middleware(['auth'])->group(function () {
 		//Koor TGA
 		Route::get('/main/tga/koor-tga/usulan-seminar-proposal', 'Main\TGA\KoorTGA\UsulanSeminarProposalController@view')->name('main.tga.koor-tga.usulan-sempro');
 		Route::post('/main/tga/koor-tga/usulan-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\KoorTGA\UsulanSeminarProposalController@process')->name('main.tga.koor-tga.usulan-sempro.process');
+
+		//Komisi Penguji
+		Route::get('/main/tga/komisi-penguji/seminar-sidang', 'Main\TGA\KomisiPenguji\SeminarSidangController@view')->name('main.tga.komisi-penguji.seminar-sidang');
+		Route::post('/main/tga/komisi-penguji/seminar-sidang/mark-done/{nim}/{type}', 'Main\TGA\KomisiPenguji\SeminarSidangController@markDone')->name('main.tga.komisi-penguji.seminar-sidang.mark-done');
 });
