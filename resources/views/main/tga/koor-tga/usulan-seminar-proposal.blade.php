@@ -20,6 +20,7 @@
 	        		</div>
 	        		<form action="{{ route('main.tga.koor-tga.usulan-sempro.process', ['nim' => $mahasiswa->user->nomor_induk, 'opsi' => 'usulkan-komisi-penguji']) }}" method="post">
 		        		<div class="modal-body">
+		        			@csrf
 		        			<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -182,7 +183,7 @@
 					</tbody>
 				</table>
 				
-				<h5 class="mt-4 mb-4">Yang baru disetujui Komisi Penguji</h5>
+				<h5 class="mt-4 mb-4">Tetapkan Komisi Penguji dan Jadwal Seminar <i>(Sudah disetujui oleh komisi penguji)</i></h5>
 				<table class="table table-bordered table-striped" id="tetapkan-komisi-penguji">
 					<thead>
 						<tr class="bg-green">
@@ -190,9 +191,7 @@
 							<th scope="col" class="align-middle text-left">Nama</th>
 							<th scope="col" class="align-middle text-center">NIM</th>
 							<th scope="col" class="align-middle text-center">Komisi Penguji</th>
-							<th scope="col" class="align-middle text-center">Jam Seminar</th>
-							<th scope="col" class="align-middle text-center">Tgl Seminar</th>
-							<th scope="col" class="align-middle text-center">Tempat Seminar</th>
+							<th scope="col" class="align-middle text-center">Jadwal Seminar</th>
 							<th scope="col" class="align-middle text-center">Opsi</th>
 						</tr>
 					</thead>
@@ -206,7 +205,7 @@
 								$mhsId2 = $mahasiswa->user_id;
 							@endphp
 							@if (isset($daftar_ketua_penguji->$mhsId2) && isset($daftar_penguji_1->$mhsId2) && isset($daftar_penguji_2->$mhsId2) && isset($daftar_penguji_3->$mhsId2))
-								@if ($daftar_ketua_penguji->mhsId2->verified == true && $daftar_penguji_1->mhsId2->verified == true && $daftar_penguji_2->mhsId2->verified == true && $daftar_penguji_3->mhsId2->verified == true)
+								@if ($daftar_ketua_penguji->$mhsId2->verified == true && $daftar_penguji_1->$mhsId2->verified == true && $daftar_penguji_2->$mhsId2->verified == true && $daftar_penguji_3->$mhsId2->verified == true)
 									@php
 										$isEmpty2 = false;
 									@endphp
@@ -216,20 +215,64 @@
 											<td class="align-middle text-left">{{ $mahasiswa->user->nama }}</td>
 											<td class="align-middle text-center">{{ $mahasiswa->user->nomor_induk }}</td>
 											<td class="align-middle text-center">
-												
+												<table class="table table-bordered table-striped table-light">
+													<tr>
+														<td class="align-middle text-left text-bold">Ketua Penguji</td>
+														<td class="align-middle text-left">
+															{{ $daftar_ketua_penguji->$mhsId2->content }}
+														</td>
+													</tr>
+													<tr>
+														<td class="align-middle text-left text-bold">Penguji 1</td>
+														<td class="align-middle text-left">
+															{{ $daftar_penguji_1->$mhsId2->content }}
+														</td>
+													</tr>
+													<tr>
+														<td class="align-middle text-left text-bold">Penguji 2</td>
+														<td class="align-middle text-left">
+															{{ $daftar_penguji_2->$mhsId2->content }}
+														</td>
+													</tr>
+													<tr>
+														<td class="align-middle text-left text-bold">Penguji 3</td>
+														<td class="align-middle text-left">
+															{{ $daftar_penguji_3->$mhsId2->content }}
+														</td>
+													</tr>
+												</table>
 											</td>
 											<td class="align-middle text-center">
-												<input type="text" class="form-control bg-light" readonly="readonly" style="display: inline-block; width: 10em;" value="{{ $jam_seminar->mhsId2->content }}">
-											</td>
-											<td class="align-middle text-center">
-												<input type="text" class="form-control bg-light" readonly="readonly" style="display: inline-block; width: 10em;" value="{{ $tgl_seminar->mhsId2->content }}">
-											</td>
-											<td class="align-middle text-center">
-												<input type="text" class="form-control bg-light" readonly="readonly" style="display: inline-block; width: 10em;" value="{{ $tempat_seminar->mhsId2->content }}">
+												<table class="table table-bordered table-striped table-light">
+													<tr>
+														<td class="align-middle text-left text-bold">Hari</td>
+														<td class="align-middle text-left">
+															{{ \Carbon\Carbon::parse($tgl_seminar->$mhsId2->content)->translatedFormat('l') }}
+														</td>
+													</tr>
+													<tr>
+														<td class="align-middle text-left text-bold">Tgl</td>
+														<td class="align-middle text-left">
+															{{ \Carbon\Carbon::parse($tgl_seminar->$mhsId2->content)->translatedFormat('d F Y') }}
+														</td>
+													</tr>
+													<tr>
+														<td class="align-middle text-left text-bold">Jam</td>
+														<td class="align-middle text-left">
+															{{ \Carbon\Carbon::parse($jam_seminar->$mhsId2->content)->translatedFormat('H:i') }} WIB
+														</td>
+													</tr>
+													<tr>
+														<td class="align-middle text-left text-bold">Tempat</td>
+														<td class="align-middle text-left">
+															{{ $tempat_seminar->$mhsId2->content }}
+														</td>
+													</tr>
+												</table>
 											</td>
 											<td class="align-middle text-center">
 												@csrf
-												<button type="submit" class="btn btn-sm btn-success text-bold">Kirim ke admin dan mahasiswa</button>
+												<button type="submit" class="btn btn-sm btn-success text-bold">Tetapkan</button>
 											</td>
 										</form>
 									</tr>
@@ -241,8 +284,6 @@
 							<tr>
 								<td class="align-middle text-center">--</td>
 								<td class="align-middle text-left">--</td>
-								<td class="align-middle text-center">--</td>
-								<td class="align-middle text-center">--</td>
 								<td class="align-middle text-center">--</td>
 								<td class="align-middle text-center">--</td>
 								<td class="align-middle text-center">--</td>

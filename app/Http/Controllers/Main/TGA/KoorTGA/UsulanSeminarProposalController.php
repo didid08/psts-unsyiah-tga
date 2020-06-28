@@ -11,10 +11,7 @@ use App\User;
 use App\UserRole;
 use App\Disposisi;
 use App\Data;
-use App\Mail\KomisiPenguji\KetuaPenguji;
-use App\Mail\KomisiPenguji\Penguji1;
-use App\Mail\KomisiPenguji\Penguji2;
-use App\Mail\KomisiPenguji\Penguji3;
+use App\Mail\UsulKomisiPenguji;
 
 class UsulanSeminarProposalController extends MainController
 {
@@ -263,26 +260,37 @@ class UsulanSeminarProposalController extends MainController
 	    		'verified' => false
 	    	]);
 
-	    	Mail::to($komisi_penguji[0]->email)->send(new KetuaPenguji($user->nama, $user->nomor_induk, $input['jam-seminar'], $input['tgl-seminar'], $input['tempat-seminar'], $key[0]));
-	    	Mail::to($komisi_penguji[1]->email)->send(new Penguji1($user->nama, $user->nomor_induk, $input['jam-seminar'], $input['tgl-seminar'], $input['tempat-seminar'], $key[1]));
-	    	Mail::to($komisi_penguji[2]->email)->send(new Penguji2($user->nama, $user->nomor_induk, $input['jam-seminar'], $input['tgl-seminar'], $input['tempat-seminar'], $key[2]));
-	    	Mail::to($komisi_penguji[3]->email)->send(new Penguji3($user->nama, $user->nomor_induk, $input['jam-seminar'], $input['tgl-seminar'], $input['tempat-seminar'], $key[3]));
+	    	Mail::to($komisi_penguji[0]->email)->send(new UsulKomisiPenguji($user->first()->nama, $user->first()->nomor_induk, $input['jam-seminar'], $input['tgl-seminar'], $input['tempat-seminar'], $key[0], 'ketua-penguji'));
+	    	Mail::to($komisi_penguji[1]->email)->send(new UsulKomisiPenguji($user->first()->nama, $user->first()->nomor_induk, $input['jam-seminar'], $input['tgl-seminar'], $input['tempat-seminar'], $key[1], 'penguji-1'));
+	    	Mail::to($komisi_penguji[2]->email)->send(new UsulKomisiPenguji($user->first()->nama, $user->first()->nomor_induk, $input['jam-seminar'], $input['tgl-seminar'], $input['tempat-seminar'], $key[2], 'penguji-2'));
+	    	Mail::to($komisi_penguji[3]->email)->send(new UsulKomisiPenguji($user->first()->nama, $user->first()->nomor_induk, $input['jam-seminar'], $input['tgl-seminar'], $input['tempat-seminar'], $key[3], 'penguji-3'));
 
-	    	return redirect()->back()->with('success', 'Berhasil mengusulkan Komisi Penguji untuk '.$user->nama.' ('.$nim.')');
+	    	return redirect()->back()->with('success', 'Berhasil mengusulkan Komisi Penguji untuk '.$user->first()->nama.' ('.$nim.')');
     	}
-
-
 
     	 elseif ($opsi == 'tetapkan-komisi-penguji')
 		{
-			/*Data::where(['user_id' => $user->first()->id, 'name' => 'lembar-asistensi'])->update([
-    				'verified' => true
-    			]);
-    			Data::where(['user_id' => $user->first()->id, 'name' => 'draft-buku-proposal'])->update([
-    				'verified' => true
-    			]);
+			Data::where(['user_id' => $user->first()->id, 'name' => 'lembar-asistensi'])->update([
+				'verified' => true
+			]);
+			Data::where(['user_id' => $user->first()->id, 'name' => 'draft-buku-proposal'])->update([
+				'verified' => true
+			]);
+			Data::where(['user_id' => $user->first()->id, 'name' => 'jam-seminar'])->update([
+				'verified' => true
+			]);
+			Data::where(['user_id' => $user->first()->id, 'name' => 'tgl-seminar'])->update([
+				'verified' => true
+			]);
+			Data::where(['user_id' => $user->first()->id, 'name' => 'tempat-seminar'])->update([
+				'verified' => true
+			]);
 
-                return redirect()->back()->with('success', 'Usulan telah diterima');*/
+			$disposisi->update([
+				'progress' => 11
+			]);
+
+            return redirect()->back()->with('success', 'Komisi penguji dan jadwal seminar berhasil ditetapkan');
         }
     	return abort(404);
     }

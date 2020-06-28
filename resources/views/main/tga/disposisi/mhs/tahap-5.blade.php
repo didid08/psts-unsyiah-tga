@@ -44,7 +44,72 @@
 			<tr>
 				<td>3.</td>
 				<td colspan="2" class="align-middle">
-					Koordinator TGA telah mengusulkan Komisi Penguji dan Jadwal Seminar
+					<table class="table table-bordered table-striped table-light">
+						<thead>
+							<tr>
+								<th colspan="2" class="align-middle text-center">Komisi Penguji</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="align-middle text-left text-bold">Ketua Penguji</td>
+								<td class="align-middle text-left">
+									{{ $data->ketua_penguji->content }}
+								</td>
+							</tr>
+							<tr>
+								<td class="align-middle text-left text-bold">Penguji 1</td>
+								<td class="align-middle text-left">
+									{{ $data->penguji_1->content }}
+								</td>
+							</tr>
+							<tr>
+								<td class="align-middle text-left text-bold">Penguji 2</td>
+								<td class="align-middle text-left">
+									{{ $data->penguji_2->content }}
+								</td>
+							</tr>
+							<tr>
+								<td class="align-middle text-left text-bold">Penguji 3</td>
+								<td class="align-middle text-left">
+									{{ $data->penguji_3->content }}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table table-bordered table-striped table-light mt-4">
+						<thead>
+							<tr>
+								<th colspan="2" class="align-middle text-center">Jadwal Seminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="align-middle text-center text-bold">Hari</td>
+								<td class="align-middle text-center">
+									{{ \Carbon\Carbon::parse($data->tgl_seminar->content)->translatedFormat('l') }}
+								</td>
+							</tr>
+							<tr>
+								<td class="align-middle text-center text-bold">Tanggal</td>
+								<td class="align-middle text-center">
+									{{ \Carbon\Carbon::parse($data->tgl_seminar->content)->translatedFormat('d F Y') }}
+								</td>
+							</tr>
+							<tr>
+								<td class="align-middle text-center text-bold">Jam</td>
+								<td class="align-middle text-center">
+									{{ \Carbon\Carbon::parse($data->jam_seminar->content)->translatedFormat('H:i') }} WIB
+								</td>
+							</tr>
+							<tr>
+								<td class="align-middle text-center text-bold">Tempat</td>
+								<td class="align-middle text-center">
+									{{ $data->tempat_seminar->content }}
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</td>
 			</tr>
 		@else

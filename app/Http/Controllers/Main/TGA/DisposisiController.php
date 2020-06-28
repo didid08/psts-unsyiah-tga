@@ -465,9 +465,14 @@ class DisposisiController extends MainController
                     return abort(404);
                 }
 
+                $requestHari = 7;
+                if (in_array($name, ['pembimbing', 'co-pembimbing'])) {
+                    $requestHari = 2;
+                }
+
                 $diff = time() - strtotime($data->first()->updated_at);
                 $hariLewat = floor($diff / (60 * 60 * 24));
-                if ($hariLewat >= 2) {
+                if ($hariLewat >= $requestHari) {
                     return abort(404);
                 }
 

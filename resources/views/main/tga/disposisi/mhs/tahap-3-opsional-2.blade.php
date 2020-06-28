@@ -5,7 +5,7 @@
 			<td class="align-middle"><b>Surat Tugas Pengambilan Data Lab/Lapangan</b></td>
 			<td class="align-middle text-center">
 			@if ($disposisi->progress_optional > 5)
-				<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<a href="{{ route('main.file', ['filename' => $data->stpd->content]) }}" class="btn btn-sm btn-success">Unduh</a>
 			@endif
 			</td>
 		</tr>
