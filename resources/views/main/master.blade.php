@@ -62,7 +62,7 @@
                     <li><a href="{{ route('main.tga.admin.usulan-sptpd') }}" class="dropdown-item">Usulan Surat Permohonan Tugas Pengambilan Data</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-stpd') }}" class="dropdown-item">Usulan Surat Tugas Pengambilan Data</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-sempro') }}" class="dropdown-item">Usulan Seminar Proposal</a></li>
-                    <li><a href="#" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sempro') }}" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Pengesahan Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Sidang</a></li>
                     <li><a href="#" class="dropdown-item">Usulan SK Penguji Sidang</a></li>
