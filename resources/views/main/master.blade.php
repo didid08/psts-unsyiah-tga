@@ -61,7 +61,7 @@
                     <li><a href="{{ route('main.tga.admin.usulan-sk-pembimbing') }}" class="dropdown-item">Usulan SK Pembimbing</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-sptpd') }}" class="dropdown-item">Usulan Surat Permohonan Tugas Pengambilan Data</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-stpd') }}" class="dropdown-item">Usulan Surat Tugas Pengambilan Data</a></li>
-                    <li><a href="#" class="dropdown-item">Usulan Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sempro') }}" class="dropdown-item">Usulan Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Pengesahan Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Sidang</a></li>
@@ -81,7 +81,7 @@
                     <li><a href="#" class="dropdown-item">Pengesahan Usulan Yudisium</a></li>
                   @endif
                   @if (isset($role->koor_tga))
-                    <li><a href="#" class="dropdown-item">Usulan Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.koor-tga.usulan-sempro') }}" class="dropdown-item">Usulan Seminar Proposal</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Sidang</a></li>
                   @endif
                   @if (isset($role->ketua_kel_keahlian))

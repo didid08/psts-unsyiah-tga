@@ -46,38 +46,6 @@ class UsulanSuratPermohonanTugasPengambilanDataController extends MainController
     		break;
 
     		case 'accept':
-		    	/*$validate_rules = [
-		            'stpd' => 'required|file|mimes:pdf|max:5120'
-		        ];
-		        $validate_errors = [
-		            'stpd.required' => 'Harap unggah Surat Tugas Pengambilan Data',
-		            'stpd.mimes' => 'Harap unggah dalam format pdf',
-		            'stpd.max' => 'Ukuran Surat Tugas Pengambilan Data melebihi 5 MB'
-		        ];
-
-		        $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
-		        if ($validator->fails()) {
-		            return redirect()->back()->withErrors($validator);
-		        }
-
-		        $ext = $request->file('stpd')->extension();
-		        $filename = $nim.'-stpd.'.$ext;
-		        $request->file('stpd')->storeAs(
-		            'data', $filename
-		        );
-		        Data::updateOrCreate([
-		            'user_id' => $user->first()->id,
-		            'category' => 'data_usul',
-		            'type' => 'file',
-		            'name' => 'stpd',
-		            'display_name' => 'Surat Tugas Pengambilan Data'
-		        ], [
-		            'content' => $filename
-		        ]);
-
-				Data::where(['user_id' => $user->first()->id, 'name' => 'sptpd'])->update([
-	                'verified' => true
-	            ]);*/
 
 	            $disposisi->update([
                     'progress_optional' => 3
