@@ -65,8 +65,8 @@
                     <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sempro') }}" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-pengesahan-sempro') }}" class="dropdown-item">Usulan Pengesahan Seminar Proposal</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-daftar-hadir-sempro') }}" class="dropdown-item">Usulan Daftar Hadir Seminar Proposal</a></li>
-                    <li><a href="#" class="dropdown-item">Usulan Sidang</a></li>
-                    <li><a href="#" class="dropdown-item">Usulan SK Penguji Sidang</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sidang') }}" class="dropdown-item">Usulan Sidang</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sidang') }}" class="dropdown-item">Usulan SK Penguji Sidang</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Pengesahan Sidang</a></li>
                     <li><a href="#" class="dropdown-item">Usulan Yudisium</a></li>
                   @endif
@@ -83,7 +83,7 @@
                   @endif
                   @if (isset($role->koor_tga))
                     <li><a href="{{ route('main.tga.koor-tga.usulan-sempro') }}" class="dropdown-item">Usulan Seminar Proposal</a></li>
-                    <li><a href="#" class="dropdown-item">Usulan Sidang</a></li>
+                    <li><a href="{{ route('main.tga.koor-tga.usulan-sidang') }}" class="dropdown-item">Usulan Sidang</a></li>
                   @endif
                   @if (isset($role->ketua_kel_keahlian))
                     <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengusulan-pembimbing') }}" class="dropdown-item">Pengusulan Pembimbing dan Co</a></li>

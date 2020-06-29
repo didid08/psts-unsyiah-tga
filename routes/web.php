@@ -74,6 +74,12 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/main/tga/admin/usulan-daftar-hadir-seminar-proposal', 'Main\TGA\Admin\UsulanDaftarHadirSeminarProposalController@view')->name('main.tga.admin.usulan-daftar-hadir-sempro');
 		Route::post('/main/tga/admin/usulan-daftar-hadir-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanDaftarHadirSeminarProposalController@process')->name('main.tga.admin.usulan-daftar-hadir-sempro.process');
 
+		Route::get('/main/tga/admin/usulan-sidang', 'Main\TGA\Admin\UsulanSidangController@view')->name('main.tga.admin.usulan-sidang');
+		Route::post('/main/tga/admin/usulan-sidang/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanSidangController@process')->name('main.tga.admin.usulan-sidang.process');
+
+		Route::get('/main/tga/admin/usulan-sk-penguji-sidang', 'Main\TGA\Admin\UsulanSKPengujiSidangController@view')->name('main.tga.admin.usulan-sk-penguji-sidang');
+		Route::post('/main/tga/admin/usulan-sk-penguji-sidang/process/{nim}', 'Main\TGA\Admin\UsulanSKPengujiSidangController@process')->name('main.tga.admin.usulan-sk-penguji-sidang.process');
+
 		//Koor Prodi
 		Route::get('/main/tga/koor-prodi/persetujuan-usulan-tga', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@view')->name('main.tga.koor-prodi.persetujuan-usulan-tga');
 		Route::post('/main/tga/koor-prodi/persetujuan-usulan-tga/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@process')->name('main.tga.koor-prodi.persetujuan-usulan-tga.process');
@@ -105,6 +111,9 @@ Route::middleware(['auth'])->group(function () {
 		//Koor TGA
 		Route::get('/main/tga/koor-tga/usulan-seminar-proposal', 'Main\TGA\KoorTGA\UsulanSeminarProposalController@view')->name('main.tga.koor-tga.usulan-sempro');
 		Route::post('/main/tga/koor-tga/usulan-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\KoorTGA\UsulanSeminarProposalController@process')->name('main.tga.koor-tga.usulan-sempro.process');
+
+		Route::get('/main/tga/koor-tga/usulan-sidang', 'Main\TGA\KoorTGA\UsulanSidangController@view')->name('main.tga.koor-tga.usulan-sidang');
+		Route::post('/main/tga/koor-tga/usulan-sidang/process/{nim}/{opsi}', 'Main\TGA\KoorTGA\UsulanSidangController@process')->name('main.tga.koor-tga.usulan-sidang.process');
 
 		//Komisi Penguji
 		Route::get('/main/tga/komisi-penguji/seminar-sidang', 'Main\TGA\KomisiPenguji\SeminarSidangController@view')->name('main.tga.komisi-penguji.seminar-sidang');

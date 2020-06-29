@@ -136,7 +136,18 @@ class DisposisiController extends MainController
                         'verified' => true,
                         'verification_key' => null
                     ]);
-                    return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name)).' untuk mahasiswa bernama '.$mhs->first()->nama.' ('.$mhs->first()->nomor_induk.')');
+                    $name2 = $name;
+                    if ($name = 'ketua-penguji-2') {
+                        $name2 = 'ketua-penguji';
+                    }elseif ($name = 'penguji-1-2') {
+                        $name2 = 'penguji-1';
+                    }elseif ($name = 'penguji-2-2') {
+                        $name2 = 'penguji-2';
+                    }elseif ($name = 'penguji-3-2') {
+                        $name2 = 'penguji-3';
+                    }
+
+                    return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name2)).' untuk mahasiswa bernama '.$mhs->first()->nama.' ('.$mhs->first()->nomor_induk.')');
                 }
                 return abort(404);
             }

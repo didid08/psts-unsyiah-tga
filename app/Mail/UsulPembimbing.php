@@ -35,6 +35,7 @@ class UsulPembimbing extends Mailable
     public function build()
     {
         return $this->from('psts.unsyiah@gmail.com')
+                   ->subject('Pengusulan Pembimbing')
                    ->view('email.usul-pembimbing')
                    ->with(
                     [

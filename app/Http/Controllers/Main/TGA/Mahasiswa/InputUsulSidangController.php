@@ -38,14 +38,25 @@ class InputUsulSidangController extends MainController
     {
     	$validator = Validator::make($request->all(), [
     		'lembar-asistensi-2' => 'required|file|mimes:pdf|max:5120',
-    		'draft-buku-tga' => 'required|file|mimes:pdf|max:5120'
+    		'draft-buku-tga' => 'required|file|mimes:pdf|max:5120',
+            'ijazah' => 'required|file|mimes:pdf|max:5120',
+            'bukti-nilai-toefl' => 'required|file|mimes:pdf|max:5120'
     	], [
     		'lembar-asistensi-2.required' => 'Harap unggah Lembar Asistensi',
             'lembar-asistensi-2.mimes' => 'Lembar Asistensi yang anda unggah tidak berbentuk pdf',
             'lembar-asistensi-2.max' => 'Ukuran Lembar Asistensi melebihi 5 MB',
+
             'draft-buku-tga.required' => 'Harap unggah Draft Buku TGA',
             'draft-buku-tga.mimes' => 'Draft Buku TGA yang anda unggah tidak berbentuk pdf',
-            'draft-buku-tga.max' => 'Ukuran Draft Buku TGA melebihi 5 MB'
+            'draft-buku-tga.max' => 'Ukuran Draft Buku TGA melebihi 5 MB',
+
+            'ijazah.required' => 'Harap unggah Ijazah',
+            'ijazah.mimes' => 'Ijazah yang anda unggah tidak berbentuk pdf',
+            'ijazah.max' => 'Ukuran Ijazah melebihi 5 MB',
+
+            'bukti-nilai-toefl.required' => 'Harap unggah Bukti Nilai Toefl',
+            'bukti-nilai-toefl.mimes' => 'Bukti Nilai Toefl yang anda unggah tidak berbentuk pdf',
+            'bukti-nilai-toefl.max' => 'Ukuran Bukti Nilai Toefl melebihi 5 MB'
     	]);
 
         if ($validator->fails()) {
@@ -54,12 +65,20 @@ class InputUsulSidangController extends MainController
 
         $lembar_asistensi_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-lembar-asistensi-2.'.$request->file('lembar-asistensi-2')->extension();
         $draft_buku_tga_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-draft-buku-tga.'.$request->file('draft-buku-tga')->extension();
+        $ijazah_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-ijazah.'.$request->file('ijazah')->extension();
+        $bukti_nilai_toefl_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-bukti-nilai-toefl.'.$request->file('bukti-nilai-toefl')->extension();
         
         $request->file('lembar-asistensi-2')->storeAs(
             'data', $lembar_asistensi_filename
         );
         $request->file('draft-buku-tga')->storeAs(
             'data', $draft_buku_tga_filename
+        );
+        $request->file('ijazah')->storeAs(
+            'data', $ijazah_filename
+        );
+        $request->file('bukti-nilai-toefl')->storeAs(
+            'data', $bukti_nilai_toefl_filename
         );
 
         Data::updateOrCreate([
@@ -79,6 +98,24 @@ class InputUsulSidangController extends MainController
             'display_name' => 'Draft Buku TGA'
         ], [
             'content' => $draft_buku_tga_filename
+        ]);
+        Data::updateOrCreate([
+            'user_id' => User::myData('id'),
+            'category' => 'data_usul_sidang_buku',
+            'type' => 'file',
+            'name' => 'ijazah',
+            'display_name' => 'Ijazah'
+        ], [
+            'content' => $ijazah_filename
+        ]);
+        Data::updateOrCreate([
+            'user_id' => User::myData('id'),
+            'category' => 'data_usul_sidang_buku',
+            'type' => 'file',
+            'name' => 'bukti-nilai-toefl',
+            'display_name' => 'Bukti Nilai Toefl'
+        ], [
+            'content' => $bukti_nilai_toefl_filename
         ]);
 
         Disposisi::where('user_id', User::myData('id'))->update([

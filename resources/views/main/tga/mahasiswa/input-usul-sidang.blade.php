@@ -17,6 +17,8 @@
 									<th scope="col" class="align-middle text-center">Masa Pembimbingan Buku TGA</th>
 									<th scope="col" class="align-middle text-center">Lembar Asistensi</th>
 									<th scope="col" class="align-middle text-center">Draft Buku TGA</th>
+									<th scope="col" class="align-middle text-center">Ijazah</th>
+									<th scope="col" class="align-middle text-center">Bukti Nilai Toefl</th>
 									@if ($progress == 21)
 										<th scope="col" class="align-middle text-center">Opsi</th>
 									@endif
@@ -40,6 +42,20 @@
 									<td class="align-middle text-center">
 										@if ($progress == 21)
 											<input type="file" name="draft-buku-tga" accept="application/pdf">
+										@elseif ($progress > 21)
+											<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada											
+										@endif
+									</td>
+									<td class="align-middle text-center">
+										@if ($progress == 21)
+											<input type="file" name="ijazah" accept="application/pdf">
+										@elseif ($progress > 21)
+											<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada											
+										@endif
+									</td>
+									<td class="align-middle text-center">
+										@if ($progress == 21)
+											<input type="file" name="bukti-nilai-toefl" accept="application/pdf">
 										@elseif ($progress > 21)
 											<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada											
 										@endif
