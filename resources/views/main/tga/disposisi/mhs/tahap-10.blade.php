@@ -11,7 +11,7 @@
 				@if (in_array($disposisi->progress, range(20,20)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 20)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
+					<input type="text" class="form-control bg-light" readonly="readonly" style="display: inline-block; width: 7em;" value="{{ $data->jumlah_asistensi_2->content }} kali">
 				@else
 					--
 				@endif
@@ -23,7 +23,7 @@
 				@if (in_array($disposisi->progress, range(20,20)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 20)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="#">
+					<input type="text" class="form-control bg-light" readonly="readonly" style="display: inline-block; width: 7em;" value="{{ $data->masa_pembimbingan_buku_tga->content }} bulan">
 				@else
 					--
 				@endif

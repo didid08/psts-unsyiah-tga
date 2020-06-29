@@ -44,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
 
 			Route::get('/main/tga/input-usul-sempro', 'Main\TGA\Mahasiswa\InputUsulSemproController@view')->name('main.tga.mahasiswa.input-usul-sempro');
 			Route::post('/main/tga/input-usul-sempro', 'Main\TGA\Mahasiswa\InputUsulSemproController@process')->name('main.tga.mahasiswa.input-usul-sempro.process');
+
+			Route::get('/main/tga/input-usul-sidang', 'Main\TGA\Mahasiswa\InputUsulSidangController@view')->name('main.tga.mahasiswa.input-usul-sidang');
+			Route::post('/main/tga/input-usul-sidang', 'Main\TGA\Mahasiswa\InputUsulSidangController@process')->name('main.tga.mahasiswa.input-usul-sidang.process');
 		});
 		
 		//Admin

@@ -1,22 +1,22 @@
 <table width="100%" class="table table-bordered{{ formBackground(21, 23, $disposisi) }}">
 	<tbody>
+		@if ($disposisi->progress == 21)
+			<tr>
+				<td colspan="3" class="align-middle text-left">
+					<a href="{{ route('main.tga.mahasiswa.input-usul-sidang') }}" class="btn btn-light">Input Usul Sidang</a>
+				</td>
+			</tr>
+		@endif
 		<tr>
 			<td class="align-middle">1.</td>
 			<td class="align-middle">Lembar Asistensi (Setuju Disidangkan)</td>
 			<td class="text-center align-middle">
-				@if ($disposisi->progress == 23)
-					<span class="text-success">Telah disetujui</span>
-				@elseif ($disposisi->progress > 23)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+				@if ($disposisi->progress > 21)
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 21)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					@if (in_array($disposisi->progress, range(22,22)))
-						<span class="text-warning">sedang diperiksa</span>
-					@else
-						<div class="custom-file">
-							<input type="file" class="custom-file-input" name="lembar-asistensi-2" id="lembar-asistensi-2" onchange="showSelectedFile('#lembar-asistensi-2-label', event)" accept="application/pdf" {!! in_array($disposisi->progress, range(21,23)) ? '' : 'disabled="disabled"' !!}>
-							<label class="custom-file-label text-left" for="lembar-asistensi-2" id="lembar-asistensi-2-label">Pilih File</label>
-						</div>
-					@endif
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
@@ -24,39 +24,15 @@
 			<td class="align-middle">2.</td>
 			<td class="align-middle">Draft Buku TGA</td>
 			<td class="text-center align-middle">
-				@if ($disposisi->progress == 23)
-					<span class="text-success">Telah disetujui</span>
-				@elseif ($disposisi->progress > 23)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+				@if ($disposisi->progress > 21)
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress < 21)
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3 text-muted">Belum ada</span>
 				@else
-					@if (in_array($disposisi->progress, range(22,22)))
-						<span class="text-warning">sedang diperiksa</span>
-					@else
-						<form class="">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="draft-buku-tga" id="draft-buku-tga" onchange="showSelectedFile('#draft-buku-tga-label', event)" accept="application/pdf" {!! in_array($disposisi->progress, range(21,23)) ? '' : 'disabled="disabled"' !!}>
-								<label class="custom-file-label text-left" for="draft-buku-tga" id="draft-buku-tga-label">Pilih File</label>
-							</div>
-						</form>
-					@endif
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
-		@if ($disposisi->progress == 21)
-			<tr>
-				<td colspan="2"></td>
-				<td class="text-center align-middle">
-					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
-				</td>
-			</tr>
-		@endif
-		@if ($disposisi->progress > 23)
-			<tr>
-				<td colspan="3" class="align-middle text-center">
-					<a href="#" class="btn btn-block btn-success">Unduh Semua</a>
-				</td>
-			</tr>
-		@endif
 		@if ($disposisi->progress == 23)
 			<tr class="bg-warning">
 				<td>3.</td>

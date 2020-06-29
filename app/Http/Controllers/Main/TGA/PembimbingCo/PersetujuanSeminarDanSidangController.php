@@ -25,6 +25,12 @@ class PersetujuanSeminarDanSidangController extends MainController
             						->select('disposisi.*')
             						->where('progress', 7)
             						->orderBy('updated_at')
+            						->get(),
+            'semua_mahasiswa_2' => Data::where(['name' => 'pembimbing', 'content' => User::myData('nama')])
+            						->join('disposisi', 'data.user_id', '=', 'disposisi.user_id')
+            						->select('disposisi.*')
+            						->where('progress', 20)
+            						->orderBy('updated_at')
             						->get()
         ]);
     }
@@ -81,6 +87,54 @@ class PersetujuanSeminarDanSidangController extends MainController
 
 	        $disposisi->update([
 	            'progress' => 8
+	        ]);
+
+	        return redirect()->back()->with('success', 'Data disimpan');
+	    } elseif ($type == 'buku-tga') {
+
+	        $validate_rules = [
+	            'jumlah-asistensi-2' => 'required|numeric|min:8',
+	            'masa-pembimbingan-buku-tga' => 'required|numeric'
+	        ];
+	        $validate_errors = [
+	            'jumlah-asistensi-2.required' => 'Harap tetapkan Jumlah Asistensi',
+	            'jumlah-asistensi-2.numeric' => 'Jumlah Asistensi hanya berbentuk angka',
+	            'jumlah-asistensi-2.min' => 'Minimal jumlah asistensi sebanyak 8 kali',
+	            'masa-pembimbingan-buku-tga.required' => 'Harap tetapkan Masa Pembimbingan Buku TGA',
+	            'masa-pembimbingan-buku-tga.numeric' => 'Masa Pembimbingan Buku TGA hanya berbentuk angka',
+	        ];
+
+	        $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+	        if ($validator->fails()) {
+	            return redirect()->back()->withErrors($validator);
+	        }
+
+	        Data::updateOrCreate([
+	            'user_id' => $user->first()->id,
+	            'category' => 'data_usul_sidang_buku',
+	            'type' => 'text',
+	            'name' => 'jumlah-asistensi-2',
+	            'display_name' => 'Jumlah Asistensi Buku TGA'
+	        ], [
+	            'content' => $request->input('jumlah-asistensi-2'),
+	            'verified' => true
+	        ]);
+
+	        Data::updateOrCreate([
+	            'user_id' => $user->first()->id,
+	            'category' => 'data_usul_sidang_buku',
+	            'type' => 'text',
+	            'name' => 'masa-pembimbingan-buku-tga',
+	            'display_name' => 'Masa Pembimbingan Buku TGA'
+	        ], [
+	            'content' => $request->input('masa-pembimbingan-buku-tga'),
+	            'verified' => true
+	        ]);
+
+	        $disposisi = Disposisi::where(['user_id' => $user->first()->id]);
+
+	        $disposisi->update([
+	            'progress' => 21
 	        ]);
 
 	        return redirect()->back()->with('success', 'Data disimpan');

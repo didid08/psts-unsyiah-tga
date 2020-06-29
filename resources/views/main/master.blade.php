@@ -53,7 +53,7 @@
                   @if (isset($role->mhs))
                     <li><a href="{{ route('main.tga.mahasiswa.input-usul') }}" class="dropdown-item">Input Usul TGA</a></li>
                     <li><a href="{{ route('main.tga.mahasiswa.input-usul-sempro') }}" class="dropdown-item">Input Usul Seminar Proposal</a></li>
-                    <li><a href="#" class="dropdown-item">Input Usul Sidang</a></li>
+                    <li><a href="{{ route('main.tga.mahasiswa.input-usul-sidang') }}" class="dropdown-item">Input Usul Sidang</a></li>
                     <li><a href="#" class="dropdown-item">Input Usul Yudisium</a></li>
                   @endif
                   @if (isset($role->admin))
