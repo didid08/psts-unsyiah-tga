@@ -11,7 +11,7 @@
 				@elseif ($disposisi->progress == 17)
 					<span class="text-yellow">Sedang diperiksa oleh Koordinator Prodi</span>
 				@elseif ($disposisi->progress > 17)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Ada</span>
 				@else
 					--
 				@endif
@@ -28,7 +28,7 @@
 				@elseif ($disposisi->progress == 17)
 					<span class="text-yellow">Sedang diperiksa oleh Koordinator Prodi</span>
 				@elseif ($disposisi->progress > 17)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Ada</span>
 				@else
 					--
 				@endif

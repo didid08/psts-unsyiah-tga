@@ -5,7 +5,7 @@
 			<td class="align-middle font-weight-bold">SK Komisi Penguji Seminar Proposal</td>
 			<td class="align-middle text-center">
 				@if ($disposisi->progress > 12)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Ada</span>
 				@endif
 			</td>
 		</tr>
@@ -42,7 +42,7 @@
 				@if (in_array($disposisi->progress, range(11,12)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 12)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Ada</span>
 				@else
 					--
 				@endif
@@ -55,7 +55,7 @@
 				@if (in_array($disposisi->progress, range(11,12)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 12)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Ada</span>
 				@else
 					--
 				@endif

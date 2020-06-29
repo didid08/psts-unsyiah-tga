@@ -19,36 +19,39 @@
 			@elseif ($disposisi->progress == 14)
 				<td class="align-middle">
 					<h5 class="mb-2 ml-2">Isi Peserta Seminar</h5>
-					<table class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th colspan="3" class="align-middle text-center">Peserta Seminar</th>
-							</tr>
-							<tr>
-								<th class="align-middle text-center">No</th>
-								<th class="align-middle text-center">Nama</th>
-								<th class="align-middle text-center">NIM</th>
-							</tr>
-						</thead>
-						<tbody>
-							@for ($i = 1; $i <= 10; $i++)
+					<form action="{{ route('main.tga.mahasiswa.upload-disposisi', ['progress' => 14]) }}" method="post">
+						@csrf
+						<table class="table table-bordered table-striped">
+							<thead>
 								<tr>
-									<td class="align-middle text-center">{{ $i }}</td>
-									<td class="align-middle text-center">
-										<input type="text" class="form-control" name="peserta-seminar-{{ $i }}-nama" placeholder="Masukkan Nama">
-									</td>
-									<td class="align-middle text-center">
-										<input type="text" class="form-control" name="peserta-seminar-{{ $i }}-nim" placeholder="Masukkan NIM">
+									<th colspan="3" class="align-middle text-center">Peserta Seminar</th>
+								</tr>
+								<tr>
+									<th class="align-middle text-center">No</th>
+									<th class="align-middle text-center">Nama</th>
+									<th class="align-middle text-center">NIM</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for ($i = 1; $i <= 10; $i++)
+									<tr>
+										<td class="align-middle text-center">{{ $i }}</td>
+										<td class="align-middle text-center">
+											<input type="text" class="form-control" name="peserta-seminar-{{ $i }}-nama" placeholder="Masukkan Nama" value="a">
+										</td>
+										<td class="align-middle text-center">
+											<input type="text" class="form-control" name="peserta-seminar-{{ $i }}-nim" placeholder="Masukkan NIM" value="1">
+										</td>
+									</tr>
+								@endfor
+								<tr>
+									<td colspan="3" class="align-middle text-center">
+										<button type="submit" class="btn btn-block btn-success text-bold">Simpan</button>
 									</td>
 								</tr>
-							@endfor
-							<tr>
-								<td colspan="3" class="align-middle text-center">
-									<button type="submit" class="btn btn-block btn-success text-bold">Simpan</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</form>
 				</td>
 			@elseif ($disposisi->progress > 14)
 				<td class="align-middle">

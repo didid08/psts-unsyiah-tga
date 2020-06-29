@@ -20,7 +20,7 @@
 				<td class="align-middle">
 					<div class="alert alert-success text-left" role="alert" style="margin: 0;">
 						<b>Pelaksanaan Seminar Proposal sudah selesai.</b> <br>
-						<i>Menunggu mahasiswa untuk mengunggah <b>Data Proposal</b></i>
+						<i>Menunggu mahasiswa untuk mengisi peserta seminar proposal</i>
 					</div>
 				</td>
 			@elseif ($disposisi->progress > 14)

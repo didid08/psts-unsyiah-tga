@@ -65,6 +65,12 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/main/tga/admin/usulan-sk-penguji-seminar-proposal', 'Main\TGA\Admin\UsulanSKPengujiSeminarProposalController@view')->name('main.tga.admin.usulan-sk-penguji-sempro');
 		Route::post('/main/tga/admin/usulan-sk-penguji-seminar-proposal/process/{nim}', 'Main\TGA\Admin\UsulanSKPengujiSeminarProposalController@process')->name('main.tga.admin.usulan-sk-penguji-sempro.process');
 
+		Route::get('/main/tga/admin/usulan-pengesahan-seminar-proposal', 'Main\TGA\Admin\UsulanPengesahanSeminarProposalController@view')->name('main.tga.admin.usulan-pengesahan-sempro');
+		Route::post('/main/tga/admin/usulan-pengesahan-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanPengesahanSeminarProposalController@process')->name('main.tga.admin.usulan-pengesahan-sempro.process');
+
+		Route::get('/main/tga/admin/usulan-daftar-hadir-seminar-proposal', 'Main\TGA\Admin\UsulanDaftarHadirSeminarProposalController@view')->name('main.tga.admin.usulan-daftar-hadir-sempro');
+		Route::post('/main/tga/admin/usulan-daftar-hadir-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanDaftarHadirSeminarProposalController@process')->name('main.tga.admin.usulan-daftar-hadir-sempro.process');
+
 		//Koor Prodi
 		Route::get('/main/tga/koor-prodi/persetujuan-usulan-tga', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@view')->name('main.tga.koor-prodi.persetujuan-usulan-tga');
 		Route::post('/main/tga/koor-prodi/persetujuan-usulan-tga/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@process')->name('main.tga.koor-prodi.persetujuan-usulan-tga.process');
@@ -80,6 +86,9 @@ Route::middleware(['auth'])->group(function () {
 
 		Route::get('/main/tga/koor-prodi/penetapan-sk-penguji-sempro', 'Main\TGA\KoorProdi\PenetapanSKPengujiSeminarProposalController@view')->name('main.tga.koor-prodi.penetapan-sk-penguji-sempro');
 		Route::post('/main/tga/koor-prodi/penetapan-sk-penguji-sempro/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PenetapanSKPengujiSeminarProposalController@process')->name('main.tga.koor-prodi.penetapan-sk-penguji-sempro.process');
+
+		Route::get('/main/tga/koor-prodi/pengesahan-seminar-proposal', 'Main\TGA\KoorProdi\PengesahanSeminarProposalController@view')->name('main.tga.koor-prodi.pengesahan-sempro');
+		Route::post('/main/tga/koor-prodi/pengesahan-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PengesahanSeminarProposalController@process')->name('main.tga.koor-prodi.pengesahan-sempro.process');
 
 		//Ketua Kel Keahlian
 		Route::get('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');

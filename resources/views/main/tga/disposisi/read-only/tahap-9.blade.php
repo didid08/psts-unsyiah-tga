@@ -12,7 +12,7 @@
 					@if (isset($roles->koor_prodi))
 						<a href="#" class="btn btn-sm btn-outline-success">Lihat</a>
 					@else
-						<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
+						<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Ada</span>
 					@endif
 				@else
 					--
