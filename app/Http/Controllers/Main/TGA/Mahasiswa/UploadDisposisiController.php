@@ -218,6 +218,59 @@ class UploadDisposisiController extends Controller
                 ]);
 
                 return redirect()->back()->with('success', 'Berhasil mengunggah Daftar Hadir Seminar Proposal');
+            } elseif ($progress == 28) {
+                $validate_rules = [
+                    'berita-acara-sidang-buku' => 'required|file|mimes:pdf|max:5120',
+                    'buku-tga' => 'required|file|mimes:pdf|max:5120'
+                ];
+                $validate_errors = [
+                    'berita-acara-sidang-buku.required' => 'Harap unggah Berita Acara Sidang Buku',
+                    'berita-acara-sidang-buku.mimes' => 'Harap unggah dalam format pdf',
+                    'berita-acara-sidang-buku.max' => 'Ukuran Berita Acara Sidang Buku melebihi 5 MB',
+                    'buku-tga.required' => 'Harap unggah Buku TGA',
+                    'buku-tga.mimes' => 'Harap unggah dalam format pdf',
+                    'buku-tga.max' => 'Ukuran Buku TGA melebihi 5 MB'
+                ];
+
+                $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator);
+                }
+
+                $filename1 = User::myData('nomor_induk').'-berita-acara-sidang-buku.'.$request->file('berita-acara-sidang-buku')->extension();
+                $filename2 = User::myData('nomor_induk').'-buku-tga.'.$request->file('buku-tga')->extension();
+
+                $request->file('berita-acara-sidang-buku')->storeAs(
+                    'data', $filename1
+                );
+                $request->file('buku-tga')->storeAs(
+                    'data', $filename2
+                );
+
+                Data::updateOrCreate([
+                    'user_id' => User::myData('id'),
+                    'category' => 'data_usul_sidang_buku',
+                    'type' => 'file',
+                    'name' => 'berita-acara-sidang-buku',
+                    'display_name' => 'Berita Acara Sidang Buku'
+                ], [
+                    'content' => $filename1
+                ]);
+                Data::updateOrCreate([
+                    'user_id' => User::myData('id'),
+                    'category' => 'data_usul_sidang_buku',
+                    'type' => 'file',
+                    'name' => 'buku-tga',
+                    'display_name' => 'Buku TGA'
+                ], [
+                    'content' => $filename2
+                ]);
+
+                $disposisi->update([
+                    'progress' => 29
+                ]);
+
+                return redirect()->back()->with('success', 'Berhasil mengunggah berkas pengesahan sidang');
             }
             return abort(404);
         }

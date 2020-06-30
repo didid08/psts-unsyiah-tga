@@ -1,11 +1,15 @@
 <table width="100%" class="table table-bordered{{ formBackground(28, 30, $disposisi) }}">
 	<tbody>
+		@if ($disposisi->progress == 28)
+			<form action="{{ route('main.tga.mahasiswa.upload-disposisi', ['progress' => 28]) }}" method="post" enctype="multipart/form-data">
+				@csrf
+		@endif
 		<tr>
 			<td class="align-middle">1.</td>
 			<td class="align-middle">Berita Acara Sidang Buku</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress > 30)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
 				@else
 					@if (in_array($disposisi->progress, range(29,30)))
 						<span class="text-warning">sedang diperiksa</span>
@@ -23,7 +27,7 @@
 			<td class="align-middle">Buku TGA</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress > 30)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
 				@else
 					@if (in_array($disposisi->progress, range(29,30)))
 						<span class="text-warning">sedang diperiksa</span>
@@ -53,14 +57,7 @@
 					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
 				</td>
 			</tr>
-		@endif
-
-		@if ($disposisi->progress > 30)
-			<tr>
-				<td colspan="3" class="align-middle text-center">
-					<a href="#" class="btn btn-block btn-success">Unduh Semua</a>
-				</td>
-			</tr>
+		</form>
 		@endif
 	</tbody>
 </table>

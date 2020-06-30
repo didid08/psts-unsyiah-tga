@@ -80,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/main/tga/admin/usulan-sk-penguji-sidang', 'Main\TGA\Admin\UsulanSKPengujiSidangController@view')->name('main.tga.admin.usulan-sk-penguji-sidang');
 		Route::post('/main/tga/admin/usulan-sk-penguji-sidang/process/{nim}', 'Main\TGA\Admin\UsulanSKPengujiSidangController@process')->name('main.tga.admin.usulan-sk-penguji-sidang.process');
 
+		Route::get('/main/tga/admin/usulan-pengesahan-sidang', 'Main\TGA\Admin\UsulanPengesahanSidangController@view')->name('main.tga.admin.usulan-pengesahan-sidang');
+		Route::post('/main/tga/admin/usulan-pengesahan-sidang/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanPengesahanSidangController@process')->name('main.tga.admin.usulan-pengesahan-sidang.process');
+
 		//Koor Prodi
 		Route::get('/main/tga/koor-prodi/persetujuan-usulan-tga', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@view')->name('main.tga.koor-prodi.persetujuan-usulan-tga');
 		Route::post('/main/tga/koor-prodi/persetujuan-usulan-tga/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@process')->name('main.tga.koor-prodi.persetujuan-usulan-tga.process');
@@ -101,6 +104,9 @@ Route::middleware(['auth'])->group(function () {
 
 		Route::get('/main/tga/koor-prodi/penetapan-sk-penguji-sidang', 'Main\TGA\KoorProdi\PenetapanSKPengujiSidangController@view')->name('main.tga.koor-prodi.penetapan-sk-penguji-sidang');
 		Route::post('/main/tga/koor-prodi/penetapan-sk-penguji-sidang/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PenetapanSKPengujiSidangController@process')->name('main.tga.koor-prodi.penetapan-sk-penguji-sidang.process');
+
+		Route::get('/main/tga/koor-prodi/pengesahan-sidang', 'Main\TGA\KoorProdi\PengesahanSidangController@view')->name('main.tga.koor-prodi.pengesahan-sidang');
+		Route::post('/main/tga/koor-prodi/pengesahan-sidang/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PengesahanSidangController@process')->name('main.tga.koor-prodi.pengesahan-sidang.process');
 
 		//Ketua Kel Keahlian
 		Route::get('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');
