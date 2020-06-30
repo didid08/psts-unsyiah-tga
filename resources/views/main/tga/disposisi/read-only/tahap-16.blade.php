@@ -1,19 +1,15 @@
-<table width="100%" class="table table-bordered{{ formBackground(34, 36, $disposisi) }}">
+<table width="100%" class="table table-bordered{{ formBackground(33, 35, $disposisi) }}">
 	<tbody>
 		<tr>
 			<td class="align-middle">1.</td>
 			<td class="align-middle">Kelengkapan Dokumen Administrasi Sidang Buku (Lembar Pengesahan, Lembar Acc)</td>
 			<td class="text-center align-middle">
-				@if ($disposisi->progress > 36)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
-				@elseif ($disposisi->progress == 34)
-					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($disposisi->progress == 35)
-					<span class="text-warning">Sedang diperiksa oleh Admin</span>
-				@elseif ($disposisi->progress == 36)
-					<span class="text-warning">Sedang diperiksa oleh Koordinator Prodi</span>
+				@if ($disposisi->progress > 33)
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress == 33)
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@else
-					--
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>
@@ -22,16 +18,12 @@
 			<td class="align-middle">2.</td>
 			<td class="align-middle">Kelengkapan Dokumen Yudisium dan Wisuda</td>
 			<td class="text-center align-middle">
-				@if ($disposisi->progress > 36)
-					<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
-				@elseif ($disposisi->progress == 34)
-					<span><i class="fa fa-times-circle text-secondary"></i>&nbsp;&nbsp;Belum diunggah</span>
-				@elseif ($disposisi->progress == 35)
-					<span class="text-warning">Sedang diperiksa oleh Admin</span>
-				@elseif ($disposisi->progress == 36)
-					<span class="text-warning">Sedang diperiksa oleh Koordinator Prodi</span>
+				@if ($disposisi->progress > 33)
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
+				@elseif ($disposisi->progress == 33)
+					<i class="fa fa-exclamation-triangle text-yellow"></i><span class="ml-3">Belum ada</span>
 				@else
-					--
+					<i class="fa fa-exclamation-triangle text-muted"></i><span class="ml-3">Belum ada</span>
 				@endif
 			</td>
 		</tr>

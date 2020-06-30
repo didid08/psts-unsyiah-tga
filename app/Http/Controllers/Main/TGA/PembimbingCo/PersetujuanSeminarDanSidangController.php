@@ -31,11 +31,20 @@ class PersetujuanSeminarDanSidangController extends MainController
             						->select('disposisi.*')
             						->where('progress', 20)
             						->orderBy('updated_at')
-            						->get()
+            						->get(),
+           	'semua_mahasiswa_3' => Data::where(['name' => 'pembimbing', 'content' => User::myData('nama')])
+            						->join('disposisi', 'data.user_id', '=', 'disposisi.user_id')
+            						->select('disposisi.*')
+            						->where('progress', 32)
+            						->orderBy('updated_at')
+            						->get(),
+            'sk_penguji_sidang' => $data->getDataMultiple('sk-penguji-sidang'),
+            'lembar_pengesahan' => $data->getDataMultiple('lembar-pengesahan'),
+            'buku_tga' => $data->getDataMultiple('buku-tga'),
         ]);
     }
 
-    public function process($nim, $type, Request $request)
+    public function process($nim, $type, $opsi = null, Request $request)
     {
         $user = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
         if (!$user->exists()) {
@@ -138,6 +147,26 @@ class PersetujuanSeminarDanSidangController extends MainController
 	        ]);
 
 	        return redirect()->back()->with('success', 'Data disimpan');
+	    } elseif ($type == 'lembar-pengesahan') {
+
+	    	if ($opsi == 'decline') {
+	    		$disposisi = Disposisi::where(['user_id' => $user->first()->id]);
+		        $disposisi->update([
+		            'progress' => 31
+		        ]);
+
+		        return redirect()->back()->with('error', 'Data ditolak');
+	    	} elseif ($opsi == 'accept') {
+	    		Data::where(['user_id' => $user->first()->id, 'name' => 'lembar-pengesahan'])->update([
+	    			'verified' => true
+	    		]);
+	    		$disposisi = Disposisi::where(['user_id' => $user->first()->id]);
+		        $disposisi->update([
+		            'progress' => 33
+		        ]);
+
+		        return redirect()->back()->with('success', 'Data diterima');
+	    	}
 	    }
     }
 }

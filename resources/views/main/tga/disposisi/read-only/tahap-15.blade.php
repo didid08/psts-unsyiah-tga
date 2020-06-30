@@ -12,11 +12,7 @@
 			<td class="align-middle">Lembar Pengesahan dan Buku Laporan KP (jika diperlukan)</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress > 32)
-					@if (isset($roles->koor_prodi))
-						<a href="#" class="btn btn-sm btn-outline-success">Lihat</a>
-					@else
-						<span><i class="fa fa-check-circle text-success"></i>&nbsp;&nbsp;Selesai</span>
-					@endif
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
 				@elseif (in_array($disposisi->progress, range(32,32)))
 					<span class="text-warning">Sedang diproses</span>
 				@elseif ($disposisi->progress == 31)
@@ -34,15 +30,5 @@
 				<a href="https://unsyiah.ac.id/faculty-and-staff" target="_blank">https://unsyiah.ac.id/faculty-and-staff</a>
 			</td>
 		</tr>
-
-		@if ($disposisi->progress == 33)
-			<tr>
-				<td colspan="3">
-					<div class="alert alert-success text-left" role="alert" style="margin: 0;">
-						<i>Menunggu mahasiswa untuk mengunggah <b>Data Yudisium</b></i>
-					</div>
-				</td>
-			</tr>
-		@endif
 	</tbody>
 </table>

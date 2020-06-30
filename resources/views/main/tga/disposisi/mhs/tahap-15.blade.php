@@ -1,5 +1,9 @@
 <table width="100%" class="table table-bordered{{ formBackground(31, 32, $disposisi) }}">
 	<tbody>
+		@if ($disposisi->progress == 31)
+			<form action="{{ route('main.tga.mahasiswa.upload-disposisi', ['progress' => 31]) }}" method="post" enctype="multipart/form-data">
+				@csrf
+		@endif
 		<tr>
 			<td class="align-middle">1.</td>
 			<td colspan="2" class="align-middle text-left">
@@ -12,14 +16,14 @@
 			<td class="align-middle">Lembar Pengesahan dan Buku Laporan KP (jika diperlukan)</td>
 			<td class="text-center align-middle">
 				@if ($disposisi->progress > 32)
-					<a href="#" class="btn btn-sm btn-success">Unduh</a>
+					<i class="fa fa-check-circle text-green"></i><span class="ml-3">Ada</span>
 				@else
 					@if (in_array($disposisi->progress, range(32,32)))
 						<span class="text-warning">sedang diperiksa</span>
 					@else
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" name="lembar-pengesahan-dan-buku-laporan-kp" id="lembar-pengesahan-dan-buku-laporan-kp" onchange="showSelectedFile('#lembar-pengesahan-dan-buku-laporan-kp-label', event)" accept="application/zip" {!! in_array($disposisi->progress, range(31,32)) ? '' : 'disabled="disabled"' !!}>
-							<label class="custom-file-label text-left" for="lembar-pengesahan-dan-buku-laporan-kp" id="lembar-pengesahan-dan-buku-laporan-kp-label">Pilih File</label>
+							<input type="file" class="custom-file-input" name="lembar-pengesahan" id="lembar-pengesahan" onchange="showSelectedFile('#lembar-pengesahan-label', event)" accept="application/zip" {!! in_array($disposisi->progress, range(31,32)) ? '' : 'disabled="disabled"' !!}>
+							<label class="custom-file-label text-left" for="lembar-pengesahan" id="lembar-pengesahan-label">Pilih File (zip)</label>
 						</div>
 					@endif
 				@endif
@@ -42,6 +46,7 @@
 					<button type="submit" class="btn btn-sm btn-success">Kirim</button>
 				</td>
 			</tr>
+		</form>
 		@endif
 		
 		<tr>
@@ -51,15 +56,5 @@
 				<a href="https://unsyiah.ac.id/faculty-and-staff" target="_blank">https://unsyiah.ac.id/faculty-and-staff</a>
 			</td>
 		</tr>
-
-		@if ($disposisi->progress == 33)
-			<tr>
-				<td colspan="3">
-					<div class="alert alert-success text-left" role="alert" style="margin: 0;">
-						Silahkan unggah <b>Data Yudisium</b> terlebih dahulu melalui link berikut: <a href="#">Unggah Data Yudisium</a> untuk lanjut ke tahap selanjutnya
-					</div>
-				</td>
-			</tr>
-		@endif
 	</tbody>
 </table>

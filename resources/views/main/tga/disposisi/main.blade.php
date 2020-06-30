@@ -461,19 +461,19 @@
 							</tr>
 
 							{{-- Tahap 16 --}}
-							<tr class="{{ background(34, 36, $disposisi) }}">
+							<tr class="{{ background(33, 35, $disposisi) }}">
 								<td><b>16</b></td>
 								<td colspan="4">
 									@include('main.tga.disposisi.'.$folder.'.tahap-16')
+								</td>
+								<td class="text-center align-middle">
+									{!! progress(33, $disposisi) !!}
 								</td>
 								<td class="text-center align-middle">
 									{!! progress(34, $disposisi) !!}
 								</td>
 								<td class="text-center align-middle">
 									{!! progress(35, $disposisi) !!}
-								</td>
-								<td class="text-center align-middle">
-									{!! progress(36, $disposisi) !!}
 								</td>
 								<td class="text-center align-middle"></td>
 								<td class="text-center align-middle"></td>

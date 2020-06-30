@@ -271,6 +271,83 @@ class UploadDisposisiController extends Controller
                 ]);
 
                 return redirect()->back()->with('success', 'Berhasil mengunggah berkas pengesahan sidang');
+            } elseif ($progress == 31) {
+                $validate_rules = [
+                    'lembar-pengesahan' => 'required|file|mimes:zip|max:10240'
+                ];
+                $validate_errors = [
+                    'lembar-pengesahan.required' => 'Harap unggah Lembar Pengesahan',
+                    'lembar-pengesahan.mimes' => 'Harap unggah dalam format zip',
+                    'lembar-pengesahan.max' => 'Ukuran Lembar Pengesahan melebihi 10 MB'
+                ];
+
+                $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator);
+                }
+
+                $filename = User::myData('nomor_induk').'-lembar-pengesahan.'.$request->file('lembar-pengesahan')->extension();
+
+                $request->file('lembar-pengesahan')->storeAs(
+                    'data', $filename
+                );
+
+                Data::updateOrCreate([
+                    'user_id' => User::myData('id'),
+                    'category' => 'data_usul_sidang_buku',
+                    'type' => 'file',
+                    'name' => 'lembar-pengesahan',
+                    'display_name' => 'Lembar Pengesahan'
+                ], [
+                    'content' => $filename
+                ]);
+
+                $disposisi->update([
+                    'progress' => 32
+                ]);
+
+                return redirect()->back()->with('success', 'Berhasil mengunggah lembar pengesahan');
+            } elseif ($progress == 33) {
+                $data = new Data;
+                if (!$data->checkMultipleData(User::myData('id'), ['biodata', 'transkrip', 'bukti-bebas-lab', 'artikel-jim'])) {
+                    return redirect()->back()->with('error', 'Harap lengkapi data usul yudisium');
+                }
+
+                $validate_rules = [
+                    'kelengkapan-dokumen-administrasi-sidang-buku' => 'required|file|mimes:zip|max:10240'
+                ];
+                $validate_errors = [
+                    'kelengkapan-dokumen-administrasi-sidang-buku.required' => 'Harap unggah Kelengkapan Dokumen Administrasi Sidang Buku',
+                    'kelengkapan-dokumen-administrasi-sidang-buku.mimes' => 'Harap unggah dalam format zip',
+                    'kelengkapan-dokumen-administrasi-sidang-buku.max' => 'Ukuran Kelengkapan Dokumen Administrasi Sidang Buku melebihi 10 MB'
+                ];
+
+                $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator);
+                }
+
+                $filename = User::myData('nomor_induk').'-kelengkapan-dokumen-administrasi-sidang-buku.'.$request->file('kelengkapan-dokumen-administrasi-sidang-buku')->extension();
+
+                $request->file('kelengkapan-dokumen-administrasi-sidang-buku')->storeAs(
+                    'data', $filename
+                );
+
+                Data::updateOrCreate([
+                    'user_id' => User::myData('id'),
+                    'category' => 'data_yudisium',
+                    'type' => 'file',
+                    'name' => 'kelengkapan-dokumen-administrasi-sidang-buku',
+                    'display_name' => 'Kelengkapan Dokumen Administrasi Sidang Buku'
+                ], [
+                    'content' => $filename
+                ]);
+
+                $disposisi->update([
+                    'progress' => 34
+                ]);
+
+                return redirect()->back()->with('success', 'Berhasil mengunggah berkas yudisium');
             }
             return abort(404);
         }

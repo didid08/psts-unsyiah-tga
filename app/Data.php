@@ -77,4 +77,21 @@ class Data extends Model
         }
         return false;
     }
+
+    public function checkMultipleData($mhs_id, $list_data) {
+        $boolean = [];
+
+        foreach($list_data as $index => $value) {
+            if ($this->where(['user_id' => $mhs_id, 'name' => $value])->exists()) {
+                array_push($boolean, true);
+            } else {
+                array_push($boolean, false);
+            }
+        }
+
+        if (count($boolean) == 0 | in_array(false, $boolean)) {
+            return false;
+        }
+        return true;
+    }
 }

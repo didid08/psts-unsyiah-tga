@@ -47,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
 
 			Route::get('/main/tga/input-usul-sidang', 'Main\TGA\Mahasiswa\InputUsulSidangController@view')->name('main.tga.mahasiswa.input-usul-sidang');
 			Route::post('/main/tga/input-usul-sidang', 'Main\TGA\Mahasiswa\InputUsulSidangController@process')->name('main.tga.mahasiswa.input-usul-sidang.process');
+
+			Route::get('/main/tga/input-usul-yudisium', 'Main\TGA\Mahasiswa\InputUsulYudisiumController@view')->name('main.tga.mahasiswa.input-usul-yudisium');
+			Route::post('/main/tga/input-usul-yudisium', 'Main\TGA\Mahasiswa\InputUsulYudisiumController@process')->name('main.tga.mahasiswa.input-usul-yudisium.process');
 		});
 		
 		//Admin
@@ -83,6 +86,9 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/main/tga/admin/usulan-pengesahan-sidang', 'Main\TGA\Admin\UsulanPengesahanSidangController@view')->name('main.tga.admin.usulan-pengesahan-sidang');
 		Route::post('/main/tga/admin/usulan-pengesahan-sidang/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanPengesahanSidangController@process')->name('main.tga.admin.usulan-pengesahan-sidang.process');
 
+		Route::get('/main/tga/admin/usulan-yudisium', 'Main\TGA\Admin\UsulanYudisiumController@view')->name('main.tga.admin.usulan-yudisium');
+		Route::post('/main/tga/admin/usulan-yudisium/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanYudisiumController@process')->name('main.tga.admin.usulan-yudisium.process');
+
 		//Koor Prodi
 		Route::get('/main/tga/koor-prodi/persetujuan-usulan-tga', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@view')->name('main.tga.koor-prodi.persetujuan-usulan-tga');
 		Route::post('/main/tga/koor-prodi/persetujuan-usulan-tga/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PersetujuanUsulanTGAController@process')->name('main.tga.koor-prodi.persetujuan-usulan-tga.process');
@@ -108,6 +114,9 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/main/tga/koor-prodi/pengesahan-sidang', 'Main\TGA\KoorProdi\PengesahanSidangController@view')->name('main.tga.koor-prodi.pengesahan-sidang');
 		Route::post('/main/tga/koor-prodi/pengesahan-sidang/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PengesahanSidangController@process')->name('main.tga.koor-prodi.pengesahan-sidang.process');
 
+		Route::get('/main/tga/koor-prodi/pengesahan-usulan-yudisium', 'Main\TGA\KoorProdi\PengesahanUsulanYudisiumController@view')->name('main.tga.koor-prodi.pengesahan-usulan-yudisium');
+		Route::post('/main/tga/koor-prodi/pengesahan-usulan-yudisium/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PengesahanUsulanYudisiumController@process')->name('main.tga.koor-prodi.pengesahan-usulan-yudisium.process');
+
 		//Ketua Kel Keahlian
 		Route::get('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');
 		Route::post('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co/process/{nim}', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@process')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing.process');
@@ -115,7 +124,7 @@ Route::middleware(['auth'])->group(function () {
 
 		//Pembimbing Co
 		Route::get('/main/tga/pembimbing/persetujuan-seminar-dan-sidang', 'Main\TGA\PembimbingCo\PersetujuanSeminarDanSidangController@view')->name('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang');
-		Route::post('/main/tga/pembimbing/persetujuan-seminar-dan-sidang/process/{nim}/{type}', 'Main\TGA\PembimbingCo\PersetujuanSeminarDanSidangController@process')->name('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang.process');
+		Route::post('/main/tga/pembimbing/persetujuan-seminar-dan-sidang/process/{nim}/{type}/{opsi?}', 'Main\TGA\PembimbingCo\PersetujuanSeminarDanSidangController@process')->name('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang.process');
 
 		//Koor TGA
 		Route::get('/main/tga/koor-tga/usulan-seminar-proposal', 'Main\TGA\KoorTGA\UsulanSeminarProposalController@view')->name('main.tga.koor-tga.usulan-sempro');

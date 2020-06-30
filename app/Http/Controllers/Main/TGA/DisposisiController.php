@@ -32,7 +32,8 @@ class DisposisiController extends MainController
                     'role' => $role,
                     'mahasiswa' => User::where('id', $id)->first(),
                     'disposisi' => Disposisi::where('user_id', $id)->first(),
-                    'data' => $data->listData($id)
+                    'data' => $data->listData($id),
+                    'cek_berkas_yudisium' => $data->checkMultipleData($id, ['biodata', 'transkrip', 'bukti-bebas-lab', 'artikel-jim'])
                 ]);
             }
             return abort(404);
