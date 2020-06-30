@@ -77,7 +77,7 @@
                     <li><a href="{{ route('main.tga.koor-prodi.persetujuan-stpd') }}" class="dropdown-item">Persetujuan Surat Tugas Pengambilan Data</a></li>
                     <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-penguji-sempro') }}" class="dropdown-item">Penetapan SK Penguji Seminar Proposal</a></li>
                     <li><a href="{{ route('main.tga.koor-prodi.pengesahan-sempro') }}" class="dropdown-item">Pengesahan Seminar Proposal</a></li>
-                    <li><a href="#" class="dropdown-item">Penetapan SK Penguji Sidang</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-penguji-sidang') }}" class="dropdown-item">Penetapan SK Penguji Sidang</a></li>
                     <li><a href="#" class="dropdown-item">Pengesahan Sidang</a></li>
                     <li><a href="#" class="dropdown-item">Pengesahan Usulan Yudisium</a></li>
                   @endif

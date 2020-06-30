@@ -31,8 +31,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/main/dosen/info', 'Main\MainController@infoDosen')->name('main.dosen.info');
 	Route::get('/main/dosen/rekap', 'Main\MainController@rekapDosen')->name('main.dosen.rekap');
 
-	Route::get('/main/file/{filename}', 'Main\FileGetController')->name('main.file');
-
+	Route::get('/main/file/{filename}', 'Main\FileGetController')->name('main.file'); //pdf
+	//Route::get('/main/file/{filename}/{filetoadd}', 'Main\FileGetController@zip')->name('main.file.zip'); //pdf
 		//TGA
 		Route::get('/main/tga/disposisi/{nim?}', 'Main\TGA\DisposisiController@view')->middleware('prevent.guest')->name('main.tga.disposisi');
 
@@ -98,6 +98,9 @@ Route::middleware(['auth'])->group(function () {
 
 		Route::get('/main/tga/koor-prodi/pengesahan-seminar-proposal', 'Main\TGA\KoorProdi\PengesahanSeminarProposalController@view')->name('main.tga.koor-prodi.pengesahan-sempro');
 		Route::post('/main/tga/koor-prodi/pengesahan-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PengesahanSeminarProposalController@process')->name('main.tga.koor-prodi.pengesahan-sempro.process');
+
+		Route::get('/main/tga/koor-prodi/penetapan-sk-penguji-sidang', 'Main\TGA\KoorProdi\PenetapanSKPengujiSidangController@view')->name('main.tga.koor-prodi.penetapan-sk-penguji-sidang');
+		Route::post('/main/tga/koor-prodi/penetapan-sk-penguji-sidang/process/{nim}/{opsi}', 'Main\TGA\KoorProdi\PenetapanSKPengujiSidangController@process')->name('main.tga.koor-prodi.penetapan-sk-penguji-sidang.process');
 
 		//Ketua Kel Keahlian
 		Route::get('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');

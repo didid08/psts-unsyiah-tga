@@ -10,6 +10,9 @@ use App\User;
 use App\UserRole;
 use App\Disposisi;
 use App\Data;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BeritahuKomisiPenguji;
+use Zip;
 
 class PenetapanSKPengujiSeminarProposalController extends MainController
 {
@@ -69,6 +72,41 @@ class PenetapanSKPengujiSeminarProposalController extends MainController
                 'verified' => true
             ]);
 
+            // Construct berkas zip
+            $filetoadd = ['sk-penguji-sempro', 'undangan-sempro', 'berkas-seminar-lainnya'];
+            $zip = Zip::create(storage_path().'/app/data/'.$nim.'-berkas-seminar-proposal.zip');
+            foreach ($filetoadd as $index => $value) {
+                $zip->add(storage_path().'/app/data/'.$nim.'-'.$value.'.pdf');
+            }
+            $zip->close();
+
+            //Email ke komisi penguji
+            $komisi_penguji = [
+                Data::where(['user_id' => $user->first()->id, 'name' => 'ketua-penguji'])->first()->content,
+                Data::where(['user_id' => $user->first()->id, 'name' => 'penguji-1'])->first()->content,
+                Data::where(['user_id' => $user->first()->id, 'name' => 'penguji-2'])->first()->content,
+                Data::where(['user_id' => $user->first()->id, 'name' => 'penguji-3'])->first()->content
+            ];
+
+            $email_komisi_penguji = [
+                User::where(['category' => 'dosen', 'nama' => $komisi_penguji[0]])->first()->email,
+                User::where(['category' => 'dosen', 'nama' => $komisi_penguji[1]])->first()->email,
+                User::where(['category' => 'dosen', 'nama' => $komisi_penguji[2]])->first()->email,
+                User::where(['category' => 'dosen', 'nama' => $komisi_penguji[3]])->first()->email
+            ];
+
+            $jadwal_seminar = [
+                Data::where(['user_id' => $user->first()->id, 'name' => 'tgl-seminar'])->first()->content,
+                Data::where(['user_id' => $user->first()->id, 'name' => 'jam-seminar'])->first()->content,
+                Data::where(['user_id' => $user->first()->id, 'name' => 'tempat-seminar'])->first()->content
+            ];
+
+            Mail::to($email_komisi_penguji[0])->send(new BeritahuKomisiPenguji('ketua penguji', $user->first()->nama, $nim, $jadwal_seminar[0], $jadwal_seminar[1], $jadwal_seminar[2]));
+            Mail::to($email_komisi_penguji[1])->send(new BeritahuKomisiPenguji('penguji 1', $user->first()->nama, $nim, $jadwal_seminar[0], $jadwal_seminar[1], $jadwal_seminar[2]));
+            Mail::to($email_komisi_penguji[2])->send(new BeritahuKomisiPenguji('penguji 2', $user->first()->nama, $nim, $jadwal_seminar[0], $jadwal_seminar[1], $jadwal_seminar[2]));
+            Mail::to($email_komisi_penguji[3])->send(new BeritahuKomisiPenguji('penguji 3', $user->first()->nama, $nim, $jadwal_seminar[0], $jadwal_seminar[1], $jadwal_seminar[2]));
+
+            //Update disposisi
     		$disposisi = Disposisi::where(['user_id' => $user->first()->id]);
 	        $disposisi->update([
 	            'progress' => 13
