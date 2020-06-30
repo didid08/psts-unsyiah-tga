@@ -93,6 +93,42 @@ class UploadDisposisiController extends Controller
                 ]);
 
                 return redirect()->back()->with('success', 'Berhasil mengisi peserta seminar proposal');
+            } elseif ($progress == 27) {
+                $validate_rules = [];
+                $validate_errors = [];
+
+                for($i = 1; $i <= 10; $i++) {
+                    $validate_rules['peserta-sidang-'.$i.'-nama'] = 'required';
+                    $validate_rules['peserta-sidang-'.$i.'-nim'] = 'required|numeric';
+
+                    $validate_errors['peserta-sidang-'.$i.'-nama.required'] = 'Harap masukkan nama peserta nomor '.$i;
+                    $validate_errors['peserta-sidang-'.$i.'-nim.required'] = 'Harap masukkan NIM peserta nomor '.$i;
+                    $validate_errors['peserta-sidang-'.$i.'-nim.numeric'] = 'Format NIM peserta '.$i.' salah';
+                }
+
+                $validator = Validator::make($request->all(), $validate_rules, $validate_errors);
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator);
+                }
+
+                for($i = 1; $i <= 10; $i++) {
+                    Data::updateOrCreate([
+                        'user_id' => User::myData('id'),
+                        'category' => 'data_usul_sidang_buku',
+                        'type' => 'text',
+                        'name' => 'peserta-sidang-'.$i,
+                        'display_name' => 'Peserta Sidang '.$i
+                    ], [
+                        'content' => $request->input('peserta-sidang-'.$i.'-nama').'-'.$request->input('peserta-sidang-'.$i.'-nim'),
+                        'verified' => true
+                    ]);
+                }
+
+                $disposisi->update([
+                    'progress' => 28
+                ]);
+
+                return redirect()->back()->with('success', 'Berhasil mengisi peserta sidang buku tga');
             } elseif ($progress == 15) {
                 $validate_rules = [
                     'berita-acara-seminar-proposal' => 'required|file|mimes:pdf|max:5120',

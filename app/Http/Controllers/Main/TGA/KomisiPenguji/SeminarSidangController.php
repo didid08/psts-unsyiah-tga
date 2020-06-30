@@ -37,7 +37,15 @@ class SeminarSidangController extends MainController
             'daftar_penguji_3' => $data->getDataMultiple('penguji-3'),
             'jam_seminar' => $data->getDataMultiple('jam-seminar'),
             'tgl_seminar' => $data->getDataMultiple('tgl-seminar'),
-            'tempat_seminar' => $data->getDataMultiple('tempat-seminar')
+            'tempat_seminar' => $data->getDataMultiple('tempat-seminar'),
+
+            'daftar_ketua_penguji_2' => $data->getDataMultiple('ketua-penguji-2'),
+            'daftar_penguji_1_2' => $data->getDataMultiple('penguji-1-2'),
+            'daftar_penguji_2_2' => $data->getDataMultiple('penguji-2-2'),
+            'daftar_penguji_3_2' => $data->getDataMultiple('penguji-3-2'),
+            'jam_sidang' => $data->getDataMultiple('jam-sidang'),
+            'tgl_sidang' => $data->getDataMultiple('tgl-sidang'),
+            'tempat_sidang' => $data->getDataMultiple('tempat-sidang')
         ]);
     }
 
@@ -57,5 +65,12 @@ class SeminarSidangController extends MainController
 			]);
             return redirect()->back()->with('success', 'Seminar telah dijadikan selesai');
     	}
+         elseif ($type == 'sidang')
+        {
+            $disposisi->update([
+                'progress' => 27
+            ]);
+            return redirect()->back()->with('success', 'Sidang telah dijadikan selesai');
+        }
     }
 }

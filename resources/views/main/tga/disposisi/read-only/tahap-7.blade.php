@@ -12,7 +12,6 @@
 						<ul>
 							<li>Seminar proposal dilaksanakan secara langsung maupun secara online.</li>
 							<li>Apabila ingin dilakukan secara online, maka mahasiswa dapat mengakses zoom melalui link berikut: <a href="http://zoom.us">zoom.us</a>.</li>
-							<li>Apabila seminar sudah selesai maka mahasiswa dapat mengunggah <b>Data Proposal</b> agar dapat lanjut ke tahap selanjutnya.</li>
 						</ul>
 					</div>
 				</td>

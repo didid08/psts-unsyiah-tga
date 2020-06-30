@@ -12,7 +12,6 @@
 						<ul>
 							<li>Sidang Buku TGA dilaksanakan secara langsung maupun secara online.</li>
 							<li>Apabila ingin dilakukan secara online, maka mahasiswa dapat mengakses zoom melalui link berikut: <a href="http://zoom.us">zoom.us</a>.</li>
-							<li>Apabila sidang sudah selesai maka mahasiswa dapat mengunggah <b>Data Sidang</b> agar dapat lanjut ke tahap selanjutnya.</li>
 						</ul>
 					</div>
 				</td>
@@ -20,7 +19,7 @@
 				<td class="align-middle">
 					<div class="alert alert-success text-left" role="alert"  style="margin: 0;">
 						<b>Pelaksanaan Sidang Buku TGA sudah selesai.</b> <br>
-						<i>Menunggu mahasiswa untuk mengunggah <b>Data Sidang</b></i>
+						<i>Menunggu mahasiswa untuk mengisi peserta sidang buku tga</i>
 					</div>
 				</td>
 			@elseif ($disposisi->progress > 27)
