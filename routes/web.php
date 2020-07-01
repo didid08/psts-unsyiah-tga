@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 	//Route::get('/main/file/{filename}/{filetoadd}', 'Main\FileGetController@zip')->name('main.file.zip'); //pdf
 		//TGA
 		Route::get('/main/tga/disposisi/{nim?}', 'Main\TGA\DisposisiController@view')->middleware('prevent.guest')->name('main.tga.disposisi');
+		Route::get('/main/tga/disposisi/{nim}/cetak', 'Main\TGA\DisposisiController@print')->middleware('prevent.guest')->name('main.tga.disposisi.cetak');
 
 		Route::middleware('only.mahasiswa')->group(function () {
 			Route::post('/main/tga/disposisi/upload/{progress}/{optional?}', 'Main\TGA\Mahasiswa\UploadDisposisiController')->middleware('prevent.guest')->name('main.tga.mahasiswa.upload-disposisi');

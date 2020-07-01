@@ -77,7 +77,7 @@
 											</td>
 											<td></td><td></td>
 											<td class="align-middle text-center">
-												<button class="btn btn-sm btn-outline-secondary text-bold"><i class="fa fa-download"></i>&nbsp;&nbsp;Unduh Disposisi</button>												
+												<a href="{{ route('main.tga.disposisi.cetak', ['nim' => $mahasiswa->nomor_induk]) }}" class="btn btn-sm btn-outline-secondary text-bold"><i class="fa fa-download"></i>&nbsp;&nbsp;Cetak Disposisi</a>												
 											</td>
 										</tr>
 									</table>

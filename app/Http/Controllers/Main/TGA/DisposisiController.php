@@ -12,6 +12,7 @@ use App\UserRole;
 use App\Disposisi;
 use App\Data;
 use App\Setting;
+use PDF;
 
 class DisposisiController extends MainController
 {
@@ -98,6 +99,35 @@ class DisposisiController extends MainController
                 'nim' => $nim
             ], $extra_data));
         }
+    }
+
+    public function print($nim)
+    {
+        $mhs = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
+        if (!$mhs->exists()) {
+            return abort(404);
+        }
+
+        $role = new UserRole();
+        if (isset($role->myRoles()->mhs)) {
+            if ($nim != User::myData('nomor_induk')) {
+                return abort(404);
+            }
+        }
+
+        $id = $mhs->first()->id;
+        $data_mahasiswa = new Data;
+        $disposisi = Disposisi::where('user_id', $id);
+
+        $data = [
+            'nim' => $nim,
+            'profil' => $mhs->first(),
+            'data' => $data_mahasiswa->listData($id),
+            'disposisi' => $disposisi->first()
+        ];
+
+        $pdf = PDF::loadView('main.tga.disposisi.cetak', $data);
+        return $pdf->stream($nim.'-disposisi.pdf');
     }
 
     public function terimaUsul($name, $nim, Request $request)
