@@ -90,6 +90,9 @@
       @if (session('warning'))
         toastr.warning('{{ session('warning') }}')
       @endif
+      @if (session('success'))
+        toastr.success('{{ session('success') }}')
+      @endif
       @if ($errors->any())
         var timeout = 0
         @foreach ($errors->all() as $error)

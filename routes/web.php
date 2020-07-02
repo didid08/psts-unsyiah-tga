@@ -31,8 +31,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/main/dosen/info', 'Main\MainController@infoDosen')->name('main.dosen.info');
 	Route::get('/main/dosen/rekap', 'Main\MainController@rekapDosen')->name('main.dosen.rekap');
 
-	Route::get('/main/file/{filename}', 'Main\FileGetController')->name('main.file'); //pdf
-	//Route::get('/main/file/{filename}/{filetoadd}', 'Main\FileGetController@zip')->name('main.file.zip'); //pdf
+	Route::get('/main/file/{filename}', 'Main\FileGetController')->name('main.file');
 		//TGA
 		Route::get('/main/tga/disposisi/{nim?}', 'Main\TGA\DisposisiController@view')->middleware('prevent.guest')->name('main.tga.disposisi');
 		Route::get('/main/tga/disposisi/{nim}/cetak', 'Main\TGA\DisposisiController@print')->middleware('prevent.guest')->name('main.tga.disposisi.cetak');

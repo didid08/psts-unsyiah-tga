@@ -4,9 +4,9 @@
 	<script>
 		$("#select-nim").select2();
 
+		$("input[type=checkbox]").attr('disabled', 'disabled');
 		@if (!isset($mhs))
 			$("tbody").addClass('text-muted');
-			$("input[type=checkbox]").attr('disabled', 'disabled');
 			$(".cetak-btn").attr('disabled', 'disabled');
 		@else
 			$("#refresh-btn").click(function () {
@@ -153,72 +153,72 @@
 
 								<tr>
 									<td class="align-middle text-left">
-										<input type="checkbox" id="data-photo">&nbsp;&nbsp;Photo
+										<input type="checkbox"{!! $check_data['foto'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;Photo
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;Proposal
+										<input type="checkbox"{!! $check_data['buku-proposal'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;Proposal
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;Buku_TGA
+										<input type="checkbox"{!! $check_data['buku-tga'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;Buku_TGA
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;SK_Penguji_Sid
-									</td>
-								</tr>
-								<tr>
-									<td class="align-middle text-left">
-										<input type="checkbox" id="data-photo">&nbsp;&nbsp;KHS_1
-									</td>
-									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;BA_Proposal
-									</td>
-									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;BA_Sidang
-									</td>
-									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;Disposisi
+										<input type="checkbox"{!! $check_data['sk-penguji-sidang'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;SK_Penguji_Sid
 									</td>
 								</tr>
 								<tr>
 									<td class="align-middle text-left">
-										<input type="checkbox" id="data-photo">&nbsp;&nbsp;KRS_1
+										<input type="checkbox"{!! $check_data['khs'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;KHS_1
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;Dhadir_Proposal
+										<input type="checkbox"{!! $check_data['berita-acara-seminar-proposal'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;BA_Proposal
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;Dhadir_Sidang
+										<input type="checkbox"{!! $check_data['berita-acara-sidang-buku'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;BA_Sidang
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;Lembar_S7
+										<input type="checkbox"{!! $progress > 35 ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;Disposisi
 									</td>
 								</tr>
 								<tr>
 									<td class="align-middle text-left">
-										<input type="checkbox" id="data-photo">&nbsp;&nbsp;Transkrips_1
+										<input type="checkbox"{!! $check_data['krs'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;KRS_1
+									</td>
+									<td class="align-middle text-left">
+										<input type="checkbox"{!! $check_data['daftar-hadir-seminar-proposal'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;Dhadir_Proposal
+									</td>
+									<td class="align-middle text-left">
+										<input type="checkbox"{!! $check_data['kelengkapan-dokumen-administrasi-sidang-buku'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;Dhadir_Sidang
+									</td>
+									<td class="align-middle text-left">
+										<input type="checkbox" disabled="disabled">
+									</td>
+								</tr>
+								<tr>
+									<td class="align-middle text-left">
+										<input type="checkbox"{!! $check_data['transkrip-sementara'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;Transkrips_1
 									</td>
 									<td class="align-middle text-left">
 										<input type="checkbox" disabled="disabled">&nbsp;&nbsp;
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;Publ_Ilmiah
+										<input type="checkbox" disabled="disabled">&nbsp;&nbsp;
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;P'sahan_TGA
+										<input type="checkbox" disabled="disabled">&nbsp;&nbsp;
 									</td>
 								</tr>
 								<tr>
 									<td class="align-middle text-left">
-										<input type="checkbox" id="data-photo">&nbsp;&nbsp;SPP_Aktif
+										<input type="checkbox"{!! $check_data['spp'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;SPP_Aktif
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;SK_Pembimb
+										<input type="checkbox"{!! $check_data['sk-pembimbing'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;SK_Pembimb
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;SK_Penguji_Prop
+										<input type="checkbox"{!! $check_data['sk-penguji-sempro'] == true ? ' checked="checked"' : '' !!}>&nbsp;&nbsp;SK_Penguji_Prop
 									</td>
 									<td class="align-middle text-left">
-										<input type="checkbox">&nbsp;&nbsp;Lembar_ACC
+										<input type="checkbox" disabled="disabled">&nbsp;&nbsp;
 									</td>
 								</tr>
 

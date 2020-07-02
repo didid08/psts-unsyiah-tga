@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Middleware\TGA;
+namespace App\Http\Middleware;
 
 use Closure;
+use App\UserRole;
 
 class OnlyAdmin
 {
@@ -15,6 +16,12 @@ class OnlyAdmin
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $userRole = new UserRole();
+        $role = $userRole->myRoles();
+
+        if (isset($role->admin)) {
+            return $next($request);
+        }
+        return abort(404);
     }
 }

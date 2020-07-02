@@ -133,7 +133,7 @@
               </span>
               @if ($category != 'tamu')
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
+                <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#rubah-password-1">
                   <i class="fa fa-key mr-2"></i> Ubah Password
                 </a>
               @endif
@@ -147,6 +147,45 @@
     </div>
   </nav>
   <!-- /.navbar -->
+
+  <!-- Ubah Password -->
+  <div class="modal fade" id="rubah-password-1" aria-modal="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Rubah Password</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <form action="{{ route('auth.password.change') }}" method="post">
+            <div class="modal-body">
+              @method('put')
+              @csrf
+              <table class="table table-light">
+                <tr>
+                  <td colspan="2" class="align-middle text-center">
+                    <input type="password" class="form-control" name="old-password" placeholder="Masukkan password lama">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="align-middle text-center">
+                    <input type="password" class="form-control" name="password" placeholder="Masukkan password baru">
+                  </td>
+                  <td class="align-middle text-center">
+                    <input type="password" class="form-control" name="password-repeat" placeholder="Ulangi password baru">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-success">Kirim</button>
+              </div>
+            </form>
+        </div>
+    </div>
+  </div>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
