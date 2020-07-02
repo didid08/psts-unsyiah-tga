@@ -51,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
 
 			Route::get('/main/tga/input-usul-yudisium', 'Main\TGA\Mahasiswa\InputUsulYudisiumController@view')->name('main.tga.mahasiswa.input-usul-yudisium');
 			Route::post('/main/tga/input-usul-yudisium', 'Main\TGA\Mahasiswa\InputUsulYudisiumController@process')->name('main.tga.mahasiswa.input-usul-yudisium.process');
+
+			Route::get('/main/biodata', 'Main\Mahasiswa\BiodataController@view')->name('main.mahasiswa.biodata');
+			Route::post('/main/biodata', 'Main\Mahasiswa\BiodataController@process')->name('main.mahasiswa.biodata.process');
 		});
 		
 		//Admin

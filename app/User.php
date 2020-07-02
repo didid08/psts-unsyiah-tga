@@ -65,9 +65,9 @@ class User extends Model
             $bimbingan[$dosen->nama] = [];
         }
 
-        if (Data::where('name', 'nama-pembimbing')->exists()) {
+        if (Data::where('name', 'pembimbing')->exists()) {
 
-            $x = Data::where('name', 'nama-pembimbing')->get();
+            $x = Data::where('name', 'pembimbing')->get();
             foreach ($x as $y) {
                 array_push($bimbingan[$y->content], $y->user->nama);
             }
@@ -101,7 +101,7 @@ class User extends Model
                     foreach ($value as $value2) {
                         $mhs_id = $this->firstWhere('nama', $value2)->id;
 
-                        if ($this->find($mhs_id)->administrasiTGA()->value('selesai') == true) {
+                        if ($this->find($mhs_id)->disposisi()->value('progress') > 35) {
                             $selesai_bimbingan[$index] = $selesai_bimbingan[$index]+1;
                         }
                     }
@@ -123,9 +123,9 @@ class User extends Model
             $co_bimbingan[$dosen->nama] = [];
         }
 
-        if (Data::where('name', 'nama-co-pembimbing')->exists()) {
+        if (Data::where('name', 'co-pembimbing')->exists()) {
 
-            $x = Data::where('name', 'nama-co-pembimbing')->get();
+            $x = Data::where('name', 'co-pembimbing')->get();
             foreach ($x as $y) {
                 array_push($co_bimbingan[$y->content], $y->user->nama);
             }
@@ -157,7 +157,7 @@ class User extends Model
                     foreach ($value as $value2) {
                         $mhs_id = $this->firstWhere('nama', $value2)->id;
 
-                        if ($this->find($mhs_id)->administrasiTGA()->value('selesai') == true) {
+                        if ($this->find($mhs_id)->disposisi()->value('progress') > 35) {
                             $selesai_bimbingan[$index] = $selesai_bimbingan[$index]+1;
                         }
                     }
