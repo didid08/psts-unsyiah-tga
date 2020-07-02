@@ -37,10 +37,10 @@
 									<tr>
 										<td class="align-middle text-center">{{ $i }}</td>
 										<td class="align-middle text-center">
-											<input type="text" class="form-control" name="peserta-sidang-{{ $i }}-nama" placeholder="Masukkan Nama" value="a">
+											<input type="text" class="form-control" name="peserta-sidang-{{ $i }}-nama" placeholder="Masukkan Nama">
 										</td>
 										<td class="align-middle text-center">
-											<input type="text" class="form-control" name="peserta-sidang-{{ $i }}-nim" placeholder="Masukkan NIM" value="1">
+											<input type="text" class="form-control" name="peserta-sidang-{{ $i }}-nim" placeholder="Masukkan NIM">
 										</td>
 									</tr>
 								@endfor

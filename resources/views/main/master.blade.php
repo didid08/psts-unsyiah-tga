@@ -110,11 +110,11 @@
             </ul>
           </li>
 
-          @if (in_array($category, ['admin', 'mahasiswa']))
+          {{--@if (in_array($category, ['admin', 'mahasiswa']))
             <li class="nav-item">
               <a href="#" class="nav-link{{ $nav_item_active == 'nilai-mahasiswa' ? ' text-bold' : '' }}">Nilai Mahasiswa</a>
             </li>
-          @endif
+          @endif--}}
         </ul>
       </div>
 

@@ -221,7 +221,7 @@
 										<input type="checkbox" disabled="disabled">&nbsp;&nbsp;
 									</td>
 								</tr>
-
+{{--
 								<tr>
 									<td colspan="4" class="align-middle text-center text-bold bg-primary">
 										CETAK DOKUMEN ADM TGA
@@ -310,7 +310,7 @@
 									<td class="align-middle text-center">
 										<button class="btn btn-block btn-info text-bold cetak-btn">Cetak_DtYud</button>
 									</td>
-								</tr>
+								</tr>--}}
 							</tbody>
 	    				</table>
 	    			</div>
