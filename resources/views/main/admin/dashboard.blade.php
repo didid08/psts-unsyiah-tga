@@ -33,7 +33,7 @@
 			<div class="modal-dialog modal-lg">
 		  		<div class="modal-content">
 		    		<div class="modal-header">
-		      			<h4 class="modal-title">Rubah Password {{ $mhs->nama }} ({{ $mhs->nomor_induk }})</h4>
+		      			<h4 class="modal-title">Ubah Password {{ $mhs->nama }} ({{ $mhs->nomor_induk }})</h4>
 		      			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		        			<span aria-hidden="true">×</span>
 		      			</button>
@@ -107,9 +107,9 @@
 									</th>
 									<th class="align-middle text-center">
 										@if (isset($mhs))
-											<button type="button" class="btn btn-info text-bold" data-toggle="modal" data-target="#rubah-password">Rubah Password</button>
+											<button type="button" class="btn btn-info text-bold" data-toggle="modal" data-target="#rubah-password">Ubah Password</button>
 										@else
-											<button class="btn btn-info text-bold" disabled="disabled">Rubah Password</button>
+											<button class="btn btn-info text-bold" disabled="disabled">Ubah Password</button>
 										@endif
 									</th>
 								</tr>

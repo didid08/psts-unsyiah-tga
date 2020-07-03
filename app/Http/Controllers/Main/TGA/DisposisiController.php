@@ -151,7 +151,7 @@ class DisposisiController extends MainController
                 }
 
                 $requestHari = 7;
-                if (in_array($name, ['pembimbing', 'co-pembimbing'])) {
+                if (in_array($name, ['pembimbing', 'co-pembimbing', 'pembimbing-ubah', 'co-pembimbing-ubah'])) {
                     $requestHari = 2;
                 }
 
@@ -167,15 +167,30 @@ class DisposisiController extends MainController
                         'verified' => true,
                         'verification_key' => null
                     ]);
+                    /*$name2 = str_replace([
+                        'ketua-penguji-2',
+                        'penguji-1-2',
+                        'penguji-2-2',
+                        'penguji-3-2'
+                    ], [
+                        'ketua-penguji',
+                        'penguji-1',
+                        'penguji-2',
+                        'penguji-3'
+                    ], $name);*/
                     $name2 = $name;
-                    if ($name = 'ketua-penguji-2') {
+                    if ($name == 'ketua-penguji-2') {
                         $name2 = 'ketua-penguji';
-                    }elseif ($name = 'penguji-1-2') {
+                    }elseif ($name == 'penguji-1-2') {
                         $name2 = 'penguji-1';
-                    }elseif ($name = 'penguji-2-2') {
+                    }elseif ($name == 'penguji-2-2') {
                         $name2 = 'penguji-2';
-                    }elseif ($name = 'penguji-3-2') {
+                    }elseif ($name == 'penguji-3-2') {
                         $name2 = 'penguji-3';
+                    }elseif ($name == 'pembimbing-ubah') {
+                        $name2 = 'pembimbing';
+                    }elseif ($name == 'co-pembimbing-ubah') {
+                        $name2 = 'co-pembimbing';
                     }
 
                     return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name2)).' untuk mahasiswa bernama '.$mhs->first()->nama.' ('.$mhs->first()->nomor_induk.')');

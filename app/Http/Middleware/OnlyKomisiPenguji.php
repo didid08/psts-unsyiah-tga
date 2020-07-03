@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\UserRole;
 
-class OnlyKoorProdi
+class OnlyKomisiPenguji
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class OnlyKoorProdi
         $userRole = new UserRole();
         $role = $userRole->myRoles();
 
-        if (isset($role->koor_prodi)) {
+        if (isset($role->komisi_penguji)) {
             return $next($request);
         }
         return abort(404);

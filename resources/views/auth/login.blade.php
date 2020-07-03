@@ -67,10 +67,6 @@
           <i class="fas fa-user mr-2"></i> Masuk Sebagai Tamu
         </a>
       </div>
-
-      <p class="mb-1">
-        <a href="forgot-password.html">Reset Password</a>
-      </p>
     </div>
   </div>
 </div>

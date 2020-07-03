@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'only.koor-prodi' => \App\Http\Middleware\OnlyKoorProdi::class,
         'only.koor-tga' => \App\Http\Middleware\OnlyKoorTGA::class,
         'only.pembimbing-co' => \App\Http\Middleware\OnlyPembimbingCo::class,
+        'only.komisi-penguji' => \App\Http\Middleware\OnlyKomisiPenguji::class,
         'only.mahasiswa' => \App\Http\Middleware\OnlyMahasiswa::class,
 
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,

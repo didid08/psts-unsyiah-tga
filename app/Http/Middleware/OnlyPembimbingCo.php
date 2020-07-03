@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Middleware\TGA;
+namespace App\Http\Middleware;
 
 use Closure;
+use App\UserRole;
 
 class OnlyPembimbingCo
 {
@@ -15,6 +16,12 @@ class OnlyPembimbingCo
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $userRole = new UserRole();
+        $role = $userRole->myRoles();
+
+        if (isset($role->pembimbing_co)) {
+            return $next($request);
+        }
+        return abort(404);
     }
 }

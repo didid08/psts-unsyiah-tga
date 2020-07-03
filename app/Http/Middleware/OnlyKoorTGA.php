@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\UserRole;
 
 class OnlyKoorTGA
 {
@@ -15,6 +16,12 @@ class OnlyKoorTGA
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $userRole = new UserRole();
+        $role = $userRole->myRoles();
+
+        if (isset($role->koor_tga)) {
+            return $next($request);
+        }
+        return abort(404);
     }
 }

@@ -19,7 +19,7 @@ class UsulanDaftarHadirSeminarProposalController extends MainController
 
     	return $this->customView('tga.admin.usulan-daftar-hadir-seminar-proposal', [
             'nav_item_active' => 'tga',
-            'subtitle' => 'Usulan Daftar Hadir Seminar Proposal',
+            'subtitle' => 'Usulan Kelengkapan Dokumen Administrasi Seminar Proposal',
 
             'semua_mahasiswa' => Disposisi::where('progress', 19)->orderBy('updated_at')->get(),
             'daftar_hadir_seminar_proposal' => $data->getDataMultiple('daftar-hadir-seminar-proposal')

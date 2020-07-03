@@ -43,6 +43,11 @@
           <li class="nav-item">
             <a href="{{ route('main.dashboard') }}" class="nav-link{{ $nav_item_active == 'dashboard' ? ' text-bold' : '' }}">Dashboard</a>
           </li>
+          @if (isset($role->admin))
+            <li class="nav-item">
+              <a href="{{ route('main.admin.akun') }}" class="nav-link{{ $nav_item_active == 'akun' ? ' text-bold' : '' }}">Akun</a>
+            </li>
+          @endif
           @if ($category != 'tamu')
             @if (isset($role->admin) | isset($role->koor_prodi) | isset($role->koor_tga) | isset($role->ketua_kel_keahlian) | isset($role->pembimbing_co) | isset($role->mhs))
               <li class="nav-item dropdown">
@@ -63,7 +68,7 @@
                     <li><a href="{{ route('main.tga.admin.usulan-sempro') }}" class="dropdown-item">Usulan Seminar Proposal</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sempro') }}" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-pengesahan-sempro') }}" class="dropdown-item">Usulan Pengesahan Seminar Proposal</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-daftar-hadir-sempro') }}" class="dropdown-item">Usulan Daftar Hadir Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-daftar-hadir-sempro') }}" class="dropdown-item">Usulan Kelengkapan Dokumen Administrasi Seminar Proposal</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-sidang') }}" class="dropdown-item">Usulan Sidang</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sidang') }}" class="dropdown-item">Usulan SK Penguji Sidang</a></li>
                     <li><a href="{{ route('main.tga.admin.usulan-pengesahan-sidang') }}" class="dropdown-item">Usulan Pengesahan Sidang</a></li>
@@ -86,6 +91,7 @@
                   @endif
                   @if (isset($role->ketua_kel_keahlian))
                     <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengusulan-pembimbing') }}" class="dropdown-item">Pengusulan Pembimbing dan Co</a></li>
+                    <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengubahan-pembimbing') }}" class="dropdown-item">Pengubahan Pembimbing dan Co</a></li>
                   @endif
                   @if (isset($role->pembimbing_co))
                     <li><a href="{{ route('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang') }}" class="dropdown-item">Persetujuan Seminar dan Sidang</a></li>
@@ -153,7 +159,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-              <h4 class="modal-title">Rubah Password</h4>
+              <h4 class="modal-title">Ubah Password</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>

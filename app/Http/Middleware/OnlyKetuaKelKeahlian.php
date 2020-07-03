@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\UserRole;
 
 class OnlyKetuaKelKeahlian
 {
@@ -15,6 +16,12 @@ class OnlyKetuaKelKeahlian
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $userRole = new UserRole();
+        $role = $userRole->myRoles();
+
+        if (isset($role->ketua_kel_keahlian)) {
+            return $next($request);
+        }
+        return abort(404);
     }
 }
