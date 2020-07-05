@@ -9,13 +9,13 @@ use App\User;
 use App\Data;
 use App\Disposisi;
 
-class DashboardController extends MainController
+class CekDataController extends MainController
 {
-    public function dashboard()
+    public function view()
     {
-    	return $this->customView('admin.dashboard', [
-            'nav_item_active' => 'dashboard',
-            'subtitle' => 'Dashboard',
+    	return $this->customView('admin.cek-data', [
+            'nav_item_active' => 'cek-data',
+            'subtitle' => 'Cek Data',
             'semua_mahasiswa' => User::dataWithCategory('mahasiswa'),
             'check_data' => [
                 'foto' => false,
@@ -40,7 +40,7 @@ class DashboardController extends MainController
         ]);
     }
 
-    public function dashboardWithData(Request $request)
+    public function viewWithData(Request $request)
     {
     	$validator = Validator::make($request->all(), [
     		'nim' => 'required|not_in:empty'
@@ -90,9 +90,9 @@ class DashboardController extends MainController
         }
 
         if (User::where('nomor_induk', $request->input('nim'))->exists()) {
-            return $this->customView('admin.dashboard', [
-                'nav_item_active' => 'dashboard',
-                'subtitle' => 'Dashboard',
+            return $this->customView('admin.cek-data', [
+                'nav_item_active' => 'cek-data',
+                'subtitle' => 'Cek Data',
                 'semua_mahasiswa' => User::dataWithCategory('mahasiswa'),
                 'mhs' => User::firstWhere('nomor_induk', $request->input('nim')),
                 'progress' => Disposisi::where('user_id', $mhs_id)->first()->progress,

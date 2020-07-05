@@ -36,13 +36,27 @@ class User extends Model
 
         $identityType;
 
-        if (in_array($auth['category'], array('dosen', 'mahasiswa'))) {
+        if (in_array($auth['category'], array('dosen', 'pejabat', 'mahasiswa'))) {
             $identityType = 'nomor_induk';
         }else {
             $identityType = 'username';
         }
 
         return User::firstwhere($identityType, $auth['identity'][$identityType])->$column;
+    }
+
+    public static function myAllData() {
+        $auth = session('auth');
+
+        $identityType;
+
+        if (in_array($auth['category'], array('dosen', 'pejabat', 'mahasiswa'))) {
+            $identityType = 'nomor_induk';
+        }else {
+            $identityType = 'username';
+        }
+
+        return User::where($identityType, $auth['identity'][$identityType])->first();
     }
 
     public static function dataWithCategory($category, $option = null) {

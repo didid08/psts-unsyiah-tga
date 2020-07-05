@@ -27,7 +27,9 @@ Route::middleware(['auth'])->group(function () {
 
 	/* MAIN ROUTES */
 	Route::get('/main/dashboard', 'Main\MainController@dashboard')->name('main.dashboard');
-	Route::get('/main/dashboard/data', 'Main\Admin\DashboardController@dashboardWithData')->middleware('only.admin')->name('main.dashboard.admin.with-data');
+
+	Route::get('/main/cek-data', 'Main\Admin\CekDataController@view')->middleware('only.admin')->name('main.admin.cek-data');
+	Route::get('/main/cek-data/data', 'Main\Admin\CekDataController@viewWithData')->middleware('only.admin')->name('main.admin.cek-data.with-data');
 	
 	Route::get('/main/akun', 'Main\Admin\AkunController@view')->middleware('only.admin')->name('main.admin.akun');
 	Route::post('/main/akun/tambah', 'Main\Admin\AkunController@tambahAkun')->middleware('only.admin')->name('main.admin.akun.tambah');
@@ -86,8 +88,8 @@ Route::middleware(['auth'])->group(function () {
 			Route::get('/main/tga/admin/usulan-pengesahan-seminar-proposal', 'Main\TGA\Admin\UsulanPengesahanSeminarProposalController@view')->name('main.tga.admin.usulan-pengesahan-sempro');
 			Route::post('/main/tga/admin/usulan-pengesahan-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanPengesahanSeminarProposalController@process')->name('main.tga.admin.usulan-pengesahan-sempro.process');
 
-			Route::get('/main/tga/admin/usulan-kelengkapan-dok-adm-sempro', 'Main\TGA\Admin\UsulanDaftarHadirSeminarProposalController@view')->name('main.tga.admin.usulan-daftar-hadir-sempro');
-			Route::post('/main/tga/admin/usulan-kelengkapan-dok-adm-sempro/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanDaftarHadirSeminarProposalController@process')->name('main.tga.admin.usulan-daftar-hadir-sempro.process');
+			Route::get('/main/tga/admin/usulan-kelengkapan-dokumen-administrasi-seminar-proposal', 'Main\TGA\Admin\UsulanDaftarHadirSeminarProposalController@view')->name('main.tga.admin.usulan-daftar-hadir-sempro');
+			Route::post('/main/tga/admin/usulan-kelengkapan-dokumen-administrasi-seminar-proposal/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanDaftarHadirSeminarProposalController@process')->name('main.tga.admin.usulan-daftar-hadir-sempro.process');
 
 			Route::get('/main/tga/admin/usulan-sidang', 'Main\TGA\Admin\UsulanSidangController@view')->name('main.tga.admin.usulan-sidang');
 			Route::post('/main/tga/admin/usulan-sidang/process/{nim}/{opsi}', 'Main\TGA\Admin\UsulanSidangController@process')->name('main.tga.admin.usulan-sidang.process');
@@ -134,8 +136,8 @@ Route::middleware(['auth'])->group(function () {
 
 		//Ketua Kel Keahlian
 		Route::middleware('only.ketua-kel-keahlian')->group(function () {
-			Route::get('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');
-			Route::post('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-co/process/{nim}', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@process')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing.process');
+			Route::get('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-dan-co', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing');
+			Route::post('/main/tga/ketua-kel-keahlian/pengusulan-pembimbing-dan-co/process/{nim}', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@process')->name('main.tga.ketua-kel-keahlian.pengusulan-pembimbing.process');
 			Route::post('/usul/pembimbing-co/{nim}', 'Main\TGA\KetuaKelKeahlian\PengusulanPembimbingController@usul')->name('usul.pembimbing-co');
 
 			Route::get('/main/tga/ketua-kel-keahlian/pengubahan-pembimbing-co', 'Main\TGA\KetuaKelKeahlian\PengubahanPembimbingController@view')->name('main.tga.ketua-kel-keahlian.pengubahan-pembimbing');

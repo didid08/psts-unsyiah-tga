@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Main\Admin\DashboardController;
 use App\User;
 use App\UserRole;
+use App\Disposisi;
 use App\Setting;
 
 class MainController extends Controller
@@ -43,21 +44,16 @@ class MainController extends Controller
 
     public function dashboard()
     {
-        $userRole = new UserRole();
-        $role = $userRole->myRoles();
-    	if (isset($role->admin)) {
-            $admin_dashboard_controller = new DashboardController;
-    		return $admin_dashboard_controller->dashboard();
-    	}else {
+        $userRole = new UserRole;
 
-            $nav_item_active = 'dashboard';
-            $subtitle = 'Dashboard';
-
-    		return $this->customView('dashboard', [
-                'nav_item_active' => $nav_item_active,
-                'subtitle' => $subtitle
-            ]);
-    	}
+		return $this->customView('dashboard', [
+            'nav_item_active' => 'dashboard',
+            'subtitle' => 'Dashboard',
+            'role' => $userRole->myRoles(),
+            'saya' => User::myAllData(),
+            'semua_mahasiswa' => Disposisi::where('progress', '>', 1)->where('progress', '<', 36)->orderBy('updated_at')->get(),
+            'semua_mahasiswa_opsional' => Disposisi::where('progress_optional', '>', 1)->where('progress_optional', '<', 6)->where('progress', '<', 26)->orderBy('updated_at')->get()
+        ]);
     }
 
     public function infoDosen()

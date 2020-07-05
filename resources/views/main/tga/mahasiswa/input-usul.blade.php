@@ -124,9 +124,7 @@
 										<td colspan="3">
 											<select name="ketua-bidang" class="form-control">
 												@foreach ($semua_dosen as $dosen)
-													@if ($dosen->bidang_id != null)
-														<option{{ $input_value['ketua-bidang'] != null ? ($input_value['ketua-bidang'] == $dosen->nama ? ' selected' : '') : '' }}>{{ $dosen->nama }}</option>
-													@endif
+													<option{{ $input_value['ketua-bidang'] != null ? ($input_value['ketua-bidang'] == $dosen->nama ? ' selected' : '') : '' }}>{{ $dosen->nama }}</option>
 												@endforeach
 											</select>
 										</td>

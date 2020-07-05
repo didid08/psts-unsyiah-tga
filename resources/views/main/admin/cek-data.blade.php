@@ -80,7 +80,7 @@
 										FAKULTAS TEKNIK - UNIVERSITAS SYIAH KUALA
 									</th>
 								</tr>
-								<form action="{{ route('main.dashboard.admin.with-data') }}" method="get" class="form-control">
+								<form action="{{ route('main.admin.cek-data.with-data') }}" method="get" class="form-control">
 									<tr class="bg-light">
 										<th class="align-middle text-left">
 											NIM Mahasiswa

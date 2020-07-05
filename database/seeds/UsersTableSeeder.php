@@ -1227,7 +1227,7 @@ class UsersTableSeeder extends Seeder
     	DB::table('users')->insert([
     		'category' => 'pejabat',
     		'nomor_induk' => '3',
-    		'nama' => 'Ketua Bidang MRK',
+    		'nama' => 'Ketua Bidang Manajemen Rekayasa Konstruksi',
     		'bidang_id' => 1,
     		'password' => Hash::make('3')
     	]);

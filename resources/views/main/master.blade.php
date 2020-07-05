@@ -6,7 +6,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>{{ $title }} | {{ ucfirst($category) }} - {{ $subtitle }}</title>
+  <title>{{ $title }} | {{ $subtitle }}</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -44,6 +44,9 @@
             <a href="{{ route('main.dashboard') }}" class="nav-link{{ $nav_item_active == 'dashboard' ? ' text-bold' : '' }}">Dashboard</a>
           </li>
           @if (isset($role->admin))
+            <li class="nav-item">
+              <a href="{{ route('main.admin.cek-data') }}" class="nav-link{{ $nav_item_active == 'cek-data' ? ' text-bold' : '' }}">Cek Data</a>
+            </li>
             <li class="nav-item">
               <a href="{{ route('main.admin.akun') }}" class="nav-link{{ $nav_item_active == 'akun' ? ' text-bold' : '' }}">Akun</a>
             </li>
@@ -96,7 +99,7 @@
                     <li><a href="{{ route('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang') }}" class="dropdown-item">1. Persetujuan Seminar dan Sidang</a></li>
                   @endif
                   @if (isset($role->komisi_penguji))
-                    <li><a href="{{ route('main.tga.komisi-penguji.seminar-sidang') }}" class="dropdown-item">1. Seminar/Sidang</a></li>
+                    <li><a href="{{ route('main.tga.komisi-penguji.seminar-sidang') }}" class="dropdown-item">2. Seminar/Sidang</a></li>
                   @endif
                 </ul>
               </li>
@@ -129,11 +132,11 @@
             <a class="nav-link" data-toggle="dropdown" href="#" style="display: inline;">
               <span class="text-bold"><b>{{ $nama }}</b>&nbsp;</span>
               <i class="fas fa-caret-down"></i>
-              <!--<img src="{{ asset('dist/img/figure/default-user.jpg') }}" class="img-circle elevation-2 ml-2" alt="User Image">-->
+              {{--<img src="{{ asset('dist/img/figure/default-user.jpg') }}" class="img-circle elevation-2 ml-2" alt="User Image">--}}
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <span class="dropdown-header">
-                <h5>{{ $nama }}</h5>
+                <h5>{{ mb_strimwidth($nama, 0, 20, "...") }}</h5>
                 {{ $identity }}
               </span>
               @if ($category != 'tamu')
