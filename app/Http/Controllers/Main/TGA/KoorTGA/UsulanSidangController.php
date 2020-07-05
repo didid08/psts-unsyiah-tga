@@ -135,7 +135,7 @@ class UsulanSidangController extends MainController
 	    		'tgl-sidang' => 'required',
 	    		'tempat-sidang' => 'required',
 	    	], [
-	    		'ketua-penguji-2.required' => 'Harap pilih nama ketua penguji',
+	    		'ketua-penguji-2.required' => 'Harap pilih nama pimpinan',
 	    		'penguji-1-2.required' => 'Harap pilih nama penguji 1',
 	    		'penguji-2-2.required' => 'Harap pilih nama penguji 2',
 	    		'penguji-3-2.required' => 'Harap pilih nama penguji 3',
@@ -190,7 +190,7 @@ class UsulanSidangController extends MainController
 	    		'category' => 'data_usul_sidang_buku',
 	    		'type' => 'text',
 	    		'name' => 'ketua-penguji-2',
-	    		'display_name' => 'Ketua Penguji Sidang Buku TGA'
+	    		'display_name' => 'Pimpinan Sidang Buku TGA'
 	    	], [
 	    		'content' => $komisi_penguji[0]->nama,
 	    		'verified' => false,

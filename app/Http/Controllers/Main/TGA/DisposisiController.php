@@ -179,8 +179,10 @@ class DisposisiController extends MainController
                         'penguji-3'
                     ], $name);*/
                     $name2 = $name;
-                    if ($name == 'ketua-penguji-2') {
-                        $name2 = 'ketua-penguji';
+                    if ($name == 'ketua-penguji') {
+                        $name2 = 'pimpinan-seminar';
+                    }elseif ($name == 'ketua-penguji-2') {
+                        $name2 = 'pimpinan-sidang';
                     }elseif ($name == 'penguji-1-2') {
                         $name2 = 'penguji-1';
                     }elseif ($name == 'penguji-2-2') {

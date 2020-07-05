@@ -221,9 +221,9 @@
           <li class="nav-item">
             <a class="nav-link" id="dosen-tab" data-toggle="pill" href="#dosen" role="tab" aria-controls="dosen" aria-selected="false">Dosen</a>
           </li>
-          <li class="nav-item">
+          {{--<li class="nav-item">
             <a class="nav-link" id="role-tab" data-toggle="pill" href="#role" role="tab" aria-controls="role" aria-selected="false">Role/Jabatan</a>
-          </li>
+          </li>--}}
         </ul>
       </div>
       <div class="card-body">
@@ -280,7 +280,7 @@
                </tbody>
              </table>
           </div>
-          <div class="tab-pane fade" id="role" role="tabpanel" aria-labelledby="role-tab">
+          {{--<div class="tab-pane fade" id="role" role="tabpanel" aria-labelledby="role-tab">
              <table class="table table-bordered table-striped">
                <tr>
                  <td class="align-middle text-bold bg-info" style="width: 30%;">
@@ -448,7 +448,7 @@
                   </form>
                </tr>
              </table>
-          </div>
+          </div>--}}
         </div>
       </div>
       <!-- /.card -->

@@ -27,7 +27,7 @@
 										<th colspan="4" class="text-center">Komisi Penguji</th>
 									</tr>
 									<tr>
-										<th class="text-center">Ketua Penguji</th>
+										<th class="text-center">Pimpinan</th>
 										<th class="text-center">Penguji 1</th>
 										<th class="text-center">Penguji 2</th>
 										<th class="text-center">Penguji 3</th>
@@ -217,7 +217,7 @@
 											<td class="align-middle text-center">
 												<table class="table table-bordered table-striped table-light">
 													<tr>
-														<td class="align-middle text-left text-bold">Ketua Penguji</td>
+														<td class="align-middle text-left text-bold">Pimpinan</td>
 														<td class="align-middle text-left">
 															{{ $daftar_ketua_penguji_2->$mhsId2->content }}
 														</td>

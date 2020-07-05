@@ -135,7 +135,7 @@ class UsulanSeminarProposalController extends MainController
 	    		'tgl-seminar' => 'required',
 	    		'tempat-seminar' => 'required',
 	    	], [
-	    		'ketua-penguji.required' => 'Harap pilih nama ketua penguji',
+	    		'ketua-penguji.required' => 'Harap pilih nama pimpinan',
 	    		'penguji-1.required' => 'Harap pilih nama penguji 1',
 	    		'penguji-2.required' => 'Harap pilih nama penguji 2',
 	    		'penguji-3.required' => 'Harap pilih nama penguji 3',
@@ -190,7 +190,7 @@ class UsulanSeminarProposalController extends MainController
 	    		'category' => 'data_usul_sempro',
 	    		'type' => 'text',
 	    		'name' => 'ketua-penguji',
-	    		'display_name' => 'Ketua Penguji'
+	    		'display_name' => 'Pimpinan Seminar'
 	    	], [
 	    		'content' => $komisi_penguji[0]->nama,
 	    		'verified' => false,

@@ -57,11 +57,13 @@ class PengubahanPembimbingController extends MainController
             }
     	}
 
+        $myBidang = User::find(User::myData('id'))->bidang()->value('nama');
+
     	return $this->customView('tga.ketua-kel-keahlian.pengubahan-pembimbing', [
             'nav_item_active' => 'tga',
             'subtitle' => 'Pengubahan Pembimbing dan Co',
 
-            'semua_mahasiswa' => Data::where(['name' => 'ketua-bidang', 'content' => User::myData('nama')])
+            'semua_mahasiswa' => Data::where(['name' => 'bidang', 'content' => $myBidang])
             						->join('disposisi', 'data.user_id', '=', 'disposisi.user_id')
             						->select('disposisi.*')
             						->where('progress', '>', 4)

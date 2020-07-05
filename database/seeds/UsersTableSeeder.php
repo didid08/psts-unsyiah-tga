@@ -101,7 +101,7 @@ class UsersTableSeeder extends Seeder
 				}
 				/* str_replace('[at]', '@', $data) */
 			}
-			switch (trim($dosen[0])) {
+			/*switch (trim($dosen[0])) {
 				case 'Febriyanti Maulina, S.T., M.T.':
 					$data_dosen['bidang_id'] = 1;
 				break;
@@ -118,7 +118,7 @@ class UsersTableSeeder extends Seeder
 					$data_dosen['bidang_id'] = 5;
 				break;
 				default: //do nothing
-			}
+			}*/
 
 			$data_dosen['password'] = Hash::make($data_dosen['nomor_induk']);
 
@@ -1211,5 +1211,53 @@ class UsersTableSeeder extends Seeder
 			DB::table('users')->insert(array_merge(['category' => 'mahasiswa'], $data_mahasiswa));
 		}
 
+		//Mulai baris 1136
+		DB::table('users')->insert([
+    		'category' => 'pejabat',
+    		'nomor_induk' => '1',
+    		'nama' => 'Koordinator Prodi',
+    		'password' => Hash::make('1')
+    	]);
+    	DB::table('users')->insert([
+    		'category' => 'pejabat',
+    		'nomor_induk' => '2',
+    		'nama' => 'Koordinator TGA',
+    		'password' => Hash::make('2')
+    	]);
+    	DB::table('users')->insert([
+    		'category' => 'pejabat',
+    		'nomor_induk' => '3',
+    		'nama' => 'Ketua Bidang MRK',
+    		'bidang_id' => 1,
+    		'password' => Hash::make('3')
+    	]);
+    	DB::table('users')->insert([
+    		'category' => 'pejabat',
+    		'nomor_induk' => '4',
+    		'nama' => 'Ketua Bidang Hidroteknik',
+    		'bidang_id' => 2,
+    		'password' => Hash::make('4')
+    	]);
+    	DB::table('users')->insert([
+    		'category' => 'pejabat',
+    		'nomor_induk' => '5',
+    		'nama' => 'Ketua Bidang Transportasi',
+    		'bidang_id' => 3,
+    		'password' => Hash::make('5')
+    	]);
+    	DB::table('users')->insert([
+    		'category' => 'pejabat',
+    		'nomor_induk' => '6',
+    		'nama' => 'Ketua Bidang Geoteknik',
+    		'bidang_id' => 4,
+    		'password' => Hash::make('6')
+    	]);
+    	DB::table('users')->insert([
+    		'category' => 'pejabat',
+    		'nomor_induk' => '7',
+    		'nama' => 'Ketua Bidang Struktur',
+    		'bidang_id' => 5,
+    		'password' => Hash::make('7')
+    	]);
     }
 }

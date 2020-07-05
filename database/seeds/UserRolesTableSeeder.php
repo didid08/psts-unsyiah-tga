@@ -20,29 +20,29 @@ class UserRolesTableSeeder extends Seeder
 
         //Koordinator Prodi
 		DB::table('user_roles')->insert([
-        	'user_id' => 18,
+        	'user_id' => 1136,
         	'role_id' => 2
         ]);
 
 		//KK Keahlian
         DB::table('user_roles')->insert([
-        	'user_id' => 19,
+        	'user_id' => 1138,
         	'role_id' => 3
         ]);
         DB::table('user_roles')->insert([
-        	'user_id' => 65,
+        	'user_id' => 1139,
         	'role_id' => 3
         ]);
         DB::table('user_roles')->insert([
-        	'user_id' => 51,
+        	'user_id' => 1140,
         	'role_id' => 3
         ]);
         DB::table('user_roles')->insert([
-        	'user_id' => 15,
+        	'user_id' => 1141,
         	'role_id' => 3
         ]);
         DB::table('user_roles')->insert([
-        	'user_id' => 62,
+        	'user_id' => 1142,
         	'role_id' => 3
         ]);
 
@@ -56,7 +56,7 @@ class UserRolesTableSeeder extends Seeder
 
         //Koordinator TGA
         DB::table('user_roles')->insert([
-        	'user_id' => 12,
+        	'user_id' => 1137,
         	'role_id' => 5
         ]);
 
