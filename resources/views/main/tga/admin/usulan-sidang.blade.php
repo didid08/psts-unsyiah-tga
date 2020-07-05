@@ -48,19 +48,19 @@
 										<input type="text" class="form-control bg-light" readonly="readonly" style="display: inline-block; width: 7em;" value="{{ $masa_pembimbingan_buku_tga->$mhsId->content }} bulan">
 									</td>
 									<td class="align-middle text-center">
-										<i class="fa fa-check-circle text-green mr-2"></i>
+										
 										<a target="_blank" href="{{ route('main.file', ['filename' => $lembar_asistensi_2->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
-										<i class="fa fa-check-circle text-green mr-2"></i>
+										
 										<a target="_blank" href="{{ route('main.file', ['filename' => $draft_buku_tga->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
-										<i class="fa fa-check-circle text-green mr-2"></i>
+										
 										<a target="_blank" href="{{ route('main.file', ['filename' => $ijazah->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
-										<i class="fa fa-check-circle text-green mr-2"></i>
+										
 										<a target="_blank" href="{{ route('main.file', ['filename' => $bukti_nilai_toefl->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">

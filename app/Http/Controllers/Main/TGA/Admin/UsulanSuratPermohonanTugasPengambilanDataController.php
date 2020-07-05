@@ -47,11 +47,15 @@ class UsulanSuratPermohonanTugasPengambilanDataController extends MainController
 
     		case 'accept':
 
-	            $disposisi->update([
-                    'progress_optional' => 3
+                Data::where(['user_id' => $user->first()->id, 'name' => 'sptpd'])->update([
+                    'verified' => true
                 ]);
 
-                return redirect()->back()->with('success', 'Usulan telah dikirim ke Koor Prodi');
+	            $disposisi->update([
+                    'progress_optional' => 4
+                ]);
+
+                return redirect()->back()->with('success', 'Usulan telah diterima');
     		break;
     		default:
     			return abort(404);

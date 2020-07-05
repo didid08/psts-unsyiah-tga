@@ -44,7 +44,7 @@
 										<input type="text" class="form-control bg-light" value="{{ $pembimbing->$mhsId->content }}" readonly="readonly">
 									</td>
 									<td class="align-middle text-center">
-										<i class="fa fa-check-circle text-green mr-2"></i>
+										
 										<a target="_blank" href="{{ route('main.file', ['filename' => $sk_pembimbing->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">

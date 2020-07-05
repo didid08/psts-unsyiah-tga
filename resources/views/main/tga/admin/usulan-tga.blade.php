@@ -39,23 +39,23 @@
 								<td class="align-middle text-left">{{ $mahasiswa->user->nama }}</td>
 								<td class="align-middle text-center">{{ $mahasiswa->user->nomor_induk }}</td>
 								<td class="align-middle text-center">
-									<i class="fa fa-check-circle text-green mr-2"></i>
+									
 									<a target="_blank" href="{{ route('main.file', ['filename' => $foto->$mhsId->content]) }}" class="text-green">Periksa</a>
 								</td>
 								<td class="align-middle text-center">
-									<i class="fa fa-check-circle text-green mr-2"></i>
+									
 									<a target="_blank" href="{{ route('main.file', ['filename' => $spp->$mhsId->content]) }}" class="text-green">Periksa</a>
 								</td>
 								<td class="align-middle text-center">
-									<i class="fa fa-check-circle text-green mr-2"></i>
+									
 									<a target="_blank" href="{{ route('main.file', ['filename' => $krs->$mhsId->content]) }}" class="text-green">Periksa</a>
 								</td>
 								<td class="align-middle text-center">
-									<i class="fa fa-check-circle text-green mr-2"></i>
+									
 									<a target="_blank" href="{{ route('main.file', ['filename' => $khs->$mhsId->content]) }}" class="text-green">Periksa</a>
 								</td>
 								<td class="align-middle text-center">
-									<i class="fa fa-check-circle text-green mr-2"></i>
+									
 									<a target="_blank" href="{{ route('main.file', ['filename' => $transkrip_sementara->$mhsId->content]) }}" class="text-green">Periksa</a>
 								</td>
 								<td class="align-middle text-center">

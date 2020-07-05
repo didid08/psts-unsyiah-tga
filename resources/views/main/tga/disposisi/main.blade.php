@@ -182,7 +182,6 @@
 										<i class="fa fa-circle nonactive icon-size"></i>
 									</td>
 									<td class="text-center align-middle">
-										<i class="fa fa-circle nonactive icon-size"></i>
 									</td>
 									<td class="text-center align-middle"></td>
 									<td class="text-center align-middle"></td>
@@ -221,7 +220,6 @@
 										{!! progressOptional(2, $disposisi) !!}
 									</td>
 									<td class="text-center align-middle">
-										{!! progressOptional(3, $disposisi) !!}
 									</td>
 									<td class="text-center align-middle"></td>
 									<td class="text-center align-middle"></td>

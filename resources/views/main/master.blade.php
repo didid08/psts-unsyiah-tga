@@ -61,43 +61,42 @@
                     <li><a href="{{ route('main.tga.mahasiswa.input-usul-yudisium') }}" class="dropdown-item">Input Usul Yudisium</a></li>
                   @endif
                   @if (isset($role->admin))
-                    <li><a href="{{ route('main.tga.admin.usulan-tga') }}" class="dropdown-item">Usulan TGA</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-sk-pembimbing') }}" class="dropdown-item">Usulan SK Pembimbing</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-sptpd') }}" class="dropdown-item">Usulan Surat Permohonan Tugas Pengambilan Data</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-stpd') }}" class="dropdown-item">Usulan Surat Tugas Pengambilan Data</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-sempro') }}" class="dropdown-item">Usulan Seminar Proposal</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sempro') }}" class="dropdown-item">Usulan SK Penguji Seminar Proposal</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-pengesahan-sempro') }}" class="dropdown-item">Usulan Pengesahan Seminar Proposal</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-daftar-hadir-sempro') }}" class="dropdown-item">Usulan Kelengkapan Dokumen Administrasi Seminar Proposal</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-sidang') }}" class="dropdown-item">Usulan Sidang</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sidang') }}" class="dropdown-item">Usulan SK Penguji Sidang</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-pengesahan-sidang') }}" class="dropdown-item">Usulan Pengesahan Sidang</a></li>
-                    <li><a href="{{ route('main.tga.admin.usulan-yudisium') }}" class="dropdown-item">Usulan Yudisium</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-tga') }}" class="dropdown-item">1. Usulan TGA</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sk-pembimbing') }}" class="dropdown-item">2. Usulan SK Pembimbing</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sptpd') }}" class="dropdown-item">3. Usulan Surat Permohonan Tugas Pengambilan Data</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-stpd') }}" class="dropdown-item">4. Usulan Surat Tugas Pengambilan Data</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sempro') }}" class="dropdown-item">5. Usulan Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sempro') }}" class="dropdown-item">6. Usulan SK Penguji Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-pengesahan-sempro') }}" class="dropdown-item">7. Usulan Pengesahan Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-daftar-hadir-sempro') }}" class="dropdown-item">8. Usulan Kelengkapan Dokumen Administrasi Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sidang') }}" class="dropdown-item">9. Usulan Sidang</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-sk-penguji-sidang') }}" class="dropdown-item">10. Usulan SK Penguji Sidang</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-pengesahan-sidang') }}" class="dropdown-item">11. Usulan Pengesahan Sidang</a></li>
+                    <li><a href="{{ route('main.tga.admin.usulan-yudisium') }}" class="dropdown-item">12. Usulan Yudisium</a></li>
                   @endif
                   @if (isset($role->koor_prodi))
-                    <li><a href="{{ route('main.tga.koor-prodi.persetujuan-usulan-tga') }}" class="dropdown-item">Persetujuan Usulan TGA</a></li>
-                    <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-pembimbing') }}" class="dropdown-item">Penetapan SK Pembimbing</a></li>
-                    <li><a href="{{ route('main.tga.koor-prodi.persetujuan-sptpd') }}" class="dropdown-item">Persetujuan Surat Permohonan Tugas Pengambilan Data</a></li>
-                    <li><a href="{{ route('main.tga.koor-prodi.persetujuan-stpd') }}" class="dropdown-item">Persetujuan Surat Tugas Pengambilan Data</a></li>
-                    <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-penguji-sempro') }}" class="dropdown-item">Penetapan SK Penguji Seminar Proposal</a></li>
-                    <li><a href="{{ route('main.tga.koor-prodi.pengesahan-sempro') }}" class="dropdown-item">Pengesahan Seminar Proposal</a></li>
-                    <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-penguji-sidang') }}" class="dropdown-item">Penetapan SK Penguji Sidang</a></li>
-                    <li><a href="{{ route('main.tga.koor-prodi.pengesahan-sidang') }}" class="dropdown-item">Pengesahan Sidang</a></li>
-                    <li><a href="{{ route('main.tga.koor-prodi.pengesahan-usulan-yudisium') }}" class="dropdown-item">Pengesahan Usulan Yudisium</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.persetujuan-usulan-tga') }}" class="dropdown-item">1. Persetujuan Usulan TGA</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-pembimbing') }}" class="dropdown-item">2. Penetapan SK Pembimbing</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.persetujuan-stpd') }}" class="dropdown-item">3. Persetujuan Surat Tugas Pengambilan Data</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-penguji-sempro') }}" class="dropdown-item">4. Penetapan SK Penguji Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.pengesahan-sempro') }}" class="dropdown-item">5. Pengesahan Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.penetapan-sk-penguji-sidang') }}" class="dropdown-item">6. Penetapan SK Penguji Sidang</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.pengesahan-sidang') }}" class="dropdown-item">7. Pengesahan Sidang</a></li>
+                    <li><a href="{{ route('main.tga.koor-prodi.pengesahan-usulan-yudisium') }}" class="dropdown-item">8. Pengesahan Usulan Yudisium</a></li>
                   @endif
                   @if (isset($role->koor_tga))
-                    <li><a href="{{ route('main.tga.koor-tga.usulan-sempro') }}" class="dropdown-item">Usulan Seminar Proposal</a></li>
-                    <li><a href="{{ route('main.tga.koor-tga.usulan-sidang') }}" class="dropdown-item">Usulan Sidang</a></li>
+                    <li><a href="{{ route('main.tga.koor-tga.usulan-sempro') }}" class="dropdown-item">1. Usulan Seminar Proposal</a></li>
+                    <li><a href="{{ route('main.tga.koor-tga.usulan-sidang') }}" class="dropdown-item">2. Usulan Sidang</a></li>
                   @endif
                   @if (isset($role->ketua_kel_keahlian))
-                    <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengusulan-pembimbing') }}" class="dropdown-item">Pengusulan Pembimbing dan Co</a></li>
-                    <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengubahan-pembimbing') }}" class="dropdown-item">Pengubahan Pembimbing dan Co</a></li>
+                    <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengusulan-pembimbing') }}" class="dropdown-item">1. Pengusulan Pembimbing dan Co</a></li>
+                    <li><a href="{{ route('main.tga.ketua-kel-keahlian.pengubahan-pembimbing') }}" class="dropdown-item">2. Pengubahan Pembimbing dan Co</a></li>
                   @endif
                   @if (isset($role->pembimbing_co))
-                    <li><a href="{{ route('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang') }}" class="dropdown-item">Persetujuan Seminar dan Sidang</a></li>
+                    <li><a href="{{ route('main.tga.pembimbing-co.persetujuan-seminar-dan-sidang') }}" class="dropdown-item">1. Persetujuan Seminar dan Sidang</a></li>
                   @endif
                   @if (isset($role->komisi_penguji))
-                    <li><a href="{{ route('main.tga.komisi-penguji.seminar-sidang') }}" class="dropdown-item">Seminar/Sidang</a></li>
+                    <li><a href="{{ route('main.tga.komisi-penguji.seminar-sidang') }}" class="dropdown-item">1. Seminar/Sidang</a></li>
                   @endif
                 </ul>
               </li>
