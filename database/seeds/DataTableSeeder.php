@@ -12,7 +12,7 @@ class DataTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = array(
+        /*$data = array(
 			array(
 				"id" => 74,
 				"user_id" => 68,
@@ -1515,6 +1515,6 @@ class DataTableSeeder extends Seeder
 				'created_at' => $value['created_at'],
 				'updated_at' => $value['updated_at']
 			]);
-		}
+		}*/
     }
 };

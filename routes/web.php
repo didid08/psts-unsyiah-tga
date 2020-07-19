@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::get('/main/cek-data', 'Main\Admin\CekDataController@view')->middleware('only.admin')->name('main.admin.cek-data');
 	Route::get('/main/cek-data/data', 'Main\Admin\CekDataController@viewWithData')->middleware('only.admin')->name('main.admin.cek-data.with-data');
+
+	Route::get('/main/data-mahasiswa/{nim?}', 'Main\Admin\DataMahasiswaController')->middleware('only.admin')->name('main.admin.data-mahasiswa');
 	
 	Route::get('/main/akun', 'Main\Admin\AkunController@view')->middleware('only.admin')->name('main.admin.akun');
 	Route::post('/main/akun/tambah', 'Main\Admin\AkunController@tambahAkun')->middleware('only.admin')->name('main.admin.akun.tambah');

@@ -48,6 +48,9 @@
               <a href="{{ route('main.admin.cek-data') }}" class="nav-link{{ $nav_item_active == 'cek-data' ? ' text-bold' : '' }}">Cek Data</a>
             </li>
             <li class="nav-item">
+              <a href="{{ route('main.admin.data-mahasiswa') }}" class="nav-link{{ $nav_item_active == 'data-mahasiswa' ? ' text-bold' : '' }}">Data Mahasiswa</a>
+            </li>
+            <li class="nav-item">
               <a href="{{ route('main.admin.akun') }}" class="nav-link{{ $nav_item_active == 'akun' ? ' text-bold' : '' }}">Akun</a>
             </li>
           @endif
