@@ -16,10 +16,10 @@
 							<th scope="col" class="align-middle text-center">No</th>
 							<th scope="col" class="align-middle text-left">Nama</th>
 							<th scope="col" class="align-middle text-center">NIM</th>
-							<th scope="col" class="align-middle text-center">Biodata</th>
-							<th scope="col" class="align-middle text-center">Transkrip</th>
-							<th scope="col" class="align-middle text-center">Bukti Bebas Lab</th>
-							<th scope="col" class="align-middle text-center">Artikel JIM</th>
+							<th scope="col" class="align-middle text-center">Berkas 1</th>
+							<th scope="col" class="align-middle text-center">Berkas 2</th>
+							<th scope="col" class="align-middle text-center">Berkas 3</th>
+							<th scope="col" class="align-middle text-center">Berkas 4</th>
 							<th scope="col" class="align-middle text-center">Opsi 1</th>
 							<th scope="col" class="align-middle text-center">Opsi 2</th>
 						</tr>
@@ -41,19 +41,19 @@
 									<td class="align-middle text-center">{{ $mahasiswa->user->nomor_induk }}</td>
 									<td class="align-middle text-center">
 										
-										<a target="_blank" href="{{ route('main.file', ['filename' => $biodata->$mhsId->content]) }}" class="text-green">Periksa</a>
+										<a target="_blank" href="{{ route('main.file', ['filename' => $berkas_1->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
 										
-										<a target="_blank" href="{{ route('main.file', ['filename' => $transkrip->$mhsId->content]) }}" class="text-green">Periksa</a>
+										<a target="_blank" href="{{ route('main.file', ['filename' => $berkas_2->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
 										
-										<a target="_blank" href="{{ route('main.file', ['filename' => $bukti_bebas_lab->$mhsId->content]) }}" class="text-green">Periksa</a>
+										<a target="_blank" href="{{ route('main.file', ['filename' => $berkas_3->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
 										
-										<a target="_blank" href="{{ route('main.file', ['filename' => $artikel_jim->$mhsId->content]) }}" class="text-green">Periksa</a>
+										<a target="_blank" href="{{ route('main.file', ['filename' => $berkas_4->$mhsId->content]) }}" class="text-green">Periksa</a>
 									</td>
 									<td class="align-middle text-center">
 										@csrf

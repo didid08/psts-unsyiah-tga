@@ -13,10 +13,10 @@
 						<table class="table table-bordered table-striped form-gorup">
 							<thead>
 								<tr class="bg-info">
-									<th scope="col" class="align-middle text-center">Biodata</th>
-									<th scope="col" class="align-middle text-center">Transkrip</th>
-									<th scope="col" class="align-middle text-center">Bukti Bebas Lab</th>
-									<th scope="col" class="align-middle text-center">Artikel JIM</th>
+									<th scope="col" class="align-middle text-center">Berkas 1</th>
+									<th scope="col" class="align-middle text-center">Berkas 2</th>
+									<th scope="col" class="align-middle text-center">Berkas 3</th>
+									<th scope="col" class="align-middle text-center">Berkas 4</th>
 									@if ($progress == 33 && !$cek_berkas_yudisium)
 										<th scope="col" class="align-middle text-center">Opsi</th>
 									@endif
@@ -29,7 +29,7 @@
 											@if ($cek_berkas_yudisium)
 												<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada (Belum dikirim)
 											@else
-												<input type="file" name="biodata" accept="application/pdf">
+												<input type="file" name="berkas-1" accept="application/pdf">
 											@endif
 										@elseif ($progress > 33)
 											<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada
@@ -40,7 +40,7 @@
 											@if ($cek_berkas_yudisium)
 												<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada (Belum dikirim)
 											@else
-												<input type="file" name="transkrip" accept="application/pdf">
+												<input type="file" name="berkas-2" accept="application/pdf">
 											@endif
 										@elseif ($progress > 33)
 											<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada											
@@ -51,7 +51,7 @@
 											@if ($cek_berkas_yudisium)
 												<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada (Belum dikirim)
 											@else
-												<input type="file" name="bukti-bebas-lab" accept="application/pdf">
+												<input type="file" name="berkas-3" accept="application/pdf">
 											@endif
 										@elseif ($progress > 33)
 											<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada											
@@ -62,7 +62,7 @@
 											@if ($cek_berkas_yudisium)
 												<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada (Belum dikirim)
 											@else
-												<input type="file" name="artikel-jim" accept="application/pdf">
+												<input type="file" name="berkas-4" accept="application/pdf">
 											@endif
 										@elseif ($progress > 33)
 											<i class="fa fa-check-circle text-green"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ada

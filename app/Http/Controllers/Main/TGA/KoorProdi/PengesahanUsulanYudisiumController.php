@@ -22,10 +22,10 @@ class PengesahanUsulanYudisiumController extends MainController
             'subtitle' => 'Pengesahan Usulan Yudisium',
 
             'semua_mahasiswa' => Disposisi::where('progress', 35)->orderBy('updated_at')->get(),
-            'biodata' => $data->getDataMultiple('biodata'),
-            'transkrip' => $data->getDataMultiple('transkrip'),
-            'bukti_bebas_lab' => $data->getDataMultiple('bukti-bebas-lab'),
-            'artikel_jim' => $data->getDataMultiple('artikel-jim')
+            'berkas_1' => $data->getDataMultiple('berkas-1'),
+            'berkas_2' => $data->getDataMultiple('berkas-2'),
+            'berkas_3' => $data->getDataMultiple('berkas-3'),
+            'berkas_4' => $data->getDataMultiple('berkas-4')
         ]);
     }
 

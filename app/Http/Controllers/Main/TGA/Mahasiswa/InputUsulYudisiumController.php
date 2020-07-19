@@ -24,92 +24,92 @@ class InputUsulYudisiumController extends MainController
             'nav_item_active' => 'tga',
             'subtitle' => 'Input Usul Yudisium',
             'progress' => $progress,
-            'cek_berkas_yudisium' => $data->checkMultipleData(User::myData('id'), ['biodata', 'transkrip', 'bukti-bebas-lab', 'artikel-jim'])
+            'cek_berkas_yudisium' => $data->checkMultipleData(User::myData('id'), ['berkas-1', 'berkas-2', 'berkas-3', 'berkas-4'])
         ]);
     }
 
     public function process (Request $request)
     {
     	$validator = Validator::make($request->all(), [
-    		'biodata' => 'required|file|mimes:pdf|max:5120',
-    		'transkrip' => 'required|file|mimes:pdf|max:5120',
-            'bukti-bebas-lab' => 'required|file|mimes:pdf|max:5120',
-            'artikel-jim' => 'required|file|mimes:pdf|max:5120'
+    		'berkas-1' => 'required|file|mimes:pdf|max:5120',
+    		'berkas-2' => 'required|file|mimes:pdf|max:5120',
+            'berkas-3' => 'required|file|mimes:pdf|max:5120',
+            'berkas-4' => 'required|file|mimes:pdf|max:5120'
     	], [
-    		'biodata.required' => 'Harap unggah Biodata',
-            'biodata.mimes' => 'Biodata yang anda unggah tidak berbentuk pdf',
-            'biodata.max' => 'Ukuran Biodata melebihi 5 MB',
+    		'berkas-1.required' => 'Harap unggah Berkas 1',
+            'berkas-1.mimes' => 'Berkas 1 yang anda unggah tidak berbentuk pdf',
+            'berkas-1.max' => 'Ukuran Berkas 1 melebihi 5 MB',
 
-            'transkrip.required' => 'Harap unggah Transkrip',
-            'transkrip.mimes' => 'Transkrip yang anda unggah tidak berbentuk pdf',
-            'transkrip.max' => 'Ukuran Transkrip melebihi 5 MB',
+            'berkas-2.required' => 'Harap unggah Berkas 2',
+            'berkas-2.mimes' => 'Berkas 2 yang anda unggah tidak berbentuk pdf',
+            'berkas-2.max' => 'Ukuran Berkas 2 melebihi 5 MB',
 
-            'bukti-bebas-lab.required' => 'Harap unggah Bukti Bebas Lab',
-            'bukti-bebas-lab.mimes' => 'Bukti Bebas Lab yang anda unggah tidak berbentuk pdf',
-            'bukti-bebas-lab.max' => 'Ukuran Bukti Bebas Lab melebihi 5 MB',
+            'berkas-3.required' => 'Harap unggah Berkas 3',
+            'berkas-3.mimes' => 'Berkas 3 yang anda unggah tidak berbentuk pdf',
+            'berkas-3.max' => 'Ukuran Berkas 3 melebihi 5 MB',
 
-            'artikel-jim.required' => 'Harap unggah Artikel JIM',
-            'artikel-jim.mimes' => 'Artikel JIM yang anda unggah tidak berbentuk pdf',
-            'artikel-jim.max' => 'Ukuran Artikel JIM melebihi 5 MB'
+            'berkas-4.required' => 'Harap unggah Berkas 4',
+            'berkas-4.mimes' => 'Berkas 4 yang anda unggah tidak berbentuk pdf',
+            'berkas-4.max' => 'Ukuran Berkas 4 melebihi 5 MB'
     	]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
 
-        $biodata_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-biodata.'.$request->file('biodata')->extension();
-        $transkrip_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-transkrip.'.$request->file('transkrip')->extension();
-        $bukti_bebas_lab_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-bukti-bebas-lab.'.$request->file('bukti-bebas-lab')->extension();
-        $artikel_jim_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-artikel-jim.'.$request->file('artikel-jim')->extension();
+        $berkas_1_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-berkas-1.'.$request->file('berkas-1')->extension();
+        $berkas_2_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-berkas-2.'.$request->file('berkas-2')->extension();
+        $berkas_3_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-berkas-3.'.$request->file('berkas-3')->extension();
+        $berkas_4_filename = User::firstWhere('id', User::myData('id'))->nomor_induk.'-berkas-4.'.$request->file('berkas-4')->extension();
         
-        $request->file('biodata')->storeAs(
-            'data', $biodata_filename
+        $request->file('berkas-1')->storeAs(
+            'data', $berkas_1_filename
         );
-        $request->file('transkrip')->storeAs(
-            'data', $transkrip_filename
+        $request->file('berkas-2')->storeAs(
+            'data', $berkas_2_filename
         );
-        $request->file('bukti-bebas-lab')->storeAs(
-            'data', $bukti_bebas_lab_filename
+        $request->file('berkas-3')->storeAs(
+            'data', $berkas_3_filename
         );
-        $request->file('artikel-jim')->storeAs(
-            'data', $artikel_jim_filename
+        $request->file('berkas-4')->storeAs(
+            'data', $berkas_4_filename
         );
 
         Data::updateOrCreate([
             'user_id' => User::myData('id'),
             'category' => 'data_yudisium',
             'type' => 'file',
-            'name' => 'biodata',
-            'display_name' => 'Biodata'
+            'name' => 'berkas-1',
+            'display_name' => 'Berkas 1'
         ], [
-            'content' => $biodata_filename
+            'content' => $berkas_1_filename
         ]);
         Data::updateOrCreate([
             'user_id' => User::myData('id'),
             'category' => 'data_yudisium',
             'type' => 'file',
-            'name' => 'transkrip',
-            'display_name' => 'Transkrip'
+            'name' => 'berkas-2',
+            'display_name' => 'Berkas 2'
         ], [
-            'content' => $transkrip_filename
+            'content' => $berkas_2_filename
         ]);
         Data::updateOrCreate([
             'user_id' => User::myData('id'),
             'category' => 'data_yudisium',
             'type' => 'file',
-            'name' => 'bukti-bebas-lab',
-            'display_name' => 'Bukti Bebas Lab'
+            'name' => 'berkas-3',
+            'display_name' => 'Berkas 3'
         ], [
-            'content' => $bukti_bebas_lab_filename
+            'content' => $berkas_3_filename
         ]);
         Data::updateOrCreate([
             'user_id' => User::myData('id'),
             'category' => 'data_yudisium',
             'type' => 'file',
-            'name' => 'artikel-jim',
-            'display_name' => 'Artikel JIM'
+            'name' => 'berkas-4',
+            'display_name' => 'Berkas 4'
         ], [
-            'content' => $artikel_jim_filename
+            'content' => $berkas_4_filename
         ]);
 
         return redirect(route('main.tga.disposisi'))->with('success', 'Data yudisium berhasil disimpan');

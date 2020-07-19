@@ -309,7 +309,7 @@ class UploadDisposisiController extends Controller
                 return redirect()->back()->with('success', 'Berhasil mengunggah lembar pengesahan');
             } elseif ($progress == 33) {
                 $data = new Data;
-                if (!$data->checkMultipleData(User::myData('id'), ['biodata', 'transkrip', 'bukti-bebas-lab', 'artikel-jim'])) {
+                if (!$data->checkMultipleData(User::myData('id'), ['berkas-1', 'berkas-2', 'berkas-3', 'berkas-4'])) {
                     return redirect()->back()->with('error', 'Harap lengkapi data usul yudisium');
                 }
 
