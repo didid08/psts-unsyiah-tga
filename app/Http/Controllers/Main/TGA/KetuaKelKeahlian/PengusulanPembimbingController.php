@@ -150,10 +150,23 @@ class PengusulanPembimbingController extends MainController
             return abort(404);
         }
 
+        $jumlahYgAdaNomorSK = Data::where('name', 'sk-pembimbing')->whereNotNull('no')->whereNotNull('tgl')->get()->count();
+        $noSK = $jumlahYgAdaNomorSK+1;
+
+        Data::insert([
+            'user_id' => $user->first()->id,
+            'category' => 'data_usul',
+            'type' => 'file',
+            'name' => 'sk-pembimbing',
+            'display_name' => 'SK Pembimbing',
+            'content' => 'auto',
+            'no' => 'B/'.$noSK.'/UN11.1.4/1/KM/2020'
+        ]);
+
         $disposisi = Disposisi::where(['user_id' => $user->first()->id]);
 
         $disposisi->update([
-            'progress' => 5
+            'progress' => 6
         ]);
 
         return redirect()->back()->with('success', 'Pembimbing telah ditetapkan');

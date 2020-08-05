@@ -21,6 +21,7 @@ class DataMahasiswaController extends MainController
 
 	    	return $this->customView('admin.data-mahasiswa', [
 	            'nav_item_active' => 'data-mahasiswa',
+                'nim' => $nim,
 	            'subtitle' => 'Data: '.$user->first()->nama.' ('.$user->first()->nomor_induk.')',
 	            'semua_data' => Data::where(['user_id' => $user->first()->id, 'verified' => true])->orderBy('category')->get(),
 	            'get_data' => true

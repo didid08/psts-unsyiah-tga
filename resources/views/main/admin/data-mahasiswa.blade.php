@@ -36,7 +36,11 @@
 									<td class="align-middle text-left">{{ $value->display_name }}</td>
 									<td class="align-middle text-center">
 										@if ($value->type == 'file')
-											<a class="btn btn-sm btn-info" href="{{ route('main.file', ['filename' => $value->content]) }}">Unduh</a>
+											@if ($value->name == 'sk-pembimbing')
+												<a class="btn btn-sm btn-info" href="{{ route('cetak.sk-pembimbing', ['nim' => $nim]) }}">Unduh</a>
+											@else
+												<a class="btn btn-sm btn-info" href="{{ route('main.file', ['filename' => $value->content]) }}">Unduh</a>
+											@endif
 										@else
 											{{ $value->content }}
 										@endif

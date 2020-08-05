@@ -44,7 +44,7 @@
 										<td class="align-middle text-center">
 											@csrf
 											<select name="pembimbing" id="" class="form-control">
-												<option value="empty">Pilih pembimbing</option>
+												<option disabled selected>Pilih pembimbing</option>
 												@foreach ($dosen_pembimbing as $nip => $dosen)
 													<option value="{{ $nip }}">{{ $dosen }}</option>
 												@endforeach
@@ -52,7 +52,7 @@
 										</td>
 										<td class="align-middle text-center">
 											<select name="co-pembimbing" id="" class="form-control">
-												<option value="empty">Pilih Co Pembimbing</option>
+												<option disabled selected>Pilih Co Pembimbing</option>
 												@foreach ($dosen_co_pembimbing as $nip => $dosen)
 													<option value="{{ $nip }}">{{ $dosen }}</option>
 												@endforeach
@@ -125,7 +125,7 @@
 										<td class="align-middle text-center">
 											<form action="{{ route('main.tga.ketua-kel-keahlian.pengubahan-pembimbing.process', ['nim' => $mahasiswa->user->nomor_induk]) }}" method="post" style="display: inline;">
 												@csrf
-												<button type="submit" class="btn btn-sm btn-success">Kirim ke admin</button>
+												<button type="submit" class="btn btn-sm btn-success">Tetapkan</button>
 											</form>
 										</td>
 									</tr>

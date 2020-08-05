@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/terima-usul/{name}/{nim}', 'Main\TGA\DisposisiController@terimaUsul')->name('terima-usul');
+Route::get('/tolak-usul/{name}/{nim}', 'Main\TGA\DisposisiController@tolakUsul')->name('tolak-usul');
+
+Route::get('/main/tga/cetak/sk-pembimbing/{nim}', 'Main\TGA\SKPembimbingController')->name('cetak.sk-pembimbing');
 
 Route::middleware(['auth'])->group(function () {
 

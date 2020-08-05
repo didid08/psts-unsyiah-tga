@@ -195,7 +195,78 @@ class DisposisiController extends MainController
                         $name2 = 'co-pembimbing';
                     }
 
+                    /*if ($name = 'pembimbing') {
+                        if (!Data::where(['user_id' => $mhs->first()->id, 'name' => 'co-pembimbing'])->exists()) {
+                            return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name2)).' untuk mahasiswa bernama '.$mhs->first()->nama.' ('.$mhs->first()->nomor_induk.'). Namun Co Pembimbing telah menolak persetujuan. Ketua Kelompok Keahlian akan mengusulkan ulang. Terima kasih atas perhatian anda');
+                        } else {
+                            return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name2)).' untuk mahasiswa bernama '.$mhs->first()->nama.' ('.$mhs->first()->nomor_induk.')');
+                        }
+                    }*/
                     return response('Anda telah setuju untuk dijadikan '.ucwords(str_replace('-', ' ', $name2)).' untuk mahasiswa bernama '.$mhs->first()->nama.' ('.$mhs->first()->nomor_induk.')');
+                }
+                return abort(404);
+            }
+            return abort(404);
+        }
+        return abort(404);
+    }
+
+    public function tolakUsul($name, $nim, Request $request)
+    {   
+        $validator = Validator::make($request->all(), [
+            'key' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return abort(404);
+        }
+
+        $mhs = User::where(['category' => 'mahasiswa', 'nomor_induk' => $nim]);
+        if ($mhs->exists()) {
+
+            $data = Data::where(['user_id' => $mhs->first()->id, 'name' => $name]);
+            if ($data->exists()) {
+
+                if ($data->first()->verified == true) {
+                    return abort(404);
+                }
+
+                $requestHari = 7;
+                if (in_array($name, ['pembimbing', 'co-pembimbing', 'pembimbing-ubah', 'co-pembimbing-ubah'])) {
+                    $requestHari = 2;
+                }
+
+                $diff = time() - strtotime($data->first()->updated_at);
+                $hariLewat = floor($diff / (60 * 60 * 24));
+                if ($hariLewat >= $requestHari) {
+                    return abort(404);
+                }
+
+                if (Hash::check($request->input('key'), $data->first()->verification_key))
+                {
+                    if (in_array($name, ['pembimbing', 'co-pembimbing'])) {
+                        Data::where(['user_id' => $mhs->first()->id, 'name' => 'pembimbing'])->delete();
+                        Data::where(['user_id' => $mhs->first()->id, 'name' => 'co-pembimbing'])->delete();
+                    }
+
+                    $name2 = $name;
+                    if ($name == 'ketua-penguji') {
+                        $name2 = 'pimpinan-seminar';
+                    }elseif ($name == 'ketua-penguji-2') {
+                        $name2 = 'pimpinan-sidang';
+                    }elseif ($name == 'penguji-1-2') {
+                        $name2 = 'penguji-1';
+                    }elseif ($name == 'penguji-2-2') {
+                        $name2 = 'penguji-2';
+                    }elseif ($name == 'penguji-3-2') {
+                        $name2 = 'penguji-3';
+                    }elseif ($name == 'pembimbing-ubah') {
+                        $name2 = 'pembimbing';
+                    }elseif ($name == 'co-pembimbing-ubah') {
+                        $name2 = 'co-pembimbing';
+                    }
+
+                    return response('Anda menolak untuk dijadikan '.ucwords(str_replace('-', ' ', $name2)).' untuk mahasiswa bernama '.$mhs->first()->nama.' ('.$mhs->first()->nomor_induk.')');
                 }
                 return abort(404);
             }

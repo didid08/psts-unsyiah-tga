@@ -36,26 +36,10 @@ class PenetapanSKPembimbingController extends MainController
 
         switch ($opsi)
         {
-            case 'decline':
-                $disposisi->update([
-                    'progress' => 5
-                ]);
-                return redirect()->back()->with('error', 'Usulan telah ditolak');
-            break;
-
             case 'accept':
 
-                $jumlahYgAdaNomorSK = Data::where('name', 'sk-pembimbing')->whereNotNull('no')->whereNotNull('tgl')->get()->count();
-                $noSK = $jumlahYgAdaNomorSK+1;
-
-                if (Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->first()->no == null) {
-                    Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->update([
-                        'no' => $noSK.'/TA/II/'.date('Y'),
-                        'tgl' => date('Y m d')
-                    ]);
-                }
-
                 Data::where(['user_id' => $user->first()->id, 'name' => 'sk-pembimbing'])->update([
+                    'tgl' => date('Y m d'),
                     'verified' => true
                 ]);
 

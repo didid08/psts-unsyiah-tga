@@ -36,9 +36,9 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => 'smtp.googlemail.com',
-            'port' => 465,
-            'encryption' => 'ssl',
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'encryption' => 'tls',
             'username' => 'psts.unsyiah@gmail.com',
             'password' => 'pstsunsyiah123',
             'timeout' => null,

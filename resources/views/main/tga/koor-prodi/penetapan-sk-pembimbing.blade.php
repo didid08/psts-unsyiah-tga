@@ -19,7 +19,7 @@
 							<th scope="col" class="align-middle text-center">Pembimbing</th>
 							<th scope="col" class="align-middle text-center">Co Pembimbing</th>
 							<th scope="col" class="align-middle text-center">SK Penunjukan Pembimbing</th>
-							<th scope="col" class="align-middle text-center" colspan="2">Opsi</th>
+							<th scope="col" class="align-middle text-center">Opsi</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -38,24 +38,17 @@
 									<td class="align-middle text-left">{{ $mahasiswa->user->nama }}</td>
 									<td class="align-middle text-center">{{ $mahasiswa->user->nomor_induk }}</td>
 									<td class="align-middle text-center">
-										<input type="text" class="form-control bg-light" value="{{ $co_pembimbing->$mhsId->content }}" readonly="readonly">
-									</td>
-									<td class="align-middle text-center">
 										<input type="text" class="form-control bg-light" value="{{ $pembimbing->$mhsId->content }}" readonly="readonly">
 									</td>
 									<td class="align-middle text-center">
-										
-										<a target="_blank" href="{{ route('main.file', ['filename' => $sk_pembimbing->$mhsId->content]) }}" class="text-green">Periksa</a>
+										<input type="text" class="form-control bg-light" value="{{ $co_pembimbing->$mhsId->content }}" readonly="readonly">
+									</td>
+									<td class="align-middle text-center">
+										<i class="fa fa-check-circle text-green mr-2"></i> Ada (<a target="_blank" href="{{ route('cetak.sk-pembimbing', ['nim' => $mahasiswa->user->nomor_induk]) }}" class="text-green">Lihat</a>)
 									</td>
 									<td class="align-middle text-center">
 										@csrf
-										<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
-									</td>
-								</form>
-								<form action="{{ route('main.tga.koor-prodi.penetapan-sk-pembimbing.process', ['nim' => $mahasiswa->user->nomor_induk, 'opsi' => 'decline']) }}" method="post" style="display: inline;">
-									<td class="align-middle text-center">
-										@csrf
-										<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+										<button type="submit" class="btn btn-sm btn-success text-bold">Tetapkan</button>
 									</td>
 								</form>
 							</tr>
@@ -65,7 +58,6 @@
 								<tr>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-left">--</td>
-									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>
 									<td class="align-middle text-center">--</td>
