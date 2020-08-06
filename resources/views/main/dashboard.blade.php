@@ -2,6 +2,8 @@
 
 @section('custom-script')
     <script>
+        $('#daftar-bimbingan').dataTable();
+        $('#daftar-co-bimbingan').dataTable();
         $('#list-mahasiswa').dataTable();
         $('#list-mahasiswa-optional').dataTable();
     </script>
@@ -23,6 +25,91 @@
                     <h3>Selamat Datang {{ $nama }}</h3>
                 	<h6>Informasi yang berkaitan dengan TGA dapat dilihat menu <i>TGA</i></h6>
                 @else
+                    @if (isset($role->pembimbing_co))
+                        <h5 class="mb-4">Daftar Bimbingan</h5>
+                        <table class="table table-bordered table-striped mb-4" id="daftar-bimbingan">
+                            <thead>
+                                <tr class="bg-info">
+                                    <th class="align-middle text-center">No</th>
+                                    <th class="align-middle">Nama</th>
+                                    <th class="align-middle text-center">NIM</th>
+                                    <th class="align-middle text-center">SK Penunjukan Pembimbing</th>
+                                    <th class="align-middle text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $noo = 0;
+                                @endphp
+                                @foreach($mahasiswa_bimbingan as $index => $mahasiswa)
+                                    @php
+                                        $noo++;
+                                    @endphp
+                                    <tr>
+                                        <td class="align-middle text-center">{{ $noo }}</td>
+                                        <td class="align-middle">{{ $mahasiswa->nama }}</td>
+                                        <td class="align-middle text-center">{{ $mahasiswa->nomor_induk }}</td>
+                                        <td class="align-middle text-center">
+                                            @if (\App\Disposisi::firstWhere('user_id', $mahasiswa->id)->progress > 6)
+                                                <a class="btn btn-sm btn-info" target="_blank" href="{{ route('cetak.sk-pembimbing', ['nim' => $mahasiswa->nomor_induk]) }}">Unduh</a>
+                                            @else
+                                                <span class="text-warning">Sedang diproses</span>
+                                            @endif
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @if (\App\Disposisi::firstWhere('user_id', $mahasiswa->id)->progress > 35)
+                                                <span class="text-success">Selesai</span>
+                                            @else
+                                                <span class="text-warning">Sedang dibimbing</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <h5 class="mb-4">Daftar Co Bimbingan</h5>
+                        <table class="table table-bordered table-striped mb-4" id="daftar-co-bimbingan">
+                            <thead>
+                                <tr class="bg-info">
+                                    <th class="align-middle text-center">No</th>
+                                    <th class="align-middle">Nama</th>
+                                    <th class="align-middle text-center">NIM</th>
+                                    <th class="align-middle text-center">SK Penunjukan Pembimbing</th>
+                                    <th class="align-middle text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $noo = 0;
+                                @endphp
+                                @foreach($mahasiswa_co_bimbingan as $index => $mahasiswa)
+                                    @php
+                                        $noo++;
+                                    @endphp
+                                    <tr>
+                                        <td class="align-middle text-center">{{ $noo }}</td>
+                                        <td class="align-middle">{{ $mahasiswa->nama }}</td>
+                                        <td class="align-middle text-center">{{ $mahasiswa->nomor_induk }}</td>
+                                        <td class="align-middle text-center">
+                                            @if (\App\Disposisi::firstWhere('user_id', $mahasiswa->id)->progress > 6)
+                                                <a class="btn btn-sm btn-info" target="_blank" href="{{ route('cetak.sk-pembimbing', ['nim' => $mahasiswa->nomor_induk]) }}">Unduh</a>
+                                            @else
+                                                <span class="text-warning">Sedang diproses</span>
+                                            @endif
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @if (\App\Disposisi::firstWhere('user_id', $mahasiswa->id)->progress > 35)
+                                                <span class="text-success">Selesai</span>
+                                            @else
+                                                <span class="text-warning">Sedang dibimbing</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
                     <h5 class="mb-4">Daftar Proses Mahasiswa</h5>
                     @php
                         $tahap = [

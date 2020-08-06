@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Main\Admin\DashboardController;
 use App\User;
 use App\UserRole;
+use App\Data;
 use App\Disposisi;
 use App\Setting;
 
@@ -45,12 +46,26 @@ class MainController extends Controller
     public function dashboard()
     {
         $userRole = new UserRole;
+        $data = new Data;
 
 		return $this->customView('dashboard', [
             'nav_item_active' => 'dashboard',
             'subtitle' => 'Dashboard',
             'role' => $userRole->myRoles(),
             'saya' => User::myAllData(),
+
+            'mahasiswa_bimbingan' => Data::where(['name' => 'pembimbing', 'content' => User::myData('nama'), 'verified' => true])
+                                        ->orderBy('updated_at')
+                                        ->join('users', 'data.user_id', '=', 'users.id')
+                                        ->select('users.*')
+                                        ->get(),
+
+            'mahasiswa_co_bimbingan' => Data::where(['name' => 'co-pembimbing', 'content' => User::myData('nama'), 'verified' => true])
+                                        ->orderBy('updated_at')
+                                        ->join('users', 'data.user_id', '=', 'users.id')
+                                        ->select('users.*')
+                                        ->get(),                                        
+
             'semua_mahasiswa' => Disposisi::where('progress', '>', 1)->where('progress', '<', 36)->orderBy('updated_at')->get(),
             'semua_mahasiswa_opsional' => Disposisi::where('progress_optional', '>', 1)->where('progress_optional', '<', 6)->where('progress', '<', 26)->orderBy('updated_at')->get()
         ]);

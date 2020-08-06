@@ -25,7 +25,7 @@
 				@if (in_array($disposisi->progress, range(5,6)))
 					<span class="text-warning">sedang diproses</span>
 				@elseif ($disposisi->progress > 6)
-					<input type="text" class="form-control bg-light" readonly="readonly" value="{{ date('d-m-Y', strtotime($mahasiswa_data_tga->sk_pembimbing->tgl)) }}">
+					<input type="text" class="form-control bg-light" readonly="readonly" value="{{ \Carbon\Carbon::parse($data->sk_pembimbing->tgl)->translatedFormat('d F Y') }}">
 				@else
 					--
 				@endif
