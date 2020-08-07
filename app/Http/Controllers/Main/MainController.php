@@ -31,8 +31,16 @@ class MainController extends Controller
             $identity = '--';
         }
 
-        $userRole = new UserRole();
+        if (session('auth')['category'] == 'tamu') {
+            return view('main.'.$viewName, array_merge([
+                'title' => Setting::get('site_title'),
+                'category' => session('auth')['category'],
+                'nama' => $nama,
+                'identity' => $identity
+            ], $data));
+        }
 
+        $userRole = new UserRole();
     	return view('main.'.$viewName, array_merge([
     		'title' => Setting::get('site_title'),
             'category' => session('auth')['category'],
@@ -40,7 +48,6 @@ class MainController extends Controller
             'identity' => $identity,
             'role' => $userRole->myRoles()
     	], $data));
-
     }
 
     public function dashboard()
@@ -48,27 +55,34 @@ class MainController extends Controller
         $userRole = new UserRole;
         $data = new Data;
 
-		return $this->customView('dashboard', [
-            'nav_item_active' => 'dashboard',
-            'subtitle' => 'Dashboard',
-            'role' => $userRole->myRoles(),
-            'saya' => User::myAllData(),
+        if (session('auth')['category'] == 'tamu') {
+            return $this->customView('dashboard', [
+                'nav_item_active' => 'dashboard',
+                'subtitle' => 'Dashboard',
+            ]);
+        } else {
+    		return $this->customView('dashboard', [
+                'nav_item_active' => 'dashboard',
+                'subtitle' => 'Dashboard',
+                'role' => $userRole->myRoles(),
+                'saya' => User::myAllData(),
 
-            'mahasiswa_bimbingan' => Data::where(['name' => 'pembimbing', 'content' => User::myData('nama'), 'verified' => true])
-                                        ->orderBy('updated_at')
-                                        ->join('users', 'data.user_id', '=', 'users.id')
-                                        ->select('users.*')
-                                        ->get(),
+                'mahasiswa_bimbingan' => Data::where(['name' => 'pembimbing', 'content' => User::myData('nama'), 'verified' => true])
+                                            ->orderBy('updated_at')
+                                            ->join('users', 'data.user_id', '=', 'users.id')
+                                            ->select('users.*')
+                                            ->get(),
 
-            'mahasiswa_co_bimbingan' => Data::where(['name' => 'co-pembimbing', 'content' => User::myData('nama'), 'verified' => true])
-                                        ->orderBy('updated_at')
-                                        ->join('users', 'data.user_id', '=', 'users.id')
-                                        ->select('users.*')
-                                        ->get(),                                        
+                'mahasiswa_co_bimbingan' => Data::where(['name' => 'co-pembimbing', 'content' => User::myData('nama'), 'verified' => true])
+                                            ->orderBy('updated_at')
+                                            ->join('users', 'data.user_id', '=', 'users.id')
+                                            ->select('users.*')
+                                            ->get(),                                        
 
-            'semua_mahasiswa' => Disposisi::where('progress', '>', 1)->where('progress', '<', 36)->orderBy('updated_at')->get(),
-            'semua_mahasiswa_opsional' => Disposisi::where('progress_optional', '>', 1)->where('progress_optional', '<', 6)->where('progress', '<', 26)->orderBy('updated_at')->get()
-        ]);
+                'semua_mahasiswa' => Disposisi::where('progress', '>', 1)->where('progress', '<', 36)->orderBy('updated_at')->get(),
+                'semua_mahasiswa_opsional' => Disposisi::where('progress_optional', '>', 1)->where('progress_optional', '<', 6)->where('progress', '<', 26)->orderBy('updated_at')->get()
+            ]);
+        }
     }
 
     public function infoDosen()

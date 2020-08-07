@@ -249,6 +249,11 @@ class DisposisiController extends MainController
                         Data::where(['user_id' => $mhs->first()->id, 'name' => 'co-pembimbing'])->delete();
                     }
 
+                    if (in_array($name, ['pembimbing-ubah', 'co-pembimbing-ubah'])) {
+                        Data::where(['user_id' => $mhs->first()->id, 'name' => 'pembimbing-ubah'])->delete();
+                        Data::where(['user_id' => $mhs->first()->id, 'name' => 'co-pembimbing-ubah'])->delete();
+                    }
+
                     if (in_array($name, ['ketua-penguji', 'penguji-1', 'penguji-2', 'penguji-3'])) {
                         Data::where(['user_id' => $mhs->first()->id, 'name' => 'ketua-penguji'])->delete();
                         Data::where(['user_id' => $mhs->first()->id, 'name' => 'penguji-1'])->delete();
