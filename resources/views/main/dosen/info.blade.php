@@ -84,23 +84,38 @@
 										-
 									@endif
 								</td>
-								<td>{{ $data['bimbingan']['total'][$dosen->nama] }}</td>
-								<td>{{ $data['bimbingan']['selesai'][$dosen->nama] }}</td>
-								<td>{{ $data['bimbingan']['total'][$dosen->nama] - $data['bimbingan']['selesai'][$dosen->nama] }}</td>
-								<td>{{ $data['co_bimbingan']['total'][$dosen->nama] }}</td>
-								<td>{{ $data['co_bimbingan']['selesai'][$dosen->nama] }}</td>
-								<td>{{ $data['co_bimbingan']['total'][$dosen->nama] - $data['co_bimbingan']['selesai'][$dosen->nama] }}</td>
+								@php
+									$bimbing = \App\Data::where(['name' => 'pembimbing', 'content' => $dosen->nama])->count();
+									$selesai_bimbing = \App\Data::where(['name' => 'pembimbing', 'content' => $dosen->nama])
+														->join('disposisi', 'data.user_id', '=', 'disposisi.user_id')
+														->where('disposisi.progress', '>', 35)
+														->count();
+									$total_bimbing = $bimbing - $selesai_bimbing;
+
+									$co_bimbing = \App\Data::where(['name' => 'co-pembimbing', 'content' => $dosen->nama])->count();
+									$selesai_co_bimbing = \App\Data::where(['name' => 'co-pembimbing', 'content' => $dosen->nama])
+														->join('disposisi', 'data.user_id', '=', 'disposisi.user_id')
+														->where('disposisi.progress', '>', 35)
+														->count();
+									$total_co_bimbing = $co_bimbing - $selesai_co_bimbing;
+								@endphp
+								<td>{{ $bimbing }}</td>
+								<td>{{ $selesai_bimbing }}</td>
+								<td>{{ $total_bimbing }}</td>
+								<td>{{ $co_bimbing }}</td>
+								<td>{{ $selesai_co_bimbing }}</td>
+								<td>{{ $total_co_bimbing }}</td>
 								<td>0</td>
 								<td>0</td>
 								<td>0</td>
 								<td>0</td>
 								<td>0</td>
-								<td>{{ $data['bimbingan']['total'][$dosen->nama] }}</td>
-								<td>{{ $data['bimbingan']['selesai'][$dosen->nama] }}</td>
-								<td>{{ $data['bimbingan']['total'][$dosen->nama] - $data['bimbingan']['selesai'][$dosen->nama] }}</td>
-								<td>{{ $data['co_bimbingan']['total'][$dosen->nama] }}</td>
-								<td>{{ $data['co_bimbingan']['selesai'][$dosen->nama] }}</td>
-								<td>{{ $data['co_bimbingan']['total'][$dosen->nama] - $data['co_bimbingan']['selesai'][$dosen->nama] }}</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
 								<td>0</td>
 								<td>0</td>
 								<td>0</td>

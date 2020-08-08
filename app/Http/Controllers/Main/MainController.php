@@ -92,17 +92,7 @@ class MainController extends Controller
         return $this->customView('dosen.info', [
             'nav_item_active' => 'dosen',
             'subtitle' => 'Info Dosen',
-            'semua_dosen' => User::dataWithCategory('dosen'),
-            'data' => [
-                'bimbingan' => [
-                    'total' => $user->calculateBimbingan('total'),
-                    'selesai' => $user->calculateBimbingan('selesai')
-                ],
-                'co_bimbingan' => [
-                    'total' => $user->calculateCoBimbingan('total'),
-                    'selesai' => $user->calculateCoBimbingan('selesai')
-                ]
-            ]
+            'semua_dosen' => User::where('category', 'dosen')->orderBy('nomor_induk')->get()
         ]);
     }
 

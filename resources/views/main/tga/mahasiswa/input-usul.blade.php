@@ -89,7 +89,6 @@
 										<td>Tahun Ajaran</td>
 										<td colspan="3">
 											<select name="tahun-ajaran" class="form-control">
-												<option{{ $input_value['tahun-ajaran'] != null ? ($input_value['tahun-ajaran'] == '2018/2019' ? ' selected' : '') : '' }}>2018/2019</option>
 												<option{{ $input_value['tahun-ajaran'] != null ? ($input_value['tahun-ajaran'] == '2019/2020' ? ' selected' : '') : '' }}>2019/2020</option>
 												<option{{ $input_value['tahun-ajaran'] != null ? ($input_value['tahun-ajaran'] == '2020/2021' ? ' selected' : '') : '' }}>2020/2021</option>
 											</select>
