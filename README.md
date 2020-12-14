@@ -1,4 +1,4 @@
-## Web TGA Unsyiah
+## Web TGA Teknik Sipil Unsyiah
 ##### Sistem pengajuan skripsi/TGA untuk jurusan Teknik Sipil Fakultas Teknik Universitas Syiah Kuala
 
 #### App Description
