@@ -8,7 +8,7 @@
 - Database: PostgreSQL
 
 #### Installation Guide (Quick Start)
-- Buka Terminal Console, lalu jalankan:
+- Buka Terminal/Console, lalu jalankan:
   > cd *folder_web*
   > composer install
   > composer run generate-env
