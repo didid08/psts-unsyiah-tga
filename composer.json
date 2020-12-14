@@ -1,10 +1,12 @@
 {
-    "name": "laravel/laravel",
+    "name": "Web TGA Teknik Sipil Unsyiah",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Sistem pengajuan skripsi/TGA untuk jurusan Teknik Sipil Fakultas Teknik Universitas Syiah Kuala",
     "keywords": [
-        "framework",
-        "laravel"
+        "sistem informasi",
+        "universitas",
+        "unsyiah",
+        "teknik sipil"
     ],
     "license": "MIT",
     "require": {
