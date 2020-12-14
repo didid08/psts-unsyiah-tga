@@ -14,7 +14,7 @@ class SettingsTableSeeder extends Seeder
     {
         DB::table('settings')->insert([
         	'key' => 'site_title',
-        	'value' => 'PSTS Unsyiah'
+        	'value' => 'Web TGA Teknik Sipil'
         ]);
     }
 }

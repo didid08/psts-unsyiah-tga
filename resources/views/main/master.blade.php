@@ -229,7 +229,7 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      PSTS Unsyiah (TGA) v1.0
+      App Version: 1.0.0
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; {{ date('Y') }} <a href="https://technosaber.com">Technosaber</a>.</strong> All rights reserved.
