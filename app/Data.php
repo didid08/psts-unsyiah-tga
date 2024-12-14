@@ -12,6 +12,10 @@ class Data extends Model
     	'user_id', 'category', 'type', 'name', 'display_name', 'content', 'no', 'tgl', 'verified', 'verification_key'
     ];
 
+    protected $casts = [
+        'verified' => 'boolean',
+    ];
+
     public function user()
     {
     	return $this->belongsTo('App\User');
