@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('nomor_induk')->unique()->nullable();
             $table->string('nama');
 
-            $table->integer('bidang_id')->nullable()->unsigned();
+            $table->unsignedBigInteger('bidang_id')->nullable();
             $table->foreign('bidang_id')->references('id')->on('bidang')->onDelete('set null');
 
             $table->string('avatar')->unique()->nullable();

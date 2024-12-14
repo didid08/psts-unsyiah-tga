@@ -16,7 +16,7 @@ class CreateDisposisiTable extends Migration
         Schema::create('disposisi', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('user_id')->nullable()->unsigned();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('progress')->default(1);
